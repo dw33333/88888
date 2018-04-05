@@ -88,7 +88,7 @@
     <!-- 下载指导 -->
     <div class="download">
       <div class="item">
-        <img class="QrcodeImage"  src="../assets/QrcodeImage.png" alt="">
+        <img class="QrcodeImage" src="../assets/QrcodeImage.png" alt="">
       </div>
       <div class="item">
         <div class="ios"></div>
@@ -102,31 +102,42 @@
     </div>
     <!-- 优势帮助 -->
     <div class="others">
-        <div class="advantages">
-              <h2></h2>
-              <div>
-              	<span class="color56">存款</span>
-              	<br />
-              到账平均时间     <span class="pull-right font30 color000">23<span class="font12 colorgrey padding-left8">秒</span></span>
-              </div>
-              <div class="progress">
-              	<div class="progress-bar"></div>
-              </div>
-              <div>
-              	<span class="color56">取款</span>
-              	<br />
-              到账平均时间     <span class="pull-right font30 color000">2'02<span class="font12 colorgrey padding-left8">分</span></span>
-              </div>
-              <div class="progress">
-              	<div class="progress-bar2"></div>
-              </div>
+      <div class="advantages">
+        <h2></h2>
+        <div>
+          <span class="color56">存款</span>
+          <br /> 到账平均时间 <span class="pull-right font30 color56">23<span class="font12 colorgrey padding-left8">秒</span></span>
         </div>
-        <div class="mobdown">
-            <h2></h2>
+        <div class="progress">
+          <div class="progress-bar"></div>
         </div>
-        <div class="help">
-            <h2></h2>
+        <div>
+          <span class="color56">取款</span>
+          <br /> 到账平均时间 <span class="pull-right font30 color56">2'02<span class="font12 colorgrey padding-left8">分</span></span>
         </div>
+        <div class="progress">
+          <div class="progress-bar2"></div>
+        </div>
+      </div>
+      <div class="mobdown">
+        <h2></h2>
+        <p>移动互联网时代，机会一手把握</p>
+        <p>全面支持苹果APP 安卓APP 手机全部浏览器</p>
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+      <div class="help">
+        <h2></h2>
+        <ul>
+          <li>存款问题</li>
+          <li>游戏帮助</li>
+          <li>取款问题</li>
+          <li>联系客服</li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -158,7 +169,6 @@ export default {
 
 .more_game_wrap {
   background: url(../assets/middle_min_bg.png) no-repeat 0 0;
-
   border-top: 56px solid #b62929;
   height: 1000px;
 }
@@ -263,8 +273,6 @@ export default {
 }
 
 
-
-
 /*热门类型*/
 
 .hottype ul {
@@ -312,8 +320,6 @@ export default {
 }
 
 
-
-
 /*游戏下载 二维码*/
 
 .download {
@@ -323,121 +329,246 @@ export default {
   margin: 0 auto;
   margin-top: 304px;
 }
-.download .item{
-    float: left;
-}
-.QrcodeImage{
-    width: 199px;
-    height: 199px;
-    margin: 40px 75px 0 36px;
-}
-.android,.ios{
-    width: 230px;
-    height: 66px;
-    background-image: url(../assets/index-down-btn.jpg);
-    background-repeat: no-repeat;
-    margin-top: 20px;
-    cursor:pointer;
-}
-.ios{
-    margin-top: 66px;
-}
-.android{
-    background-position: 0 -66px;
-}
-.address{
-    margin-top: 45px;
-    margin-left: 80px;
-}
-.step{
-    margin-top: 30px;
-    margin-left: 80px;
-}
-.advantages{
 
-    text-align: left;
-    padding: 0 15px;
-    font-size: 12px;
+.download .item {
+  float: left;
 }
-.pull-right{
-    float: right;
+
+.QrcodeImage {
+  width: 199px;
+  height: 199px;
+  margin: 40px 75px 0 36px;
 }
-.font30{
-    font-size: 30px;
+
+.android,
+.ios {
+  width: 230px;
+  height: 66px;
+  background-image: url(../assets/index-down-btn.jpg);
+  background-repeat: no-repeat;
+  margin-top: 20px;
+  cursor: pointer;
 }
-.font12{
-    font-size: 12px;
+
+.ios {
+  margin-top: 66px;
 }
-.color000{
-	color: #000;
+
+.android {
+  background-position: 0 -66px;
 }
-.advantages{
-	line-height: 26px;
-	color:#c9c6c6;
-	
+
+.address {
+  margin-top: 45px;
+  margin-left: 80px;
 }
-.advantages div{
-	 padding-left: 14px;
-	 padding-right: 14px;
-     padding-top: 10px;
+
+.step {
+  margin-top: 30px;
+  margin-left: 80px;
 }
-.colorgrey{
-	color:#c9c6c6;
+
+.advantages {
+  text-align: left;
+  padding: 0 15px;
+  font-size: 12px;
 }
-.advantages,.mobdown,.help{
-    padding-top: 32px;
-   
-    float: left;
+
+.pull-right {
+  float: right;
 }
-.advantages h2,.mobdown h2,.help h2{
-	background: url(../assets/others_all.png);
-	background-repeat: no-repeat;
-	background-position: 0 0;
-    width: 312px;
-    height: 36px;
+
+.font30 {
+  font-size: 30px;
 }
-.mobdown h2{
+
+.font12 {
+  font-size: 12px;
+}
+
+.color56 {
+  color: #565656;
+}
+
+.advantages {
+  line-height: 26px;
+  color: #c9c6c6;
+}
+
+.advantages div {
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 10px;
+}
+
+.colorgrey {
+  color: #c9c6c6;
+}
+
+.advantages,
+.mobdown,
+.help {
+  padding-top: 32px;
+  float: left;
+}
+
+.advantages h2,
+.mobdown h2,
+.help h2 {
+  background: url(../assets/others_all.png);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  width: 312px;
+  height: 36px;
+}
+
+.mobdown h2 {
   background-position: 0 -75px;
 }
-.help h2{
+
+.help h2 {
   background-position: 0 -153px;
 }
-.color56{
-    color:#565656;
+
+.color56 {
+  color: #565656;
 }
-.others{
-	background-color: #fff;;
-	width: 1050px;
-	height: 280px;
-	margin: 0 auto;
-	margin-top:-20px;
+
+
+
+/*服务优势*/
+
+.others {
+  background-color: #fff;
+  ;
+  width: 1050px;
+  height: 280px;
+  margin: 0 auto;
+  margin-top: -20px;
 }
-.padding-left8{
-    padding-left: 8px;
+
+.padding-left8 {
+  padding-left: 8px;
 }
-.progress{
-    position: relative;
-    height: 6px;
-    background-color: #EDEBE9;
-    border-radius: 10px;
-    margin-top: 10px;
+
+.progress {
+  position: relative;
+  height: 6px;
+  background-color: #EDEBE9;
+  border-radius: 10px;
+  margin-top: 10px;
 }
-.progress-bar{
-    height: 6px;
-    background-color: #FFDF01;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 112px;
-    border-radius: 10px;
+
+.progress-bar {
+  height: 6px;
+  background-color: #FFDF01;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 112px;
+  border-radius: 10px;
 }
-.progress-bar2{
-    height: 6px;
-    background-color: #e35050;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 112px;
-    border-radius: 10px;
+
+.progress-bar2 {
+  height: 6px;
+  background-color: #e35050;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 112px;
+  border-radius: 10px;
 }
+
+.mobdown p {
+  font-size: 12px;
+  text-align: left;
+  margin-top: 8px;
+  color: #858585;
+}
+
+
+/*移动端下载*/
+
+.mobdown ul {
+  overflow: hidden;
+}
+
+.mobdown ul li {
+  width: 79px;
+  height: 79px;
+  background-image: url(../assets/others_all.png);
+  background-repeat: no-repeat;
+  float: left;
+  margin: 16px;
+  cursor: pointer;
+}
+
+.mobdown ul li:nth-child(1) {
+  background-position: 0px -334px;
+}
+
+.mobdown ul li:nth-child(2) {
+  background-position: 0px -427px;
+}
+
+.mobdown ul li:nth-child(3) {
+  background-position: 0px -520px;
+}
+
+.mobdown ul li:nth-child(1):hover {
+  background-position: -167px -334px;
+}
+
+.mobdown ul li:nth-child(2):hover {
+  background-position: -167px -427px;
+}
+
+.mobdown ul li:nth-child(3):hover {
+  background-position: -167px -520px;
+}
+
+
+/*帮助中心*/
+
+.help ul {
+  overflow: hidden;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.help ul li {
+  text-align: left;
+  cursor: pointer;
+  color: #808080;
+  /*vertical-align: middle;*/
+  margin: 10px 0;
+  line-height: 25px;
+  float: left;
+  padding-left: 34px;
+  background-image: url(../assets/others_all.png);
+  background-repeat: no-repeat;
+  background-position: 0 -295px;
+  width: 29%;
+}
+
+.help ul li:nth-child(1):hover {
+  color: #000;
+  background-position: -130px -295px;
+}
+
+.help ul li:nth-child(2):hover {
+  color: #000;
+  background-position: -130px -295px;
+}
+
+.help ul li:nth-child(3):hover {
+  color: #000;
+  background-position: -130px -295px;
+}
+
+.help ul li:nth-child(4):hover {
+  color: #000;
+  background-position: -130px -295px;
+}
+
 </style>
