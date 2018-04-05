@@ -170,7 +170,7 @@ export default {
 .more_game_wrap {
   background: url(../assets/middle_min_bg.png) no-repeat 0 0;
   border-top: 56px solid #b62929;
-  height: 1000px;
+  height: 868px;
 }
 
 .more_game {

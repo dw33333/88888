@@ -5,6 +5,7 @@
     <router-view name="banner"></router-view>
     <router-view name="moregame"></router-view>
     <router-view name="download"></router-view>
+    <router-view name="footer"></router-view>
   </div>
 </template>
 
