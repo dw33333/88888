@@ -229,6 +229,7 @@ export default {
   background-color: #b62929;
   color: #fff;
   overflow: hidden;
+  height: 304px;
 }
 
 .hotgame .guantype li {
