@@ -107,7 +107,7 @@ export default {
 }
 
 .bar-right div {
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .preson-info,
@@ -116,7 +116,7 @@ export default {
 .withdraw,
 .login-out {
   float: left;
-
+  cursor: pointer;
   background: url(../assets/base-ico2.png) no-repeat;
 }
 
@@ -133,23 +133,36 @@ export default {
 }
 
 .recharge {
-  padding-left: 40px;
+  padding-left: 45px;
 
   background-position: -108px -677px;
 }
 
 .withdraw {
-  padding-left: 40px;
+  padding-left: 45px;
 
   background-position: 0 -677px;
 }
 
 .login-out {
-  padding-left: 40px;
+  padding-left: 45px;
 
   background-position: -201px -677px;
 }
 
+
+.recharge:hover{
+    color: #b62929;
+    background-position: -108px -750px;
+}
+.withdraw:hover{
+  color: #b62929;
+  background-position: 0 -750px;
+}
+.login-out:hover{
+  color: #b62929;
+  background-position: -201px -750px;
+}
 
 /*导航栏*/
 

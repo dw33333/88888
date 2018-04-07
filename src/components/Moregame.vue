@@ -476,7 +476,7 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  width: 112px;
+  width: 180px;
   border-radius: 10px;
 }
 
