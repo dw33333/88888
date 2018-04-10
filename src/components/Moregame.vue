@@ -150,7 +150,7 @@ export default {
     }
   },
   methods: {
-    selectType: function(index) {
+    selectType (index) {
 
       if (index == 1) {
         this.isShow = true;
@@ -168,7 +168,7 @@ export default {
 /*更多游戏*/
 
 .more_game_wrap {
-  background: url(../assets/middle_min_bg.png) no-repeat 0 0;
+  background: url(../assets/middle_min_bg.png) no-repeat top center;
   border-top: 56px solid #b62929;
   height: 868px;
 }

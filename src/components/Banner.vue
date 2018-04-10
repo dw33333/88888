@@ -1,4 +1,5 @@
 <template>
+  <div>
   <swiper :options="swiperOption" class="swiper-box">
     <swiper-slide class="swiper-item">
       <img src="https://zzzy3qqqt.52notice.net//Content/images/banner/65739/W_20170111192447.jpg" alt="">
@@ -8,12 +9,29 @@
     </swiper-slide>
     <div class="swiper-button-prev" slot="button-prev"></div>
     <div class="swiper-button-next" slot="button-next"></div>
+    
     <!-- <div class="swiper-pagination" slot="pagination"></div> -->
   </swiper>
+  <div class="mq">
+      <div class="mq-mask" id="notices">
+        <div style="width: 100%; height: 100%; position: relative; overflow: hidden;">
+          <div style="position: absolute; left: -5px; top: 0px; white-space: nowrap;">
+            <!-- <span style="padding-right:20px;">
+              <label>1、&nbsp;</label>
+              温馨提示：银行卡更新通告：银行卡更新通告：因公司需要，银行卡入款.微信入款.支付宝入款已使用新的入款账号，已更改为新入款账号了，请您获取我司最新入款账号，存入过期账号概不负责！
+            </span> -->
+             <marquee scrollAmount="5" scrolldelay="10" direction="left">
+              温馨提示：银行卡更新通告：银行卡更新通告：因公司需要，银行卡入款.微信入款.支付宝入款已使用新的入款账号，已更改为新入款账号了，请您获取我司最新入款账号，存入过期账号概不负责！
+                </marquee>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
 </template>
 <script>
 export default {
-  
+
   data() {
     return {
       swiperOption: {
@@ -81,6 +99,8 @@ body {
 }
 
 
+
+
 /*轮播图*/
 
 .swiper-container {
@@ -109,6 +129,34 @@ div.swiper-button-prev {
   left: 18%;
   background-size: 40%;
   background-image: url("https://zzzy3qqqt.52notice.net//Content/default/home/images/arrow_left.png");
+}
+
+/*跑马灯*/
+.mq {
+  cursor: pointer;
+  position: relative;
+  z-index: 100;
+  margin: -54px auto 6px auto;
+  padding: 10px 0;
+  width: 998px;
+  height: 27px;
+  top:-6px;
+  background: url(../assets/banner_text_box.png) no-repeat 0 0;
+}
+
+.mq .mq-mask {
+  padding-left: 40px;
+  height: 30px;
+  line-height: 30px;
+  width: 836px;
+  margin-left: 62px;
+  color: #f0a109;
+  background: url(../assets/base-ico2.png) -123px 3px no-repeat;
+}
+
+.mq-mask marquee {
+  color: #f0a109;
+  font-size: 14px;
 }
 
 </style>
