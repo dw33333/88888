@@ -6,7 +6,6 @@
           <span>PLAY RESPONSIBLY</span>
           <span style="padding-left:10px;">{{nowTime}}</span>
         </div>
-
         <div class="bar-right" style="display:none">
           <div class="preson-info">
             账号：xxxxxx
@@ -23,27 +22,23 @@
           <div class="login-out">
             退出
           </div>
-
         </div>
-
         <div class="bar-right">
           <div class="preson-info preson-balance">
             <input type="text" placeholder="账号">
           </div>
           <div class="preson-balance personpwd">
-             <input type="text" placeholder="密码">
+            <input type="text" placeholder="密码">
           </div>
-
           <div class="login">
-            登录
+            <router-link to="/Login">登录</router-link>
           </div>
           <div class="regster" @click="">
-            免费开户
+            <router-link to="/register">免费开户</router-link>
           </div>
           <div class="resetpwd">
             <a href="javascript:void(0);">忘记密码</a>
           </div>
-
         </div>
       </div>
     </div>
@@ -53,8 +48,10 @@
         <img class="logo" src="../assets/base-ico2.png" alt="">
         <ul>
           <li class="buy-center">
-            <div>购彩中心</div>
+            <a href="javascript:void(0)">
+              <div>购彩中心</div>
             <span>LOTTERY</span>
+            </a>
           </li>
           <li class="user-center">
             <router-link to='/UserCenter'>
@@ -63,20 +60,28 @@
             </router-link>
           </li>
           <li>
-            <div>优惠活动</div>
+            <a href="javascript:void(0)">
+              <div>优惠活动</div>
             <span>ACTIVITY</span>
+            </a>
           </li>
           <li>
-            <div>平台公告</div>
+            <a href="javascript:void(0)">
+              <div>平台公告</div>
             <span>ANNOUNCEMENT</span>
+            </a>
           </li>
           <li>
-            <div>彩种信息</div>
+            <a href="javascript:void(0)">
+              <div>彩种信息</div>
             <span>GAMEINFORMATION</span>
+            </a>
           </li>
           <li>
-            <div>手机下注</div>
+            <a href="javascript:void(0)">
+              <div>手机下注</div>
             <span>MOBILE</span>
+            </a>
           </li>
         </ul>
       </div>
@@ -240,24 +245,24 @@ export default {
       nowTime: 11111
     }
   },
-  mounted(){
-    this.nowTime=this.clockon();
+  mounted() {
+    this.clockon();
   },
   methods: {
     clockon() {
-     var now = new Date();
-        var day = now.getDay();
-        var hour = now.getHours();
-        var minu = now.getMinutes();
-        var sec = now.getSeconds();
+      var now = new Date();
+      var day = now.getDay();
+      var hour = now.getHours();
+      var minu = now.getMinutes();
+      var sec = now.getSeconds();
 
-        if (hour < 10) hour = "0" + hour;
-        if (minu < 10) minu = "0" + minu;
-        if (sec < 10) sec = "0" + sec;
-        var time = "";
-        time = hour + ":" + minu+ ":" + sec;
-        var timer = setTimeout(this.clockon, 1000);
-        return time;
+      if (hour < 10) hour = "0" + hour;
+      if (minu < 10) minu = "0" + minu;
+      if (sec < 10) sec = "0" + sec;
+      var time = "";
+      time = hour + ":" + minu + ":" + sec;
+      var timer = setTimeout(this.clockon, 1000);
+      this.nowTime = time;
     }
   }
 
@@ -314,52 +319,69 @@ body {
 
 .bar-right div {
   margin-right: 0;
-  float:left;
+  float: left;
 }
 
-.bar-right .login,.bar-right .regster{
+.bar-right .login,
+.bar-right .regster {
   height: 34px;
   line-height: 34px;
   width: 100px;
-  margin:0 20px;
+  margin: 0 20px;
   margin-top: 10px;
-  background:url(../assets/base-ico2.png) no-repeat;
-  cursor:pointer;
+  background: url(../assets/base-ico2.png) no-repeat;
+  cursor: pointer;
   border-radius: 8px;
   background-position: 0px -334px;
   text-align: center;
 }
-.resetpwd a{
+
+.bar-right .login a{
+  color: #fff;
+}
+.bar-right .regster  a{
+  color: #fff;
+  padding: 8px 10px;
+}
+.resetpwd a {
   color: #fff;
   padding: 10px 0;
 }
 
-.bar-right div input{
+.bar-right div input {
   width: 120px;
-  border:none;
-  background-color: transparent;
-  color: #fff;
-  outline: none;
-}
-.bar-right div input:focus{
-  border:none;
+  border: none;
   background-color: transparent;
   color: #fff;
   outline: none;
 }
 
-input::-webkit-input-placeholder{
-            color:#fff;
-        }
-        input::-moz-placeholder{   /* Mozilla Firefox 19+ */
-            color:#fff;
-        }
-        input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
-            color:#fff;
-        }
-        input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
-            color:#fff;
-        }
+.bar-right div input:focus {
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  outline: none;
+}
+
+input::-webkit-input-placeholder {
+  color: #fff;
+}
+
+input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #fff;
+}
+
+input:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #fff;
+}
+
+input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #fff;
+}
+
 .preson-info,
 .preson-balance,
 .recharge,
@@ -372,7 +394,7 @@ input::-webkit-input-placeholder{
 
 .preson-info {
   padding: 0;
-margin-left: 110px;
+  margin-left: 110px;
   background-position: 0 -390px;
 }
 
@@ -380,11 +402,12 @@ margin-left: 110px;
   /*padding: 0 20px;*/
   width: 120px;
   padding-left: 40px;
-
 }
-.personpwd{
+
+.personpwd {
   background-position: 0 -434px;
 }
+
 .recharge {
   padding-left: 45px;
 
@@ -418,6 +441,8 @@ margin-left: 110px;
   color: #b62929;
   background-position: -201px -750px;
 }
+
+
 
 
 
@@ -477,6 +502,10 @@ nav {
   transform: scale(1.1);
 
   background-color: #f14a4a;
+}
+
+.nav ul li a{
+  
 }
 
 

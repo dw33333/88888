@@ -21,8 +21,8 @@ export default {
   name: 'App',
   data() {
     return {
-      isShowBannerGame: true,
-      isShowRegster: false,
+      isShowBannerGame: false,
+      isShowRegster: true,
       isShowLogin: false,
     }
   },

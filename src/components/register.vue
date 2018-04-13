@@ -1,141 +1,222 @@
 <template>
-  <div class="pages-con">
-    <div class="registration-c" id="REG-FORM">
-      <h1>注册本公司账户</h1>
-      <div class="line1"></div>
-      <form action="/Home/Register" method="post" autocomplete="off" data-bind="submit:submit">
-        <table border="0" cellspacing="5" cellpadding="5" class="regTab">
-          <tbody>
-            <tr>
-              <td width="160">
-                &nbsp;
-              </td>
-              <td>
-                如果您已拥有本公司账户，<a href="/Login">点击此处登录</a>
-              </td>
-            </tr>
-            <tr>
-              <td class="right">
-                &nbsp;<span style="color:red;">*</span>&nbsp;登录账号：
-              </td>
-              <td>
-                <input class="inp" type="text" data-bind="textinput:fields.account" maxlength="15" needed="">
-              </td>
-              <td>
-                <a href="javascript:;" data-bind="click:generateAccount" class="regi-btn regi-btn1">点击生成账号</a>&nbsp;&nbsp;
-                <font color="#ce8b00">
-                  *账号规则：账号只能是数字和字母，长度为3-15位
-                </font>
-              </td>
-            </tr>
-            <tr>
-              <td class="right">
-                &nbsp;<span style="color:red;">*</span>&nbsp;登录密码：
-              </td>
-              <td>
-                <input class="inp" type="password" data-bind="textinput:fields.password" maxlength="18" needed="">
-              </td>
-              <td>
-                <font color="#ce8b00">
-                  *密码规则：密码由6-13个数字或字母组成
-                </font>
-              </td>
-            </tr>
-            <tr>
-              <td class="right">
-                &nbsp;<span style="color:red;">*</span>&nbsp;确认密码：
-              </td>
-              <td>
-                <input class="inp" type="password" data-bind="textinput:fields.repassword" maxlength="18" needed="">
-              </td>
-              <td>
-                <font color="#ce8b00">
-                </font>
-              </td>
-            </tr>
-            <tr>
-              <td class="right">
-                &nbsp;
-              </td>
-              <td colspan="2">
-                <input class="agree-check" type="checkbox" data-bind="checked:agree">
-                <label>
-                  同意并愿意遵守本公司<a href="javascript:void(0);" @click="showAgreement" class="wns-kaihu">用户协议</a>
-                </label>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                &nbsp;
-              </td>
-              <td colspan="2">
-                <a href="javascript:void(0);" class="regi-btn" style="position:relative"><span data-bind="text:isSubmitting()?'正在注册中...':'立即注册'">立即注册</span>
-                                <input type="submit" value=" " style="position:absolute;left:0;top:0;width:170px;height:36px;filter:alpha(opacity=0);opacity:0;">
-                            </a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </form>
-    </div>
-    <!-- 遮罩 -->
-    <div tabindex="0" v-if="isShowAgreement" style="opacity: 0.7; background: rgb(0, 0, 0); position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; user-select: none; z-index: 1025;" class="ui-popup-backdrop"></div>
-    <!-- 弹出框 -->
-    <div tabindex="-1" v-if="isShowAgreement" style="position: fixed; outline: 0px; left: 90px; top: 223px; z-index: 1025;" aria-labelledby="title:alert" aria-describedby="content:alert" class="ui-popup ui-popup-modal ui-popup-show ui-popup-focus" role="alertdialog">
-      <div i="dialog" class="ui-dialog dialog-custom">
-        <div class="ui-dialog-arrow-a"></div>
-        <div class="ui-dialog-arrow-b"></div>
-        <table class="ui-dialog-grid">
-          <tbody>
-            <tr>
-              <td i="header" class="ui-dialog-header">
-                <button i="close" class="ui-dialog-close" title="取消" @click="hideAgreement">×</button>
-                <div i="title" class="ui-dialog-title" id="title:alert">用户协议</div>
-              </td>
-            </tr>
-            <tr>
-              <td i="body" class="ui-dialog-body">
-                <div i="content" class="ui-dialog-content" id="content:alert">
-                  <ul style="text-align:left;">
-                    <li>1、在开户后进行一次有效存款，恭喜您成为本公司有效会员！ </li>
-                    <li>2、存款免手续费，开户最低入款金额100人民币。</li>
-                    <li>3、本公司严禁会员有重复申请账号行为，每位玩家、每一住址 、每一电子邮箱、每一电话号码、相同支付卡/信用卡号码，及共享计算机环境(例如网吧、其他公共用计算机等)只能拥有一个帐户数据。</li>
-                    <li>4、本公司是提供互联网投注服务的机构。请会员在注册前参考当地政府的法律，在博彩不被允许的地区，如有会员在本公司注册、下注，为会员个人行为，本公司不负责、承担任何相关责任。</li>
-                    <li>5、无论是个人或是团体，如有任何威胁、滥用本公司名义的行为，本公司保留杈利取消、收回玩家账号。</li>
-                    <li>6、玩家注册信息有争议时，为确保双方利益、杜绝身份盗用行为，本公司保留权利要求客户向我们提供充足有效的档，并以各种方式辨别客户是否符合资格享有我们的任何优惠。</li>
-                  </ul>
-                  <p style="color:#FF0000;padding-bottom:20px">本公司是使用利鑫科技所提供的在线娱乐软件，若发现您在同系统的娱乐场上开设多个会员账户，并进行套利下注；本公司有权取消您的会员账号并将所有下注营利取消！</p>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td i="footer" class="ui-dialog-footer">
-                <div i="statusbar" class="ui-dialog-statusbar" style="display: none;"></div>
-                <div i="button" class="ui-dialog-button">
-                  <button type="button" i-id="ok" autofocus="" @click="hideAgreement" class="ui-dialog-autofocus">确定</button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+  <div>
+    <headervue></headervue>
+    <div class="pages-con">
+      <div class="registration-c" id="REG-FORM">
+        <h1>注册本公司账户</h1>
+        <div class="line1"></div>
+        <form action="/Home/Register" method="post" autocomplete="off" data-bind="submit:submit">
+          <table border="0" cellspacing="5" cellpadding="5" class="regTab">
+            <tbody>
+              <tr>
+                <td width="160">
+                  &nbsp;
+                </td>
+                <td>
+                  如果您已拥有本公司账户，<router-link to="/Login">点击此处登录</router-link>
+                </td>
+              </tr>
+              <tr>
+                <td class="right">
+                  &nbsp;<span style="color:red;">*</span>&nbsp;用户名：
+                </td>
+                <td>
+                  <input class="inp" type="text" maxlength="15" v-model="username">
+                </td>
+                <td>
+                  <font color="#ce8b00">
+                    *账号规则：账号只能是数字和字母，长度为3-15位
+                  </font>
+                </td>
+              </tr>
+              <tr>
+                <td class="right">
+                  &nbsp;<span style="color:red;">*</span>&nbsp;登录密码：
+                </td>
+                <td>
+                  <input class="inp" type="password" maxlength="18" v-model="password">
+                </td>
+                <td>
+                  <font color="#ce8b00">
+                    *密码规则：密码由6-13个数字或字母组成
+                  </font>
+                </td>
+              </tr>
+              <tr>
+                <td class="right">
+                  &nbsp;<span style="color:red;">*</span>&nbsp;确认密码：
+                </td>
+                <td>
+                  <input class="inp" type="password" maxlength="18" v-model="passwd">
+                </td>
+                <td>
+                  <font color="#ce8b00">
+                  </font>
+                </td>
+              </tr>
+              <tr>
+                <td class="right">
+                  &nbsp;<span style="color:red;">*</span>&nbsp;真实姓名：
+                </td>
+                <td>
+                  <input class="inp" type="text" maxlength="18" v-model="real_name">
+                </td>
+                <td>
+                  <font color="#ce8b00">
+                  </font>
+                </td>
+              </tr>
+              <tr>
+                <td class="right">
+                  &nbsp;<span style="color:red;">*</span>&nbsp;手机号：
+                </td>
+                <td>
+                  <input class="inp" type="text" maxlength="18" v-model="tel">
+                </td>
+                <td>
+                  <font color="#ce8b00">
+                  </font>
+                </td>
+              </tr>
+              <tr>
+                <td class="right">
+                  &nbsp;<span style="color:red;">*</span>&nbsp;取款密码：
+                </td>
+                <td>
+                  <input class="inp" type="password" maxlength="18" v-model='pwd1'>
+                </td>
+                <td>
+                  <font color="#ce8b00">
+                  </font>
+                </td>
+              </tr>
+              <tr>
+                <td class="right">
+                  &nbsp;
+                </td>
+                <td colspan="2">
+                  <input class="agree-check" type="checkbox">
+                  <label>
+                    同意并愿意遵守本公司<a href="javascript:void(0);" @click="showAgreement" class="wns-kaihu">用户协议</a>
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  &nbsp;
+                </td>
+                <td colspan="2">
+                  <a href="javascript:void(0);" @click="registerSubmit" class="regi-btn" style="position:relative">
+                    <span data-bind="text:isSubmitting()?'正在注册中...':'立即注册'">立即注册</span>
+                    <input type="submit" value=" " style="position:absolute;left:0;top:0;width:170px;height:36px;filter:alpha(opacity=0);opacity:0;">
+                </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+      </div>
+      <!-- 遮罩 -->
+      <div tabindex="0" v-if="isShowAgreement" style="opacity: 0.7; background: rgb(0, 0, 0); position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; user-select: none; z-index: 1025;" class="ui-popup-backdrop"></div>
+      <!-- 弹出框 -->
+      <div tabindex="-1" v-if="isShowAgreement" style="position: fixed; outline: 0px; left: 90px; top: 223px; z-index: 1025;" aria-labelledby="title:alert" aria-describedby="content:alert" class="ui-popup ui-popup-modal ui-popup-show ui-popup-focus" role="alertdialog">
+        <div i="dialog" class="ui-dialog dialog-custom">
+          <div class="ui-dialog-arrow-a"></div>
+          <div class="ui-dialog-arrow-b"></div>
+          <table class="ui-dialog-grid">
+            <tbody>
+              <tr>
+                <td i="header" class="ui-dialog-header">
+                  <button i="close" class="ui-dialog-close" title="取消" @click="hideAgreement">×</button>
+                  <div i="title" class="ui-dialog-title" id="title:alert">用户协议</div>
+                </td>
+              </tr>
+              <tr>
+                <td i="body" class="ui-dialog-body">
+                  <div i="content" class="ui-dialog-content" id="content:alert">
+                    <ul style="text-align:left;">
+                      <li>1、在开户后进行一次有效存款，恭喜您成为本公司有效会员！ </li>
+                      <li>2、存款免手续费，开户最低入款金额100人民币。</li>
+                      <li>3、本公司严禁会员有重复申请账号行为，每位玩家、每一住址 、每一电子邮箱、每一电话号码、相同支付卡/信用卡号码，及共享计算机环境(例如网吧、其他公共用计算机等)只能拥有一个帐户数据。</li>
+                      <li>4、本公司是提供互联网投注服务的机构。请会员在注册前参考当地政府的法律，在博彩不被允许的地区，如有会员在本公司注册、下注，为会员个人行为，本公司不负责、承担任何相关责任。</li>
+                      <li>5、无论是个人或是团体，如有任何威胁、滥用本公司名义的行为，本公司保留杈利取消、收回玩家账号。</li>
+                      <li>6、玩家注册信息有争议时，为确保双方利益、杜绝身份盗用行为，本公司保留权利要求客户向我们提供充足有效的档，并以各种方式辨别客户是否符合资格享有我们的任何优惠。</li>
+                    </ul>
+                    <p style="color:#FF0000;padding-bottom:20px">本公司是使用利鑫科技所提供的在线娱乐软件，若发现您在同系统的娱乐场上开设多个会员账户，并进行套利下注；本公司有权取消您的会员账号并将所有下注营利取消！</p>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td i="footer" class="ui-dialog-footer">
+                  <div i="statusbar" class="ui-dialog-statusbar" style="display: none;"></div>
+                  <div i="button" class="ui-dialog-button">
+                    <button type="button" i-id="ok" autofocus="" @click="hideAgreement" class="ui-dialog-autofocus">确定</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
+    <footervue></footervue>
   </div>
 </template>
 <script>
+import axios from 'axios'
+import headervue from '@/components/Header'
+import footervue from '@/components/Footer'
+
 export default {
   data() {
     return {
-        isShowAgreement:false,
+      isShowAgreement: false,
+
+      key: 'add',
+      username: '',
+      password: '',
+      passwd: '',
+      real_name: '',
+      tel: '',
+      pwd1: '',
+      agent_id: '0'
+
     }
   },
   methods: {
     showAgreement() {
-           this.isShowAgreement=true; 
+      this.isShowAgreement = true;
     },
-    hideAgreement(){
-        this.isShowAgreement=false; 
+    hideAgreement() {
+      this.isShowAgreement = false;
+    },
+    registerSubmit() {
+
+      var data = {
+        key: 'add',
+        username: this.username,
+        password: this.password,
+        passwd: this.confirmPassword,
+        real_name: this.real_name,
+        tel: this.tel,
+        pwd1: this.pwd1,
+        agent_id: '0'
+      };
+
+
+      axios.post('/api/json/api.php?r=regster', data)
+        .then(function(response) {
+          alert(1)
+        })
+        .catch(function(error) {
+          console.log(error);
+          alert(2)
+        });
     }
+  },
+  components:{
+    headervue,
+    footervue
   }
 
 }

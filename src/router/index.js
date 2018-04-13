@@ -5,25 +5,17 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 
 // 首页头部导航栏
-const Header = (resolve) => {
-  import('@/components/header').then((module) => {
+
+
+
+
+const home = (resolve) => {
+  import('@/components/home').then((module) => {
     resolve(module)
   })
 }
 
-// 首页banner
-const Banner = (resolve) => {
-  import('@/components/Banner').then((module) => {
-    resolve(module)
-  })
-}
 
-// 首页banner下面部分
-const MoreGame = (resolve) => {
-  import('@/components/MoreGame').then((module) => {
-    resolve(module)
-  })
-}
 
 // 首页注册
 const register = (resolve) => {
@@ -42,6 +34,13 @@ const Login = (resolve) => {
 //首页footer部分
 const Footer = (resolve) => {
   import('@/components/Footer').then((module) => {
+    resolve(module)
+  })
+}
+
+//彩票模块
+const lottery = (resolve) => {
+  import('@/components/lottery/lottery').then((module) => {
     resolve(module)
   })
 }
@@ -204,13 +203,26 @@ export default new Router({
       path: '/',
       name: 'Header',
       components:{
-      	default:Header,
-      	banner:Banner,
-      	moregame:MoreGame,
-        footer:Footer,
-      	register:register,
-        Login:Login
+      	default:home      
       }
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component:register     
+      
+    },
+    {
+      path: '/Login',
+      name: 'Login',
+      component:Login     
+      
+    },
+    {
+      path: '/lottery',
+      name: 'lottery',
+      component:lottery     
+      
     },
     {
       path:'/UserCenter',

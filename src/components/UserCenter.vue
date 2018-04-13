@@ -14,7 +14,7 @@
       </ul>
 
       <!-- 下拉游戏选择 -->
-        <div class="menu-child" v-if="isShowMenu" id="lot_sec_menu">
+        <div class="menu-child" @mouseover="showAllgame" @mouseout="hideAllgame" v-if="isShowMenu" id="lot_sec_menu">
                 <div class="gamelist clear">
                         <div class="official_play">
                             <div class="gamelist_tit clear">
@@ -48,7 +48,7 @@
                                         </li>
                                     
                                         <li>
-                                            <a class="game_26" data-bind="attr:{href:groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):('/OffcialOtherGame/Index/' + FGameID)}" href="/OffcialOtherGame/Index/45"><font data-bind="text:FGameName">广东11选5</font></a>
+                                            <router-link class="game_26" to="/lottery"><font data-bind="text:FGameName">广东11选5</font></router-link>
                                         </li>
                                     
                                         <li>
@@ -107,8 +107,8 @@
                                         </li>
                                       
                                     
-                                        <li>
-                                            <a class="game_1" data-bind="attr:{href: groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):(FBaseGameId == '1' ? '/Six/Index/'+ FGameID:'/OtherGame/Index/' + FGameID)}" href="/OtherGame/Index/4"><font data-bind="text:FGameName">广东11选5</font></a>
+                                         <li>
+                                            <router-link class="game_26" to="/lottery"><font data-bind="text:FGameName">广东11选5</font></router-link>
                                         </li>
                                       
                                     

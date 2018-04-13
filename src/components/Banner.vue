@@ -31,7 +31,7 @@
 </template>
 <script>
 export default {
-
+  name:"banner",
   data() {
     return {
       swiperOption: {
