@@ -336,7 +336,7 @@
 		}
 	}
 </script>
-<style>
+<style scoped>
 	table {
     border-left: 1px solid #cdcdcd;
     border-top: 1px solid #cdcdcd;

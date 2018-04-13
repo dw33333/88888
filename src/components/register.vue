@@ -20,12 +20,13 @@
                 <td class="right">
                   &nbsp;<span style="color:red;">*</span>&nbsp;用户名：
                 </td>
-                <td>
-                  <input class="inp" type="text" maxlength="15" v-model="username">
+                <td class="w280">
+                  <input class="inp" type="text" maxlength="15" placeholder="请输入用户名" v-model="username">
+                  <!-- <input class="inp" type="text" maxlength="15" v-model="username"> -->
                 </td>
                 <td>
                   <font color="#ce8b00">
-                    *账号规则：账号只能是数字和字母，长度为3-15位
+                    *请输入4-12位数字、字母或数字/字母组合
                   </font>
                 </td>
               </tr>
@@ -34,11 +35,11 @@
                   &nbsp;<span style="color:red;">*</span>&nbsp;登录密码：
                 </td>
                 <td>
-                  <input class="inp" type="password" maxlength="18" v-model="password">
+                  <input class="inp" type="password" placeholder="请输入密码" v-model="password">
                 </td>
                 <td>
                   <font color="#ce8b00">
-                    *密码规则：密码由6-13个数字或字母组成
+                   *请使用6-11字母、数字及组合
                   </font>
                 </td>
               </tr>
@@ -47,10 +48,11 @@
                   &nbsp;<span style="color:red;">*</span>&nbsp;确认密码：
                 </td>
                 <td>
-                  <input class="inp" type="password" maxlength="18" v-model="passwd">
+                  <input class="inp" type="password" placeholder="请确认输入密码" maxlength="18" v-model="passwd">
                 </td>
                 <td>
                   <font color="#ce8b00">
+                   *确认密码不能为空
                   </font>
                 </td>
               </tr>
@@ -59,10 +61,11 @@
                   &nbsp;<span style="color:red;">*</span>&nbsp;真实姓名：
                 </td>
                 <td>
-                  <input class="inp" type="text" maxlength="18" v-model="real_name">
+                  <input class="inp" type="text" placeholder="请输入真实姓名" maxlength="18" v-model="real_name">
                 </td>
                 <td>
                   <font color="#ce8b00">
+                    *必须与银行帐号姓名相同，否则不能出款
                   </font>
                 </td>
               </tr>
@@ -71,10 +74,11 @@
                   &nbsp;<span style="color:red;">*</span>&nbsp;手机号：
                 </td>
                 <td>
-                  <input class="inp" type="text" maxlength="18" v-model="tel">
+                  <input class="inp" placeholder="请输入手机号码" type="text" maxlength="18" v-model="tel">
                 </td>
                 <td>
                   <font color="#ce8b00">
+                    *请输入有效的手机号码
                   </font>
                 </td>
               </tr>
@@ -83,10 +87,11 @@
                   &nbsp;<span style="color:red;">*</span>&nbsp;取款密码：
                 </td>
                 <td>
-                  <input class="inp" type="password" maxlength="18" v-model='pwd1'>
+                  <input class="inp" type="password" placeholder="请输入4~6位取款密码" maxlength="18" v-model='pwd1'>
                 </td>
                 <td>
                   <font color="#ce8b00">
+                    *提款认证必须，请务必记住！
                   </font>
                 </td>
               </tr>
@@ -224,7 +229,7 @@ export default {
 </script>
 <style scoped>
 .registration-c {
-  width: 900px;
+  width: 830px;
   min-height: 228px;
   margin: 60px auto 146px;
   padding-bottom: 50px;
@@ -521,5 +526,7 @@ ol {
   -o-user-select: none;
   user-select: none;
 }
-
+.w280{
+  width: 280px;
+}
 </style>
