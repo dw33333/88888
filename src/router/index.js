@@ -46,51 +46,51 @@ const lottery = (resolve) => {
 }
 
 //用户中心>投注记录>购彩查询
-const Buyrecord = (resolve) => {
-  import('@/components/userinfo/buyrecord').then((module) => {
-    resolve(module)
-  })
-}
+// const Buyrecord = (resolve) => {
+//   import('@/components/userinfo/buyrecord').then((module) => {
+//     resolve(module)
+//   })
+// }
 
 //用户中心>投注记录>追号查询
-const track = (resolve) => {
-  import('@/components/userinfo/track').then((module) => {
-    resolve(module)
-  })
-}
+// const track = (resolve) => {
+//   import('@/components/userinfo/track').then((module) => {
+//     resolve(module)
+//   })
+// }
 
 //用户中心>报表管理>充值记录
-const ChargeRecord = (resolve) => {
-  import('@/components/userinfo/ChargeRecord').then((module) => {
+const sportsgame = (resolve) => {
+  import('@/components/userinfo/sportsgame').then((module) => {
     resolve(module)
   })
 }
 
 
 //用户中心>报表管理>帐变报表
-const AccountChange = (resolve) => {
-  import('@/components/userinfo/AccountChange').then((module) => {
+const videogame= (resolve) => {
+  import('@/components/userinfo/videogame').then((module) => {
     resolve(module)
   })
 }
 
 //用户中心>报表管理>个人报表
-const privateRecord = (resolve) => {
-  import('@/components/userinfo/privateRecord').then((module) => {
+const lotterygame = (resolve) => {
+  import('@/components/userinfo/lotterygame').then((module) => {
     resolve(module)
   })
 }
 
 //用户中心>报表管理>团队报表
-const teamRecord = (resolve) => {
-  import('@/components/userinfo/teamRecord').then((module) => {
+const depositrecord = (resolve) => {
+  import('@/components/userinfo/depositrecord').then((module) => {
     resolve(module)
   })
 }
 
 //用户中心>报表管理>优惠活动详情
-const UserJoinActivity = (resolve) => {
-  import('@/components/userinfo/UserJoinActivity').then((module) => {
+const conversionchange = (resolve) => {
+  import('@/components/userinfo/conversionchange').then((module) => {
     resolve(module)
   })
 }
@@ -118,51 +118,51 @@ const CardsList = (resolve) => {
 }
 
 //用户中心>账户管理>用户资料
-const UserData = (resolve) => {
-  import('@/components/userinfo/UserData').then((module) => {
-    resolve(module)
-  })
-}
+// const UserData = (resolve) => {
+//   import('@/components/userinfo/UserData').then((module) => {
+//     resolve(module)
+//   })
+// }
 
 //用户中心>账户管理>彩种信息
-const GameInfoType = (resolve) => {
-  import('@/components/userinfo/GameInfoType').then((module) => {
-    resolve(module)
-  })
-}
+// const GameInfoType = (resolve) => {
+//   import('@/components/userinfo/GameInfoType').then((module) => {
+//     resolve(module)
+//   })
+// }
 
 //用户中心>账户管理>彩种限额
-const GameLimits = (resolve) => {
-  import('@/components/userinfo/GameLimits').then((module) => {
-    resolve(module)
-  })
-}
+// const GameLimits = (resolve) => {
+//   import('@/components/userinfo/GameLimits').then((module) => {
+//     resolve(module)
+//   })
+// }
 
-//用户中心>代理管理>团队总览
-const teamRecordView = (resolve) => {
-  import('@/components/userinfo/teamRecordView').then((module) => {
-    resolve(module)
-  })
-}
+// //用户中心>代理管理>团队总览
+// const teamRecordView = (resolve) => {
+//   import('@/components/userinfo/teamRecordView').then((module) => {
+//     resolve(module)
+//   })
+// }
 
-//用户中心>代理管理>用户列表
-const UserList = (resolve) => {
-  import('@/components/userinfo/UserList').then((module) => {
-    resolve(module)
-  })
-}
+// //用户中心>代理管理>用户列表
+// const UserList = (resolve) => {
+//   import('@/components/userinfo/UserList').then((module) => {
+//     resolve(module)
+//   })
+// }
 
-//用户中心>代理管理>注册管理
-const RegisterManage = (resolve) => {
-  import('@/components/userinfo/RegisterManage').then((module) => {
-    resolve(module)
-  })
-}
+// //用户中心>代理管理>注册管理
+// const RegisterManage = (resolve) => {
+//   import('@/components/userinfo/RegisterManage').then((module) => {
+//     resolve(module)
+//   })
+// }
 
 
-//用户中心>代理管理>推广注册
-const AdRegister = (resolve) => {
-  import('@/components/userinfo/AdRegister').then((module) => {
+//用户中心>额度管理>转入
+const moneymanagemen = (resolve) => {
+  import('@/components/userinfo/moneymanagemen').then((module) => {
     resolve(module)
   })
 }
@@ -229,33 +229,27 @@ export default new Router({
       name:'UserCenter',
       component:USERCENTER,
       children:[
+      
         {
-          path:'/buyrecord',
-          component:Buyrecord
+          path:'/sportsgame',
+          component:sportsgame
         },
         {
-          path:'/track',
-          component:track
+          path:'/videogame',
+          component:videogame
+        },
+        
+        {
+          path:'/lotterygame',
+          component:lotterygame
         },
         {
-          path:'/ChargeRecord',
-          component:ChargeRecord
+          path:'/depositrecord',
+          component:depositrecord
         },
         {
-          path:'/AccountChange',
-          component:AccountChange
-        },
-        {
-          path:'/privateRecord',
-          component:privateRecord
-        },
-        {
-          path:'/teamRecord',
-          component:teamRecord
-        },
-        {
-          path:'/UserJoinActivity',
-          component:UserJoinActivity
+          path:'/conversionchange',
+          component:conversionchange
         },
         {
           path:'/UserInfo',
@@ -266,50 +260,29 @@ export default new Router({
           component:PasswordManagement
         },
         {
-          path:'/CardsList',
-          component:CardsList
+          path:'/moneymanagemen',
+          component:moneymanagemen
         },
-        {
-          path:'/UserData',
-          component:UserData
-        },
-        {
-          path:'/GameInfoType',
-          component:GameInfoType
-        }, {
-          path:'/GameLimits',
-          component:GameLimits
-        },
-        {
-          path:'/teamRecordView',
-          component:teamRecordView
-        },
+        // {
+        //   path:'/UserData',
+        //   component:UserData
+        // },
+        // {
+        //   path:'/GameInfoType',
+        //   component:GameInfoType
+        // },
+        //  {
+        //   path:'/GameLimits',
+        //   component:GameLimits
+        // },
+       
         {
           path:'/Notice',
           component:Notice
-        },
-        {
-          path:'/RegisterManage',
-          component:RegisterManage
-        },
-        {
-          path:'/AdRegister',
-          component:AdRegister
-        },
+        },      
         {
           path:'/Messge',
           component:Messge
-        },
-        {
-          path:'/UserList',
-          component:UserList,
-          children:[{
-            path:'/teamRecordView',
-            component:teamRecordView
-          },{
-            path:'/AccountChange',
-            component:AccountChange
-          }]
         }
       ]
     },

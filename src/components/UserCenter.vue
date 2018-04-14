@@ -205,7 +205,16 @@
         账号: <span>abcde</span>
       </div>
       <div class="balance">
-        余额: <span>9999</span>
+        用户余额: <span>9999</span>
+      </div>
+      <div class="balance">
+        真实姓名: <span>9999</span>
+      </div>
+      <div class="balance">
+        AG真人余额: <span>9999</span>
+      </div>
+      <div class="balance">
+        DS真人余额: <span>9999</span>
       </div>
       <div class="money">
         <div class="recharge">
@@ -219,46 +228,37 @@
       <div class="sidebar">
         <div class="sidebar-menu">
           <div class="item" @click="isShow(1)">
-            <a href="javascript:void(0);">投注记录</a>
+            <a href="javascript:void(0);">密码管理</a>
           </div>
           <ul class='list-item' v-if="isDisplay10">
-            <li><router-link to="/buyrecord">购彩查询</router-link></li>
-            <li><router-link to="/track">追号查询</router-link></li>
+            <li><router-link to="/PasswordManagement">修改密码</router-link></li>
           </ul>
           <div class="item" @click="isShow(2)">
-            <a href="javascript:void(0);">报表管理</a>
+            <a href="javascript:void(0);">投注报表</a>
           </div>
           <ul class="list-item" v-if="isDisplay20">
-            <li><router-link to="/ChargeRecord">充值记录</router-link></li>
-            <li><router-link to="/AccountChange">帐变报表</router-link></li>
-            <li><router-link to="/privateRecord">个人报表</router-link></li>
-            <li><router-link to="/teamRecord">团队报表</router-link></li>
-            <li><router-link to="/UserJoinActivity">优惠活动详情</router-link></li>
+            <li><router-link to="/sportsgame">体育</router-link></li>
+            <li><router-link to="/videogame">视讯</router-link></li>
+            <li><router-link to="/privateRecord">彩票</router-link></li>
+            <li><router-link to="/depositrecord">存取款</router-link></li>
+            <li><router-link to="/conversionchange">额度转换</router-link></li>
           </ul>
           <div class="item" @click="isShow(3)">
-            <a href="javascript:void(0);">账户管理</a>
+            <a href="javascript:void(0);">额度转换</a>
           </div>
           <ul class='list-item' v-if="isDisplay30">
-            <li><router-link to="/UserInfo">个人总览</router-link></li>
-            <li><router-link to="/PasswordManagement">密码管理</router-link></li>
-            <li><router-link to="/CardsList">银行卡管理</router-link></li>
+            <li><router-link to="/moneymanagemen">额度管理</router-link></li>
+            <!-- <li><router-link to="/outto">转出</router-link></li> -->
+            <!-- <li><router-link to="/CardsList">银行卡管理</router-link></li>
             <li><router-link to="/UserData">用户资料</router-link></li>
             <li><router-link to="/GameInfoType">彩种信息</router-link></li>
-            <li><router-link to="/GameLimits">彩种限额</router-link></li>
+            <li><router-link to="/GameLimits">彩种限额</router-link></li> -->
           </ul>
+         
           <div class="item" @click="isShow(4)">
-            <a href="javascript:void(0);">代理管理</a>
+            <a href="javascript:void(0);">信息中心</a>
           </div>
           <ul class='list-item' v-if="isDisplay40">
-            <li><router-link to="/teamRecordView">团队总览</router-link></li>
-            <li><router-link to="/UserList">用户列表</router-link></li>
-            <li><router-link to="/RegisterManage">注册管理</router-link></li>
-            <li><router-link to="/AdRegister">推广注册</router-link></li>
-          </ul>
-          <div class="item" @click="isShow(5)">
-            <a href="javascript:void(0);">短信公告</a>
-          </div>
-          <ul class='list-item' v-if="isDisplay50">
             <li><router-link to="/Messge">站内短信</router-link></li>
             <li><router-link to="/Notice">网站公告</router-link></li>
           </ul>
@@ -272,78 +272,60 @@
 </template>
 <script>
 export default {
-
-
   data() {
     return {
       isDisplay10: false,
       isDisplay20: false,
       isDisplay30: false,
       isDisplay40: false,
-      isDisplay50: false,
       lock10: true,
       lock20: true,
       lock30: true,
       lock40: true,
-      lock50: true,
-      isShowMenu:false
-
-    }
+      isShowMenu: false
+    };
   },
   methods: {
-    showAllgame(){
-        this.isShowMenu=true;
+    showAllgame() {
+      this.isShowMenu = true;
     },
-    hideAllgame(){
-
-        this.isShowMenu=false;
+    hideAllgame() {
+      this.isShowMenu = false;
     },
     isShow(index) {
-
-      console.log(index)
+      console.log(index);
 
       if (index == 1) {
-
         if (this.lock10) {
           this.isDisplay10 = true;
           this.isDisplay20 = false;
           this.isDisplay30 = false;
           this.isDisplay40 = false;
-          this.isDisplay50 = false;
           this.lock10 = false;
         } else {
           this.isDisplay10 = false;
           this.isDisplay20 = false;
           this.isDisplay30 = false;
           this.isDisplay40 = false;
-          this.isDisplay50 = false;
           this.lock10 = true;
         }
-
-      };
+      }
 
       if (index == 2) {
-
         if (this.lock20) {
-
           this.isDisplay20 = true;
           this.isDisplay10 = false;
           this.isDisplay30 = false;
           this.isDisplay40 = false;
-          this.isDisplay50 = false;
           this.lock20 = false;
         } else {
           this.isDisplay20 = false;
           this.isDisplay10 = false;
           this.isDisplay30 = false;
           this.isDisplay40 = false;
-          this.isDisplay50 = false;
           this.lock20 = true;
-
         }
       }
-
-
 
       if (index == 3) {
         if (this.lock30) {
@@ -351,17 +333,14 @@ export default {
           this.isDisplay10 = false;
           this.isDisplay20 = false;
           this.isDisplay40 = false;
-          this.isDisplay50 = false;
           this.lock30 = false;
         } else {
           this.isDisplay30 = false;
           this.isDisplay10 = false;
           this.isDisplay20 = false;
           this.isDisplay40 = false;
-          this.isDisplay50 = false;
           this.lock30 = true;
         }
-
       }
       if (index == 4) {
         if (this.lock40) {
@@ -369,42 +348,18 @@ export default {
           this.isDisplay10 = false;
           this.isDisplay20 = false;
           this.isDisplay30 = false;
-          this.isDisplay50 = false;
           this.lock40 = false;
         } else {
           this.isDisplay40 = false;
           this.isDisplay10 = false;
           this.isDisplay20 = false;
           this.isDisplay30 = false;
-          this.isDisplay50 = false;
           this.lock40 = true;
         }
-
-      };
-
-      if (index == 5) {
-        if (this.lock50) {
-          this.isDisplay50 = true;
-          this.isDisplay10 = false;
-          this.isDisplay20 = false;
-          this.isDisplay30 = false;
-          this.isDisplay40 = false;
-          this.lock50 = false;
-        } else {
-          this.isDisplay50 = false;
-          this.isDisplay10 = false;
-          this.isDisplay20 = false;
-          this.isDisplay30 = false;
-          this.isDisplay40 = false;
-          this.lock50 = true;
-        }
-
       }
-
-    },
+    }
   }
-}
-
+};
 </script>
 <style scoped>
 body {
@@ -413,13 +368,12 @@ body {
 
 .container {
   height: 100%;
-  overflow-y:scroll;
+  overflow-y: scroll;
 }
 
 .container::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
-
 
 .header {
   background-color: #363636;
@@ -464,7 +418,7 @@ body {
   background-position: -45px -470px;
 }
 
-.header .nav li.game:hover .menu-child{
+.header .nav li.game:hover .menu-child {
   display: block;
 }
 
@@ -508,149 +462,138 @@ body {
   background-position: -45px -274px;
 }
 
-
 /*下拉游戏选择*/
 
 .menu-child {
-    position: absolute;
-    zoom: 1;
-    top: 104px;
-    right: 50px;
-    width: 780px;
-    background: url('../assets/nav_bg.png') repeat;
-    margin: 2px 0 0;
-    height: auto;
-    padding: 15px 0;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px #000;
-    z-index: 99;
+  position: absolute;
+  zoom: 1;
+  top: 104px;
+  right: 50px;
+  width: 780px;
+  background: url("../assets/nav_bg.png") repeat;
+  margin: 2px 0 0;
+  height: auto;
+  padding: 15px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px #000;
+  z-index: 99;
 }
 
 .gamelist {
-    position: relative;
-    height: 100%;
-    width: 100%;
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
 
 .triangles_back {
-    display: none;
+  display: none;
 }
 
 .official_play {
-    border-bottom: none;
-    width: 50%;
-    font-size: 12px;
-    float: left;
+  border-bottom: none;
+  width: 50%;
+  font-size: 12px;
+  float: left;
 }
 .gamelist_tit {
-    width: 370px;
-    display: block;
-    margin: 8px 0;
-    border-bottom: none;
-    text-align: left;
+  width: 370px;
+  display: block;
+  margin: 8px 0;
+  border-bottom: none;
+  text-align: left;
 }
 
 .menu-child h1.red_style {
-    height: 28px;
-    background: url('../assets/icon51.png') no-repeat center left;
+  height: 28px;
+  background: url("../assets/icon51.png") no-repeat center left;
 }
 
 .menu-child h1 {
-    padding: 4px 0 4px 38px;
-    margin-left: 30px;
-    font-size: 15px;
-    font-weight: normal;
-    width: 70px;
-    height: 20px;
-    font-size: 16px;
-    display: inline-block;
-    color: #fff;
+  padding: 4px 0 4px 38px;
+  margin-left: 30px;
+  font-size: 15px;
+  font-weight: normal;
+  width: 70px;
+  height: 20px;
+  font-size: 16px;
+  display: inline-block;
+  color: #fff;
 }
 
 .high_wrap {
-    float: left;
-    border-bottom: none;
-    width: auto;
-    height: auto;
+  float: left;
+  border-bottom: none;
+  width: auto;
+  height: auto;
 }
 
 .cut-line {
-    position: absolute;
-    height: 100%;
-    width: 1px;
-    left: 50%;
-    background: #fff;
-    text-align: center;
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  left: 50%;
+  background: #fff;
+  text-align: center;
 }
 
 .credit_play {
-    font-size: 0;
-    float: left;
-    width: 50%;
+  font-size: 0;
+  float: left;
+  width: 50%;
 }
 
 .menu-child h1.orange_style {
-    height: 28px;
-    background: url('../assets/icon52.png') no-repeat center left;
+  height: 28px;
+  background: url("../assets/icon52.png") no-repeat center left;
 }
 
 .menu-child ul {
-    min-height: 62px;
-    float: left;
-    margin-left: 30px;
-    padding: 0;
+  min-height: 62px;
+  float: left;
+  margin-left: 30px;
+  padding: 0;
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 .menu-child li {
-    float: left;
-    line-height: 28px;
-    width: 80px;
-    height: 28px;
-    margin: 5px 0;
-    text-align: left;
-    margin-right: 10px;
+  float: left;
+  line-height: 28px;
+  width: 80px;
+  height: 28px;
+  margin: 5px 0;
+  text-align: left;
+  margin-right: 10px;
 }
 
- .menu-child li a {
-    display: block;
-    width: 80px;
-    height: 28px;
-    color: #fff;
-   
-    background: none;
-    font-size: 12px;
-    margin: 0;
+.menu-child li a {
+  display: block;
+  width: 80px;
+  height: 28px;
+  color: #fff;
+
+  background: none;
+  font-size: 12px;
+  margin: 0;
 }
 
- .top_menu a {
-    width: 52px;
-    margin: 0 14px;
-    color: #fff;
-    background: url('../assets/top_menu_icos.png') no-repeat;
+.top_menu a {
+  width: 52px;
+  margin: 0 14px;
+  color: #fff;
+  background: url("../assets/top_menu_icos.png") no-repeat;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-
-
-
-
-
-
-
-
-
-.main-body{
-	overflow: hidden;
-	height: 100%;
+.main-body {
+  overflow: hidden;
+  height: 100%;
 }
-
 
 /*左边区域*/
 
@@ -669,18 +612,22 @@ a{
   width: 197px;
   height: 31px;
   line-height: 28px;
-  background: url('../assets/base-ico2.png') no-repeat;
+  background: url("../assets/base-ico2.png") no-repeat;
 }
 
 .container .select .account {
-  background-position: -89px -36px;
+  background-position: -96px -36px;
+  text-align: left;
+  padding-left: 52px;
 }
 
 .container .select .balance {
-  background-position: -89px -83px;
+  background-position: -96px -83px;
+  text-align: left;
+  padding-left: 52px;
+
   margin-top: 16px;
 }
-
 
 .container .select .money {
   padding-top: 10px;
@@ -695,10 +642,10 @@ a{
   width: 26%;
   padding-left: 40px;
   line-height: 55px;
-  background: url('../assets/user-btn.png') no-repeat;
+  background: url("../assets/user-btn.png") no-repeat;
 }
 
-.container .select>div {
+.container .select > div {
   margin: 0 auto;
   padding-top: 20px;
 }
@@ -766,24 +713,20 @@ a{
   background-color: #fff;
 }
 
-
-.sidebar-menu .list-item li .router-link-exact-active.router-link-active{
-	color: #000;
+.sidebar-menu .list-item li .router-link-exact-active.router-link-active {
+  color: #000;
   background-color: #fff;
-
 }
-
 
 /*右边区域*/
 
 .container .content {
   /*width: 1600px;*/
   /*height: 100%;*/
-margin-left: 0px;
-/*margin-left: 213px;*/
-    min-height: 900px;
-    min-width: ;
+  margin-left: 0px;
+  /*margin-left: 213px;*/
+  min-height: 900px;
+  min-width: ;
   background-color: #ededed;
 }
-
 </style>
