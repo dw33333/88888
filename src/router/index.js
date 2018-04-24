@@ -243,6 +243,7 @@ export default new Router({
     },
     {
       path:'/UserCenter',
+      redirect:'/recharge',
       name:'UserCenter',
       component:USERCENTER,
       children:[
