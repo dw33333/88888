@@ -14,21 +14,17 @@
             <th>转账类型</th>
             <th>转账金额</th>
             <th>结果反馈</th>
-           
           </tr>
         </thead>
         <tbody>
-          <tr v-for="data in quotaWeekDatas">
+          <tr v-for="quota in quotaWeekDatas">
             <td>{{quota.do_time}}</td>
             <td>{{quota.order_num}}</td>
             <td>{{quota.live_type}}</td>
             <td>{{quota.zz_type}}</td>
             <td>{{quota.zz_money}}</td>
             <td>{{quota.result}}</td>
-            
           </tr>
-         
-      
           <tr v-if="quotaWeekDatas.length<=0">
             <td colspan="6">暂时没有相关信息</td>
           </tr>
@@ -41,16 +37,17 @@
 export default {
   data() {
     return {
-      quotaWeekDatas:[],
-      inliveMoney:'',
-      outliveMoney:''
+      quotaWeekDatas: [],
+      inliveMoney: '',
+      outliveMoney: '',
+    
     }
   },
   mounted() {
     // 额度转换
     this.$http.get('/json/center/?r=ChangeHistory').then((res) => {
       if (res.data.code == 0) {
-        this.quotaWeekDatas = res.data.data.InfoList || [];
+        this.quotaWeekDatas = res.data.data.InfoList;
         this.inliveMoney = res.data.data.in_normal_total;
         this.outliveMoney = res.data.data.out_normal_total;
       }
@@ -59,7 +56,7 @@ export default {
     })
   },
   methods: {
-  
+
   }
 };
 
@@ -80,6 +77,7 @@ export default {
   height: 49px;
   border-bottom: 2px solid #b62929;
 }
+
 
 
 /*表格*/
