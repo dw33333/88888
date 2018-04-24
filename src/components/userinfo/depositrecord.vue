@@ -3,110 +3,163 @@
     <div class="main-head">
       <span>用户中心&gt;投注报表&gt;存取款</span>
     </div>
-
-    <!-- 日期列表 -->
-    <div class="table-list" v-if="isShowDetail">
+    <div class="btns platform">
+      <div :class='{recharge:true,ag:true,active:tabIndex==1}' @click="selectType(1);">
+        在线存款记录
+      </div>
+      <div :class='{remittance:true,ag:true,active:tabIndex==2}' @click="selectType(2);">
+        汇款记录
+      </div>
+      <div :class="{withdraw:true,ds:true,active:tabIndex==3}" @click="selectType(3);">
+        取款记录
+      </div>
+    </div>
+    <!-- 存款记录 -->
+    <div class="table-list" v-if='tabIndex==1'>
       <table>
         <thead>
           <tr>
-            <th>日期</th>
-            <th>下注金额</th>
-            <th>未结算</th>
-            <th>结果</th>
-            <th>用户操作</th>
-           
+            <th>存款流水号</th>
+            <th>存款时间</th>
+            <th>存款金额</th>
+            <th>存款状态</th>
+            <th>备注</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>2018-04-14</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td><a href="javascript:void(0)" @click="isShowDetailFn(1)">查看详情</a></td>
+          <tr v-for="(deposit,index) in onlineDepositDatas" :key='index'>
+            <td>{{deposit.order_num}}</td>
+            <td>{{deposit.update_time}}</td>
+            <td>{{deposit.order_value}}</td>
+            <td>{{deposit.statusString}}</td>
+            <td>{{deposit.about}}</td>
           </tr>
-           <tr>
-            <td>2018-04-14</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td><a href="javascript:void(0)" @click="isShowDetailFn(1)">查看详情</a></td>
-          </tr>
-           <tr>
-            <td>总计</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td></td>
+          <tr v-if='onlineDepositDatas.length<=0'>
+            <td colspan="5">暂时没有存款信息记录</td>
           </tr>
         </tbody>
       </table>
     </div>
-
-
-    <!-- 详情列表 -->
-    <div class="table-list" v-if="!isShowDetail">
-      <div class="text">2018-04-14  <span @click="isShowDetailFn(2)">返回</span></div>
+    <!-- 汇款记录 -->
+    <div class="table-list" v-if='tabIndex==2'>
       <table>
         <thead>
           <tr>
-            <th>游戏名称</th>
-            <th>下注金额</th>
-            <th>未结算</th>
-            <th>结果</th>
-           
-           
+            <th>汇款流水号</th>
+            <th>汇款时间</th>
+            <th>汇款金额</th>
+            <th>汇款银行</th>
+            <th>汇款方式</th>
+            <th>汇款状态</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>足球</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0</td>
-            
+          <tr v-for="(bank,index) in bankDepositDatas" :key='index'>
+            <td>{{bank.order_num}}</td>
+            <td>{{bank.update_time}}</td>
+            <td>{{bank.order_value}}</td>
+            <td>{{bank.pay_card}}</td>
+            <td>{{bank.manner}}</td>
+            <td>{{bank.statusString}}</td>
           </tr>
-           <tr>
-            <td>篮球</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0</td>
-            
-          </tr>
-           <tr>
-            <td>总计</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
+          <tr v-if='onlineDepositDatas.length<=0'>
+            <td colspan="6">暂时没有汇款信息记录</td>
           </tr>
         </tbody>
       </table>
     </div>
-
-
-
+    <!-- 取款记录 -->
+    <div class="table-list" v-if='tabIndex==3'>
+      <table>
+        <thead>
+          <tr>
+            <th>取款流水号</th>
+            <th>取款时间</th>
+            <th>取款金额</th>
+            <th>取款状态</th>
+            <th>备注</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(draw,index) in drawDatas" :key='index'>
+            <td>{{draw.order_num}}</td>
+            <td>{{draw.update_time}}</td>
+            <td>{{draw.order_value}}</td>
+            <td>{{draw.statusString}}</td>
+            <td>{{draw.about}}</td>
+          </tr>
+          <tr v-if='onlineDepositDatas.length<=0'>
+            <td colspan="5">暂时没有取款信息记录</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      isShowDetail:true
+      // 在线存款
+      onlineDepositDatas: [],
+      // 在线汇款
+      bankDepositDatas: [],
+      // 取款
+      drawDatas: [],
+      tabIndex: 1
+
     }
   },
-  methods:{
-    isShowDetailFn(index){
-      if(index==1){
-      this.isShowDetail=false;
-        
+  mounted() {
+    // 在线存款记录
+    this.$http.get('/json/center/?r=ChaCkOnline').then((res) => {
+      if (res.data.code === 0) {
+        this.onlineDepositDatas = res.data.data
       }
-       if(index==2){
-      this.isShowDetail=true;
-        
+    }).catch((error) => {
+      console.log(error)
+    });
+
+    // 银行汇款记录
+    this.$http.get('/json/center/?r=ChaHuiKuan').then((res) => {
+      if (res.data.code === 0) {
+        this.bankDepositDatas = res.data.data
       }
+    }).catch((error) => {
+      console.log(error)
+    });
+
+
+    // 取款记录
+    this.$http.get('/json/center/?r=ChaQuKuan').then((res) => {
+      if (res.data.code === 0) {
+        this.drawDatas = res.data.data
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+
+
+  },
+  methods: {
+    selectType(index) {
+      if (index == 1) {
+        this.tabIndex = 1;
+
+      }
+      if (index == 2) {
+        this.tabIndex = 2;
+
+      }
+      if (index == 3) {
+        this.tabIndex = 3;
+
+      }
+
     }
   }
 };
+
 </script>
 <style scoped>
 .main-head {
@@ -125,27 +178,64 @@ export default {
   border-bottom: 2px solid #b62929;
 }
 
+
+
+
 /*表格*/
 
 .table-list {
   padding: 10px 20px 10px 20px;
 }
 
-.table-list .text{
-  line-height: 50px;
-  height: 50px;
-  text-align: left;
-  text-indent: 10px;
+.platform {
+  padding-top: 20px;
 }
 
-.table-list .text span{
-  background-color:#e34343;
-  padding: 10px;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 20px;
+.btns {
+  overflow: hidden;
 }
+
+.btns .recharge,
+.btns .remittance,
+.btns .withdraw {
+  padding: 0 22px;
+  border: none;
+  background: none;
+  display: inline-block;
+  background-color: #ededed;
+  border: 1px solid #b62929;
+  cursor: pointer;
+  height: 30px;
+  line-height: 30px;
+  float: left;
+}
+
+.btns .ag,
+.btns .ds {
+  height: 40px;
+  line-height: 40px;
+}
+
+
+.btns .recharge {
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  margin-left: 20px;
+  border-right: none;
+}
+
+.btns .withdraw {
+  border-left: none;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.btns>.active {
+  background-color: #b62929;
+  color: #fff;
+}
+
+
 
 table {
   border-left: 1px solid #cdcdcd;
@@ -154,6 +244,7 @@ table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
+  border-radius: 5px;
 }
 
 .table-list tr th {
@@ -168,8 +259,12 @@ table {
 
 .table-list tr td {
   border-bottom: 1px solid #cdcdcd;
-  background: #fff;
   padding: 5px;
   text-align: center;
 }
+
+.table-list tr:hover {
+  background-color: #ddd;
+}
+
 </style>

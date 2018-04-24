@@ -10,7 +10,19 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+        '/json':{
+            target: 'http://185.224.171.148:81',
+            changeOrigin: true,
+            // pathRewrite: {
+            //     '^/api': ''
+            // },
+            headers: {
+                referer: 'http://185.224.171.148:81',
+                host: '185.224.171.148:81'
+            }
+        }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -18,7 +30,7 @@ module.exports = {
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
-    poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
+    poll: false, // 
 
     // Use Eslint Loader?
     // If true, your code will be linted during bundling and

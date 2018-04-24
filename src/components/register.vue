@@ -5,121 +5,123 @@
       <div class="registration-c" id="REG-FORM">
         <h1>注册本公司账户</h1>
         <div class="line1"></div>
-        <form action="/Home/Register" method="post" autocomplete="off" data-bind="submit:submit">
-          <table border="0" cellspacing="5" cellpadding="5" class="regTab">
-            <tbody>
-              <tr>
-                <td width="160">
-                  &nbsp;
-                </td>
-                <td>
-                  如果您已拥有本公司账户，<router-link to="/Login">点击此处登录</router-link>
-                </td>
-              </tr>
-              <tr>
-                <td class="right">
-                  &nbsp;<span style="color:red;">*</span>&nbsp;用户名：
-                </td>
-                <td class="w280">
-                  <input class="inp" type="text" maxlength="15" placeholder="请输入用户名" v-model="username">
-                  <!-- <input class="inp" type="text" maxlength="15" v-model="username"> -->
-                </td>
-                <td>
-                  <font color="#ce8b00">
-                    *请输入4-12位数字、字母或数字/字母组合
-                  </font>
-                </td>
-              </tr>
-              <tr>
-                <td class="right">
-                  &nbsp;<span style="color:red;">*</span>&nbsp;登录密码：
-                </td>
-                <td>
-                  <input class="inp" type="password" placeholder="请输入密码" v-model="password">
-                </td>
-                <td>
-                  <font color="#ce8b00">
-                   *请使用6-11字母、数字及组合
-                  </font>
-                </td>
-              </tr>
-              <tr>
-                <td class="right">
-                  &nbsp;<span style="color:red;">*</span>&nbsp;确认密码：
-                </td>
-                <td>
-                  <input class="inp" type="password" placeholder="请确认输入密码" maxlength="18" v-model="passwd">
-                </td>
-                <td>
-                  <font color="#ce8b00">
-                   *确认密码不能为空
-                  </font>
-                </td>
-              </tr>
-              <tr>
-                <td class="right">
-                  &nbsp;<span style="color:red;">*</span>&nbsp;真实姓名：
-                </td>
-                <td>
-                  <input class="inp" type="text" placeholder="请输入真实姓名" maxlength="18" v-model="real_name">
-                </td>
-                <td>
-                  <font color="#ce8b00">
-                    *必须与银行帐号姓名相同，否则不能出款
-                  </font>
-                </td>
-              </tr>
-              <tr>
-                <td class="right">
-                  &nbsp;<span style="color:red;">*</span>&nbsp;手机号：
-                </td>
-                <td>
-                  <input class="inp" placeholder="请输入手机号码" type="text" maxlength="18" v-model="tel">
-                </td>
-                <td>
-                  <font color="#ce8b00">
-                    *请输入有效的手机号码
-                  </font>
-                </td>
-              </tr>
-              <tr>
-                <td class="right">
-                  &nbsp;<span style="color:red;">*</span>&nbsp;取款密码：
-                </td>
-                <td>
-                  <input class="inp" type="password" placeholder="请输入4~6位取款密码" maxlength="18" v-model='pwd1'>
-                </td>
-                <td>
-                  <font color="#ce8b00">
-                    *提款认证必须，请务必记住！
-                  </font>
-                </td>
-              </tr>
-              <tr>
-                <td class="right">
-                  &nbsp;
-                </td>
-                <td colspan="2">
-                  <input class="agree-check" type="checkbox">
-                  <label>
-                    同意并愿意遵守本公司<a href="javascript:void(0);" @click="showAgreement" class="wns-kaihu">用户协议</a>
-                  </label>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  &nbsp;
-                </td>
-                <td colspan="2">
-                  <a href="javascript:void(0);" @click="registerSubmit" class="regi-btn" style="position:relative">
-                    <span data-bind="text:isSubmitting()?'正在注册中...':'立即注册'">立即注册</span>
-                    <input type="submit" value=" " style="position:absolute;left:0;top:0;width:170px;height:36px;filter:alpha(opacity=0);opacity:0;">
+        <!-- <form method="post" autocomplete="off" data-bind="submit:submit"> -->
+        <table border="0" cellspacing="5" cellpadding="5" class="regTab">
+          <tbody>
+            <tr>
+              <td width="160">
+                &nbsp;
+              </td>
+              <td>
+                如果您已拥有本公司账户，
+                <router-link to="/Login">点击此处登录</router-link>
+              </td>
+            </tr>
+            <tr>
+              <td class="right">
+                &nbsp;<span style="color:red;">*</span>&nbsp;用户名：
+              </td>
+              <td class="w280">
+                <input class="inp" type="text" placeholder="请输入用户名" maxlength="12" oninput="value=value.replace(/[\W]/g,'')" v-model="username">
+                <!-- <input class="inp" type="text" maxlength="15" v-model="username"> -->
+              </td>
+              <td>
+                <font color="#ce8b00">
+                  *请输入4-12位数字、字母或数字/字母组合
+                </font>
+              </td>
+            </tr>
+            <tr>
+              <td class="right">
+                &nbsp;<span style="color:red;">*</span>&nbsp;登录密码：
+              </td>
+              <td>
+                <input class="inp" type="password" placeholder="请输入密码" maxlength="11" v-model="password">
+              </td>
+              <td>
+                <font color="#ce8b00">
+                  *请使用6-11字母、数字及组合
+                </font>
+              </td>
+            </tr>
+            <tr>
+              <td class="right">
+                &nbsp;<span style="color:red;">*</span>&nbsp;确认密码：
+              </td>
+              <td>
+                <input class="inp" type="password" placeholder="请输入确认密码" v-model="confirmPassword">
+              </td>
+              <td>
+                <font color="#ce8b00">
+                  *确认密码不能为空
+                </font>
+              </td>
+            </tr>
+            <tr>
+              <td class="right">
+                &nbsp;<span style="color:red;">*</span>&nbsp;真实姓名：
+              </td>
+              <td>
+                <input class="inp" type="text" placeholder="请输入真实姓名" @input="realTis" v-model="realname" ref="realname">
+              </td>
+              <td>
+                <font color="#ce8b00">
+                  *必须与银行帐号姓名相同，否则不能出款
+                </font>
+              </td>
+            </tr>
+            <tr>
+              <td class="right">
+                &nbsp;<span style="color:red;">*</span>&nbsp;手机号：
+              </td>
+              <td>
+                <input class="inp" type="text" placeholder="请输入手机号码" onkeyup="value=value.replace(/[^1234567890-]+/g,'')" v-model="phonenum" ref="phonenum" maxlength="11">
+              </td>
+              <td>
+                <font color="#ce8b00">
+                  *请输入有效的手机号码
+                </font>
+              </td>
+            </tr>
+            <tr>
+              <td class="right">
+                &nbsp;<span style="color:red;">*</span>&nbsp;取款密码：
+              </td>
+              <td>
+                <input class="inp" type="password" oninput='return( /[\d]/.test(String.fromCharCode(event.keyCode)))' placeholder="请输入4~6位取款密码" maxlength="6" v-model="bankCode">
+              </td>
+              <td>
+                <font color="#ce8b00">
+                  *提款认证必须，请务必记住！
+                </font>
+              </td>
+            </tr>
+            <tr>
+              <td class="right">
+                &nbsp;
+              </td>
+              <td colspan="2">
+                <input class="agree-check" type="checkbox" name="agreement" ref="agreementCheck" id="agreement" checked="checked" @click="checkSelect">
+                <label>
+                  同意并愿意遵守本公司<a href="javascript:void(0);" @click="showAgreement" class="wns-kaihu">用户协议</a>
+                  <br/> <span style="color:red;margin-left:17px;" v-show="!ifcheck">*请阅读协议</span>
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                &nbsp;
+              </td>
+              <td colspan="2">
+                <a href="javascript:void(0);" class="regi-btn" style="position:relative">
+                    <span>立即注册</span>
+                    <input type="submit" @click="registerSubmit" style="position:absolute;left:0;top:0;width:170px;height:36px;filter:alpha(opacity=0);opacity:0;">
                 </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- </form> -->
       </div>
       <!-- 遮罩 -->
       <div tabindex="0" v-if="isShowAgreement" style="opacity: 0.7; background: rgb(0, 0, 0); position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; overflow: hidden; user-select: none; z-index: 1025;" class="ui-popup-backdrop"></div>
@@ -140,14 +142,18 @@
                 <td i="body" class="ui-dialog-body">
                   <div i="content" class="ui-dialog-content" id="content:alert">
                     <ul style="text-align:left;">
-                      <li>1、在开户后进行一次有效存款，恭喜您成为本公司有效会员！ </li>
-                      <li>2、存款免手续费，开户最低入款金额100人民币。</li>
-                      <li>3、本公司严禁会员有重复申请账号行为，每位玩家、每一住址 、每一电子邮箱、每一电话号码、相同支付卡/信用卡号码，及共享计算机环境(例如网吧、其他公共用计算机等)只能拥有一个帐户数据。</li>
-                      <li>4、本公司是提供互联网投注服务的机构。请会员在注册前参考当地政府的法律，在博彩不被允许的地区，如有会员在本公司注册、下注，为会员个人行为，本公司不负责、承担任何相关责任。</li>
-                      <li>5、无论是个人或是团体，如有任何威胁、滥用本公司名义的行为，本公司保留杈利取消、收回玩家账号。</li>
-                      <li>6、玩家注册信息有争议时，为确保双方利益、杜绝身份盗用行为，本公司保留权利要求客户向我们提供充足有效的档，并以各种方式辨别客户是否符合资格享有我们的任何优惠。</li>
+                      <p class="agreement-content">
+                        <li>1、只接受合法博彩年龄的客户申请。同时我们保留要求客户提供其年龄证明的权利。</li>
+                        <li>2、在进行注册时所提供的全部信息必须在各个方面都是准确和完整的。</li>
+                        <li>3、在开户后进行一次有效存款，恭喜您成为有效会员！</li>
+                        <li>4、存款免手续费，开户最低入款金额10人民币，最高单次入款金额500000人民币。</li>
+                        <li>5、成为有效会员后，客户有责任以在线客服、电子邮件、在网站上联系我们，随时向本公司提供最新的个人资料。</li>
+                        <li>6、是提供互联网投注服务的机构。请会员在注册前参考当地政府的法律，在博彩不被允许的地区，如有会员在注册、下注，为会员个人行为，不负责、承担任何相关责任。</li>
+                        <li>7、无论是个人或是团体，如有任何威胁、滥用优惠的行为，保留杈利取消、收回由优惠产生的红利，并保留权利追讨最高50%手续费。</li>
+                        <li>8、所有的优惠是特别为玩家而设，在玩家注册信息有争议时，为确保双方利益、杜绝身份盗用行为，保留权利要求客户向我们提供充足有效的文件， 并以各种方式辨别客户是否符合资格享有我们的任何优惠。</li>
+                        <li>9、客户一经注册开户，将被视为接受所有颁布在网站上的规则与条例。</li>
                     </ul>
-                    <p style="color:#FF0000;padding-bottom:20px">本公司是使用利鑫科技所提供的在线娱乐软件，若发现您在同系统的娱乐场上开设多个会员账户，并进行套利下注；本公司有权取消您的会员账号并将所有下注营利取消！</p>
+                    <!-- <li style="color:#FF0000;padding-bottom:20px">本公司是使用利鑫科技所提供的在线娱乐软件，若发现您在同系统的娱乐场上开设多个会员账户，并进行套利下注；本公司有权取消您的会员账号并将所有下注营利取消！</p> -->
                   </div>
                 </td>
               </tr>
@@ -164,29 +170,33 @@
         </div>
       </div>
     </div>
+    <maskLayer :ifopen="ifopen" :content='content'></maskLayer>
     <footervue></footervue>
   </div>
 </template>
 <script>
-import axios from 'axios'
-import headervue from '@/components/Header'
-import footervue from '@/components/Footer'
+import headervue from "@/components/Header";
+import footervue from "@/components/Footer";
+import maskLayer from "@/components/base/mask-layer";
 
 export default {
   data() {
     return {
       isShowAgreement: false,
 
-      key: 'add',
-      username: '',
-      password: '',
-      passwd: '',
-      real_name: '',
-      tel: '',
-      pwd1: '',
-      agent_id: '0'
-
-    }
+      ifopen: false,
+      content: '',
+      username: "",
+      password: "",
+      confirmPassword: "",
+      realname: "",
+      email: "",
+      phonenum: null,
+      bankCode: "",
+      captcha: "",
+      value: [],
+      ifcheck: true,
+    };
   },
   methods: {
     showAgreement() {
@@ -195,36 +205,104 @@ export default {
     hideAgreement() {
       this.isShowAgreement = false;
     },
+
+    // 限制真实姓名输入框只能输入中文
+    realTis() {
+      this.realname = this.realname.replace(/[^\u4e00-\u9fa5]+$/, "");
+      return this.realname;
+    },
+
+    // 封装提示信息函数
+    mytoast(msg) {
+      this.ifopen = !this.ifopen;
+      // let instance = Toast(msg);
+      this.content = msg;
+      setTimeout(() => {
+        // instance.close();
+        this.ifopen = !this.ifopen;
+        // clearTimeout();
+      }, 1000);
+    },
+
+    // 提交注册
     registerSubmit() {
+      if (!this.username) {
+        this.mytoast("请输入用户名！");
+      } else if (this.username.length < 4) {
+        this.mytoast("用户名长度最少4位！");
+      } else if (!this.password) {
+        this.mytoast("请输入密码！");
+      } else if (this.password.length < 6) {
+        this.mytoast("密码长度最少6位！");
+      } else if (!this.confirmPassword) {
+        this.mytoast("请输入确认密码！");
+      } else if (this.confirmPassword.length < 6) {
+        this.mytoast("确认密码长度最少6位！");
+      } else if (this.password !== this.confirmPassword) {
+        this.mytoast("密码与确认密码不一致！");
+      } else if (!this.realname) {
+        this.mytoast("请输入真实姓名！");
+      } else if (/[^\u4e00-\u9fa5]+$/.test(this.realname)) {
+        this.mytoast("真实姓名只能为中文！");
+      } else if (!this.phonenum) {
+        this.mytoast("请输入手机号码！");
+      } else if (this.phonenum.length < 11) {
+        this.mytoast("请输入11位数手机号码！");
+      } else if (!this.bankCode) {
+        this.mytoast("请输入取款密码！");
+      } else if (this.bankCode.length < 4) {
+        this.mytoast("取款密码最少4位数！");
+      } else if (!this.ifcheck) {
+        this.mytoast("请勾选开户协议！");
+      } else {
+        let data = {
+          action: "regster",
+          key: "add",
+          username: this.username,
+          password: this.password,
+          passwd: this.confirmPassword,
+          real_name: this.realname,
+          tel: this.phonenum,
+          pwd1: this.bankCode,
+          agent_id: this.agentId
+        };
 
-      var data = {
-        key: 'add',
-        username: this.username,
-        password: this.password,
-        passwd: this.confirmPassword,
-        real_name: this.real_name,
-        tel: this.tel,
-        pwd1: this.pwd1,
-        agent_id: '0'
-      };
+
+        this.$http.post("/json/api.php?r=regster", data).then(res => {
+            this.mytoast(res.data.msg)
+            if (res.status === 200 && res.data.code === 0) {
 
 
-      axios.post('/api/json/api.php?r=regster', data)
-        .then(function(response) {
-          alert(1)
-        })
-        .catch(function(error) {
-          console.log(error);
-          alert(2)
-        });
+              // this.$store.dispatch('UserLogin', this.username)
+              // this.$store.dispatch('SET_userMoney', '0.00')
+              this.$router.push('/')
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
+    },
+
+    // 点击本人同意
+    sureAgreement() {
+      this.ifcheck = !this.ifcheck;
+    },
+    // 点击勾选框
+    checkSelect() {
+      if (this.$refs.agreementCheck.checked) {
+        this.ifcheck = true;
+      } else {
+        this.ifcheck = false;
+      }
     }
   },
-  components:{
+  components: {
     headervue,
-    footervue
+    footervue,
+    maskLayer
   }
-
-}
+};
 
 </script>
 <style scoped>
@@ -233,7 +311,7 @@ export default {
   min-height: 228px;
   margin: 60px auto 146px;
   padding-bottom: 50px;
-  background: url('../assets/bg_07.png') repeat;
+  background: url("../assets/bg_07.png") repeat;
 }
 
 .registration-c h1 {
@@ -243,7 +321,7 @@ export default {
   line-height: 70px;
   text-align: center;
   font-weight: normal;
-  color: #FFF;
+  color: #fff;
 }
 
 .registration-c table {
@@ -262,7 +340,7 @@ export default {
 }
 
 .right {
-  text-align: right!important;
+  text-align: right !important;
 }
 
 .registration-c a {
@@ -274,7 +352,6 @@ a {
   text-decoration: none !important;
   outline: none !important;
 }
-
 
 .registration-c .inp {
   color: #666;
@@ -296,20 +373,27 @@ a.regi-btn,
   padding: 10px 61px;
   border-radius: 5px;
   zoom: 1;
-  color: #FFF;
+  color: #fff;
   background: #c42133;
-  background: -moz-linear-gradient(top, #c42133 1%, #DB5967 9%, #AF1223 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #c42133), color-stop(9%, #DB5967), color-stop(100%, #AF1223));
-  background: -webkit-linear-gradient(top, #c42133 1%, #c42133 9%, #c42133 100%);
-  background: -o-linear-gradient(top, #c42133 1%, #DB5967 9%, #AF1223 100%);
-  background: -ms-linear-gradient(top, #c42133 1%, #DB5967 9%, #AF1223 100%);
-  background: linear-gradient(to bottom, #c42133 1%, #DB5967 9%, #AF1223 100%);
+  background: -moz-linear-gradient(top, #c42133 1%, #db5967 9%, #af1223 100%);
+  background: -webkit-gradient( linear,
+  left top,
+  left bottom,
+  color-stop(1%, #c42133),
+  color-stop(9%, #db5967),
+  color-stop(100%, #af1223));
+  background: -webkit-linear-gradient( top,
+  #c42133 1%,
+  #c42133 9%,
+  #c42133 100%);
+  background: -o-linear-gradient(top, #c42133 1%, #db5967 9%, #af1223 100%);
+  background: -ms-linear-gradient(top, #c42133 1%, #db5967 9%, #af1223 100%);
+  background: linear-gradient(to bottom, #c42133 1%, #db5967 9%, #af1223 100%);
 }
 
 .registration-c .agree-check {
   vertical-align: -3px;
 }
-
 
 .parcel-wrap {
   width: 100%;
@@ -350,7 +434,7 @@ a.regi-btn,
 }
 
 .ui-popup-modal .ui-dialog {
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1), 0 0 256px rgba(255, 255, 255, .3);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1), 0 0 256px rgba(255, 255, 255, 0.3);
 }
 
 .ui-dialog-arrow-a,
@@ -360,7 +444,7 @@ a.regi-btn,
   width: 0;
   height: 0;
   overflow: hidden;
-  _color: #FF3FFF;
+  _color: #ff3fff;
   _filter: chroma(color=#FF3FFF);
   border: 8px dashed transparent;
 }
@@ -380,20 +464,24 @@ a.regi-btn,
 
 .dialog-custom .ui-dialog-header {
   background: #c32b39;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#d22f3e), to(#a7232f));
+  background-image: -webkit-gradient( linear,
+  left top,
+  left bottom,
+  from(#d22f3e),
+  to(#a7232f));
   background-image: -moz-linear-gradient(top, #d22f3e, #a7232f);
   background-image: -o-linear-gradient(top, #d22f3e, #a7232f);
   background-image: -webkit-linear-gradient(top, #d22f3e, #a7232f);
   background-image: linear-gradient(to bottom, #d22f3e, #a7232f);
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#d22f3e', endColorstr='#a7232f')";
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d22f3e', endColorstr='#a7232f');
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#d22f3e",
+  endColorstr="#a7232f");
   zoom: 1;
 }
 
-
 .ui-dialog-header {
   white-space: nowrap;
-  border-bottom: 1px solid #E5E5E5;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .ui-dialog-header,
@@ -423,12 +511,12 @@ a.regi-btn,
   font-weight: bold;
   line-height: 1;
   color: #000;
-  text-shadow: 0 1px 0 #FFF;
-  opacity: .2;
+  text-shadow: 0 1px 0 #fff;
+  opacity: 0.2;
   filter: alpha(opacity=20);
   cursor: pointer;
   background: transparent;
-  _background: #FFF;
+  _background: #fff;
   border: 0;
   -webkit-appearance: none;
 }
@@ -526,7 +614,9 @@ ol {
   -o-user-select: none;
   user-select: none;
 }
-.w280{
+
+.w280 {
   width: 280px;
 }
+
 </style>

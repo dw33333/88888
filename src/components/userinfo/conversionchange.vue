@@ -3,110 +3,66 @@
     <div class="main-head">
       <span>用户中心&gt;投注报表&gt;额度转换</span>
     </div>
-
     <!-- 日期列表 -->
-    <div class="table-list" v-if="isShowDetail">
+    <div class="table-list">
       <table>
         <thead>
           <tr>
-            <th>日期</th>
-            <th>下注金额</th>
-            <th>未结算</th>
-            <th>结果</th>
-            <th>用户操作</th>
+            <th>转账时间</th>
+            <th>订单号</th>
+            <th>游戏类型</th>
+            <th>转账类型</th>
+            <th>转账金额</th>
+            <th>结果反馈</th>
            
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>2018-04-14</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td><a href="javascript:void(0)" @click="isShowDetailFn(1)">查看详情</a></td>
+          <tr v-for="data in quotaWeekDatas">
+            <td>{{quota.do_time}}</td>
+            <td>{{quota.order_num}}</td>
+            <td>{{quota.live_type}}</td>
+            <td>{{quota.zz_type}}</td>
+            <td>{{quota.zz_money}}</td>
+            <td>{{quota.result}}</td>
+            
           </tr>
-           <tr>
-            <td>2018-04-14</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td><a href="javascript:void(0)" @click="isShowDetailFn(1)">查看详情</a></td>
-          </tr>
-           <tr>
-            <td>总计</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td></td>
+         
+      
+          <tr v-if="quotaWeekDatas.length<=0">
+            <td colspan="6">暂时没有相关信息</td>
           </tr>
         </tbody>
       </table>
     </div>
-
-
-    <!-- 详情列表 -->
-    <div class="table-list" v-if="!isShowDetail">
-      <div class="text">2018-04-14  <span @click="isShowDetailFn(2)">返回</span></div>
-      <table>
-        <thead>
-          <tr>
-            <th>游戏名称</th>
-            <th>下注金额</th>
-            <th>未结算</th>
-            <th>结果</th>
-           
-           
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>足球</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0</td>
-            
-          </tr>
-           <tr>
-            <td>篮球</td>
-            <td>0.00</td>
-            <td>0.00</td>
-            <td>0</td>
-            
-          </tr>
-           <tr>
-            <td>总计</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-
-
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      isShowDetail:true
+      quotaWeekDatas:[],
+      inliveMoney:'',
+      outliveMoney:''
     }
   },
-  methods:{
-    isShowDetailFn(index){
-      if(index==1){
-      this.isShowDetail=false;
-        
+  mounted() {
+    // 额度转换
+    this.$http.get('/json/center/?r=ChangeHistory').then((res) => {
+      if (res.data.code == 0) {
+        this.quotaWeekDatas = res.data.data.InfoList || [];
+        this.inliveMoney = res.data.data.in_normal_total;
+        this.outliveMoney = res.data.data.out_normal_total;
       }
-       if(index==2){
-      this.isShowDetail=true;
-        
-      }
-    }
+    }).catch((error) => {
+      console.log(error)
+    })
+  },
+  methods: {
+  
   }
 };
+
 </script>
 <style scoped>
 .main-head {
@@ -125,21 +81,22 @@ export default {
   border-bottom: 2px solid #b62929;
 }
 
+
 /*表格*/
 
 .table-list {
   padding: 10px 20px 10px 20px;
 }
 
-.table-list .text{
+.table-list .text {
   line-height: 50px;
   height: 50px;
   text-align: left;
   text-indent: 10px;
 }
 
-.table-list .text span{
-  background-color:#e34343;
+.table-list .text span {
+  background-color: #e34343;
   padding: 10px;
   color: #fff;
   border-radius: 5px;
@@ -172,4 +129,5 @@ table {
   padding: 5px;
   text-align: center;
 }
+
 </style>

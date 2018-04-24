@@ -4,61 +4,185 @@
       <span>用户中心&gt;账户管理&gt;密码修改</span>
     </div>
     <div class="btns">
-      <div :class='{recharge:true,active:isShow}' @click="selectType(1);">修改登录密码</div>
-      <div :class="{withdraw:true,active:!isShow}" @click="selectType(2);">设置取款密码</div>
+      <div :class='{recharge:true,active:tabIndex==1}' @click="selectType(1);">修改登录密码</div>
+      <div :class="{withdraw:true,active:tabIndex==2}" @click="selectType(2);">设置取款密码</div>
     </div>
     <div class="content-box">
       <!-- 修改密码 -->
-      <div class="modify" v-if='isShow'>
+      <div class="modify" v-if='tabIndex==1'>
         <p>输入旧登录密码：
-          <input type="text">
+          <input type="password" onKeyUp="value=value.replace(/[\W]/g,'')" placeholder="" v-model="oldPassWord">
         </p>
         <p>输入新登录密码：
-          <input type="text" placeholder="6-13个字符(数字和字母)">
+          <input type="password" onKeyUp="value=value.replace(/[\W]/g,'')" placeholder="" v-model="newPassWord">
         </p>
         <p>输入新登录密码：
-          <input type="text">
+          <input type="password" onKeyUp="value=value.replace(/[\W]/g,'')" placeholder="" v-model="againPassWord">
         </p>
       </div>
       <!-- 设置取款密码 -->
-      <div class="setPwd" v-else>
+      <div class="setPwd" v-if='tabIndex==2'>
         <p>
           提示：取款密码由4-6位数字或字母或数字和字母组成，在线取款时需要输入取款密码才能进行取款
         </p>
-        <p>输入新提款密码:
-          <input type="text" placeholder="">
+        <p style="padding-left:28px;">请输入旧密码:
+          <input type="password" maxlength="6" onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="输入旧密码4-6位" v-model="oldPassWord">
         </p>
-        <p>输入新提款密码:
-          <input type="text">
+        <p style="padding-left:28px;">请输入新密码:
+          <input type="password" maxlength="6" onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="输入新密码4-6位" v-model="newPassWord">
+        </p>
+        <p>请再次输入新密码:
+          <input type="password" maxlength="6" onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="再次输入新密码4-6位" v-model="againPassWord">
         </p>
       </div>
-      <div class="btn-group" v-if="isShow">
-        <button>修改</button>
-        <button>重置</button>
+      <div class="btn-group" v-if="tabIndex==1">
+        <button @click='modifySubmit'>修改</button>
+        <button @click="resetPwd">重置</button>
       </div>
-      <div class="btn-group" v-else>
-        <button>设置</button>
-        <button>重置</button>
+      <div class="btn-group" v-if='tabIndex==2'>
+        <button @click='modifySubmit'>设置</button>
+        <button click="resetPwd">重置</button>
       </div>
     </div>
+    <maskLayer :ifopen="ifopen" :content='content'></maskLayer>
   </div>
 </template>
 <script>
+import maskLayer from '../base/mask-layer'
+
 export default {
   data() {
     return {
-      isShow: true,
+      tabIndex: 1,
+      oldPassWord: null,
+      newPassWord: null,
+      againPassWord: null,
+      ifopen:false,
+      content:''
     }
   },
   methods: {
-    selectType(index) {
-      if (index == 1) {
-        this.isShow = true;
-      };
-      if (index == 2) {
-        this.isShow = false;
+    resetPwd(){
+      this.oldPassWord='';
+      this.newPassWord='';
+      this.againPassWord='';
+    },
+    // 封装提示信息函数
+    mytoast(msg) {
+      this.ifopen = !this.ifopen;
+      // let instance = Toast(msg);
+      this.content = msg;
+      setTimeout(() => {
+        // instance.close();
+        this.ifopen = !this.ifopen;
+        // clearTimeout();
+      }, 1000);
+    },
+
+
+      modifySubmit () {
+      if (this.tabIndex === 1) {
+        if (!this.oldPassWord) {
+          this.mytoast('请输入旧密码')
+          setTimeout(() => {
+            // instance.close()
+            clearTimeout()
+          }, 1500)
+        } else if (!this.newPassWord) {
+          this.mytoast('请输入新密码')
+          setTimeout(() => {
+            // instance.close()
+            clearTimeout()
+          }, 1500)
+        } else if (!this.againPassWord) {
+          this.mytoast('请再次输入新密码')
+          setTimeout(() => {
+            // instance.close()
+            clearTimeout()
+          }, 1500)
+        } else {
+          let data = {}
+          data['password_old'] = this.oldPassWord
+          data['password'] = this.newPassWord
+          data['REpassword'] = this.againPassWord
+          this.$http.post('/json/center/?r=ChkPasswd', data).then((res) => {
+            this.mytoast(res.data.msg)
+            setTimeout(() => {
+              // instance.close()
+              clearTimeout()
+            }, 1500)
+            if (res.data.code === 0) {
+              this.oldPassWord = ''
+              this.newPassWord = ''
+              this.againPassWord = ''
+            }
+          }).catch((error) => {
+            console.log(error)
+          })
+        }
       }
+      if (this.tabIndex === 2) {
+        if (!this.oldPassWord) {
+          this.mytoast('请输入旧密码')
+          setTimeout(() => {
+            // instance.close()
+            clearTimeout()
+          }, 1500)
+        } else if (!this.newPassWord) {
+          this.mytoast('请输入新密码')
+          setTimeout(() => {
+            // instance.close()
+            clearTimeout()
+          }, 1500)
+        } else if (this.newPassWord.length < 4) {
+          this.mytoast('新密码长度最少为4位')
+          setTimeout(() => {
+            // instance.close()
+            clearTimeout()
+          }, 1500)
+        } else if (!this.againPassWord) {
+          this.mytoast('请再次输入新密码')
+          setTimeout(() => {
+            // instance.close()
+            clearTimeout()
+          }, 1500)
+        } else if (this.againPassWord.length < 4) {
+          this.mytoast('确认密码长度最少为4位')
+          setTimeout(() => {
+            // instance.close()
+            clearTimeout()
+          }, 1500)
+        } else {
+          let data = {}
+          data['password_old'] = this.oldPassWord
+          data['password'] = this.newPassWord
+          data['REpassword'] = this.againPassWord
+          this.$http.post('/json/center/?r=ChkQkPasswd', data).then((res) => {
+            this.mytoast(res.data.msg)
+            setTimeout(() => {
+              // instance.close()
+              clearTimeout()
+            }, 1500)
+            if (res.data.code === 0) {
+              this.oldPassWord = ''
+              this.newPassWord = ''
+              this.againPassWord = ''
+            }
+          }).catch((error) => {
+            console.log(error)
+          })
+        }
+      }
+    },
+
+
+
+    selectType(index) {
+      this.tabIndex = index;
     }
+  },
+  components: {
+    maskLayer
   }
 }
 
@@ -116,6 +240,8 @@ export default {
   background-color: #b62929;
   color: #fff;
 }
+
+
 
 
 

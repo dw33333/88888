@@ -58,7 +58,7 @@
 
 
 </script>
-<style>
+<style scoped>
 footer {
   background: url(../assets/footer_bg.jpg) no-repeat center -2px;
   height: 267px;

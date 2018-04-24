@@ -4,288 +4,419 @@
       <img class="logo" src="../assets/logo1.png" height="82" width="136" alt="">
       <ul class="nav">
         <li class='game' @mouseover="showAllgame" @mouseout="hideAllgame"><a href="#">游戏大厅</a>
-            
         </li>
-        <li class="home"><router-link to="/">返回首页</router-link></li>
+        <li class="home">
+          <router-link to="/">返回首页</router-link>
+        </li>
         <li class="server"><a href="#">在线客服</a></li>
         <li class="rules"><a href="#">规则说明</a></li>
         <li class="help"><a href="#">游戏帮助</a></li>
-        <li class="layout"><a href="#">登出账号</a></li>
+        <li class="layout"><a href="#" @click="loginout();">登出账号</a></li>
       </ul>
-
       <!-- 下拉游戏选择 -->
-        <div class="menu-child" @mouseover="showAllgame" @mouseout="hideAllgame" v-if="isShowMenu" id="lot_sec_menu">
-                <div class="gamelist clear">
-                        <div class="official_play">
-                            <div class="gamelist_tit clear">
-                                <h1 class="red_style">官方玩法</h1>
-                            </div>
-                            <div class="high_wrap">
-                                <div class="gamelist_l">
-                                    <ul data-bind="foreach:official">
-                                        <li>
-                                            <a class="game_26" data-bind="attr:{href:groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):('/OffcialOtherGame/Index/' + FGameID)}" href="/OffcialOtherGame/Index/26"><font data-bind="text:FGameName">重庆时时彩</font></a>
-                                        </li>
-                                    
-                                        <li>
-                                            <a class="game_26" data-bind="attr:{href:groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):('/OffcialOtherGame/Index/' + FGameID)}" href="/OffcialOtherGame/Index/28"><font data-bind="text:FGameName">北京快乐8</font></a>
-                                        </li>
-                                    
-                                        <li>
-                                            <a class="game_26" data-bind="attr:{href:groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):('/OffcialOtherGame/Index/' + FGameID)}" href="/OffcialOtherGame/Index/29"><font data-bind="text:FGameName">北京PK拾</font></a>
-                                        </li>
-                                    
-                                        <li>
-                                            <a class="game_26" data-bind="attr:{href:groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):('/OffcialOtherGame/Index/' + FGameID)}" href="/OffcialOtherGame/Index/30"><font data-bind="text:FGameName">福彩3D</font></a>
-                                        </li>
-                                    
-                                        <li>
-                                            <a class="game_26" data-bind="attr:{href:groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):('/OffcialOtherGame/Index/' + FGameID)}" href="/OffcialOtherGame/Index/40"><font data-bind="text:FGameName">新疆时时彩</font></a>
-                                        </li>
-                                    
-                                        <li>
-                                            <a class="game_26" data-bind="attr:{href:groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):('/OffcialOtherGame/Index/' + FGameID)}" href="/OffcialOtherGame/Index/44"><font data-bind="text:FGameName">排列三、五</font></a>
-                                        </li>
-                                    
-                                        <li>
-                                            <router-link class="game_26" to="/lottery"><font data-bind="text:FGameName">广东11选5</font></router-link>
-                                        </li>
-                                    
-                                        <li>
-                                            <a class="game_26" data-bind="attr:{href:groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):('/OffcialOtherGame/Index/' + FGameID)}" href="/OffcialOtherGame/Index/50"><font data-bind="text:FGameName">黑龙江11选5</font></a>
-                                        </li>
-                                    
-                                        <li>
-                                            <a class="game_26" data-bind="attr:{href:groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):('/OffcialOtherGame/Index/' + FGameID)}" href="/OffcialOtherGame/Index/56"><font data-bind="text:FGameName">北京时时彩</font></a>
-                                        </li>
-                                    
-                                        <li>
-                                            <a class="game_26" data-bind="attr:{href:groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):('/OffcialOtherGame/Index/' + FGameID)}" href="/OffcialOtherGame/Index/78"><font data-bind="text:FGameName">QQ分分彩</font></a>
-                                        </li>
-                                    
-                                        <li>
-                                            <a class="game_26" data-bind="attr:{href:groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):('/OffcialOtherGame/Index/' + FGameID)}" href="/OffcialOtherGame/Index/81"><font data-bind="text:FGameName">上海时时乐</font></a>
-                                        </li>
-                                    
-                                        <li>
-                                            <a class="game_26" data-bind="attr:{href:groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):('/OffcialOtherGame/Index/' + FGameID)}" href="/OffcialOtherGame/Index/80"><font data-bind="text:FGameName">河北快3</font></a>
-                                        </li>
-                                    
-                                        <li>
-                                            <a class="game_26" data-bind="attr:{href:groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):('/OffcialOtherGame/Index/' + FGameID)}" href="/OffcialOtherGame/Index/51"><font data-bind="text:FGameName">韩式1.5分彩</font></a>
-                                        </li>
-                                    
-                                        <li>
-                                            <a class="game_26" data-bind="attr:{href:groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):('/OffcialOtherGame/Index/' + FGameID)}" href="/OffcialOtherGame/Index/62"><font data-bind="text:FGameName">江苏11选5</font></a>
-                                        </li>
-                                    
-                                        <li>
-                                            <a class="game_26" data-bind="attr:{href:groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):('/OffcialOtherGame/Index/' + FGameID)}" href="/OffcialOtherGame/Index/68"><font data-bind="text:FGameName">澳洲3分彩</font></a>
-                                        </li>
-                                    
-                                        <li>
-                                            <a class="game_26" data-bind="attr:{href:groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):('/OffcialOtherGame/Index/' + FGameID)}" href="/OffcialOtherGame/Index/72"><font data-bind="text:FGameName">上海11选5</font></a>
-                                        </li>
-                                    
-                                        <li>
-                                            <a class="game_26" data-bind="attr:{href:groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):('/OffcialOtherGame/Index/' + FGameID)}" href="/OffcialOtherGame/Index/76"><font data-bind="text:FGameName">腾讯分分彩</font></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cut-line"></div>
-                        <div class="credit_play">
-                            <div class="gamelist_tit clear">
-                                <h1 class="orange_style">信用玩法</h1>
-                            </div>
-                            <div class="high_wrap">
-                                <div class="gamelist_r">
-                                    <ul data-bind="foreach:credit">
-                                        <li>
-                                            <a class="game_1" data-bind="attr:{href: groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):(FBaseGameId == '1' ? '/Six/Index/'+ FGameID:'/OtherGame/Index/' + FGameID)}" href="/Six/Index/1"><font data-bind="text:FGameName">香港六合彩</font></a>
-                                        </li>
-                                      
-                                    
-                                         <li>
-                                            <router-link class="game_26" to="/lottery"><font data-bind="text:FGameName">广东11选5</font></router-link>
-                                        </li>
-                                      
-                                    
-                                        <li>
-                                            <a class="game_1" data-bind="attr:{href: groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):(FBaseGameId == '1' ? '/Six/Index/'+ FGameID:'/OtherGame/Index/' + FGameID)}" href="/OtherGame/Index/6"><font data-bind="text:FGameName">广西快十</font></a>
-                                        </li>
-                                      
-                                    
-                                        <li>
-                                            <a class="game_1" data-bind="attr:{href: groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):(FBaseGameId == '1' ? '/Six/Index/'+ FGameID:'/OtherGame/Index/' + FGameID)}" href="/OtherGame/Index/7"><font data-bind="text:FGameName">重庆时时彩</font></a>
-                                        </li>
-                                      
-                                    
-                                        <li>
-                                            <a class="game_1" data-bind="attr:{href: groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):(FBaseGameId == '1' ? '/Six/Index/'+ FGameID:'/OtherGame/Index/' + FGameID)}" href="/OtherGame/Index/10"><font data-bind="text:FGameName">新疆时时彩</font></a>
-                                        </li>
-                                      
-                                    
-                                        <li>
-                                            <a class="game_1" data-bind="attr:{href: groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):(FBaseGameId == '1' ? '/Six/Index/'+ FGameID:'/OtherGame/Index/' + FGameID)}" href="/OtherGame/Index/13"><font data-bind="text:FGameName">幸运农场</font></a>
-                                        </li>
-                                      
-                                    
-                                        <li>
-                                            <a class="game_1" data-bind="attr:{href: groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):(FBaseGameId == '1' ? '/Six/Index/'+ FGameID:'/OtherGame/Index/' + FGameID)}" href="/OtherGame/Index/15"><font data-bind="text:FGameName">北京PK拾</font></a>
-                                        </li>
-                                      
-                                    
-                                        <li>
-                                            <a class="game_1" data-bind="attr:{href: groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):(FBaseGameId == '1' ? '/Six/Index/'+ FGameID:'/OtherGame/Index/' + FGameID)}" href="/OtherGame/Index/55"><font data-bind="text:FGameName">北京时时彩</font></a>
-                                        </li>
-                                      
-                                    
-                                        <li>
-                                            <a class="game_1" data-bind="attr:{href: groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):(FBaseGameId == '1' ? '/Six/Index/'+ FGameID:'/OtherGame/Index/' + FGameID)}" href="/OtherGame/Index/77"><font data-bind="text:FGameName">QQ分分彩</font></a>
-                                        </li>
-                                      
-                                    
-                                        <li>
-                                            <a class="game_1" data-bind="attr:{href: groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):(FBaseGameId == '1' ? '/Six/Index/'+ FGameID:'/OtherGame/Index/' + FGameID)}" href="/OtherGame/Index/63"><font data-bind="text:FGameName">江苏11选5</font></a>
-                                        </li>
-                                      
-                                    
-                                        <li>
-                                            <a class="game_1" data-bind="attr:{href: groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):(FBaseGameId == '1' ? '/Six/Index/'+ FGameID:'/OtherGame/Index/' + FGameID)}" href="/OtherGame/Index/69"><font data-bind="text:FGameName">澳洲3分彩</font></a>
-                                        </li>
-                                      
-                                    
-                                        <li>
-                                            <a class="game_1" data-bind="attr:{href: groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):(FBaseGameId == '1' ? '/Six/Index/'+ FGameID:'/OtherGame/Index/' + FGameID)}" href="/OtherGame/Index/73"><font data-bind="text:FGameName">上海11选5</font></a>
-                                        </li>
-                                      
-                                    
-                                        <li>
-                                            <a class="game_1" data-bind="attr:{href: groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):(FBaseGameId == '1' ? '/Six/Index/'+ FGameID:'/OtherGame/Index/' + FGameID)}" href="/OtherGame/Index/79"><font data-bind="text:FGameName">河北快3</font></a>
-                                        </li>
-                                      
-                                    
-                                        <li>
-                                            <a class="game_1" data-bind="attr:{href: groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):(FBaseGameId == '1' ? '/Six/Index/'+ FGameID:'/OtherGame/Index/' + FGameID)}" href="/OtherGame/Index/53"><font data-bind="text:FGameName">韩式1.5分彩</font></a>
-                                        </li>
-                                      
-                                    
-                                        <li>
-                                            <a class="game_1" data-bind="attr:{href: groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):(FBaseGameId == '1' ? '/Six/Index/'+ FGameID:'/OtherGame/Index/' + FGameID)}" href="/OtherGame/Index/101"><font data-bind="text:FGameName">幸运28</font></a>
-                                        </li>
-                                      
-                                    
-                                        <li>
-                                            <a class="game_1" data-bind="attr:{href: groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):(FBaseGameId == '1' ? '/Six/Index/'+ FGameID:'/OtherGame/Index/' + FGameID)}" href="/OtherGame/Index/5"><font data-bind="text:FGameName">广东快十</font></a>
-                                        </li>
-                                      
-                                    
-                                        <li>
-                                            <a class="game_1" data-bind="attr:{href: groupName === 'VR'?('/VRGame/VRPCIndex/' + FGameID):(FBaseGameId == '1' ? '/Six/Index/'+ FGameID:'/OtherGame/Index/' + FGameID)}" href="/OtherGame/Index/75"><font data-bind="text:FGameName">腾讯分分彩</font></a>
-                                        </li>
-                                      
-                                    </ul>
-
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                <div class="triangles_back"></div>
+      <div class="menu-child" @mouseover="showAllgame" @mouseout="hideAllgame" v-if="isShowMenu" id="lot_sec_menu">
+        <div class="gamelist clear">
+          <div class="official_play">
+            <div class="gamelist_tit clear">
+              <h1 class="red_style">官方玩法</h1>
             </div>
+            <div class="high_wrap">
+              <div class="gamelist_l">
+                <ul>
+                  <li>
+                    <a class="game_26" href="#">
+                      <font>重庆时时彩</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_26" href="#">
+                      <font>北京快乐8</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_26" href="#">
+                      <font>北京PK拾</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_26" href="#">
+                      <font>福彩3D</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_26" href="#">
+                      <font>新疆时时彩</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_26" href="#">
+                      <font>排列三、五</font>
+                    </a>
+                  </li>
+                  <li>
+                    <router-link class="game_26" to="/lottery">
+                      <font>广东11选5</font>
+                    </router-link>
+                  </li>
+                  <li>
+                    <a class="game_26" href="#">
+                      <font>黑龙江11选5</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_26" href="#">
+                      <font>北京时时彩</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_26" href="#">
+                      <font>QQ分分彩</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_26" href="#">
+                      <font>上海时时乐</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_26" href="#">
+                      <font>河北快3</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_26" href="#">
+                      <font>韩式1.5分彩</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_26" href="#">
+                      <font>江苏11选5</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_26" href="#">
+                      <font>澳洲3分彩</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_26" href="#">
+                      <font>上海11选5</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_26" href="#">
+                      <font>腾讯分分彩</font>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="cut-line"></div>
+          <div class="credit_play">
+            <div class="gamelist_tit clear">
+              <h1 class="orange_style">信用玩法</h1>
+            </div>
+            <div class="high_wrap">
+              <div class="gamelist_r">
+                <ul data-bind="foreach:credit">
+                  <li>
+                    <a class="game_1" href="#">
+                      <font>香港六合彩</font>
+                    </a>
+                  </li>
+                  <li>
+                    <router-link class="game_26" to="/lottery">
+                      <font>广东11选5</font>
+                    </router-link>
+                  </li>
+                  <li>
+                    <a class="game_1">
+                      <font>广西快十</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_1" href="#">
+                      <font>重庆时时彩</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_1" href="#">
+                      <font>新疆时时彩</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_1" href="#">
+                      <font>幸运农场</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_1" href="#">
+                      <font>北京PK拾</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_1" href="#">
+                      <font>北京时时彩</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_1" href="#">
+                      <font>QQ分分彩</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_1" href="#">
+                      <font>江苏11选5</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_1" href="#">
+                      <font>澳洲3分彩</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_1" href="#">
+                      <font>上海11选5</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_1" href="#">
+                      <font>河北快3</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_1" href="#">
+                      <font>韩式1.5分彩</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_1">
+                      <font>幸运28</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_1" href="#">
+                      <font>广东快十</font>
+                    </a>
+                  </li>
+                  <li>
+                    <a class="game_1" href="#">
+                      <font>腾讯分分彩</font>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="triangles_back"></div>
+      </div>
       <!-- 下拉游戏选择 -->
-
     </div>
     <div class="main-body">
-    	
-    
-    <div class='select'>
-      <div class="account">
-        账号: <span>abcde</span>
-      </div>
-      <div class="balance">
-        用户余额: <span>9999</span>
-      </div>
-      <div class="balance">
-        真实姓名: <span>9999</span>
-      </div>
-      <div class="balance">
-        AG真人余额: <span>9999</span>
-      </div>
-      <div class="balance">
-        DS真人余额: <span>9999</span>
-      </div>
-      <div class="money">
-        <div class="recharge">
-          <span>充值</span>
+      <div class='select'>
+        <div class="account">
+          账号: <span>{{username}}</span>
         </div>
-        <div class="withdraw">
-          <span>提现</span>
+        <div class="balance">
+          用户余额: <span>{{user_money}}</span>
         </div>
-      </div>
-      <!-- 折叠菜单 -->
-      <div class="sidebar">
-        <div class="sidebar-menu">
-          <div class="item" @click="isShow(1)">
-            <a href="javascript:void(0);">密码管理</a>
-          </div>
-          <ul class='list-item' v-if="isDisplay10">
-            <li><router-link to="/PasswordManagement">修改密码</router-link></li>
-          </ul>
-          <div class="item" @click="isShow(2)">
-            <a href="javascript:void(0);">投注报表</a>
-          </div>
-          <ul class="list-item" v-if="isDisplay20">
-            <li><router-link to="/sportsgame">体育</router-link></li>
-            <li><router-link to="/videogame">视讯</router-link></li>
-            <li><router-link to="/privateRecord">彩票</router-link></li>
-            <li><router-link to="/depositrecord">存取款</router-link></li>
-            <li><router-link to="/conversionchange">额度转换</router-link></li>
-          </ul>
-          <div class="item" @click="isShow(3)">
-            <a href="javascript:void(0);">额度转换</a>
-          </div>
-          <ul class='list-item' v-if="isDisplay30">
-            <li><router-link to="/moneymanagemen">额度管理</router-link></li>
-            <!-- <li><router-link to="/outto">转出</router-link></li> -->
-            <!-- <li><router-link to="/CardsList">银行卡管理</router-link></li>
+        <div class="balance" style="background-position:-96px -36px;">
+          真实姓名: <span>{{realname}}</span>
+        </div>
+        <div class="balance">
+          AG真人余额: <span>{{ag_money}}</span>
+        </div>
+        <div class="balance">
+          DS真人余额: <span>{{ds_money}}</span>
+        </div>
+        <div class="money">
+          <router-link to='/recharge' class="recharge">
+            <span>充值</span>
+          </router-link>
+          <router-link to='/withdrawal' class="withdraw">
+            <span>提现</span>
+          </router-link>
+        </div>
+        <!-- 折叠菜单 -->
+        <div class="sidebar">
+          <div class="sidebar-menu">
+            <div class="item" @click="isShow(1)">
+              <a href="javascript:void(0);">密码管理</a>
+            </div>
+            <ul class='list-item' v-if="isDisplay==1">
+              <li>
+                <router-link to="/PasswordManagement">修改密码</router-link>
+              </li>
+            </ul>
+            <div class="item" @click="isShow(2)">
+              <a href="javascript:void(0);">投注报表</a>
+            </div>
+            <ul class="list-item" v-if="isDisplay==2">
+              <li>
+                <router-link to="/sportsgame">体育</router-link>
+              </li>
+              <li>
+                <router-link to="/videogame">视讯</router-link>
+              </li>
+              <li>
+                <router-link to="/lotterygame">彩票</router-link>
+              </li>
+              <li>
+                <router-link to="/depositrecord">存取款</router-link>
+              </li>
+              <li>
+                <router-link to="/conversionchange">额度转换</router-link>
+              </li>
+            </ul>
+            <div class="item" @click="isShow(3)">
+              <a href="javascript:void(0);">额度转换</a>
+            </div>
+            <ul class='list-item' v-if="isDisplay==3">
+              <li>
+                <router-link to="/moneymanagemen">额度管理</router-link>
+              </li>
+              <!-- <li><router-link to="/outto">转出</router-link></li> -->
+              <!-- <li><router-link to="/CardsList">银行卡管理</router-link></li>
             <li><router-link to="/UserData">用户资料</router-link></li>
             <li><router-link to="/GameInfoType">彩种信息</router-link></li>
             <li><router-link to="/GameLimits">彩种限额</router-link></li> -->
-          </ul>
-         
-          <div class="item" @click="isShow(4)">
-            <a href="javascript:void(0);">信息中心</a>
+            </ul>
+            <div class="item" @click="isShow(4)">
+              <a href="javascript:void(0);">信息中心</a>
+            </div>
+            <ul class='list-item' v-if="isDisplay==4">
+              <li>
+                <router-link to="/Messge">站内短信</router-link>
+              </li>
+              <li>
+                <router-link to="/Notice">网站公告</router-link>
+              </li>
+            </ul>
           </div>
-          <ul class='list-item' v-if="isDisplay40">
-            <li><router-link to="/Messge">站内短信</router-link></li>
-            <li><router-link to="/Notice">网站公告</router-link></li>
-          </ul>
         </div>
       </div>
+      <router-view class="content">
+      </router-view>
     </div>
-    <router-view class="content">
-    </router-view>
-    </div>
+    <maskLayer :ifopen="ifopen" :content='content'></maskLayer>
   </div>
 </template>
 <script>
+
+import maskLayer from './base/mask-layer'
+
 export default {
   data() {
     return {
-      isDisplay10: false,
-      isDisplay20: false,
-      isDisplay30: false,
-      isDisplay40: false,
-      lock10: true,
-      lock20: true,
-      lock30: true,
-      lock40: true,
-      isShowMenu: false
+      isDisplay: 0,
+      content: '',
+      ifopen: false,
+      isShowMenu: false,
+      username:sessionStorage.getItem('username'),
+      user_money: '',
+      ag_money: '',
+      ds_money: '',
+      unread_count: '',
+      lock10: false,
+      lock20: false,
+      lock30: false,
+      lock40: false,
+      realname: '',
+      bankCardNum: '',
+      bankName: ''
+
     };
   },
+  components:{
+    maskLayer
+  },
+  mounted() {
+
+    // 获取个人信息
+    this.getuserinfo();
+
+
+  },
+
   methods: {
+
+
+
+    // 获取个人信息
+    getuserinfo() {
+      this.$http.get('/json/center/?r=UsrInfo').then((res) => {
+        this.realname = res.data.data.pay_name;
+        this.bankCardNum = res.data.data.pay_num;
+        this.bankName = res.data.data.pay_bank;
+      }).catch((error) => {
+        console.log(error)
+      })
+
+      // >获取AG真人余额
+      this.$http.get('/json/center/?r=AginMoney').then((res) => {
+        this.ag_money = res.data.data.money
+      }).catch((error) => {
+        console.log(error)
+      })
+
+      // >获取DS真人余额：
+      this.$http.get('/json/center/?r=DsMoney').then((res) => {
+        this.ds_money = res.data.data.money
+      }).catch((error) => {
+        console.log(error)
+      })
+
+      // >获取用户余额
+      this.$http.get('/json/center/?r=Money').then((res) => {
+        this.user_money = res.data.data.user_money;
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
+
+
+      // 封装提示信息函数
+    mytoast(msg) {
+      this.ifopen = true;
+
+      this.content = msg;
+      setTimeout(() => {
+
+        this.ifopen = false;
+        clearTimeout();
+      }, 1500);
+    },
+
+
+    // 退出登录
+    loginout() {
+      this.$http.get('/json/api.php?r=logout').then((res) => {
+        if (res.data.code === 0) {
+          // this.$store.dispatch('UserLogout')
+          this.mytoast(res.data.msg);
+          sessionStorage.removeItem('username');
+          sessionStorage.removeItem('isShow');
+          setTimeout(() => {
+            // alert(1)
+            // instance.close()
+            this.ifopen = false;
+            clearTimeout()
+            this.$router.replace('/')
+            // location.reload();
+          }, 1500);
+
+          // this.isShow=false;
+        }
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
+
+
+
+
     showAllgame() {
       this.isShowMenu = true;
     },
@@ -296,70 +427,52 @@ export default {
       console.log(index);
 
       if (index == 1) {
+        this.lock10 = !this.lock10;
+
         if (this.lock10) {
-          this.isDisplay10 = true;
-          this.isDisplay20 = false;
-          this.isDisplay30 = false;
-          this.isDisplay40 = false;
-          this.lock10 = false;
+          this.isDisplay = 1;
+
         } else {
-          this.isDisplay10 = false;
-          this.isDisplay20 = false;
-          this.isDisplay30 = false;
-          this.isDisplay40 = false;
-          this.lock10 = true;
+          this.isDisplay = 0;
+
         }
       }
 
       if (index == 2) {
+        this.lock20 = !this.lock20;
         if (this.lock20) {
-          this.isDisplay20 = true;
-          this.isDisplay10 = false;
-          this.isDisplay30 = false;
-          this.isDisplay40 = false;
-          this.lock20 = false;
+          this.isDisplay = 2;
+
         } else {
-          this.isDisplay20 = false;
-          this.isDisplay10 = false;
-          this.isDisplay30 = false;
-          this.isDisplay40 = false;
-          this.lock20 = true;
+          this.isDisplay = 0;
+
         }
       }
 
       if (index == 3) {
+        this.lock30 = !this.lock30;
         if (this.lock30) {
-          this.isDisplay30 = true;
-          this.isDisplay10 = false;
-          this.isDisplay20 = false;
-          this.isDisplay40 = false;
-          this.lock30 = false;
+          this.isDisplay = 3;
+
         } else {
-          this.isDisplay30 = false;
-          this.isDisplay10 = false;
-          this.isDisplay20 = false;
-          this.isDisplay40 = false;
-          this.lock30 = true;
+          this.isDisplay = 0;
+
         }
       }
       if (index == 4) {
+        this.lock40 = !this.lock40;
         if (this.lock40) {
-          this.isDisplay40 = true;
-          this.isDisplay10 = false;
-          this.isDisplay20 = false;
-          this.isDisplay30 = false;
-          this.lock40 = false;
+          this.isDisplay = 4;
+
         } else {
-          this.isDisplay40 = false;
-          this.isDisplay10 = false;
-          this.isDisplay20 = false;
-          this.isDisplay30 = false;
-          this.lock40 = true;
+          this.isDisplay = 0;
+
         }
       }
     }
   }
 };
+
 </script>
 <style scoped>
 body {
@@ -462,6 +575,11 @@ body {
   background-position: -45px -274px;
 }
 
+
+
+
+
+
 /*下拉游戏选择*/
 
 .menu-child {
@@ -495,6 +613,7 @@ body {
   font-size: 12px;
   float: left;
 }
+
 .gamelist_tit {
   width: 370px;
   display: block;
@@ -595,6 +714,11 @@ a {
   height: 100%;
 }
 
+
+
+
+
+
 /*左边区域*/
 
 .container .select {
@@ -609,7 +733,7 @@ a {
 .container .select .account,
 .container .select .balance {
   padding-top: 10px;
-  width: 197px;
+  width: 154px;
   height: 31px;
   line-height: 28px;
   background: url("../assets/base-ico2.png") no-repeat;
@@ -624,7 +748,7 @@ a {
 .container .select .balance {
   background-position: -96px -83px;
   text-align: left;
-  padding-left: 52px;
+  padding-left: 46px;
 
   margin-top: 16px;
 }
@@ -637,29 +761,30 @@ a {
   margin-top: 20px;
 }
 
-.container .select .money div {
+.container .select .money a {
   float: left;
   width: 26%;
   padding-left: 40px;
   line-height: 55px;
   background: url("../assets/user-btn.png") no-repeat;
+  color: #fff;
 }
 
-.container .select > div {
+.container .select>a {
   margin: 0 auto;
   padding-top: 20px;
 }
 
-.container .select .money div span {
+.container .select .money a span {
   margin-left: 10px;
 }
 
-.container .select .money div.recharge {
-  background-position: 10px 10px;
+.container .select .money a.recharge {
+  background-position: 10px 8px;
 }
 
-.container .select .money div.withdraw {
-  background-position: 10px 10px;
+.container .select .money a.withdraw {
+  background-position: -71px 10px;
 }
 
 .sidebar {
@@ -718,6 +843,11 @@ a {
   background-color: #fff;
 }
 
+
+
+
+
+
 /*右边区域*/
 
 .container .content {
@@ -729,4 +859,5 @@ a {
   min-width: ;
   background-color: #ededed;
 }
+
 </style>

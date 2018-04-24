@@ -6,12 +6,31 @@
           <span>PLAY RESPONSIBLY</span>
           <span style="padding-left:10px;">{{nowTime}}</span>
         </div>
-        <div class="bar-right" style="display:none">
-          <div class="preson-info">
-            账号：xxxxxx
+        <!-- 登录界面 -->
+        <div class="bar-right" v-if="!isShow">
+          <div class="item preson-info preson-balance">
+            <input type="text" autoComplete='off' placeholder="账号" v-model="username">
           </div>
-          <div class="preson-balance">
-            余额:11233322
+          <div class="item preson-balance personpwd">
+            <input type="password" autoComplete='off' placeholder="密码" v-model="password">
+          </div>
+          <div class="item login">
+            <a href="javascript:void(0);" @click='loginSubmit();'>登录</a>
+          </div>
+          <div class="item regster">
+            <router-link to="/register">免费开户</router-link>
+          </div>
+          <div class="item resetpwd">
+            <a href="javascript:void(0);">忘记密码</a>
+          </div>
+        </div>
+        <!-- 登录后显示账户名余额信息 -->
+        <div class="bar-right" v-else>
+          <div class="preson-info preson-balance">
+            账号：{{username}}
+          </div>
+          <div class="preson-balance personpwd leftMoney">
+            余额:{{mymoney}}
           </div>
           <div class="recharge">
             充值
@@ -19,25 +38,8 @@
           <div class="withdraw">
             提款
           </div>
-          <div class="login-out">
+          <div class="login-out" @click="loginout();">
             退出
-          </div>
-        </div>
-        <div class="bar-right">
-          <div class="preson-info preson-balance">
-            <input type="text" placeholder="账号">
-          </div>
-          <div class="preson-balance personpwd">
-            <input type="text" placeholder="密码">
-          </div>
-          <div class="login">
-            <router-link to="/Login">登录</router-link>
-          </div>
-          <div class="regster" @click="">
-            <router-link to="/register">免费开户</router-link>
-          </div>
-          <div class="resetpwd">
-            <a href="javascript:void(0);">忘记密码</a>
           </div>
         </div>
       </div>
@@ -50,37 +52,37 @@
           <li class="buy-center">
             <a href="javascript:void(0)">
               <div>购彩中心</div>
-            <span>LOTTERY</span>
+              <span>LOTTERY</span>
             </a>
           </li>
           <li class="user-center">
-            <router-link to='/UserCenter'>
+            <a href='javascript:void(0);' @click='enterUserCenter();'>
               <div>用户中心</div>
               <span>USERCENTER</span>
-            </router-link>
+            </a>
           </li>
           <li>
             <a href="javascript:void(0)">
               <div>优惠活动</div>
-            <span>ACTIVITY</span>
+              <span>ACTIVITY</span>
             </a>
           </li>
           <li>
             <a href="javascript:void(0)">
               <div>平台公告</div>
-            <span>ANNOUNCEMENT</span>
+              <span>ANNOUNCEMENT</span>
             </a>
           </li>
           <li>
             <a href="javascript:void(0)">
               <div>彩种信息</div>
-            <span>GAMEINFORMATION</span>
+              <span>GAMEINFORMATION</span>
             </a>
           </li>
           <li>
             <a href="javascript:void(0)">
               <div>手机下注</div>
-            <span>MOBILE</span>
+              <span>MOBILE</span>
             </a>
           </li>
         </ul>
@@ -97,72 +99,55 @@
               <div class="gamelist_l">
                 <ul>
                   <li>
-                    <!--<a class="game_26" href="/OffcialOtherGame/Index/26"><img src="https://zzzy3qqqt.52notice.net//Content/dingsheng/images/gameIcon/ZQSSC.png?_=20160805" /></a>-->
-                    <a class="game_26" href="/OffcialOtherGame/Index/26"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/ZQSSC.png?_=20160805"><span class="hot"><font>重庆时时彩</font></span></a>
+                    <a class="game_26" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/ZQSSC.png?_=20160805"><span class="hot"><font>重庆时时彩</font></span></a>
                   </li>
                   <li>
-                    <!--<a class="game_28" href="/OffcialOtherGame/Index/28"><img src="https://zzzy3qqqt.52notice.net//Content/dingsheng/images/gameIcon/BJKL8.png?_=20160805" /></a>-->
-                    <a class="game_28" href="/OffcialOtherGame/Index/28"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/BJKL8.png?_=20160805"><span class="hot"><font>北京快乐8</font></span></a>
+                    <a class="game_28" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/BJKL8.png?_=20160805"><span class="hot"><font>北京快乐8</font></span></a>
                   </li>
                   <li>
-                    <!--<a class="game_29" href="/OffcialOtherGame/Index/29"><img src="https://zzzy3qqqt.52notice.net//Content/dingsheng/images/gameIcon/BJPKS.png?_=20160805" /></a>-->
-                    <a class="game_29" href="/OffcialOtherGame/Index/29"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/BJPKS.png?_=20160805"><span class="hot"><font>北京PK拾</font></span></a>
+                    <a class="game_29" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/BJPKS.png?_=20160805"><span class="hot"><font>北京PK拾</font></span></a>
                   </li>
                   <li>
-                    <!--<a class="game_30" href="/OffcialOtherGame/Index/30"><img src="https://zzzy3qqqt.52notice.net//Content/dingsheng/images/gameIcon/FC3D.png?_=20160805" /></a>-->
-                    <a class="game_30" href="/OffcialOtherGame/Index/30"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/FC3D.png?_=20160805"><span class="hot"><font>福彩3D</font></span></a>
+                    <a class="game_30" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/FC3D.png?_=20160805"><span class="hot"><font>福彩3D</font></span></a>
                   </li>
                   <li>
-                    <!--<a class="game_40" href="/OffcialOtherGame/Index/40"><img src="https://zzzy3qqqt.52notice.net//Content/dingsheng/images/gameIcon/XJSSC.png?_=20160805" /></a>-->
-                    <a class="game_40" href="/OffcialOtherGame/Index/40"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/XJSSC.png?_=20160805"><span class="hot"><font>新疆时时彩</font></span></a>
+                    <a class="game_40" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/XJSSC.png?_=20160805"><span class="hot"><font>新疆时时彩</font></span></a>
                   </li>
                   <li>
-                    <!--<a class="game_44" href="/OffcialOtherGame/Index/44"><img src="https://zzzy3qqqt.52notice.net//Content/dingsheng/images/gameIcon/PLSW.png?_=20160805" /></a>-->
-                    <a class="game_44" href="/OffcialOtherGame/Index/44"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/PLSW.png?_=20160805"><span class="hot"><font>排列三、五</font></span></a>
+                    <a class="game_44" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/PLSW.png?_=20160805"><span class="hot"><font>排列三、五</font></span></a>
                   </li>
                   <li>
-                    <!--<a class="game_45" href="/OffcialOtherGame/Index/45"><img src="https://zzzy3qqqt.52notice.net//Content/dingsheng/images/gameIcon/GD11X5.png?_=20160805" /></a>-->
-                    <a class="game_45" href="/OffcialOtherGame/Index/45"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/GD11X5.png?_=20160805"><span class="hot"><font>广东11选5</font></span></a>
+                    <a class="game_45" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/GD11X5.png?_=20160805"><span class="hot"><font>广东11选5</font></span></a>
                   </li>
                   <li>
-                    <!--<a class="game_50" href="/OffcialOtherGame/Index/50"><img src="https://zzzy3qqqt.52notice.net//Content/dingsheng/images/gameIcon/HLJ11X5.png?_=20160805" /></a>-->
-                    <a class="game_50" href="/OffcialOtherGame/Index/50"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/HLJ11X5.png?_=20160805"><span class="hot"><font>黑龙江11选5</font></span></a>
+                    <a class="game_50" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/HLJ11X5.png?_=20160805"><span class="hot"><font>黑龙江11选5</font></span></a>
                   </li>
                   <li>
-                    <!--<a class="game_56" href="/OffcialOtherGame/Index/56"><img src="https://zzzy3qqqt.52notice.net//Content/dingsheng/images/gameIcon/BJSSC.png?_=20160805" /></a>-->
-                    <a class="game_56" href="/OffcialOtherGame/Index/56"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/BJSSC.png?_=20160805"><span class="hot"><font>北京时时彩</font></span></a>
+                    <a class="game_56" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/BJSSC.png?_=20160805"><span class="hot"><font>北京时时彩</font></span></a>
                   </li>
                   <li>
-                    <!--<a class="game_78" href="/OffcialOtherGame/Index/78"><img src="https://zzzy3qqqt.52notice.net//Content/dingsheng/images/gameIcon/QQFFC.png?_=20160805" /></a>-->
-                    <a class="game_78" href="/OffcialOtherGame/Index/78"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/QQFFC.png?_=20160805"><span class="hot"><font>QQ分分彩</font></span></a>
+                    <a class="game_78" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/QQFFC.png?_=20160805"><span class="hot"><font>QQ分分彩</font></span></a>
                   </li>
                   <li>
-                    <!--<a class="game_81" href="/OffcialOtherGame/Index/81"><img src="https://zzzy3qqqt.52notice.net//Content/dingsheng/images/gameIcon/SHSSL.png?_=20160805" /></a>-->
-                    <a class="game_81" href="/OffcialOtherGame/Index/81"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/SHSSL.png?_=20160805"><span class="hot"><font>上海时时乐</font></span></a>
+                    <a class="game_81" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/SHSSL.png?_=20160805"><span class="hot"><font>上海时时乐</font></span></a>
                   </li>
                   <li>
-                    <!--<a class="game_80" href="/OffcialOtherGame/Index/80"><img src="https://zzzy3qqqt.52notice.net//Content/dingsheng/images/gameIcon/HEBEIKUAI3.png?_=20160805" /></a>-->
-                    <a class="game_80" href="/OffcialOtherGame/Index/80"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/HEBEIKUAI3.png?_=20160805"><span class="hot"><font>河北快3</font></span></a>
+                    <a class="game_80" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/HEBEIKUAI3.png?_=20160805"><span class="hot"><font>河北快3</font></span></a>
                   </li>
                   <li>
-                    <!--<a class="game_51" href="/OffcialOtherGame/Index/51"><img src="https://zzzy3qqqt.52notice.net//Content/dingsheng/images/gameIcon/HGKLC.png?_=20160805" /></a>-->
-                    <a class="game_51" href="/OffcialOtherGame/Index/51"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/HGKLC.png?_=20160805"><span class="hot"><font>韩式1.5分彩</font></span></a>
+                    <a class="game_51" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/HGKLC.png?_=20160805"><span class="hot"><font>韩式1.5分彩</font></span></a>
                   </li>
                   <li>
-                    <!--<a class="game_62" href="/OffcialOtherGame/Index/62"><img src="https://zzzy3qqqt.52notice.net//Content/dingsheng/images/gameIcon/JS11X5.png?_=20160805" /></a>-->
-                    <a class="game_62" href="/OffcialOtherGame/Index/62"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/JS11X5.png?_=20160805"><span class="hot"><font>江苏11选5</font></span></a>
+                    <a class="game_62" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/JS11X5.png?_=20160805"><span class="hot"><font>江苏11选5</font></span></a>
                   </li>
                   <li>
-                    <!--<a class="game_68" href="/OffcialOtherGame/Index/68"><img src="https://zzzy3qqqt.52notice.net//Content/dingsheng/images/gameIcon/AZ3FC.png?_=20160805" /></a>-->
-                    <a class="game_68" href="/OffcialOtherGame/Index/68"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/AZ3FC.png?_=20160805"><span class="hot"><font>澳洲3分彩</font></span></a>
+                    <a class="game_68" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/AZ3FC.png?_=20160805"><span class="hot"><font>澳洲3分彩</font></span></a>
                   </li>
                   <li>
-                    <!--<a class="game_72" href="/OffcialOtherGame/Index/72"><img src="https://zzzy3qqqt.52notice.net//Content/dingsheng/images/gameIcon/SH11X5.png?_=20160805" /></a>-->
-                    <a class="game_72" href="/OffcialOtherGame/Index/72"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/SH11X5.png?_=20160805"><span class="hot"><font>上海11选5</font></span></a>
+                    <a class="game_72" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/SH11X5.png?_=20160805"><span class="hot"><font>上海11选5</font></span></a>
                   </li>
                   <li>
-                    <!--<a class="game_76" href="/OffcialOtherGame/Index/76"><img src="https://zzzy3qqqt.52notice.net//Content/dingsheng/images/gameIcon/TXFFC.png?_=20160805" /></a>-->
-                    <a class="game_76" href="/OffcialOtherGame/Index/76"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/TXFFC.png?_=20160805"><span class="hot"><font>腾讯分分彩</font></span></a>
+                    <a class="game_76" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/TXFFC.png?_=20160805"><span class="hot"><font>腾讯分分彩</font></span></a>
                   </li>
                 </ul>
               </div>
@@ -235,20 +220,171 @@
         <div class="triangles_back"></div>
       </div>
     </nav>
+    <maskLayer :ifopen="ifopen" :content='content'></maskLayer>
   </div>
 </template>
 <script>
+import maskLayer from './base/mask-layer'
+
 export default {
   name: 'Header',
   data() {
     return {
-      nowTime: 11111
+      nowTime: '',
+      username: sessionStorage.getItem("username"),
+      password: '',
+      content: '',
+      ifopen: false,
+      user_money: '',
+      mymoney: '',
+      isShow: sessionStorage.getItem("isShow")
+
     }
   },
-  mounted() {
-    this.clockon();
+  created() {
+    // alert(sessionStorage.getItem("isShow"));
+
+    // alert(1)
+
+    // >获取用户余额
+    this.$http.get('/json/center/?r=Money').then((res) => {
+      this.mymoney = res.data.data.user_money;
+    }).catch((error) => {
+      console.log(error)
+    });
+
+
   },
   methods: {
+    // 封装提示信息函数
+    mytoast(msg) {
+      this.ifopen = true;
+
+      this.content = msg;
+      setTimeout(() => {
+
+        this.ifopen = false;
+        clearTimeout();
+      }, 1500);
+    },
+
+    enterUserCenter() {
+      if (!this.username) {
+        this.mytoast("请先登录");
+        setTimeout(() => {
+          this.$router.replace('/Login');
+          // this.$router.go('/');
+
+        }, 2000)
+      } else {
+        this.$router.replace('/UserCenter')
+      }
+
+
+
+    },
+
+    // 登录提交
+    loginSubmit() {
+      let data = {
+        action: "login",
+        username: this.username,
+        password: this.password
+      }
+
+
+
+      if (!this.username) {
+        this.mytoast('请输入帐号')
+      } else if (!this.password) {
+        this.mytoast('请输入密码')
+      } else {
+        this.$http.post('/json/api.php?r=login', data).then((res) => {
+          this.mytoast(res.data.msg)
+          if (res.status === 200 && res.data.code === 0) {
+            this.mymoney = res.data.data.user_money;
+
+            sessionStorage.setItem("username", this.username);
+            sessionStorage.setItem("isShow", this.username);
+            this.$router.push('/UserCenter');
+            // this.$store.dispatch('UserLogin', this.username)
+            // this.$store.dispatch('SET_userMoney', this.mymoney)
+            // this.$router.push(this.$route.query.redirect || '/')
+          }
+        }).catch((error) => {
+          console.log(error)
+        })
+      }
+    },
+
+    // 登录
+    // loginFn() {
+
+    //   let data = {
+    //     action: "login",
+    //     username: this.username,
+    //     password: this.password
+    //   }
+
+
+    //   this.$http.post('/json/api.php?r=login', data).then((res) => {
+
+    //     alert(1)
+    //     console.log("res.status:" + res.status)
+    //     console.log("res.status:" + res.data.code)
+    //     if (res.status === 200 && res.data.code === 0) {
+
+
+
+    //       this.mytoast(res.data.msg);
+    //       this.mymoney = res.data.data.user_money;
+
+
+
+    //       sessionStorage.setItem("username", this.username);
+    //       sessionStorage.setItem("isShow", this.username);
+
+    //       this.$router.push('/UserCenter');
+    //     }
+    //   }).catch((error) => {
+    //     console.log(error)
+    //   })
+
+    // },
+
+    // 退出登录
+    loginout() {
+      this.$http.get('/json/api.php?r=logout').then((res) => {
+        if (res.data.code === 0) {
+          // this.$store.dispatch('UserLogout')
+          this.mytoast(res.data.msg);
+          sessionStorage.removeItem('username');
+          sessionStorage.removeItem('isShow');
+          setTimeout(() => {
+            // alert(1)
+            // instance.close()
+            this.ifopen = false;
+            clearTimeout()
+            // this.$router.replace('/')
+            location.reload();
+          }, 1500);
+
+          // this.isShow=false;
+        }
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
+
+    // getUserMoney(){
+    //     // >获取用户余额
+    //   this.$http.get('/json/center/?r=Money').then((res) => {
+    //     this.user_money = res.data.data.user_money;
+    //   }).catch((error) => {
+    //     console.log(error)
+    //   })
+    // },
+
     clockon() {
       var now = new Date();
       var day = now.getDay();
@@ -264,6 +400,13 @@ export default {
       var timer = setTimeout(this.clockon, 1000);
       this.nowTime = time;
     }
+  },
+  mounted() {
+    this.clockon();
+    this.username = sessionStorage.getItem('username');
+  },
+  components: {
+    maskLayer
   }
 
 }
@@ -318,6 +461,11 @@ body {
 }
 
 .bar-right div {
+  margin-right: 22px;
+  float: left;
+}
+
+.bar-right .item {
   margin-right: 0;
   float: left;
 }
@@ -336,24 +484,33 @@ body {
   text-align: center;
 }
 
-.bar-right .login a{
+.bar-right .login a {
   color: #fff;
+  text-decoration: none;
 }
-.bar-right .regster  a{
+
+.bar-right .regster a {
   color: #fff;
   padding: 8px 10px;
+  text-decoration: none;
 }
+
 .resetpwd a {
   color: #fff;
   padding: 10px 0;
+  text-decoration: none;
 }
 
 .bar-right div input {
   width: 120px;
   border: none;
-  background-color: transparent;
   color: #fff;
   outline: none;
+  background-color: transparent!important;
+}
+
+input:-webkit-autofill {
+  background-color: transparent!important;
 }
 
 .bar-right div input:focus {
@@ -392,17 +549,26 @@ input:-ms-input-placeholder {
   background: url(../assets/base-ico2.png) no-repeat;
 }
 
+
+
 .preson-info {
   padding: 0;
-  margin-left: 110px;
+  margin-left: 100px;
   background-position: 0 -390px;
 }
 
 .preson-balance {
   /*padding: 0 20px;*/
-  width: 120px;
+  width: 125px;
   padding-left: 40px;
+  text-align: left;
 }
+
+.leftMoney {
+  padding-left: 40px;
+  padding-right: 23px;
+}
+
 
 .personpwd {
   background-position: 0 -434px;
@@ -441,6 +607,12 @@ input:-ms-input-placeholder {
   color: #b62929;
   background-position: -201px -750px;
 }
+
+
+
+
+
+
 
 
 
@@ -504,9 +676,13 @@ nav {
   background-color: #f14a4a;
 }
 
-.nav ul li a{
-  
-}
+.nav ul li a {}
+
+
+
+
+
+
 
 
 

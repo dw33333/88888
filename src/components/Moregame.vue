@@ -3,11 +3,11 @@
     <div class="more_game">
       <div class="hotgame">
         <div class="title">
-          <span :class="{guan:true,active:!isShow}" @click="selectType(1)">信</span>
-          <span :class="{xin:true,active:isShow}" @click="selectType(2)">官</span>
+          <span :class="{guan:true,active:tabIndex==2}" @click="selectType(2)">信</span>
+          <span :class="{xin:true,active:tabIndex==1}" @click="selectType(1)">官</span>
         </div>
         <!-- 官方玩法 -->
-        <ul class="guantype" v-if="!isShow">
+        <ul class="guantype" v-if="tabIndex==1">
           <li>官方玩法 <span>官</span></li>
           <li class="border-top ov padbottom">
             <div class="font16 lh40">高频游戏</div>
@@ -34,7 +34,7 @@
           </li>
         </ul>
         <!-- 信用玩法 -->
-        <ul class="guantype" v-else>
+        <ul class="guantype" v-if="tabIndex==2">
           <li>信用玩法 <span>信</span></li>
           <li class="border-top ov padbottom">
             <div class="item">香港六合彩</div>
@@ -146,18 +146,12 @@ export default {
   name: 'Moregame',
   data: function() {
     return {
-      isShow: false
+      tabIndex: 1
     }
   },
   methods: {
-    selectType (index) {
-
-      if (index == 1) {
-        this.isShow = true;
-      };
-      if (index == 2) {
-        this.isShow = false;
-      }
+    selectType(index) {
+      this.tabIndex=index;
 
     }
   }

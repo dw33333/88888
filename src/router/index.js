@@ -31,6 +31,8 @@ const Login = (resolve) => {
   })
 }
 
+
+
 //首页footer部分
 const Footer = (resolve) => {
   import('@/components/Footer').then((module) => {
@@ -62,6 +64,21 @@ const lottery = (resolve) => {
 //用户中心>报表管理>充值记录
 const sportsgame = (resolve) => {
   import('@/components/userinfo/sportsgame').then((module) => {
+    resolve(module)
+  })
+}
+
+
+// 充值
+const recharge = (resolve) => {
+  import('@/components/userinfo/recharge').then((module) => {
+    resolve(module)
+  })
+}
+
+// 提现
+const withdrawal = (resolve) => {
+  import('@/components/userinfo/withdrawal').then((module) => {
     resolve(module)
   })
 }
@@ -237,6 +254,15 @@ export default new Router({
         {
           path:'/videogame',
           component:videogame
+        },
+        {
+          path:'/recharge',
+          component:recharge
+        }
+        ,
+        {
+          path:'/withdrawal',
+          component:withdrawal
         },
         
         {
