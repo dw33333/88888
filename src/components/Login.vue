@@ -67,7 +67,7 @@ export default {
       content: ''
     };
   },
-  methods: {
+  methods: {  
     // 封装提示信息函数
     mytoast(msg) {
       this.ifopen = !this.ifopen;
