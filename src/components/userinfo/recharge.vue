@@ -321,7 +321,7 @@ export default {
 
 
       // 在线网银
-      this.$http.get('/api/php/api.php?r=wap').then((res) => {
+      this.$http.get('/json/api.php?r=wap').then((res) => {
         // if (res.data.data.length === 0) {
         //   this.modeWidth = '100%'
         // } else {

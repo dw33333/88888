@@ -244,7 +244,7 @@ export default {
   created() {
     // alert(sessionStorage.getItem("isShow"));
 
-    // alert(1)
+    // alert(this.username)
 
     // >获取用户余额
     this.$http.get('/json/center/?r=Money').then((res) => {
@@ -275,7 +275,7 @@ export default {
           this.$router.replace('/Login');
           // this.$router.go('/');
 
-        }, 2000)
+        }, 1500)
       } else {
         this.$router.replace('/UserCenter')
       }

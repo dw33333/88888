@@ -70,14 +70,14 @@ export default {
   methods: {  
     // 封装提示信息函数
     mytoast(msg) {
-      this.ifopen = !this.ifopen;
+      this.ifopen = true;
       // let instance = Toast(msg);
       this.content = msg;
       setTimeout(() => {
         // instance.close();
-        this.ifopen = !this.ifopen;
+        this.ifopen = false;
         // clearTimeout();
-      }, 1000);
+      }, 1500);
     },
 
     loginFn() {
@@ -96,6 +96,7 @@ export default {
           this.mymoney = res.data.data.user_money;
 
           sessionStorage.setItem("username", this.username);
+          sessionStorage.setItem("isShow", this.username);
           // this.$store.dispatch('UserLogin', this.username)
           // this.$store.dispatch('SET_userMoney', this.mymoney)
           this.$router.push('/UserCenter')

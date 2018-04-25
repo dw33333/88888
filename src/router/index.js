@@ -263,6 +263,7 @@ export default new Router({
         ,
         {
           path:'/withdrawal',
+          name:'withdrawal',
           component:withdrawal
         },
         
