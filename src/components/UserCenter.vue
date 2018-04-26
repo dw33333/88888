@@ -308,13 +308,13 @@
 import maskLayer from './base/mask-layer'
 
 export default {
-  data() {
+  data () {
     return {
       isDisplay: 0,
       content: '',
       ifopen: false,
       isShowMenu: false,
-      username:sessionStorage.getItem('username'),
+      username: sessionStorage.getItem('username'),
       user_money: '',
       ag_money: '',
       ds_money: '',
@@ -326,30 +326,22 @@ export default {
       realname: '',
       bankCardNum: '',
       bankName: ''
-
-    };
+    }
   },
-  components:{
+  components: {
     maskLayer
   },
-  mounted() {
-
+  mounted () {
     // 获取个人信息
-    this.getuserinfo();
-
-
+    this.getuserinfo()
   },
-
   methods: {
-
-
-
     // 获取个人信息
-    getuserinfo() {
+    getuserinfo () {
       this.$http.get('/json/center/?r=UsrInfo').then((res) => {
-        this.realname = res.data.data.pay_name;
-        this.bankCardNum = res.data.data.pay_num;
-        this.bankName = res.data.data.pay_bank;
+        this.realname = res.data.data.pay_name
+        this.bankCardNum = res.data.data.pay_num
+        this.bankName = res.data.data.pay_bank
       }).catch((error) => {
         console.log(error)
       })
@@ -370,108 +362,86 @@ export default {
 
       // >获取用户余额
       this.$http.get('/json/center/?r=Money').then((res) => {
-        this.user_money = res.data.data.user_money;
+        this.user_money = res.data.data.user_money
       }).catch((error) => {
         console.log(error)
       })
     },
-
-
-      // 封装提示信息函数
-    mytoast(msg) {
-      this.ifopen = true;
-
-      this.content = msg;
+    // 封装提示信息函数
+    mytoast (msg) {
+      this.ifopen = true
+      this.content = msg
       setTimeout(() => {
-
-        this.ifopen = false;
-        clearTimeout();
-      }, 1500);
+        this.ifopen = false
+        clearTimeout()
+      }, 1500)
     },
 
-
     // 退出登录
-    loginout() {
+    loginout () {
       this.$http.get('/json/api.php?r=logout').then((res) => {
         if (res.data.code === 0) {
           // this.$store.dispatch('UserLogout')
-          this.mytoast(res.data.msg);
-          sessionStorage.removeItem('username');
-          sessionStorage.removeItem('isShow');
+          this.mytoast(res.data.msg)
+          sessionStorage.removeItem('username')
+          sessionStorage.removeItem('isShow')
           setTimeout(() => {
-            // alert(1)
-            // instance.close()
-            this.ifopen = false;
+            this.ifopen = false
             clearTimeout()
             this.$router.replace('/')
             // location.reload();
-          }, 1500);
-
-          // this.isShow=false;
+          }, 1500)
         }
       }).catch((error) => {
         console.log(error)
       })
     },
-
-
-
-
-    showAllgame() {
-      this.isShowMenu = true;
+    showAllgame () {
+      this.isShowMenu = true
     },
-    hideAllgame() {
-      this.isShowMenu = false;
+    hideAllgame () {
+      this.isShowMenu = false
     },
-    isShow(index) {
-      console.log(index);
-
-      if (index == 1) {
-        this.lock10 = !this.lock10;
+    isShow (index) {
+      console.log(index)
+      if (index === 1) {
+        this.lock10 = !this.lock10
 
         if (this.lock10) {
-          this.isDisplay = 1;
-
+          this.isDisplay = 1
         } else {
-          this.isDisplay = 0;
-
+          this.isDisplay = 0
         }
       }
 
-      if (index == 2) {
-        this.lock20 = !this.lock20;
+      if (index === 2) {
+        this.lock20 = !this.lock20
         if (this.lock20) {
-          this.isDisplay = 2;
-
+          this.isDisplay = 2
         } else {
-          this.isDisplay = 0;
-
+          this.isDisplay = 0
         }
       }
 
-      if (index == 3) {
-        this.lock30 = !this.lock30;
+      if (index === 3) {
+        this.lock30 = !this.lock30
         if (this.lock30) {
-          this.isDisplay = 3;
-
+          this.isDisplay = 3
         } else {
-          this.isDisplay = 0;
-
+          this.isDisplay = 0
         }
       }
-      if (index == 4) {
-        this.lock40 = !this.lock40;
+      if (index === 4) {
+        this.lock40 = !this.lock40
         if (this.lock40) {
-          this.isDisplay = 4;
-
+          this.isDisplay = 4
         } else {
-          this.isDisplay = 0;
-
+          this.isDisplay = 0
         }
       }
     }
   }
-};
+}
 
 </script>
 <style scoped>
@@ -575,13 +545,7 @@ body {
   background-position: -45px -274px;
 }
 
-
-
-
-
-
 /*下拉游戏选择*/
-
 .menu-child {
   position: absolute;
   zoom: 1;
@@ -714,13 +678,7 @@ a {
   height: 100%;
 }
 
-
-
-
-
-
 /*左边区域*/
-
 .container .select {
   float: left;
   background-color: #363636;
@@ -843,13 +801,7 @@ a {
   background-color: #fff;
 }
 
-
-
-
-
-
 /*右边区域*/
-
 .container .content {
   /*width: 1600px;*/
   /*height: 100%;*/

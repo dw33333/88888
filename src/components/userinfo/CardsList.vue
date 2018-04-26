@@ -150,21 +150,18 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       isShowCardList: true
     }
-
   },
   methods: {
-    newCard(index) {
-      if (index == 1) {
-        this.isShowCardList = false;
-
+    newCard (index) {
+      if (index === 1) {
+        this.isShowCardList = false
       }
-      if (index == 2) {
-        this.isShowCardList = true;
-
+      if (index === 2) {
+        this.isShowCardList = true
       }
     }
   }
@@ -194,8 +191,6 @@ export default {
   text-align: left;
 }
 
-
-
 .search-box .checkbox {
   padding: 2px 10px;
   line-height: 25px;
@@ -220,13 +215,7 @@ export default {
   text-decoration: none;
 }
 
-
-
-
-
-
 /*表格*/
-
 .table-list {
   padding: 10px 0 10px 20px;
 }
@@ -267,7 +256,6 @@ td {
   padding: 5px;
   text-align: center;
 }
-
 
 /*新增银行卡*/
 

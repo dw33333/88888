@@ -144,15 +144,14 @@
 <script>
 export default {
   name: 'Moregame',
-  data: function() {
+  data () {
     return {
       tabIndex: 1
     }
   },
   methods: {
-    selectType(index) {
-      this.tabIndex=index;
-
+    selectType (index) {
+      this.tabIndex = index
     }
   }
 }
@@ -267,9 +266,7 @@ export default {
   padding-bottom: 10px;
 }
 
-
 /*热门类型*/
-
 .hottype ul {
   overflow: hidden;
   background-color: #302f2f;
@@ -313,7 +310,6 @@ export default {
   text-align: center;
   margin-top: 106px;
 }
-
 
 /*游戏下载 二维码*/
 
@@ -429,8 +425,6 @@ export default {
   color: #565656;
 }
 
-
-
 /*服务优势*/
 
 .others {
@@ -481,9 +475,7 @@ export default {
   color: #858585;
 }
 
-
 /*移动端下载*/
-
 .mobdown ul {
   overflow: hidden;
 }
@@ -522,9 +514,7 @@ export default {
   background-position: -167px -520px;
 }
 
-
 /*帮助中心*/
-
 .help ul {
   overflow: hidden;
   margin-top: 10px;

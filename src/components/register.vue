@@ -175,89 +175,89 @@
   </div>
 </template>
 <script>
-import headervue from "@/components/Header";
-import footervue from "@/components/Footer";
-import maskLayer from "@/components/base/mask-layer";
+import headervue from '@/components/Header'
+import footervue from '@/components/Footer'
+import maskLayer from '@/components/base/mask-layer'
 
 export default {
-  data() {
+  data () {
     return {
       isShowAgreement: false,
 
       ifopen: false,
       content: '',
-      username: "",
-      password: "",
-      confirmPassword: "",
-      realname: "",
-      email: "",
+      username: '',
+      password: '',
+      confirmPassword: '',
+      realname: '',
+      email: '',
       phonenum: null,
-      bankCode: "",
-      captcha: "",
+      bankCode: '',
+      captcha: '',
       value: [],
-      ifcheck: true,
-    };
+      ifcheck: true
+    }
   },
   methods: {
-    showAgreement() {
-      this.isShowAgreement = true;
+    showAgreement () {
+      this.isShowAgreement = true
     },
-    hideAgreement() {
-      this.isShowAgreement = false;
+    hideAgreement () {
+      this.isShowAgreement = false
     },
 
     // 限制真实姓名输入框只能输入中文
-    realTis() {
-      this.realname = this.realname.replace(/[^\u4e00-\u9fa5]+$/, "");
-      return this.realname;
+    realTis () {
+      this.realname = this.realname.replace(/[^\u4e00-\u9fa5]+$/, '')
+      return this.realname
     },
 
     // 封装提示信息函数
-    mytoast(msg) {
-      this.ifopen = !this.ifopen;
+    mytoast (msg) {
+      this.ifopen = !this.ifopen
       // let instance = Toast(msg);
-      this.content = msg;
+      this.content = msg
       setTimeout(() => {
         // instance.close();
-        this.ifopen = !this.ifopen;
+        this.ifopen = !this.ifopen
         // clearTimeout();
-      }, 1000);
+      }, 1000)
     },
 
     // 提交注册
-    registerSubmit() {
+    registerSubmit () {
       if (!this.username) {
-        this.mytoast("请输入用户名！");
+        this.mytoast('请输入用户名！')
       } else if (this.username.length < 4) {
-        this.mytoast("用户名长度最少4位！");
+        this.mytoast('用户名长度最少4位！')
       } else if (!this.password) {
-        this.mytoast("请输入密码！");
+        this.mytoast('请输入密码！')
       } else if (this.password.length < 6) {
-        this.mytoast("密码长度最少6位！");
+        this.mytoast('密码长度最少6位！')
       } else if (!this.confirmPassword) {
-        this.mytoast("请输入确认密码！");
+        this.mytoast('请输入确认密码！')
       } else if (this.confirmPassword.length < 6) {
-        this.mytoast("确认密码长度最少6位！");
+        this.mytoast('确认密码长度最少6位！')
       } else if (this.password !== this.confirmPassword) {
-        this.mytoast("密码与确认密码不一致！");
+        this.mytoast('密码与确认密码不一致！')
       } else if (!this.realname) {
-        this.mytoast("请输入真实姓名！");
+        this.mytoast('请输入真实姓名！')
       } else if (/[^\u4e00-\u9fa5]+$/.test(this.realname)) {
-        this.mytoast("真实姓名只能为中文！");
+        this.mytoast('真实姓名只能为中文！')
       } else if (!this.phonenum) {
-        this.mytoast("请输入手机号码！");
+        this.mytoast('请输入手机号码！')
       } else if (this.phonenum.length < 11) {
-        this.mytoast("请输入11位数手机号码！");
+        this.mytoast('请输入11位数手机号码！')
       } else if (!this.bankCode) {
-        this.mytoast("请输入取款密码！");
+        this.mytoast('请输入取款密码！')
       } else if (this.bankCode.length < 4) {
-        this.mytoast("取款密码最少4位数！");
+        this.mytoast('取款密码最少4位数！')
       } else if (!this.ifcheck) {
-        this.mytoast("请勾选开户协议！");
+        this.mytoast('请勾选开户协议！')
       } else {
         let data = {
-          action: "regster",
-          key: "add",
+          action: 'regster',
+          key: 'add',
           username: this.username,
           password: this.password,
           passwd: this.confirmPassword,
@@ -265,35 +265,32 @@ export default {
           tel: this.phonenum,
           pwd1: this.bankCode,
           agent_id: this.agentId
-        };
+        }
 
-
-        this.$http.post("/json/api.php?r=regster", data).then(res => {
-            this.mytoast(res.data.msg)
-            if (res.status === 200 && res.data.code === 0) {
-
-
-              // this.$store.dispatch('UserLogin', this.username)
-              // this.$store.dispatch('SET_userMoney', '0.00')
-              this.$router.push('/')
-            }
-          })
+        this.$http.post('/json/api.php?r=regster', data).then(res => {
+          this.mytoast(res.data.msg)
+          if (res.status === 200 && res.data.code === 0) {
+          // this.$store.dispatch('UserLogin', this.username)
+          // this.$store.dispatch('SET_userMoney', '0.00')
+            this.$router.push('/')
+          }
+        })
           .catch(error => {
-            console.log(error);
-          });
+            console.log(error)
+          })
       }
     },
 
     // 点击本人同意
-    sureAgreement() {
-      this.ifcheck = !this.ifcheck;
+    sureAgreement () {
+      this.ifcheck = !this.ifcheck
     },
     // 点击勾选框
-    checkSelect() {
+    checkSelect () {
       if (this.$refs.agreementCheck.checked) {
-        this.ifcheck = true;
+        this.ifcheck = true
       } else {
-        this.ifcheck = false;
+        this.ifcheck = false
       }
     }
   },
@@ -302,7 +299,7 @@ export default {
     footervue,
     maskLayer
   }
-};
+}
 
 </script>
 <style scoped>

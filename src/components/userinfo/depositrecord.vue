@@ -98,7 +98,7 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       // 在线存款
       onlineDepositDatas: [],
@@ -107,10 +107,9 @@ export default {
       // 取款
       drawDatas: [],
       tabIndex: 1
-
     }
   },
-  mounted() {
+  mounted () {
     // 在线存款记录
     this.$http.get('/json/center/?r=ChaCkOnline').then((res) => {
       if (res.data.code === 0) {
@@ -118,7 +117,7 @@ export default {
       }
     }).catch((error) => {
       console.log(error)
-    });
+    })
 
     // 银行汇款记录
     this.$http.get('/json/center/?r=ChaHuiKuan').then((res) => {
@@ -127,8 +126,7 @@ export default {
       }
     }).catch((error) => {
       console.log(error)
-    });
-
+    })
 
     // 取款记录
     this.$http.get('/json/center/?r=ChaQuKuan').then((res) => {
@@ -138,27 +136,21 @@ export default {
     }).catch((error) => {
       console.log(error)
     })
-
-
   },
   methods: {
-    selectType(index) {
-      if (index == 1) {
-        this.tabIndex = 1;
-
+    selectType (index) {
+      if (index === 1) {
+        this.tabIndex = 1
       }
-      if (index == 2) {
-        this.tabIndex = 2;
-
+      if (index === 2) {
+        this.tabIndex = 2
       }
-      if (index == 3) {
-        this.tabIndex = 3;
-
+      if (index === 3) {
+        this.tabIndex = 3
       }
-
     }
   }
-};
+}
 
 </script>
 <style scoped>
@@ -178,11 +170,7 @@ export default {
   border-bottom: 2px solid #b62929;
 }
 
-
-
-
 /*表格*/
-
 .table-list {
   padding: 10px 20px 10px 20px;
 }
@@ -215,8 +203,6 @@ export default {
   height: 40px;
   line-height: 40px;
 }
-
-
 .btns .recharge {
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
@@ -234,8 +220,6 @@ export default {
   background-color: #b62929;
   color: #fff;
 }
-
-
 
 table {
   border-left: 1px solid #cdcdcd;

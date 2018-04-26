@@ -51,9 +51,8 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
-
     }
   }
 }
@@ -82,8 +81,6 @@ export default {
   text-align: left;
 }
 
-
-
 .search-box .checkbox {
   padding: 2px 10px;
   line-height: 25px;
@@ -108,12 +105,7 @@ export default {
   text-decoration: none;
 }
 
-
-
-
-
 /*表格*/
-
 ul,li,p {
     list-style: none;
     margin:0;

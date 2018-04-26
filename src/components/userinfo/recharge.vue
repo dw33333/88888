@@ -20,7 +20,7 @@
     </div>
     <div class="btns border-bottom-none">
       <div class="wallet">请选择支付方式</div>
-      <div v-for="(re,reindex) in rechargeModeArr" :class='{item:true,payway:true,active:tabIndex==reindex}' @click="selectPayWay(reindex);">
+      <div v-for="(re,reindex) in rechargeModeArr" :key='reindex' :class='{item:true,payway:true,active:tabIndex==reindex}' @click="selectPayWay(reindex);">
         {{re}}
       </div>
       <!--  <div :class='{item:true,payway:true,active:typeIndex==2}' @click="selectType(2);">
@@ -31,7 +31,7 @@
       </div> -->
     </div>
     <div class="title">入款信息</div>
-    <div class="table-list" v-for='item in bankNumArr'>
+    <div class="table-list" v-for='(item,index) in bankNumArr' :key='index'>
       <table>
         <tbody>
           <tr>
@@ -85,17 +85,17 @@
 import maskLayer from '../base/mask-layer'
 
 export default {
-  data() {
+  data () {
     return {
       ifopen: false,
       content: '',
-      user_money: '', //用户余额
-      ag_money: '', //AG真人余额
-      ds_money: '', //DS真人余额
-      realname: '', //真实姓名
-      bankCardNum: '', //银行卡号
-      bankName: '', //银行卡姓名
-      typeIndex: 1, //1 银行汇款  2 AG平台  3 DS平台
+      user_money: '', // 用户余额
+      ag_money: '', // AG真人余额
+      ds_money: '', // DS真人余额
+      realname: '', // 真实姓名
+      bankCardNum: '', // 银行卡号
+      bankName: '', // 银行卡姓名
+      typeIndex: 1, // 1 银行汇款  2 AG平台  3 DS平台
       tabIndex: 0,
       rechargeModeArr: ['银行汇款'],
       huikuanMode: ['银行柜台', 'ATM现金', 'ATM卡转', '网银转账', '支付宝', '微信'],
@@ -103,18 +103,13 @@ export default {
       bankArr: '',
       bankNumArr: '',
       bankSelected: '',
-      inputMoney: null,
-
+      inputMoney: null
     }
   },
 
   methods: {
-
-
     // 提交银行汇款
-    submitRecharge() {
-
-
+    submitRecharge () {
       // if (this.modeSelectingIndex === 0) {
       if (!this.bankSelected) {
         this.mytoast('请选择转入银行')
@@ -154,16 +149,12 @@ export default {
         data['InType'] = this.modeSelected
         data['IntoType'] = this.modeSelected
         this.$http.post('/json/center/?r=HuikuanDo', data).then((res) => {
-
-
-
-
           // this.ifopen = !this.ifopen;
           if (res.data.code === 0) {
-            this.mytoast(res.data.msg);
+            this.mytoast(res.data.msg)
             setTimeout(() => {
               // instance.close()
-              this.ifopen = false;
+              this.ifopen = false
               this.$router.push('/')
               clearTimeout()
             }, 1500)
@@ -173,8 +164,6 @@ export default {
         })
       }
       // }
-
-
 
       // if (this.modeSelectingIndex === 2) {
       //   let data = {}
@@ -256,7 +245,7 @@ export default {
     //   }
     // },
     // 金额框限制输入整数跟两位小数
-    moneyInput() {
+    moneyInput () {
       // 先把非数字的都替换掉，除了数字和.
       this.inputMoney = this.inputMoney.replace(/[^\d.]/, '')
       // 必须保证第一个为数字而不是.
@@ -275,12 +264,8 @@ export default {
       return this.inputMoney
     },
 
-
-
     // 获取个人信息
-    getuserinfo() {
-
-
+    getuserinfo () {
       // 获取银行
       this.$http.get('/json/center/?r=HuikuanInfo').then((res) => {
         this.bankArr = res.data.data.bank
@@ -291,9 +276,9 @@ export default {
 
       // 获取个人信息
       this.$http.get('/json/center/?r=UsrInfo').then((res) => {
-        this.realname = res.data.data.pay_name;
-        this.bankCardNum = res.data.data.pay_num;
-        this.bankName = res.data.data.pay_bank;
+        this.realname = res.data.data.pay_name
+        this.bankCardNum = res.data.data.pay_num
+        this.bankName = res.data.data.pay_bank
       }).catch((error) => {
         console.log(error)
       })
@@ -314,11 +299,10 @@ export default {
 
       // >获取用户余额
       this.$http.get('/json/center/?r=Money').then((res) => {
-        this.user_money = res.data.data.user_money;
+        this.user_money = res.data.data.user_money
       }).catch((error) => {
         console.log(error)
       })
-
 
       // 在线网银
       this.$http.get('/json/api.php?r=wap').then((res) => {
@@ -338,51 +322,43 @@ export default {
       }).catch((error) => {
         console.log(error)
       })
-
-
     },
-
-    selectType(index) {
-      if (index == 1) {
-        this.typeIndex = 1;
-
+    selectType (index) {
+      if (index === 1) {
+        this.typeIndex = 1
       }
-      if (index == 2) {
-        this.typeIndex = 2;
-
+      if (index === 2) {
+        this.typeIndex = 2
       }
-      if (index == 3) {
-        this.typeIndex = 3;
-
+      if (index === 3) {
+        this.typeIndex = 3
       }
-
     },
-    selectPayWay(index) {
+    selectPayWay (index) {
       // alert(1)
-      this.tabIndex = index;
+      this.tabIndex = index
     },
     // 封装提示信息函数
-    mytoast(msg) {
-      this.ifopen = true;
+    mytoast (msg) {
+      this.ifopen = true
       // let instance = Toast(msg);
-      this.content = msg;
+      this.content = msg
       setTimeout(() => {
         // instance.close();
-        this.ifopen = false;
-        clearTimeout();
-      }, 1500);
+        this.ifopen = false
+        clearTimeout()
+      }, 1500)
     }
 
   },
   components: {
     maskLayer
   },
-  mounted() {
-    this.getuserinfo();
+  mounted () {
+    this.getuserinfo()
   },
   computed: {
-
-    currentTime() {
+    currentTime () {
       let Y = new Date().getFullYear()
       let M = new Date().getMonth() + 1
       let D = new Date().getDate()
@@ -390,7 +366,7 @@ export default {
       let m = new Date().getMinutes() < 10 ? 0 + new Date().getMinutes() : new Date().getMinutes()
       return `${Y}年${M}月${D}日${H}时${m}分`
     }
-  },
+  }
 }
 
 </script>
@@ -410,11 +386,6 @@ export default {
   height: 49px;
   border-bottom: 2px solid #b62929;
 }
-
-
-
-
-
 
 .wallet {
   line-height: 50px;
@@ -498,18 +469,7 @@ export default {
   color: #fff;
 }
 
-
-
-
-
-
-
-
-
-
-
 /*表格*/
-
 .table-list {
   padding: 10px 20px 10px 20px;
   width: 800px;
@@ -535,7 +495,6 @@ export default {
 .table-list .text span {
   margin: 0 20px;
 }
-
 
 table {
   border-left: 1px solid #cdcdcd;
@@ -569,8 +528,6 @@ table {
   border-right: 1px solid #cdcdcd;
 }
 
-
-
 input[type=text]::-webkit-input-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: red;
@@ -602,7 +559,6 @@ input:focus {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(198, 33, 51, 0.8);
 }
 
-
 .pay-info button {
   border: none;
   background-color: #fff;
@@ -618,5 +574,4 @@ input:focus {
   margin-top: 20px;
   cursor: pointer;
 }
-
 </style>

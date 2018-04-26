@@ -13,18 +13,16 @@ import moregame from '@/components/MoreGame'
 import footervue from '@/components/Footer'
 
 export default {
-	name:'home',
-	components:{
-		headervue,
-		banner,
-		moregame,
-		footervue
-	}
-
+  name: 'home',
+  components: {
+    headervue,
+    banner,
+    moregame,
+    footervue
+  }
 }
 
 </script>
 <style scoped>
-
 
 </style>

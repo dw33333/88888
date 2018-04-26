@@ -51,53 +51,49 @@
 import maskLayer from '../base/mask-layer'
 
 export default {
-  data() {
+  data () {
     return {
       tabIndex: 1,
       oldPassWord: null,
       newPassWord: null,
       againPassWord: null,
-      ifopen:false,
-      content:''
+      ifopen: false,
+      content: ''
     }
   },
   methods: {
-    resetPwd(){
-      this.oldPassWord='';
-      this.newPassWord='';
-      this.againPassWord='';
+    resetPwd () {
+      this.oldPassWord = ''
+      this.newPassWord = ''
+      this.againPassWord = ''
     },
     // 封装提示信息函数
-    mytoast(msg) {
-      this.ifopen = !this.ifopen;
+    mytoast (msg) {
+      this.ifopen = !this.ifopen
       // let instance = Toast(msg);
-      this.content = msg;
+      this.content = msg
       setTimeout(() => {
         // instance.close();
-        this.ifopen = !this.ifopen;
+        this.ifopen = !this.ifopen
         // clearTimeout();
-      }, 1000);
+      }, 1500)
     },
 
-
-      modifySubmit () {
+    modifySubmit () {
       if (this.tabIndex === 1) {
         if (!this.oldPassWord) {
           this.mytoast('请输入旧密码')
           setTimeout(() => {
-            // instance.close()
             clearTimeout()
           }, 1500)
         } else if (!this.newPassWord) {
           this.mytoast('请输入新密码')
           setTimeout(() => {
-            // instance.close()
             clearTimeout()
           }, 1500)
         } else if (!this.againPassWord) {
           this.mytoast('请再次输入新密码')
           setTimeout(() => {
-            // instance.close()
             clearTimeout()
           }, 1500)
         } else {
@@ -125,31 +121,26 @@ export default {
         if (!this.oldPassWord) {
           this.mytoast('请输入旧密码')
           setTimeout(() => {
-            // instance.close()
             clearTimeout()
           }, 1500)
         } else if (!this.newPassWord) {
           this.mytoast('请输入新密码')
           setTimeout(() => {
-            // instance.close()
             clearTimeout()
           }, 1500)
         } else if (this.newPassWord.length < 4) {
           this.mytoast('新密码长度最少为4位')
           setTimeout(() => {
-            // instance.close()
             clearTimeout()
           }, 1500)
         } else if (!this.againPassWord) {
           this.mytoast('请再次输入新密码')
           setTimeout(() => {
-            // instance.close()
             clearTimeout()
           }, 1500)
         } else if (this.againPassWord.length < 4) {
           this.mytoast('确认密码长度最少为4位')
           setTimeout(() => {
-            // instance.close()
             clearTimeout()
           }, 1500)
         } else {
@@ -160,7 +151,6 @@ export default {
           this.$http.post('/json/center/?r=ChkQkPasswd', data).then((res) => {
             this.mytoast(res.data.msg)
             setTimeout(() => {
-              // instance.close()
               clearTimeout()
             }, 1500)
             if (res.data.code === 0) {
@@ -174,18 +164,14 @@ export default {
         }
       }
     },
-
-
-
-    selectType(index) {
-      this.tabIndex = index;
+    selectType (index) {
+      this.tabIndex = index
     }
   },
   components: {
     maskLayer
   }
 }
-
 </script>
 <style scoped>
 .main-head {
@@ -202,8 +188,6 @@ export default {
   height: 49px;
   border-bottom: 2px solid #b62929;
 }
-
-
 
 .btns {
   margin: 20px;
@@ -241,14 +225,7 @@ export default {
   color: #fff;
 }
 
-
-
-
-
-
-
 /*修改登录密码*/
-
 .content-box {
   text-align: left;
   font-size: 14px;

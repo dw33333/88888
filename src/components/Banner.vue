@@ -9,7 +9,6 @@
     </swiper-slide>
     <div class="swiper-button-prev" slot="button-prev"></div>
     <div class="swiper-button-next" slot="button-next"></div>
-    
     <!-- <div class="swiper-pagination" slot="pagination"></div> -->
   </swiper>
   <div class="mq">
@@ -31,8 +30,8 @@
 </template>
 <script>
 export default {
-  name:"banner",
-  data() {
+  name: 'banner',
+  data () {
     return {
       swiperOption: {
         mousewheel: false,
@@ -48,8 +47,8 @@ export default {
         // 如果需要前进后退按钮
         navigation: {
           nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
+          prevEl: '.swiper-button-prev'
+        }
         // pagination: {
         //     el: '.swiper-pagination',
         //     clickable: true
@@ -98,16 +97,12 @@ body {
   align-items: center;
 }
 
-
-
-
 /*轮播图*/
 
 .swiper-container {
   width: 100%;
   height: 504px;
 }
-
 .swiper-button-next,
 .swiper-button-prev {
   padding: 15px 13px;

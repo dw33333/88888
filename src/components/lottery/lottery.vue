@@ -441,7 +441,7 @@
       <!-- 主体部分右边 -->
       <div class="content ">
         <ul class="title">
-          <li :class="{act:titleindex==showIndex}" v-for="(item,titleindex) in titleArr" @click="selectType(titleindex);"><a href="javascript:void(0);">{{item}}</a></li>
+          <li :class="{act:titleindex==showIndex}" :key='titleindex' v-for="(item,titleindex) in titleArr" @click="selectType(titleindex);"><a href="javascript:void(0);">{{item}}</a></li>
           <!-- <li class="active1"><a href="javascript:void(0);">特码</a></li> -->
           <!--  <li><a href="javascript:void(0);">正码一</a></li>
                     <li><a href="javascript:void(0);">正码二</a></li>
@@ -680,68 +680,65 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       username: sessionStorage.getItem('username'),
       user_money: '',
       isShow: true,
       showIndex: 0,
-
-      showIndex: 0,
       titleArr: [
-        "两面盘",
-        "特码",
-        "正码一",
-        "正码二",
-        "正码三",
-        "正码四",
-        "龙虎斗"
+        '两面盘',
+        '特码',
+        '正码一',
+        '正码二',
+        '正码三',
+        '正码四',
+        '龙虎斗'
       ],
       isShow2: true,
       isShowMenu: false
-    };
+    }
   },
-  mounted() {
+  mounted () {
     // >获取用户余额
     this.$http.get('/json/center/?r=Money').then((res) => {
-      this.user_money = res.data.data.user_money;
+      this.user_money = res.data.data.user_money
     }).catch((error) => {
       console.log(error)
     })
-
   },
   methods: {
-    selectType(index) {
-      this.showIndex = index;
+    selectType (index) {
+      this.showIndex = index
     },
-    leftBarfolding(index) {
-      console.log(index);
-      this.showIndex = index;
+    leftBarfolding (index) {
+      console.log(index)
+      this.showIndex = index
     },
-    showOpenMsg(index) {
-      if (index == 1) {
-        this.isShow = true;
+    showOpenMsg (index) {
+      if (index === 1) {
+        this.isShow = true
       }
-      if (index == 2) {
-        this.isShow = false;
-      }
-    },
-    selectRange(index) {
-      if (index == 1) {
-        this.isShow2 = true;
-      }
-      if (index == 2) {
-        this.isShow2 = false;
+      if (index === 2) {
+        this.isShow = false
       }
     },
-    showAllgame() {
-      this.isShowMenu = true;
+    selectRange (index) {
+      if (index === 1) {
+        this.isShow2 = true
+      }
+      if (index === 2) {
+        this.isShow2 = false
+      }
     },
-    hideAllgame() {
-      this.isShowMenu = false;
+    showAllgame () {
+      this.isShowMenu = true
+    },
+    hideAllgame () {
+      this.isShowMenu = false
     }
   }
-};
+}
 
 </script>
 <style scoped>
@@ -776,9 +773,7 @@ body {
   position: relative;
 }
 
-
 /*头部*/
-
 .head {
   height: 116px;
   background-color: #b62929;
@@ -1027,28 +1022,23 @@ body {
   background-position: -47px -300px;
 }
 
-
 /*主体部分左边*/
-
 .main-body {
   width: 100%;
   height: 100%;
 }
-
 .main-body .left-bar {
   float: left;
   width: 200px;
   height: 100%;
   border-right: 1px solid #959595;
 }
-
 .left-bar .userbox {
   background-color: #f2f2f2;
   padding-top: 10px;
   padding-left: 4px;
   padding-bottom: 8px;
 }
-
 .left-bar .account {
   width: 195px;
   height: 45px;
@@ -1058,7 +1048,6 @@ body {
   background: url(../../assets/base-ico2.png) no-repeat;
   background-position: -98px -36px;
 }
-
 .left-bar .balance {
   width: 195px;
   height: 45px;
@@ -1068,12 +1057,10 @@ body {
   background: url(../../assets/base-ico2.png) no-repeat;
   background-position: -98px -80px;
 }
-
 .left-bar .userinfo {
   overflow: hidden;
   background-color: #f2f2f2;
 }
-
 .left-bar .userinfo a {
   color: #2c3e50;
   float: left;
@@ -1087,7 +1074,6 @@ body {
   border: 1px solid #fff;
   border-left: none;
 }
-
 .left-bar .userinfo .recharge {
   background-position: 7px 3px;
   /*border-right: none;*/
@@ -1096,7 +1082,6 @@ body {
 .left-bar .userinfo .withdraw {
   background-position: -73px 6px;
 }
-
 .left-bar .userinfo .acc-record {
   background-position: -147px 3px;
   border-right: none;
@@ -1213,17 +1198,13 @@ body {
   color: #c42133;
 }
 
-
 /*本期投注*/
-
 .overdue-wrap table {
   width: 100%;
 }
-
 .overdue-wrap table tr {
   text-align: center;
 }
-
 .overdue-wrap table th,
 .overdue-wrap table td {
   height: 26px;
@@ -1231,21 +1212,17 @@ body {
   text-align: center;
   border-bottom: 1px solid #e4e1e1;
 }
-
 .colorred {
   color: #c42133;
 }
-
 .side-menu {
   width: 196px;
   padding: 0 2px;
   background-color: #fff;
 }
-
 .side-menu .lottery {
   width: 100%;
 }
-
 .side-menu .lottery .item {
   position: relative;
   cursor: pointer;
@@ -1257,12 +1234,10 @@ body {
   font-weight: bold;
   background: url(../../assets/base-ico.png) 0 -534px no-repeat;
 }
-
 .side-menu .lottery .item.active {
   background: url(../../assets/base-ico.png) 0 -576px no-repeat;
   color: #fff;
 }
-
 .side-menu .lottery .item span {
   width: 26px;
   height: 28px;
@@ -1272,7 +1247,6 @@ body {
   top: 8px;
   left: 10px;
 }
-
 .side-menu .lottery .item-list li {
   width: 177px;
   height: 26px;
@@ -1283,15 +1257,11 @@ body {
   cursor: pointer;
   /*background-color: #666;*/
 }
-
-.side-menu .lottery .item-list li:hover {}
-
 .side-menu .lottery .item-list li .icon {
   padding-right: 20px;
   width: 30px;
   height: 25px;
   float: left;
-
   background: url(../../assets/menu_ico.png) no-repeat;
   background-position: 0px 0px;
 }
@@ -1366,15 +1336,12 @@ body {
   background-position: 0 -168px;
 }
 
-
 /*主体部分右边*/
-
 .main-body .content {
   margin-left: 202px;
   height: 100%;
   position: relative;
 }
-
 .content>.title {
   height: 45px;
   margin-left: -1px;
@@ -1385,7 +1352,6 @@ body {
 .content>.title li {
   float: left;
 }
-
 .content>.title li a {
   color: #4d4d4d;
   text-decoration: none;
@@ -1394,12 +1360,10 @@ body {
   line-height: 45px;
   display: inline-block;
 }
-
 .content>.title li.act a {
   background-color: #e95959;
   color: #fff;
 }
-
 .content .guanpaly {
   width: 101px;
   height: 32px;
@@ -1408,21 +1372,17 @@ body {
   top: 6px;
   background: url(../../assets/base-ico.png) 0 -731px no-repeat;
 }
-
 .content .new {
   position: absolute;
   top: -0;
   right: -0;
 }
-
 .content .tables {
   position: relative;
 }
-
 .content .tables .title {
   height: 41px;
 }
-
 .content .tables .title span {
   background: url(../../assets/base-ico.png) no-repeat;
 }
@@ -1443,7 +1403,6 @@ body {
   top: 8px;
   left: 80px;
 }
-
 .content .tables .title .minus {
   width: 22px;
   height: 22px;
@@ -1563,12 +1522,8 @@ body {
   cursor: pointer;
 }
 
-
 /*range*/
-
-
 /*去除默认样式*/
-
 input[type="range"] {
   -webkit-appearance: none;
   width: 200px;
@@ -1587,7 +1542,6 @@ input[type="range"]::-moz-range-thumb {
 input[type="range"]:focus {
   outline: none;
 }
-
 
 /*滑块样式*/
 
@@ -1629,9 +1583,7 @@ input[type="range"]::-moz-range-thumb {
   /*添加底部阴影*/
 }
 
-
 /*三个按钮*/
-
 .tables .btns {
   float: right;
   overflow: hidden;
@@ -1686,10 +1638,7 @@ input[type="range"]::-moz-range-thumb {
   border-right: 1px solid #c9c7c7;
 }
 
-
-
 /* 导航部分下拉菜单 */
-
 .menu-child {
   position: absolute;
   zoom: 1;
@@ -1800,7 +1749,6 @@ ul {
   width: 80px;
   height: 28px;
   color: #fff;
-
   background: none;
   font-size: 12px;
   margin: 0;

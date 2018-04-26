@@ -18,7 +18,6 @@
           <!-- <tr>
             <td>2018-04-14</td>
             <td>0</td>
-           
             <td>0</td>
             <td><a href="javascript:void(0)" @click="isShowDetailFn(1)">查看详情</a></td>
           </tr> -->
@@ -115,22 +114,22 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       tabIndex: 1,
       totalLotterymoney: '',
       totalLotteryresultmoney: '',
       lotteryWeekDatas: [],
       dayTime: '',
-      typeName:'',
+      typeName: '',
       daytotalLotterymoney: '',
       daytotalLotterynotmoney: '',
       daytotalLotteryresultmoney: '',
       lotteryDayDatas: [],
-      lotteryTypeDatas:[]
+      lotteryTypeDatas: []
     }
   },
-  mounted() {
+  mounted () {
     // 彩票
     this.$http.get('/json/center/?r=LotteryRecord').then((res) => {
       if (res.data.code === 0) {
@@ -145,16 +144,15 @@ export default {
   },
   methods: {
     // 彩票日报表
-    selectOneDayLottery(date) {
-
-      this.tabIndex = 2;
+    selectOneDayLottery (date) {
+      this.tabIndex = 2
       this.$http.get('/json/center/?r=LotteryRecordOneday&gamedate=' + date).then((res) => {
         if (res.data.code === 0) {
-          this.dayTime = date;
-          this.lotteryDayDatas = res.data.data.recordList;
-          this.daytotalLotterymoney = res.data.data.total_bet_money;
-          this.daytotalLotterynotmoney = res.data.data.total_not_bet_money;
-          this.daytotalLotteryresultmoney = res.data.data.total_win_money;
+          this.dayTime = date
+          this.lotteryDayDatas = res.data.data.recordList
+          this.daytotalLotterymoney = res.data.data.total_bet_money
+          this.daytotalLotterynotmoney = res.data.data.total_not_bet_money
+          this.daytotalLotteryresultmoney = res.data.data.total_win_money
         }
       }).catch((error) => {
         console.log(error)
@@ -162,16 +160,14 @@ export default {
     },
 
     // 打开彩票种类报表
-    selectTypeLottery(type, gtype, date) {
-      this.dayTime = date;
-      this.typeName = type;
-      this.tabIndex = 3;
+    selectTypeLottery (type, gtype, date) {
+      this.dayTime = date
+      this.typeName = type
+      this.tabIndex = 3
       if (type === '六合彩') {
         this.$http.get('/json/center/?r=LotteryRecordLhcDetails&gtype=' + gtype + '&gamedate=' + date).then((res) => {
           if (res.data.code === 0) {
             this.lotteryTypeDatas = res.data.data.recordList
-
-
           }
         }).catch((error) => {
           console.log(error)
@@ -179,9 +175,8 @@ export default {
       } else {
         this.$http.get('/json/center/?r=LotteryRecordDetails&gtype=' + gtype + '&gamedate=' + date).then((res) => {
           if (res.data.code === 0) {
-            this.lotteryTypeDatas = res.data.data.recordList;
+            this.lotteryTypeDatas = res.data.data.recordList
             console.log(this.lotteryTypeDatas)
-
           }
         }).catch((error) => {
           console.log(error)
@@ -189,21 +184,16 @@ export default {
       }
     },
 
-    isShowDetailFn(index) {
-      if (index == 1) {
-        this.tabIndex = 1;
-
+    isShowDetailFn (index) {
+      if (index === 1) {
+        this.tabIndex = 1
       }
-
-      if (index == 2) {
-        this.tabIndex = 2;
-
+      if (index === 2) {
+        this.tabIndex = 2
       }
-
-
     }
   }
-};
+}
 
 </script>
 <style scoped>
@@ -223,12 +213,7 @@ export default {
   border-bottom: 2px solid #b62929;
 }
 
-
-
-
-
 /*表格*/
-
 .table-list {
   padding: 10px 20px 10px 20px;
 }
@@ -253,7 +238,6 @@ export default {
 .table-list .text span {
   margin: 0 20px;
 }
-
 
 table {
   border-left: 1px solid #cdcdcd;

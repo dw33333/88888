@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for='week in liveWeekDatas'>
+          <tr v-for='(week,index) in liveWeekDatas' :key='index'>
             <td>{{week.date}}</td>
             <td>{{week.bet_money_total}}</td>
             <td>{{week.val_money_total}}</td>
@@ -51,16 +51,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for='live in liveDayDatas'>
-            <td>{{type.i}}</td>
-            <td>{{type.order_num}}</td>
-            <td>{{type.order_time}}</td>
-            <td>{{type.live_type}}</td>
-            <td>{{type.bet_info}}</td>
-            <td>{{type.bet_money}}</td>
-            <td>{{type.VALIDBETAMOUNT}}</td>
-            <td>{{type.live_win}}</td>
-            <td>{{type.game_type}}</td>
+          <tr v-for='(live,index) in liveDayDatas' :key='index'>
+            <td>{{live.i}}</td>
+            <td>{{live.order_num}}</td>
+            <td>{{live.order_time}}</td>
+            <td>{{live.live_type}}</td>
+            <td>{{live.bet_info}}</td>
+            <td>{{live.bet_money}}</td>
+            <td>{{live.VALIDBETAMOUNT}}</td>
+            <td>{{live.live_win}}</td>
+            <td>{{live.game_type}}</td>
           </tr>
           <tr v-if='liveDayDatas.length<=0'>
             <td colspan="9">暂时没有下注信息</td>
@@ -72,7 +72,7 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       tabIndex: 1,
       totalLivemoney: '',
@@ -80,15 +80,14 @@ export default {
       totalLiveresultmoney: '',
       liveWeekDatas: [],
       dayTime: '',
-      liveDayDatas: [],
-
+      liveDayDatas: []
     }
   },
-  mounted() {
-    this.videoGameFn();
+  mounted () {
+    this.videoGameFn()
   },
   methods: {
-    videoGameFn() {
+    videoGameFn () {
       // 真人视讯
       this.$http.get('/json/center/?r=LiveRecord').then((res) => {
         if (res.data.code === 0) {
@@ -102,13 +101,13 @@ export default {
       })
     },
     // 真人日报表
-    selectOneDayLive(date) {
-      this.tabIndex = 2;
-      this.dayTime = date;
+    selectOneDayLive (date) {
+      this.tabIndex = 2
+      this.dayTime = date
       this.$http.get('/json/center/?r=LiveRecordDetails&date=' + date).then((res) => {
         console.log(res.data.data.InfoList)
         if (res.data.code === 0) {
-          this.liveDayDatas = res.data.data.InfoList;
+          this.liveDayDatas = res.data.data.InfoList
         }
       }).catch((error) => {
         console.log(error)
@@ -116,11 +115,11 @@ export default {
     },
 
     // 返回按钮点击
-    isShowDetailFn() {
-      this.tabIndex = 1;
+    isShowDetailFn () {
+      this.tabIndex = 1
     }
   }
-};
+}
 
 </script>
 <style scoped>
@@ -140,11 +139,7 @@ export default {
   border-bottom: 2px solid #b62929;
 }
 
-
-
-
 /*表格*/
-
 .table-list {
   padding: 10px 20px 10px 20px;
 }
@@ -195,9 +190,7 @@ table {
   text-align: center;
 }
 
-
 .table-list tr:hover {
   background-color: #ddd;
 }
-
 </style>

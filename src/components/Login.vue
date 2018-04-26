@@ -54,49 +54,43 @@
   </div>
 </template>
 <script>
-import axios from "axios"
-import footervue from "@/components/Footer.vue"
-import maskLayer from "@/components/base/mask-layer"
+import footervue from '@/components/Footer.vue'
+import maskLayer from '@/components/base/mask-layer'
 export default {
   name: 'Login',
-  data() {
+  data () {
     return {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
       ifopen: false,
       content: ''
-    };
+    }
   },
-  methods: {  
+  methods: {
     // 封装提示信息函数
-    mytoast(msg) {
-      this.ifopen = true;
+    mytoast (msg) {
+      this.ifopen = true
       // let instance = Toast(msg);
-      this.content = msg;
+      this.content = msg
       setTimeout(() => {
         // instance.close();
-        this.ifopen = false;
+        this.ifopen = false
         // clearTimeout();
-      }, 1500);
+      }, 1500)
     },
 
-    loginFn() {
-
+    loginFn () {
       let data = {
-        action: "login",
+        action: 'login',
         username: this.username,
         password: this.password
       }
-
-
       this.$http.post('/json/api.php?r=login', data).then((res) => {
-
         this.mytoast(res.data.msg)
         if (res.status === 200 && res.data.code === 0) {
-          this.mymoney = res.data.data.user_money;
-
-          sessionStorage.setItem("username", this.username);
-          sessionStorage.setItem("isShow", this.username);
+          this.mymoney = res.data.data.user_money
+          sessionStorage.setItem('username', this.username)
+          sessionStorage.setItem('isShow', this.username)
           // this.$store.dispatch('UserLogin', this.username)
           // this.$store.dispatch('SET_userMoney', this.mymoney)
           this.$router.push('/UserCenter')
@@ -104,14 +98,13 @@ export default {
       }).catch((error) => {
         console.log(error)
       })
-
     }
   },
   components: {
     footervue,
     maskLayer
   }
-};
+}
 
 </script>
 <style scoped>

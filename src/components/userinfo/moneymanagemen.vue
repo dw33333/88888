@@ -49,7 +49,7 @@
 import maskLayer from '../base/mask-layer'
 
 export default {
-  data() {
+  data () {
     return {
       isShow: true,
       inOrOut: 1,
@@ -69,19 +69,16 @@ export default {
 
     }
   },
-  mounted() {
-    this.getuserinfo();
+  mounted () {
+    this.getuserinfo()
   },
   methods: {
-
-
     // 获取个人信息
-    getuserinfo() {
-
+    getuserinfo () {
       this.$http.get('/json/center/?r=UsrInfo').then((res) => {
-        this.realname = res.data.data.pay_name;
-        this.bankCardNum = res.data.data.pay_num;
-        this.bankName = res.data.data.pay_bank;
+        this.realname = res.data.data.pay_name
+        this.bankCardNum = res.data.data.pay_num
+        this.bankName = res.data.data.pay_bank
       }).catch((error) => {
         console.log(error)
       })
@@ -102,100 +99,88 @@ export default {
 
       // >获取用户余额
       this.$http.get('/json/center/?r=Money').then((res) => {
-        this.user_money = res.data.data.user_money;
+        this.user_money = res.data.data.user_money
       }).catch((error) => {
         console.log(error)
       })
     },
 
-    turnInOrOut(select) {
-      this.inOrOut = select;
-      this.inputMoney = '';
-      this.all = '';
-      this.lock = true;
+    turnInOrOut (select) {
+      this.inOrOut = select
+      this.inputMoney = ''
+      this.all = ''
+      this.lock = true
     },
-    platformSelect(plat) {
-      this.lock = true;
-      this.inputMoney = '';
-      this.all = '';
-      this.platform = plat;
+    platformSelect (plat) {
+      this.lock = true
+      this.inputMoney = ''
+      this.all = ''
+      this.platform = plat
     },
 
-
-    selectType(index) {
-
-      if (index == 10) {
-
+    selectType (index) {
+      if (index === 10) {
         if (this.lock) {
-          this.all = index;
-          this.lock = false;
-
+          this.all = index
+          this.lock = false
           // 转入
-          if (this.inOrOut == 1) {
-            this.inputMoney = this.user_money;
+          if (this.inOrOut === 1) {
+            this.inputMoney = this.user_money
           }
           // 转出
-          if (this.inOrOut == 2) {
-
+          if (this.inOrOut === 2) {
             // AG平台
-            if (this.platform == 1) {
-              this.inputMoney = this.ag_money;
+            if (this.platform === 1) {
+              this.inputMoney = this.ag_money
             }
 
             // DS平台
-            if (this.platform == 2) {
-              this.inputMoney = this.ds_money;
+            if (this.platform === 2) {
+              this.inputMoney = this.ds_money
             }
           }
-
         } else {
-          this.all = '';
-          this.lock = true;
-          this.inputMoney = '';
+          this.all = ''
+          this.lock = true
+          this.inputMoney = ''
         }
-
-      } else if (index == 0) {
+      } else if (index === 0) {
         // 重置按钮
-        this.inputMoney = '';
-        this.all = '';
-
+        this.inputMoney = ''
+        this.all = ''
       } else {
-        this.lock = true;
-        this.all = '';
-        this.inputMoney = index;
+        this.lock = true
+        this.all = ''
+        this.inputMoney = index
       }
-
       console.log(this.inputMoney)
-
       // 重置按钮
-      if (index == 0) {
-        this.inputMoney = '';
-        this.all = '';
+      if (index === 0) {
+        this.inputMoney = ''
+        this.all = ''
       }
     },
     // 封装提示信息函数
-    mytoast(msg) {
-      this.ifopen = true;
+    mytoast (msg) {
+      this.ifopen = true
       // let instance = Toast(msg);
-      this.content = msg;
+      this.content = msg
       setTimeout(() => {
         // instance.close();
-        this.ifopen = false;
-        clearTimeout();
-      }, 1000);
+        this.ifopen = false
+        clearTimeout()
+      }, 1000)
     },
     // 提交
-    submitQuota() {
+    submitQuota () {
       console.log(this.inputMoney)
       if (!this.inputMoney) {
-        this.mytoast('请先输入转账金额');
+        this.mytoast('请先输入转账金额')
         return
-      } else if (this.inOrOut == 1) {
+      } else if (this.inOrOut === 1) {
         // 转入
-
         // 转入到AG平台
-        if (this.platform == 1) {
-
+        if (this.platform === 1) {
           let data = {}
           data['change_money'] = this.inputMoney
           data['change_type'] = 'd'
@@ -204,14 +189,13 @@ export default {
             if (res.data.code === 0) {
               this.mytoast(res.data.msg)
               setTimeout(() => {
-
-                this.ifopen = false;
+                this.ifopen = false
                 clearTimeout()
               }, 1000)
               this.getuserinfo()
               // this.$store.dispatch('SET_userMoney', res.data.data.money)
-              this.inputMoney = '';
-              this.all = '';
+              this.inputMoney = ''
+              this.all = ''
               // this.fastIndex = 0
             } else if (res.data.code === 2) {
               // MessageBox.confirm('请先登录', '温馨提示').then(() => {
@@ -227,22 +211,16 @@ export default {
             } else {
               this.mytoast(res.data.msg)
               setTimeout(() => {
-
-                this.ifopen = false;
+                this.ifopen = false
                 clearTimeout()
               }, 1000)
             }
           }).catch((error) => {
             console.log(error)
           })
-
-
-
-
         }
         // 转入到DS平台
-        if (this.platform == 2) {
-
+        if (this.platform === 2) {
           let data = {}
           data['change_money'] = this.inputMoney
           data['change_type'] = 'd'
@@ -251,15 +229,13 @@ export default {
             if (res.data.code === 0) {
               this.mytoast(res.data.msg)
               setTimeout(() => {
-
-                this.ifopen = false;
+                this.ifopen = false
                 clearTimeout()
               }, 1000)
               this.getuserinfo()
               // this.$store.dispatch('SET_userMoney', res.data.data.money)
-              this.inputMoney = '';
-              this.all = '';
-
+              this.inputMoney = ''
+              this.all = ''
             } else if (res.data.code === 2) {
               // MessageBox.confirm('请先登录', '温馨提示').then(() => {
               //   this.$router.push({
@@ -274,48 +250,37 @@ export default {
             } else {
               this.mytoast(res.data.msg)
               setTimeout(() => {
-
-                this.ifopen = false;
+                this.ifopen = false
                 clearTimeout()
               }, 1000)
             }
           }).catch((error) => {
             console.log(error)
           })
-
-
-
-
         }
-      } else if (this.inOrOut == 2) {
+      } else if (this.inOrOut === 2) {
         // 转出
-
         // 转出到AG平台
-        if (this.platform == 1) {
-
+        if (this.platform === 1) {
           let data = {}
           data['change_money'] = this.inputMoney
-          data['change_type'] = 'w';
-          data['change_live'] = 1;
+          data['change_type'] = 'w'
+          data['change_live'] = 1
 
           this.$http.post('/json/center/?r=AginTransfer', data).then((res) => {
             console.log(res.data.code + 'sdewee')
             if (res.data.code === 0) {
-              console.log("res.data.code-----" + res.data.code)
+              console.log('res.data.code-----' + res.data.code)
               this.mytoast(res.data.msg)
               setTimeout(() => {
-
-
-                this.ifopen = false;
-                clearTimeout();
+                this.ifopen = false
+                clearTimeout()
               }, 1500)
-              this.getuserinfo();
+              this.getuserinfo()
 
-              this.inputMoney = '';
-              this.all = '';
-
+              this.inputMoney = ''
+              this.all = ''
             } else if (res.data.code === 2) {
-
               // MessageBox.confirm('请先登录', '温馨提示').then(() => {
               //   this.$router.push({
               //     path: '/login',
@@ -329,22 +294,19 @@ export default {
             } else {
               this.mytoast(res.data.msg)
               setTimeout(() => {
-
-                this.ifopen = false;
+                this.ifopen = false
                 clearTimeout()
-              }, 1500);
+              }, 1500)
 
-              this.inputMoney = '';
-              this.all = '';
+              this.inputMoney = ''
+              this.all = ''
             }
           }).catch((error) => {
             console.log(error)
           })
-
-
         }
         // 转出到DS平台
-        if (this.platform == 2) {
+        if (this.platform === 2) {
           let data = {}
           data['change_money'] = this.inputMoney
           data['change_type'] = 'w'
@@ -353,16 +315,12 @@ export default {
             if (res.data.code === 0) {
               this.mytoast(res.data.msg)
               setTimeout(() => {
-
-                this.ifopen = false;
+                this.ifopen = false
                 clearTimeout()
               }, 1500)
-
               this.getuserinfo()
-
-              this.inputMoney = '';
-              this.all = '';
-
+              this.inputMoney = ''
+              this.all = ''
             } else if (res.data.code === 2) {
               // MessageBox.confirm('请先登录', '温馨提示').then(() => {
               //   this.$router.push({
@@ -377,8 +335,7 @@ export default {
             } else {
               this.mytoast(res.data.msg)
               setTimeout(() => {
-
-                this.ifopen = false;
+                this.ifopen = false
                 clearTimeout()
               }, 1000)
             }
@@ -387,12 +344,6 @@ export default {
           })
         }
       }
-
-
-
-
-
-
 
       if (this.changeType === '转出AG') {
         alert(1)
@@ -414,22 +365,19 @@ export default {
             this.inputMoney = ''
             this.fastIndex = 0
           } else if (res.data.code === 2) {
-
-
-            MessageBox.confirm('请先登录', '温馨提示').then(() => {
-              this.$router.push({
-                path: '/login',
-                query: { redirect: this.$route.path } // 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由
-              })
-              this.$store.dispatch('UserLogout')
-            }, () => {
-              this.$store.dispatch('UserLogout')
-              return false
-            })
+            // MessageBox.confirm('请先登录', '温馨提示').then(() => {
+            //   this.$router.push({
+            //     path: '/login',
+            //     query: { redirect: this.$route.path } // 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由
+            //   })
+            //   this.$store.dispatch('UserLogout')
+            // }, () => {
+            //   this.$store.dispatch('UserLogout')
+            //   return false
+            // })
           } else {
             this.mytoast(res.data.msg)
             setTimeout(() => {
-
               this.ifopen = !this.ifopen
               clearTimeout()
             }, 1000)
@@ -439,15 +387,7 @@ export default {
         })
       }
 
-
-
-
-
       if (this.changeType === '转出DS') {
-
-
-
-
         this.ifopen = !this.ifopen
         let data = {}
         data['change_money'] = this.inputMoney
@@ -457,7 +397,6 @@ export default {
           if (res.data.code === 0) {
             this.mytoast(res.data.msg)
             setTimeout(() => {
-
               this.ifopen = !this.ifopen
               clearTimeout()
             }, 1000)
@@ -466,20 +405,19 @@ export default {
             this.inputMoney = ''
             this.fastIndex = 0
           } else if (res.data.code === 2) {
-            MessageBox.confirm('请先登录', '温馨提示').then(() => {
-              this.$router.push({
-                path: '/login',
-                query: { redirect: this.$route.path } // 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由
-              })
-              this.$store.dispatch('UserLogout')
-            }, () => {
-              this.$store.dispatch('UserLogout')
-              return false
-            })
+            // MessageBox.confirm('请先登录', '温馨提示').then(() => {
+            //   this.$router.push({
+            //     path: '/login',
+            //     query: { redirect: this.$route.path } // 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由
+            //   })
+            //   this.$store.dispatch('UserLogout')
+            // }, () => {
+            //   this.$store.dispatch('UserLogout')
+            //   return false
+            // })
           } else {
             this.mytoast(res.data.msg)
             setTimeout(() => {
-
               this.ifopen = !this.ifopen
               clearTimeout()
             }, 1000)
@@ -487,16 +425,9 @@ export default {
         }).catch((error) => {
           console.log(error)
         })
-
-
-
-
-
       }
       if (this.changeType === '转入AG') {
         this.ifopen = !this.ifopen
-
-
         let data = {}
         data['change_money'] = this.inputMoney
         data['change_type'] = 'd'
@@ -505,14 +436,13 @@ export default {
           if (res.data.code === 0) {
             this.mytoast(res.data.msg)
             setTimeout(() => {
-
-              this.ifopen = false;
+              this.ifopen = false
               clearTimeout()
             }, 1000)
             this.getuserinfo()
             // this.$store.dispatch('SET_userMoney', res.data.data.money)
-            this.inputMoney = '';
-            this.all = '';
+            this.inputMoney = ''
+            this.all = ''
             // this.fastIndex = 0
           } else if (res.data.code === 2) {
             // MessageBox.confirm('请先登录', '温馨提示').then(() => {
@@ -528,26 +458,16 @@ export default {
           } else {
             this.mytoast(res.data.msg)
             setTimeout(() => {
-
-              this.ifopen = false;
+              this.ifopen = false
               clearTimeout()
             }, 1000)
           }
         }).catch((error) => {
           console.log(error)
         })
-
-
-
-
-
       }
       if (this.changeType === '转入DS') {
         this.ifopen = !this.ifopen
-
-
-
-
         let data = {}
         data['change_money'] = this.inputMoney
         data['change_type'] = 'd'
@@ -556,15 +476,13 @@ export default {
           if (res.data.code === 0) {
             this.mytoast(res.data.msg)
             setTimeout(() => {
-
-              this.ifopen = false;
+              this.ifopen = false
               clearTimeout()
             }, 1000)
             this.getuserinfo()
             // this.$store.dispatch('SET_userMoney', res.data.data.money)
-            this.inputMoney = '';
-            this.all = '';
-
+            this.inputMoney = ''
+            this.all = ''
           } else if (res.data.code === 2) {
             // MessageBox.confirm('请先登录', '温馨提示').then(() => {
             //   this.$router.push({
@@ -579,19 +497,13 @@ export default {
           } else {
             this.mytoast(res.data.msg)
             setTimeout(() => {
-
-              this.ifopen = false;
+              this.ifopen = false
               clearTimeout()
             }, 1000)
           }
         }).catch((error) => {
           console.log(error)
         })
-
-
-
-
-
       }
     }
 
@@ -599,7 +511,7 @@ export default {
   components: {
     maskLayer
   }
-};
+}
 
 </script>
 <style scoped>
@@ -619,25 +531,7 @@ export default {
   border-bottom: 2px solid #b62929;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*表格*/
-
 .table-list {
   padding: 10px 20px 10px 20px;
 }
@@ -687,7 +581,6 @@ export default {
   line-height: 30px;
 }
 
-
 .btns .recharge {
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
@@ -708,7 +601,6 @@ export default {
 .red {
   color: #b62929;
 }
-
 
 .table-list .title {
   text-align: left;
@@ -752,8 +644,6 @@ export default {
 }
 
 input:focus {
-
-
   border-color: rgba(198, 33, 51, 0.8);
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(198, 33, 51, 0.8);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(198, 33, 51, 0.8);

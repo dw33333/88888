@@ -17,7 +17,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="quota in quotaWeekDatas">
+          <tr v-for="(quota,index) in quotaWeekDatas" :key='index'>
             <td>{{quota.do_time}}</td>
             <td>{{quota.order_num}}</td>
             <td>{{quota.live_type}}</td>
@@ -35,30 +35,27 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       quotaWeekDatas: [],
       inliveMoney: '',
-      outliveMoney: '',
-    
+      outliveMoney: ''
     }
   },
-  mounted() {
+  mounted () {
     // 额度转换
     this.$http.get('/json/center/?r=ChangeHistory').then((res) => {
-      if (res.data.code == 0) {
-        this.quotaWeekDatas = res.data.data.InfoList;
-        this.inliveMoney = res.data.data.in_normal_total;
-        this.outliveMoney = res.data.data.out_normal_total;
+      console.log(res.data)
+      if (res.data.code === 0) {
+        this.quotaWeekDatas = res.data.data.InfoList || []
+        this.inliveMoney = res.data.data.in_normal_total
+        this.outliveMoney = res.data.data.out_normal_total
       }
     }).catch((error) => {
       console.log(error)
     })
-  },
-  methods: {
-
   }
-};
+}
 
 </script>
 <style scoped>
@@ -78,10 +75,7 @@ export default {
   border-bottom: 2px solid #b62929;
 }
 
-
-
 /*表格*/
-
 .table-list {
   padding: 10px 20px 10px 20px;
 }

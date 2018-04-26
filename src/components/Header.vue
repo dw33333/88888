@@ -99,7 +99,7 @@
               <div class="gamelist_l">
                 <ul>
                   <li>
-                    <a class="game_26" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/ZQSSC.png?_=20160805"><span class="hot"><font>重庆时时彩</font></span></a>
+                    <a class="game_26" <img src='https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/ZQSSC.png?_=20160805'><span class="hot"><font>重庆时时彩</font></span></a>
                   </li>
                   <li>
                     <a class="game_28" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/BJKL8.png?_=20160805"><span class="hot"><font>北京快乐8</font></span></a>
@@ -228,71 +228,60 @@ import maskLayer from './base/mask-layer'
 
 export default {
   name: 'Header',
-  data() {
+  data () {
     return {
       nowTime: '',
-      username: sessionStorage.getItem("username"),
+      username: sessionStorage.getItem('username'),
       password: '',
       content: '',
       ifopen: false,
       user_money: '',
       mymoney: '',
-      isShow: sessionStorage.getItem("isShow")
+      isShow: sessionStorage.getItem('isShow')
 
     }
   },
-  created() {
+  created () {
     // alert(sessionStorage.getItem("isShow"));
-
     // alert(this.username)
-
     // >获取用户余额
     this.$http.get('/json/center/?r=Money').then((res) => {
-      this.mymoney = res.data.data.user_money;
+      this.mymoney = res.data.data.user_money
     }).catch((error) => {
       console.log(error)
-    });
-
-
+    })
   },
   methods: {
     // 封装提示信息函数
-    mytoast(msg) {
-      this.ifopen = true;
+    mytoast (msg) {
+      this.ifopen = true
 
-      this.content = msg;
+      this.content = msg
       setTimeout(() => {
-
-        this.ifopen = false;
-        clearTimeout();
-      }, 1500);
+        this.ifopen = false
+        clearTimeout()
+      }, 1500)
     },
 
-    enterUserCenter() {
+    enterUserCenter () {
       if (!this.username) {
-        this.mytoast("请先登录");
+        this.mytoast('请先登录')
         setTimeout(() => {
-          this.$router.replace('/Login');
+          this.$router.replace('/Login')
           // this.$router.go('/');
-
         }, 1500)
       } else {
         this.$router.replace('/UserCenter')
       }
-
-
-
     },
 
     // 登录提交
-    loginSubmit() {
+    loginSubmit () {
       let data = {
-        action: "login",
+        action: 'login',
         username: this.username,
         password: this.password
       }
-
-
 
       if (!this.username) {
         this.mytoast('请输入帐号')
@@ -302,11 +291,10 @@ export default {
         this.$http.post('/json/api.php?r=login', data).then((res) => {
           this.mytoast(res.data.msg)
           if (res.status === 200 && res.data.code === 0) {
-            this.mymoney = res.data.data.user_money;
-
-            sessionStorage.setItem("username", this.username);
-            sessionStorage.setItem("isShow", this.username);
-            this.$router.push('/UserCenter');
+            this.mymoney = res.data.data.user_money
+            sessionStorage.setItem('username', this.username)
+            sessionStorage.setItem('isShow', this.username)
+            this.$router.push('/UserCenter')
             // this.$store.dispatch('UserLogin', this.username)
             // this.$store.dispatch('SET_userMoney', this.mymoney)
             // this.$router.push(this.$route.query.redirect || '/')
@@ -326,7 +314,6 @@ export default {
     //     password: this.password
     //   }
 
-
     //   this.$http.post('/json/api.php?r=login', data).then((res) => {
 
     //     alert(1)
@@ -334,12 +321,8 @@ export default {
     //     console.log("res.status:" + res.data.code)
     //     if (res.status === 200 && res.data.code === 0) {
 
-
-
     //       this.mytoast(res.data.msg);
     //       this.mymoney = res.data.data.user_money;
-
-
 
     //       sessionStorage.setItem("username", this.username);
     //       sessionStorage.setItem("isShow", this.username);
@@ -353,21 +336,21 @@ export default {
     // },
 
     // 退出登录
-    loginout() {
+    loginout () {
       this.$http.get('/json/api.php?r=logout').then((res) => {
         if (res.data.code === 0) {
           // this.$store.dispatch('UserLogout')
-          this.mytoast(res.data.msg);
-          sessionStorage.removeItem('username');
-          sessionStorage.removeItem('isShow');
+          this.mytoast(res.data.msg)
+          sessionStorage.removeItem('username')
+          sessionStorage.removeItem('isShow')
           setTimeout(() => {
             // alert(1)
             // instance.close()
-            this.ifopen = false;
+            this.ifopen = false
             clearTimeout()
             // this.$router.replace('/')
-            location.reload();
-          }, 1500);
+            location.reload()
+          }, 1500)
 
           // this.isShow=false;
         }
@@ -385,47 +368,37 @@ export default {
     //   })
     // },
 
-    clockon() {
-      var now = new Date();
-      var day = now.getDay();
-      var hour = now.getHours();
-      var minu = now.getMinutes();
-      var sec = now.getSeconds();
+    clockon () {
+      var now = new Date()
+      // var day = now.getDay()
+      var hour = now.getHours()
+      var minu = now.getMinutes()
+      var sec = now.getSeconds()
 
-      if (hour < 10) hour = "0" + hour;
-      if (minu < 10) minu = "0" + minu;
-      if (sec < 10) sec = "0" + sec;
-      var time = "";
-      time = hour + ":" + minu + ":" + sec;
-      var timer = setTimeout(this.clockon, 1000);
-      this.nowTime = time;
+      if (hour < 10) hour = '0' + hour
+      if (minu < 10) minu = '0' + minu
+      if (sec < 10) sec = '0' + sec
+      var time = ''
+      time = hour + ':' + minu + ':' + sec
+      setTimeout(this.clockon, 1000)
+      this.nowTime = time
     }
   },
-  mounted() {
-    this.clockon();
-    this.username = sessionStorage.getItem('username');
+  mounted () {
+    this.clockon()
+    this.username = sessionStorage.getItem('username')
   },
   components: {
     maskLayer
   }
-
 }
-
 </script>
 <style scoped>
 /*登录*/
 
-
-/*
-body {
-
-  background: url('../assets/bg1.jpg') 0 0 no-repeat;
-}*/
-
 .top-wrap {
   height: 48px;
   overflow: hidden;
-
   color: #fff;
   background-color: rgba(0, 0, 0, .73);
 }
@@ -438,25 +411,21 @@ body {
 
 .top-box .bar-left {
   float: left;
-
   background: url(../assets/base-ico2.png) 0 -176px no-repeat;
 }
 
 .top-box .bar-left span {
   display: inline-block;
   padding-left: 48px;
-
   font-size: 14px;
   font-style: italic;
   line-height: 48px;
-
   background-position: 0 -180px;
 }
 
 .bar-right {
   float: left;
   overflow: hidden;
-
   line-height: 48px;
 }
 
@@ -549,8 +518,6 @@ input:-ms-input-placeholder {
   background: url(../assets/base-ico2.png) no-repeat;
 }
 
-
-
 .preson-info {
   padding: 0;
   margin-left: 100px;
@@ -569,14 +536,12 @@ input:-ms-input-placeholder {
   padding-right: 23px;
 }
 
-
 .personpwd {
   background-position: 0 -434px;
 }
 
 .recharge {
   padding-left: 45px;
-
   background-position: -108px -677px;
 }
 
@@ -588,10 +553,8 @@ input:-ms-input-placeholder {
 
 .login-out {
   padding-left: 45px;
-
   background-position: -201px -677px;
 }
-
 
 .recharge:hover {
   color: #b62929;
@@ -608,20 +571,7 @@ input:-ms-input-placeholder {
   background-position: -201px -750px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 /*导航栏*/
-
 nav {
   background-color: #b62929;
 }
@@ -631,9 +581,7 @@ nav {
   height: 69px;
   margin: 0 auto;
   overflow: hidden;
-
   font-size: 14px;
-
   color: #fff;
 }
 
@@ -650,9 +598,7 @@ nav {
 .nav ul>li {
   float: left;
   padding: 12px 26px;
-
   line-height: 22px;
-
   cursor: pointer;
   -webkit-transition: all .5s;
   -ms-transition: all .5s;
@@ -672,23 +618,10 @@ nav {
   -ms-transform: scale(1.1);
   -o-transform: scale(1.1);
   transform: scale(1.1);
-
   background-color: #f14a4a;
 }
 
-.nav ul li a {}
-
-
-
-
-
-
-
-
-
-
 /*下拉菜单*/
-
 .menu-child1 {
   position: absolute;
   top: 90px;
@@ -778,11 +711,9 @@ nav {
   overflow: hidden;
 }
 
-
 .high_wrap ul {
   float: none;
 }
-
 
 .menu-box ul {
   background-image: none;
@@ -859,5 +790,4 @@ img {
   left: 246px;
   top: -8px;
 }
-
 </style>

@@ -6,7 +6,7 @@
     <!-- 公告 -->
     <div class="msg-box">
       <div class="head">公告列表</div>
-      <div class="item" v-for="(notice,index) in noticeArr">
+      <div class="item" v-for="(notice, index) in noticeArr" :key='index'> 
         <!-- <div class="title">{{notice.addtime}}</div> -->
         <p class="content">{{notice.content}} </p>
       </div>
@@ -20,29 +20,21 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       noticeArr: [],
-      total:0,
+      total: 0
     }
   },
 
   mounted () {
-
     this.$http.get('/json/center/?r=HotNews').then((res) => {
-
-
-      this.noticeArr = res.data.data;
-      this.total=this.noticeArr.length;
-
+      this.noticeArr = res.data.data
+      this.total = this.noticeArr.length
       console.log(res.data)
     }).catch((error) => {
       console.log(error)
     })
-
-  },
-  methods: {
-
   }
 }
 
@@ -63,11 +55,7 @@ export default {
   border-bottom: 2px solid #b62929;
 }
 
-
-
-
 /*公告列表*/
-
 .msg-box {
   margin: 10px 20px;
   border-bottom: 1px solid #cdcdcd;

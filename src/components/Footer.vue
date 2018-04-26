@@ -55,8 +55,6 @@
   </footer>
 </template>
 <script>
-
-
 </script>
 <style scoped>
 footer {
@@ -151,9 +149,7 @@ a {
 }
 .browser-list .icon {
     margin-right: 7px;
-    
 }
-
 .icon-browser {
     width: 46px;
     height: 49px;
@@ -163,30 +159,30 @@ a {
     vertical-align: middle;
 }
 .icon-browser{
-    background: url(../assets/home-ico.png) no-repeat;
+  background: url(../assets/home-ico.png) no-repeat;
 }
 .icon-browserIE {
-    background-position: 0 -948px;
+  background-position: 0 -948px;
 }
 .icon-browserIE:hover{
-	background-position: 0 -899px;
+  background-position: 0 -899px;
 }
 .icon-browserFF{
-	background-position: -46px -948px;
+  background-position: -46px -948px;
 }
 .icon-browserFF:hover{
   background-position: -46px -899px;
 }
 .icon-browserGL{
-	background-position: -91px -948px;
+  background-position: -91px -948px;
 }
 .icon-browserGL:hover{
   background-position: -91px -899px;
 }
 .browser-list.notitle li span {
-    color: #fff;
-    display: block;
-    margin-top: 8px;
-    bottom:10px;
+  color: #fff;
+  display: block;
+  margin-top: 8px;
+  bottom:10px;
 }
 </style>

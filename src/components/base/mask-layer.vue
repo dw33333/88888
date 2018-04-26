@@ -11,7 +11,7 @@ export default {
       default: false
     },
     content: {
-      type: String,
+      type: String
     }
   }
 }

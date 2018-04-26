@@ -11,18 +11,7 @@
         <div>状态</div>
         <div>用户操作</div>
       </div>
-     <!--  <div class="content-box">
-        <ul class="title">
-          <li>"2018-04-20 18:44:23"</li>
-          <li>"97uj66u5"</li>
-          <li>已读</li>
-          <li>删除</li>
-        </ul>
-        <p>银行卡通告：因公司需要，银行卡入款.微信入款.支付宝入款已使用新的入款账号，已更改为新入款账号了，请您获取我司最新入款账号，存入过期账号概不负责！银行最新入款账号，存入过期账号概不负责！银行卡更新通告：因公司需要，银行卡入款.微款.支付宝入款已使用新的入款账号，已更改为新入款账号了，请您获取我司最新入款账号，存入过期账号概不负责！银行卡更新通告：因公行卡入款.微信入款.支付宝入款已使用新的入款账号，已更改为新入款账号了，请您获取我司最新入款账号，存入过期账号概不负责！
-
-        </p>
-      </div> -->
-      <div class="content-box" v-for="(msg,index) in msgArr">
+      <div class="content-box" v-for="(msg,index) in msgArr" :key='index'>
         <ul class="title" @click='read(msg, index)'>
           <li>{{msg.msg_time}}</li>
           <li>{{msg.msg_title}}</li>
@@ -40,65 +29,58 @@
 import maskLayer from '../base/mask-layer'
 
 export default {
-  data() {
+  data () {
     return {
-      
       total: 0,
       mailLength: 0,
       msgArr: [],
       ifopen: false,
-      content:'',
+      content: '',
       looking: false,
       msgContent: '',
       lookState: '未读',
       msgContentIndex: -1
     }
   },
-
-  mounted() {
-    this.getMsg();
-
+  mounted () {
+    this.getMsg()
   },
-  components:{
+  components: {
     maskLayer
   },
   methods: {
     // 封装提示信息函数
-    mytoast(msg) {
-      this.ifopen = true;
+    mytoast (msg) {
+      this.ifopen = true
       // let instance = Toast(msg);
-      this.content = msg;
+      this.content = msg
       setTimeout(() => {
         // instance.close();
-        this.ifopen = false;
-        clearTimeout();
-      }, 1000);
+        this.ifopen = false
+        clearTimeout()
+      }, 1000)
     },
     // 获取站内信
-    getMsg(item,index) {
+    getMsg (item, index) {
       this.$http.get('/json/center/?r=Msg').then((res) => {
         console.log(res.data.data)
-        this.msgArr = res.data.data;
-
+        this.msgArr = res.data.data
         this.msgArr.forEach((item, index) => {
           if (item.islook === '0') {
             this.mailLength = this.mailLength + 1
           }
-        });
-
-
+        })
       }).catch((error) => {
         console.log(error)
-      });
+      })
     },
     // 阅读站内邮件
-    read(item, index) {
+    read (item, index) {
       this.$http.get('/json/center/?r=MsgOne&msgid=' + item.msg_id).then((res) => {
-        this.msgContent = res.data.data.content;
-       
-        item.islook = 1;
-        this.looking = !this.looking;
-        this.msgContentIndex = index;
+        this.msgContent = res.data.data.content
+        item.islook = 1
+        this.looking = !this.looking
+        this.msgContentIndex = index
         // this.mailLength = 0;
         this.getMsgs(item, index)
       }).catch((error) => {
@@ -106,19 +88,16 @@ export default {
       })
     },
     // 删除站内邮件
-    deleteMsg(item, index) {
+    deleteMsg (item, index) {
       this.$http.get('/json/center/?r=MsgDel&msgid=' + item.msg_id).then((res) => {
         if (res.data.code === 0) {
           this.mailLength = 0
           this.mytoast(res.data.msg)
           setTimeout(() => {
-            
             clearTimeout()
           }, 1500)
-
-
-          this.msgArr.splice(index,1);
-          this.getMsgs(item, index);
+          this.msgArr.splice(index, 1)
+          this.getMsgs(item, index)
         }
       }).catch((error) => {
         console.log(error)
@@ -145,15 +124,11 @@ export default {
   border-bottom: 2px solid #b62929;
 }
 
-
 a{
   text-decoration:none;
 }
 
-
-
 /*公告列表*/
-
 p{
   margin: 0;
   padding: 0;

@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for='sport in sportRecordList'>
+          <tr v-for='(sport,index) in sportRecordList' :key='index'>
             <td>{{sport.DateTime}}</td>
             <td>{{sport.BetMoney}}</td>
             <td>{{sport.NotBetMoney}}</td>
@@ -60,7 +60,7 @@
             <td>0.00</td>
             <td>0</td>
           </tr> -->
-          <tr v-for="sports in sportDayDatas">
+          <tr v-for="(sports,index) in sportDayDatas" :key='index'>
             <td>{{sports.name}}</td>
             <td>{{sports.BetMoney}}</td>
             <td>{{sports.NotBetMoney}}</td>
@@ -94,7 +94,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for='order in sportTypeDatas'>
+          <tr v-for='(order,index) in sportTypeDatas' :key='index'>
             <td>{{order.order_num}}</td>
             <td>{{order.match_name}}</td>
             <td>{{order.master_guest}}</td>
@@ -114,7 +114,7 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       tabIndex: 1,
       sportRecordList: [],
@@ -130,68 +130,53 @@ export default {
       typeName: ''
     }
   },
-  mounted() {
-
-    this.getSportRecord();
-
-
+  mounted () {
+    this.getSportRecord()
   },
   methods: {
     // 获取体育注单记录
-    getSportRecord() {
+    getSportRecord () {
       this.$http.get('/json/center/?r=SportRecord').then((res) => {
         console.log(res.data.data)
         if (res.status === 200 && res.data.code === 0) {
-          this.sportRecordList = res.data.data.recordList;
-
-          this.TotalBetMoney = res.data.data.TotalBetMoney;
-          this.TotalNotbetMoney = res.data.data.TotalNotbetMoney;
-          this.TotalResultMoney = res.data.data.TotalResultMoney;
-
-
+          this.sportRecordList = res.data.data.recordList
+          this.TotalBetMoney = res.data.data.TotalBetMoney
+          this.TotalNotbetMoney = res.data.data.TotalNotbetMoney
+          this.TotalResultMoney = res.data.data.TotalResultMoney
         }
       }).catch((error) => {
         console.log(error)
       })
-
     },
-
-
     // 打开体育日报表
-    selectOneDaySport(date) {
+    selectOneDaySport (date) {
       this.$http.get('/json/center/?r=SportRecordOneday&date=' + date).then((res) => {
         console.log(res.data.data)
         if (res.data.code === 0) {
           // this.dayifopen = !this.dayifopen
-          this.tabIndex = 2;
-          this.dayTime = date;
-          this.daytotalmoney = res.data.data.TotalBetMoney;
-          this.daytotalnotmoney = res.data.data.TotalNotbetMoney;
-          this.daytotalresultmoney = res.data.data.TotalResultMoney;
-          this.sportDayDatas = res.data.data.recordList;
+          this.tabIndex = 2
+          this.dayTime = date
+          this.daytotalmoney = res.data.data.TotalBetMoney
+          this.daytotalnotmoney = res.data.data.TotalNotbetMoney
+          this.daytotalresultmoney = res.data.data.TotalResultMoney
+          this.sportDayDatas = res.data.data.recordList
         }
       }).catch((error) => {
         console.log(error)
       })
     },
 
-
     // 打开体育种类报表
-    selectTypeSport(type, date) {
-      this.tabIndex = 3;
-
-      this.dayTime = date;
-      this.typeName = type;
+    selectTypeSport (type, date) {
+      this.tabIndex = 3
+      this.dayTime = date
+      this.typeName = type
 
       if (type === '串关') {
         console.log('chuanguan')
         this.$http.get('/json/center/?r=SportRecordCgDetails&date=' + date + '&gtype=' + type).then((res) => {
-
           if (res.data.code === 0) {
-
-            this.sportTypeDatas = res.data.data;
-
-
+            this.sportTypeDatas = res.data.data
           }
         }).catch((error) => {
           console.log(error)
@@ -199,32 +184,26 @@ export default {
       } else {
         console.log('feichuanguan')
         this.$http.get('/json/center/?r=SportRecordDetails' + '&date=' + date + '&gtype=' + type).then((res) => {
-
           console.log(res.data.data)
           if (res.data.code === 0) {
-            this.sportTypeDatas = res.data.data;
-
+            this.sportTypeDatas = res.data.data
           }
         }).catch((error) => {
           console.log(error)
         })
       }
     },
-
     // 返回按钮点击
-    isShowDetailFn(index) {
-
-      if (index == 1) {
-
-        this.tabIndex = 1;
+    isShowDetailFn (index) {
+      if (index === 1) {
+        this.tabIndex = 1
       }
-      if (index == 2) {
-
-        this.tabIndex = 2;
+      if (index === 2) {
+        this.tabIndex = 2
       }
     }
   }
-};
+}
 
 </script>
 <style scoped>
@@ -236,7 +215,6 @@ export default {
   margin-left: 20px;
   margin-right: 20px;
 }
-
 .main-head span {
   font-size: 16px;
   display: inline-block;
@@ -244,16 +222,7 @@ export default {
   border-bottom: 2px solid #b62929;
 }
 
-
-
-
-
-
-
-
-
 /*表格*/
-
 .table-list {
   padding: 10px 20px 10px 20px;
 }
