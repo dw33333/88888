@@ -83,12 +83,14 @@ export default {
       let data = {
         action: 'login',
         username: this.username,
-        password: this.password
+        password: this.password,
+        usermoney:''
       }
+      
       this.$http.post('/json/api.php?r=login', data).then((res) => {
         this.mytoast(res.data.msg)
         if (res.status === 200 && res.data.code === 0) {
-          this.mymoney = res.data.data.user_money
+          this.usermoney = res.data.data.user_money
           sessionStorage.setItem('username', this.username)
           sessionStorage.setItem('isShow', this.username)
           // this.$store.dispatch('UserLogin', this.username)

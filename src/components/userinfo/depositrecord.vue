@@ -62,7 +62,7 @@
             <td>{{bank.manner}}</td>
             <td>{{bank.statusString}}</td>
           </tr>
-          <tr v-if='onlineDepositDatas.length<=0'>
+          <tr v-if='bankDepositDatas.length<=0'>
             <td colspan="6">暂时没有汇款信息记录</td>
           </tr>
         </tbody>
@@ -88,7 +88,7 @@
             <td>{{draw.statusString}}</td>
             <td>{{draw.about}}</td>
           </tr>
-          <tr v-if='onlineDepositDatas.length<=0'>
+          <tr v-if='drawDatas.length<=0'>
             <td colspan="5">暂时没有取款信息记录</td>
           </tr>
         </tbody>

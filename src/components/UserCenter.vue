@@ -220,16 +220,16 @@
           账号: <span>{{username}}</span>
         </div>
         <div class="balance">
-          用户余额: <span>{{user_money}}</span>
+          用户余额: <span>{{usermoney}}</span>
         </div>
         <div class="balance" style="background-position:-96px -36px;">
           真实姓名: <span>{{realname}}</span>
         </div>
         <div class="balance">
-          AG真人余额: <span>{{ag_money}}</span>
+          AG真人余额: <span>{{agmoney}}</span>
         </div>
         <div class="balance">
-          DS真人余额: <span>{{ds_money}}</span>
+          DS真人余额: <span>{{dsmoney}}</span>
         </div>
         <div class="money">
           <router-link to='/recharge' class="recharge">
@@ -315,9 +315,9 @@ export default {
       ifopen: false,
       isShowMenu: false,
       username: sessionStorage.getItem('username'),
-      user_money: '',
-      ag_money: '',
-      ds_money: '',
+      usermoney: '',
+      agmoney: '',
+      dsmoney: '',
       unread_count: '',
       lock10: false,
       lock20: false,
@@ -348,21 +348,21 @@ export default {
 
       // >获取AG真人余额
       this.$http.get('/json/center/?r=AginMoney').then((res) => {
-        this.ag_money = res.data.data.money
+        this.agmoney = res.data.data.money
       }).catch((error) => {
         console.log(error)
       })
 
       // >获取DS真人余额：
       this.$http.get('/json/center/?r=DsMoney').then((res) => {
-        this.ds_money = res.data.data.money
+        this.dsmoney = res.data.data.money
       }).catch((error) => {
         console.log(error)
       })
 
       // >获取用户余额
       this.$http.get('/json/center/?r=Money').then((res) => {
-        this.user_money = res.data.data.user_money
+        this.usermoney = res.data.data.user_money
       }).catch((error) => {
         console.log(error)
       })

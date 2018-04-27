@@ -178,6 +178,7 @@
 import headervue from '@/components/Header'
 import footervue from '@/components/Footer'
 import maskLayer from '@/components/base/mask-layer'
+import { mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -221,7 +222,7 @@ export default {
         // instance.close();
         this.ifopen = !this.ifopen
         // clearTimeout();
-      }, 1000)
+      }, 1500)
     },
 
     // 提交注册
@@ -256,7 +257,6 @@ export default {
         this.mytoast('请勾选开户协议！')
       } else {
         let data = {
-          action: 'regster',
           key: 'add',
           username: this.username,
           password: this.password,
@@ -264,14 +264,14 @@ export default {
           real_name: this.realname,
           tel: this.phonenum,
           pwd1: this.bankCode,
-          agent_id: this.agentId
+          agent_id:this.agentId
         }
 
         this.$http.post('/json/api.php?r=regster', data).then(res => {
           this.mytoast(res.data.msg)
           if (res.status === 200 && res.data.code === 0) {
-          // this.$store.dispatch('UserLogin', this.username)
-          // this.$store.dispatch('SET_userMoney', '0.00')
+          this.$store.dispatch('UserLogin', this.username)
+          this.$store.dispatch('SET_userMoney', '0.00')
             this.$router.push('/')
           }
         })
@@ -298,6 +298,9 @@ export default {
     headervue,
     footervue,
     maskLayer
+  },
+  computed: {
+    ...mapGetters(['agentId'])
   }
 }
 

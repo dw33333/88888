@@ -4,6 +4,11 @@ import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 // 首页头部导航栏
 
+ // username
+ // user_money
+ // ag_money
+ // ds_money
+
 const home = (resolve) => {
   import('@/components/home').then((module) => {
     resolve(module)
@@ -199,6 +204,7 @@ export default new Router({
     {
       path: '/',
       name: 'Header',
+      default: home,
       components: {
         default: home
       }
@@ -220,7 +226,7 @@ export default new Router({
     },
     {
       path: '/UserCenter',
-      redirect: '/recharge',
+      // redirect: '/recharge',
       name: 'UserCenter',
       component: USERCENTER,
       children: [

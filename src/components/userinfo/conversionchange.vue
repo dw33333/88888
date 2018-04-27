@@ -117,9 +117,13 @@ table {
 
 .table-list tr td {
   border-bottom: 1px solid #cdcdcd;
-  background: #fff;
+  /*background: #fff;*/
   padding: 5px;
   text-align: center;
+}
+
+.table-list tr:hover {
+  background-color: #ddd;
 }
 
 </style>

@@ -30,7 +30,9 @@
             账号：{{username}}
           </div>
           <div class="preson-balance personpwd leftMoney">
-            余额:{{mymoney}}
+            余额:{{usermoney}}
+
+
           </div>
           <div class="recharge">
             充值
@@ -235,8 +237,7 @@ export default {
       password: '',
       content: '',
       ifopen: false,
-      user_money: '',
-      mymoney: '',
+      usermoney: '',
       isShow: sessionStorage.getItem('isShow')
 
     }
@@ -244,9 +245,10 @@ export default {
   created () {
     // alert(sessionStorage.getItem("isShow"));
     // alert(this.username)
-    // >获取用户余额
+    // 获取用户余额
+
     this.$http.get('/json/center/?r=Money').then((res) => {
-      this.mymoney = res.data.data.user_money
+      this.usermoney = res.data.data.user_money
     }).catch((error) => {
       console.log(error)
     })
@@ -291,12 +293,12 @@ export default {
         this.$http.post('/json/api.php?r=login', data).then((res) => {
           this.mytoast(res.data.msg)
           if (res.status === 200 && res.data.code === 0) {
-            this.mymoney = res.data.data.user_money
+            this.user_money = res.data.data.user_money
             sessionStorage.setItem('username', this.username)
             sessionStorage.setItem('isShow', this.username)
             this.$router.push('/UserCenter')
             // this.$store.dispatch('UserLogin', this.username)
-            // this.$store.dispatch('SET_userMoney', this.mymoney)
+            // this.$store.dispatch('SET_userMoney', this.user_money)
             // this.$router.push(this.$route.query.redirect || '/')
           }
         }).catch((error) => {
@@ -304,36 +306,6 @@ export default {
         })
       }
     },
-
-    // 登录
-    // loginFn() {
-
-    //   let data = {
-    //     action: "login",
-    //     username: this.username,
-    //     password: this.password
-    //   }
-
-    //   this.$http.post('/json/api.php?r=login', data).then((res) => {
-
-    //     alert(1)
-    //     console.log("res.status:" + res.status)
-    //     console.log("res.status:" + res.data.code)
-    //     if (res.status === 200 && res.data.code === 0) {
-
-    //       this.mytoast(res.data.msg);
-    //       this.mymoney = res.data.data.user_money;
-
-    //       sessionStorage.setItem("username", this.username);
-    //       sessionStorage.setItem("isShow", this.username);
-
-    //       this.$router.push('/UserCenter');
-    //     }
-    //   }).catch((error) => {
-    //     console.log(error)
-    //   })
-
-    // },
 
     // 退出登录
     loginout () {

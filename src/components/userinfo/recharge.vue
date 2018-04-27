@@ -7,15 +7,15 @@
       <div class="wallet">请选择所转入的钱包</div>
       <div :class='{item:true,active:typeIndex==1}' @click="selectType(1);">
         我的钱包
-        <br> ¥ {{user_money}}
+        <br> ¥ {{usermoney}}
       </div>
       <div :class='{item:true,active:typeIndex==2}' @click="selectType(2);">
         AG平台
-        <br> ¥ {{ag_money}}
+        <br> ¥ {{agmoney}}
       </div>
       <div :class='{item:true,active:typeIndex==3}' @click="selectType(3);">
         DS平台
-        <br> ¥ {{ds_money}}
+        <br> ¥ {{dsmoney}}
       </div>
     </div>
     <div class="btns border-bottom-none">
@@ -89,9 +89,9 @@ export default {
     return {
       ifopen: false,
       content: '',
-      user_money: '', // 用户余额
-      ag_money: '', // AG真人余额
-      ds_money: '', // DS真人余额
+      usermoney: '', // 用户余额
+      agmoney: '', // AG真人余额
+      dsmoney: '', // DS真人余额
       realname: '', // 真实姓名
       bankCardNum: '', // 银行卡号
       bankName: '', // 银行卡姓名
@@ -285,21 +285,21 @@ export default {
 
       // >获取AG真人余额
       this.$http.get('/json/center/?r=AginMoney').then((res) => {
-        this.ag_money = res.data.data.money
+        this.agmoney = res.data.data.money
       }).catch((error) => {
         console.log(error)
       })
 
       // >获取DS真人余额：
       this.$http.get('/json/center/?r=DsMoney').then((res) => {
-        this.ds_money = res.data.data.money
+        this.dsmoney = res.data.data.money
       }).catch((error) => {
         console.log(error)
       })
 
       // >获取用户余额
       this.$http.get('/json/center/?r=Money').then((res) => {
-        this.user_money = res.data.data.user_money
+        this.usermoney = res.data.data.user_money
       }).catch((error) => {
         console.log(error)
       })
@@ -413,6 +413,9 @@ export default {
   height: 30px;
   width: 300px;
   padding-left: 5px;
+  border-radius: 5px;
+  outline: none;
+      border: 1px #ccc solid;
 }
 
 .pay-info {
@@ -549,7 +552,6 @@ input[type=text]:-ms-input-placeholder {
 }
 
 input:focus {
-  border: none;
   outline: none;
 }
 
