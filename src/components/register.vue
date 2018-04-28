@@ -178,13 +178,12 @@
 import headervue from '@/components/Header'
 import footervue from '@/components/Footer'
 import maskLayer from '@/components/base/mask-layer'
-import { mapGetters } from 'vuex'
+import { mapState,mapMutations } from 'vuex'
 
 export default {
   data () {
     return {
       isShowAgreement: false,
-
       ifopen: false,
       content: '',
       username: '',
@@ -270,9 +269,18 @@ export default {
         this.$http.post('/json/api.php?r=regster', data).then(res => {
           this.mytoast(res.data.msg)
           if (res.status === 200 && res.data.code === 0) {
-          this.$store.dispatch('UserLogin', this.username)
-          this.$store.dispatch('SET_userMoney', '0.00')
-            this.$router.push('/')
+          // this.$store.dispatch('UserLogin', this.username)
+
+          // sessionStorage.setItem('username', this.username)
+          // sessionStorage.setItem('isShowLogin', this.username)
+
+          // this.$store.dispatch('SET_userMoney', '0.00')
+
+          this.changeUserName(this.username)
+          this.changeUserMoney('0.00')
+          this.userIsLogin(true)
+      
+          this.$router.push('/')
           }
         })
           .catch(error => {
@@ -280,7 +288,7 @@ export default {
           })
       }
     },
-
+    ...mapMutations(['changeUserName','changeUserMoney','userIsLogin']), 
     // 点击本人同意
     sureAgreement () {
       this.ifcheck = !this.ifcheck
@@ -300,7 +308,7 @@ export default {
     maskLayer
   },
   computed: {
-    ...mapGetters(['agentId'])
+    ...mapState(['agentId'])
   }
 }
 

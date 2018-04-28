@@ -18,11 +18,11 @@
             <ul>
               <li>
                 <label for="ph1523347205303" style="display: block;"></label>
-                <input type="text" class="fieldWithIcon2" placeholder="帐号" v-model="username">
+                <input type="text" class="fieldWithIcon2" placeholder="帐号" v-model="user_name">
               </li>
               <li>
                 <label for="ph1523347205304" style="display: block;"></label>
-                <input type="password" placeholder="密码" class="fieldWithIcon3" v-model='password'>
+                <input type="password" placeholder="密码" class="fieldWithIcon3" v-model='pass_word'>
               </li>
               <li class="loginbtn" @click="loginFn">
                 <input type="submit" title="登录" class="btn btn_login" value="">
@@ -56,12 +56,13 @@
 <script>
 import footervue from '@/components/Footer.vue'
 import maskLayer from '@/components/base/mask-layer'
+import { mapMutations } from 'vuex'
 export default {
   name: 'Login',
   data () {
     return {
-      username: '',
-      password: '',
+      user_name: '',
+      pass_word: '',
       ifopen: false,
       content: ''
     }
@@ -82,25 +83,30 @@ export default {
     loginFn () {
       let data = {
         action: 'login',
-        username: this.username,
-        password: this.password,
-        usermoney:''
+        username: this.user_name,
+        password: this.pass_word
       }
       
       this.$http.post('/json/api.php?r=login', data).then((res) => {
         this.mytoast(res.data.msg)
         if (res.status === 200 && res.data.code === 0) {
-          this.usermoney = res.data.data.user_money
-          sessionStorage.setItem('username', this.username)
-          sessionStorage.setItem('isShow', this.username)
+          // this.usermoney = res.data.data.user_money
+          // sessionStorage.setItem('username', this.username)
+          // sessionStorage.setItem('isShow', this.username)
+          
           // this.$store.dispatch('UserLogin', this.username)
           // this.$store.dispatch('SET_userMoney', this.mymoney)
-          this.$router.push('/UserCenter')
+
+          this.changeUserName(this.user_name)
+          this.changeUserMoney(res.data.data.user_money)
+          this.userIsLogin(true)
+          this.$router.push('/')
         }
       }).catch((error) => {
         console.log(error)
       })
-    }
+    },
+    ...mapMutations(['changeUserName','changeUserMoney','userIsLogin']),
   },
   components: {
     footervue,

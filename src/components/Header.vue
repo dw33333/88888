@@ -7,12 +7,12 @@
           <span style="padding-left:10px;">{{nowTime}}</span>
         </div>
         <!-- 登录界面 -->
-        <div class="bar-right" v-if="!isShow">
+        <div class="bar-right" v-if="!isLogin">
           <div class="item preson-info preson-balance">
-            <input type="text" autoComplete='off' placeholder="账号" v-model="username">
+            <input type="text" autoComplete='off' placeholder="账号" v-model="user_name">
           </div>
           <div class="item preson-balance personpwd">
-            <input type="password" autoComplete='off' placeholder="密码" v-model="password">
+            <input type="password" autoComplete='off' placeholder="密码" v-model="pass_word">
           </div>
           <div class="item login">
             <a href="javascript:void(0);" @click='loginSubmit();'>登录</a>
@@ -34,12 +34,18 @@
 
 
           </div>
-          <div class="recharge">
-            充值
-          </div>
-          <div class="withdraw">
-            提款
-          </div>
+          
+          <router-link to='/UserCenter'>
+            
+            <div class="recharge">
+              充值
+            </div>
+          </router-link>
+          <router-link to='/withdrawal'>
+            <div class="withdraw">
+              提款
+            </div>
+          </router-link>
           <div class="login-out" @click="loginout();">
             退出
           </div>
@@ -227,31 +233,23 @@
 </template>
 <script>
 import maskLayer from './base/mask-layer'
-
+import { mapState,mapMutations } from 'vuex'
 export default {
   name: 'Header',
   data () {
     return {
       nowTime: '',
-      username: sessionStorage.getItem('username'),
-      password: '',
+      user_name: '',
+      pass_word: '',
       content: '',
       ifopen: false,
-      usermoney: '',
-      isShow: sessionStorage.getItem('isShow')
+      // usermoney: '',
+      // isShowLogin: sessionStorage.getItem('isLogin')
 
     }
   },
-  created () {
-    // alert(sessionStorage.getItem("isShow"));
-    // alert(this.username)
-    // 获取用户余额
-
-    this.$http.get('/json/center/?r=Money').then((res) => {
-      this.usermoney = res.data.data.user_money
-    }).catch((error) => {
-      console.log(error)
-    })
+  computed: {
+    ...mapState(['usermoney','username','isLogin'])
   },
   methods: {
     // 封装提示信息函数
@@ -266,14 +264,14 @@ export default {
     },
 
     enterUserCenter () {
-      if (!this.username) {
+      if (!this.isLogin) {
         this.mytoast('请先登录')
         setTimeout(() => {
-          this.$router.replace('/Login')
+          this.$router.push('/Login')
           // this.$router.go('/');
         }, 1500)
       } else {
-        this.$router.replace('/UserCenter')
+        this.$router.push('/UserCenter')
       }
     },
 
@@ -281,46 +279,56 @@ export default {
     loginSubmit () {
       let data = {
         action: 'login',
-        username: this.username,
-        password: this.password
+        username: this.user_name,
+        password: this.pass_word
       }
 
-      if (!this.username) {
+      if (!this.user_name) {
         this.mytoast('请输入帐号')
-      } else if (!this.password) {
+      } else if (!this.pass_word) {
         this.mytoast('请输入密码')
       } else {
         this.$http.post('/json/api.php?r=login', data).then((res) => {
-          this.mytoast(res.data.msg)
           if (res.status === 200 && res.data.code === 0) {
-            this.user_money = res.data.data.user_money
-            sessionStorage.setItem('username', this.username)
-            sessionStorage.setItem('isShow', this.username)
-            this.$router.push('/UserCenter')
+              this.mytoast(res.data.msg)
+            // this.usermoney = res.data.data.user_money
+            
+            // sessionStorage.setItem('username', this.username)
+            // sessionStorage.setItem('isShowLogin', this.username)
+            // sessionStorage.setItem('usermoney', res.data.data.user_money)
+
             // this.$store.dispatch('UserLogin', this.username)
-            // this.$store.dispatch('SET_userMoney', this.user_money)
+            // this.$store.dispatch('SET_userMoney', this.usermoney)
+            // this.$router.push('/UserCenter')
             // this.$router.push(this.$route.query.redirect || '/')
+
+
+              // alert(this.user_name)
+          this.changeUserName(this.user_name)
+          this.changeUserMoney(res.data.data.user_money)
+          this.userIsLogin(true)
           }
         }).catch((error) => {
           console.log(error)
         })
       }
-    },
-
+    }, 
     // 退出登录
     loginout () {
       this.$http.get('/json/api.php?r=logout').then((res) => {
         if (res.data.code === 0) {
           // this.$store.dispatch('UserLogout')
+
+          this.userLoginOut()
+
           this.mytoast(res.data.msg)
-          sessionStorage.removeItem('username')
-          sessionStorage.removeItem('isShow')
+          
           setTimeout(() => {
             // alert(1)
             // instance.close()
             this.ifopen = false
             clearTimeout()
-            // this.$router.replace('/')
+            this.$router.replace('/')
             location.reload()
           }, 1500)
 
@@ -330,7 +338,7 @@ export default {
         console.log(error)
       })
     },
-
+    ...mapMutations(['changeUserName','changeUserMoney','userIsLogin','userLoginOut']),
     // getUserMoney(){
     //     // >获取用户余额
     //   this.$http.get('/json/center/?r=Money').then((res) => {
@@ -355,10 +363,6 @@ export default {
       setTimeout(this.clockon, 1000)
       this.nowTime = time
     }
-  },
-  mounted () {
-    this.clockon()
-    this.username = sessionStorage.getItem('username')
   },
   components: {
     maskLayer
@@ -515,11 +519,12 @@ input:-ms-input-placeholder {
 .recharge {
   padding-left: 45px;
   background-position: -108px -677px;
+  color: #fff;
 }
 
 .withdraw {
   padding-left: 45px;
-
+  color: #fff;
   background-position: 0 -677px;
 }
 

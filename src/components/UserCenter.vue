@@ -223,7 +223,7 @@
           用户余额: <span>{{usermoney}}</span>
         </div>
         <div class="balance" style="background-position:-96px -36px;">
-          真实姓名: <span>{{realname}}</span>
+          真实姓名: <span>{{userRealName}}</span>
         </div>
         <div class="balance">
           AG真人余额: <span>{{agmoney}}</span>
@@ -277,11 +277,6 @@
               <li>
                 <router-link to="/moneymanagemen">额度管理</router-link>
               </li>
-              <!-- <li><router-link to="/outto">转出</router-link></li> -->
-              <!-- <li><router-link to="/CardsList">银行卡管理</router-link></li>
-            <li><router-link to="/UserData">用户资料</router-link></li>
-            <li><router-link to="/GameInfoType">彩种信息</router-link></li>
-            <li><router-link to="/GameLimits">彩种限额</router-link></li> -->
             </ul>
             <div class="item" @click="isShow(4)">
               <a href="javascript:void(0);">信息中心</a>
@@ -306,6 +301,7 @@
 <script>
 
 import maskLayer from './base/mask-layer'
+import { mapState,mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -314,10 +310,6 @@ export default {
       content: '',
       ifopen: false,
       isShowMenu: false,
-      username: sessionStorage.getItem('username'),
-      usermoney: '',
-      agmoney: '',
-      dsmoney: '',
       unread_count: '',
       lock10: false,
       lock20: false,
@@ -335,38 +327,48 @@ export default {
     // 获取个人信息
     this.getuserinfo()
   },
+  computed: {
+    ...mapState(['agmoney','dsmoney','usermoney','username','userRealName'])
+  },
   methods: {
     // 获取个人信息
     getuserinfo () {
       this.$http.get('/json/center/?r=UsrInfo').then((res) => {
-        this.realname = res.data.data.pay_name
-        this.bankCardNum = res.data.data.pay_num
-        this.bankName = res.data.data.pay_bank
+
+        this.getUserRealName(res.data.data.pay_name)
+
       }).catch((error) => {
         console.log(error)
       })
 
       // >获取AG真人余额
       this.$http.get('/json/center/?r=AginMoney').then((res) => {
-        this.agmoney = res.data.data.money
+    
+         this.changeAgMoney(res.data.data.money)
+
       }).catch((error) => {
         console.log(error)
       })
 
       // >获取DS真人余额：
       this.$http.get('/json/center/?r=DsMoney').then((res) => {
-        this.dsmoney = res.data.data.money
+   
+        this.changeDsMoney(res.data.data.money)
+        
       }).catch((error) => {
         console.log(error)
       })
 
       // >获取用户余额
       this.$http.get('/json/center/?r=Money').then((res) => {
-        this.usermoney = res.data.data.user_money
+
+        this.changeUserMoney(res.data.data.user_money)
+
       }).catch((error) => {
         console.log(error)
       })
     },
+    ...mapMutations(['getUserRealName','changeAgMoney','changeDsMoney','changeUserMoney','userLoginOut']),
     // 封装提示信息函数
     mytoast (msg) {
       this.ifopen = true
@@ -381,10 +383,11 @@ export default {
     loginout () {
       this.$http.get('/json/api.php?r=logout').then((res) => {
         if (res.data.code === 0) {
-          // this.$store.dispatch('UserLogout')
+      
           this.mytoast(res.data.msg)
-          sessionStorage.removeItem('username')
-          sessionStorage.removeItem('isShow')
+
+          this.userLoginOut()
+
           setTimeout(() => {
             this.ifopen = false
             clearTimeout()

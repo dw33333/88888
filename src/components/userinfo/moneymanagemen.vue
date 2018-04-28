@@ -47,7 +47,7 @@
 <script>
 
 import maskLayer from '../base/mask-layer'
-
+import { mapState,mapMutations } from 'vuex'
 export default {
   data () {
     return {
@@ -62,54 +62,51 @@ export default {
       realname: '',
       bankCardNum: '',
       bankName: '',
-      agmoney: '',
-      dsmoney: '',
-      usermoney: '',
       content: ''
     }
   },
   mounted () {
-    this.getuserinfo()
+    // this.getuserinfo()
   },
   methods: {
     // 获取个人信息
     getuserinfo () {
-      this.$http.get('/json/center/?r=UsrInfo').then((res) => {
-        this.realname = res.data.data.pay_name
-        this.bankCardNum = res.data.data.pay_num
-        this.bankName = res.data.data.pay_bank
-      }).catch((error) => {
-        console.log(error)
-      })
+      // this.$http.get('/json/center/?r=UsrInfo').then((res) => {
+      //   this.realname = res.data.data.pay_name
+      //   this.bankCardNum = res.data.data.pay_num
+      //   this.bankName = res.data.data.pay_bank
+      // }).catch((error) => {
+      //   console.log(error)
+      // })
 
       // >获取AG真人余额
-      this.$http.get('/json/center/?r=AginMoney').then((res) => {
-        // this.agmoney = res.data.data.money;
+      // this.$http.get('/json/center/?r=AginMoney').then((res) => {
+      //   // this.agmoney = res.data.data.money;
 
-        this.$store.dispatch('SET_agMoney', res.data.data.money)
+      //   this.$store.dispatch('SET_agMoney', res.data.data.money)
 
-      }).catch((error) => {
-        console.log(error)
-      })
+      // }).catch((error) => {
+      //   console.log(error)
+      // })
 
       // >获取DS真人余额：
-      this.$http.get('/json/center/?r=DsMoney').then((res) => {
-        // this.dsmoney = res.data.data.money
+      // this.$http.get('/json/center/?r=DsMoney').then((res) => {
+      //   // this.dsmoney = res.data.data.money
 
-        this.$store.dispatch('SET_dsMoney', res.data.data.money)
-      }).catch((error) => {
-        console.log(error)
-      })
+      //   this.$store.dispatch('SET_dsMoney', res.data.data.money)
+      // }).catch((error) => {
+      //   console.log(error)
+      // })
 
       // >获取用户余额
-      this.$http.get('/json/center/?r=Money').then((res) => {
-        // this.usermoney = res.data.data.user_money;
+      // this.$http.get('/json/center/?r=Money').then((res) => {
+      //   // this.usermoney = res.data.data.user_money;
 
-        this.$store.dispatch('SET_userMoney', res.data.data.money)
+      //   this.$store.dispatch('SET_userMoney', res.data.data.money)
 
-      }).catch((error) => {
-        console.log(error)
-      })
+      // }).catch((error) => {
+      //   console.log(error)
+      // })
     },
 
     turnInOrOut (select) {
@@ -192,14 +189,18 @@ export default {
           data['change_type'] = 'd'
           data['change_live'] = 1
           this.$http.post('/json/center/?r=AginTransfer', data).then((res) => {
+
+            console.log(res.data.data)
             if (res.data.code === 0) {
               this.mytoast(res.data.msg)
               setTimeout(() => {
                 this.ifopen = false
                 // clearTimeout()
               }, 1500)
-              this.getuserinfo()
-              // this.$store.dispatch('SET_userMoney', res.data.data.money)
+          
+              this.changeAgMoney(res.data.data.liveMoney)
+              this.changeUserMoney(res.data.data.money)
+
               this.inputMoney = ''
               this.all = ''
               // this.fastIndex = 0
@@ -238,8 +239,9 @@ export default {
                 this.ifopen = false
                 clearTimeout()
               }, 1500)
-              this.getuserinfo()
-              // this.$store.dispatch('SET_userMoney', res.data.data.money)
+          
+              this.changeDsMoney(res.data.data.liveMoney)
+              this.changeUserMoney(res.data.data.money)
               this.inputMoney = ''
               this.all = ''
             } else if (res.data.code === 2) {
@@ -275,7 +277,7 @@ export default {
           data['change_live'] = 1
 
           this.$http.post('/json/center/?r=AginTransfer', data).then((res) => {
-            console.log(res.data.code + 'sdewee')
+            
               this.mytoast(res.data.msg)
             if (res.data.code === 0) {
               console.log('res.data.code-----' + res.data.code)
@@ -283,7 +285,11 @@ export default {
                 this.ifopen = false
                 clearTimeout()
               }, 1500)
-              this.getuserinfo()
+              // this.getuserinfo()
+
+
+              this.changeAgMoney(res.data.data.liveMoney)
+              this.changeUserMoney(res.data.data.money)
 
               this.inputMoney = ''
               this.all = ''
@@ -325,7 +331,12 @@ export default {
                 this.ifopen = false
                 clearTimeout()
               }, 1500)
-              this.getuserinfo()
+              // this.getuserinfo()
+
+              this.changeDsMoney(res.data.data.liveMoney)
+              this.changeUserMoney(res.data.data.money)
+
+
               this.inputMoney = ''
               this.all = ''
             } else if (res.data.code === 2) {
@@ -351,8 +362,12 @@ export default {
           })
         }
       }  
-    }
+    },
+    ...mapMutations(['changeAgMoney','changeDsMoney','changeUserMoney','userLoginOut']),
 
+  }, 
+  computed: {
+    ...mapState(['agmoney','dsmoney','usermoney'])
   },
   components: {
     maskLayer

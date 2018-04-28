@@ -1,59 +1,72 @@
-import * as types from './mutations_type'
-// 关于session的存放位置
-// 1.只用vuex存储：刷新页面vuex重新初始化，session消失导致需要重新登录
-// 2.window.sessionStorage: 初始化的时候用sessionStorage来赋值，刷新页面重新初始化，但因为sessionStorage里面存有session有值，
-// 那么state.username就有值了,vue-router就不会拦截，则无需重新登录。
 const mutations = {
-  // 登录保存session
-  [types.LOGIN]: (state, user) => {
-    sessionStorage.setItem('username', JSON.stringify(user))
-    state.username = user
+  changeUserName (state,data) {
+      state.username = data
+    try {
+      sessionStorage.setItem('username',data)   
+    } catch (e) {}
   },
-  // 登出清除session
-  [types.LOGOUT]: (state) => {
-    // 登出的时候要清除session
-    sessionStorage.removeItem('username')
-    sessionStorage.removeItem('usermoney')
-    sessionStorage.removeItem('agmoney')
-    sessionStorage.removeItem('bbinmoney')
-    sessionStorage.removeItem('mgmoney')
-    sessionStorage.removeItem('dsmoney')
-    state.username = ''
-    state.usermoney = ''
-    state.agmoney = ''
-    state.bbinmoney = ''
-    state.mgmoney = ''
-    state.dsmoney = ''
+
+  changeUserMoney (state,data) {
+      state.usermoney = data
+    try {
+      sessionStorage.setItem('usermoney',data)   
+    } catch (e) {}
   },
-  // 余额
-  [types.USERMONEY]: (state, data) => {
-    sessionStorage.setItem('usermoney', JSON.stringify(data))
-    state.usermoney = data
+
+  changeAgMoney (state,data) {
+      state.agmoney = data
+    try {
+      sessionStorage.setItem('agmoney',data)   
+    } catch (e) {}
   },
-  // AG余额
-  [types.AGMONEY]: (state, data) => {
-    sessionStorage.setItem('agmoney', JSON.stringify(data))
-    state.agmoney = data
+
+  changeDsMoney (state,data) {
+      state.dsmoney = data
+    try {
+      sessionStorage.setItem('dsmoney',data)   
+    } catch (e) {}
   },
-  // BBIN余额
-  [types.BBINMONEY]: (state, data) => {
-    sessionStorage.setItem('bbinmoney', JSON.stringify(data))
-    state.bbinmoney = data
+  
+  changeAgentId (state,data) {
+      state.agentId = data
+    try {
+      sessionStorage.setItem('agentId',data)   
+    } catch (e) {}
   },
-  // MG余额
-  [types.MGMONEY]: (state, data) => {
-    sessionStorage.setItem('mgmoney', JSON.stringify(data))
-    state.mgmoney = data
+
+  // true登录  false未登录
+  userIsLogin (state,data) {
+      state.isLogin = data
+    try {
+      sessionStorage.setItem('isLogin',data)   
+    } catch (e) {}
   },
-  // DS余额
-  [types.DSMONEY]: (state, data) => {
-    sessionStorage.setItem('dsmoney', JSON.stringify(data))
-    state.dsmoney = data
+
+   // 获取真实姓名
+  getUserRealName (state,data) {
+      state.userRealName = data
+    try {
+      sessionStorage.setItem('userRealName',data)   
+    } catch (e) {}
   },
-  // 代理ID
-  [types.AGENTID]: (state, data) => {
-    sessionStorage.setItem('agentId', JSON.stringify(data))
-    state.agentId = data
+
+  userLoginOut (state,data) {
+      state.username=''
+      state.usermoney=0.00
+      state.agmoney=0.00
+      state.dsmoney=0.00
+      state.agentId=0.00
+      state.isLogin=false
+      state.userRealName = ''
+    try {
+      sessionStorage.setItem('username','')   
+      sessionStorage.setItem('usermoney',0.00)   
+      sessionStorage.setItem('agmoney',0.00)   
+      sessionStorage.setItem('dsmoney',0.00)   
+      sessionStorage.setItem('agentId',0.00)   
+      sessionStorage.setItem('isLogin',false)
+      sessionStorage.setItem('userRealName','')    
+    } catch (e) {}
   }
 }
 

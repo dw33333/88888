@@ -7,15 +7,15 @@
       <div class="wallet">请选择所转入的钱包</div>
       <div :class='{item:true,active:typeIndex==1}' @click="selectType(1);">
         我的钱包
-        <br> ¥ {{usermoney}}
+        <br> ¥ {{this.usermoney}}
       </div>
       <div :class='{item:true,active:typeIndex==2}' @click="selectType(2);">
         AG平台
-        <br> ¥ {{agmoney}}
+        <br> ¥ {{this.agmoney}}
       </div>
       <div :class='{item:true,active:typeIndex==3}' @click="selectType(3);">
         DS平台
-        <br> ¥ {{dsmoney}}
+        <br> ¥ {{this.dsmoney}}
       </div>
     </div>
     <div class="btns border-bottom-none">
@@ -83,15 +83,16 @@
 </template>
 <script>
 import maskLayer from '../base/mask-layer'
+import { mapState } from 'vuex'
 
 export default {
   data () {
     return {
       ifopen: false,
       content: '',
-      usermoney: '', // 用户余额
-      agmoney: '', // AG真人余额
-      dsmoney: '', // DS真人余额
+      // usermoney: '', // 用户余额
+      // agmoney: '', // AG真人余额
+      // dsmoney: '', // DS真人余额
       realname: '', // 真实姓名
       bankCardNum: '', // 银行卡号
       bankName: '', // 银行卡姓名
@@ -106,7 +107,7 @@ export default {
       inputMoney: null
     }
   },
-
+ 
   methods: {
     // 提交银行汇款
     submitRecharge () {
@@ -284,25 +285,25 @@ export default {
       })
 
       // >获取AG真人余额
-      this.$http.get('/json/center/?r=AginMoney').then((res) => {
-        this.agmoney = res.data.data.money
-      }).catch((error) => {
-        console.log(error)
-      })
+      // this.$http.get('/json/center/?r=AginMoney').then((res) => {
+      //   this.agmoney = res.data.data.money
+      // }).catch((error) => {
+      //   console.log(error)
+      // })
 
       // >获取DS真人余额：
-      this.$http.get('/json/center/?r=DsMoney').then((res) => {
-        this.dsmoney = res.data.data.money
-      }).catch((error) => {
-        console.log(error)
-      })
+      // this.$http.get('/json/center/?r=DsMoney').then((res) => {
+      //   this.dsmoney = res.data.data.money
+      // }).catch((error) => {
+      //   console.log(error)
+      // })
 
       // >获取用户余额
-      this.$http.get('/json/center/?r=Money').then((res) => {
-        this.usermoney = res.data.data.user_money
-      }).catch((error) => {
-        console.log(error)
-      })
+      // this.$http.get('/json/center/?r=Money').then((res) => {
+      //   this.usermoney = res.data.data.user_money
+      // }).catch((error) => {
+      //   console.log(error)
+      // })
 
       // 在线网银
       this.$http.get('/json/api.php?r=wap').then((res) => {
@@ -357,6 +358,7 @@ export default {
   mounted () {
     this.getuserinfo()
   },
+ 
   computed: {
     currentTime () {
       let Y = new Date().getFullYear()
@@ -365,7 +367,8 @@ export default {
       let H = new Date().getHours()
       let m = new Date().getMinutes() < 10 ? 0 + new Date().getMinutes() : new Date().getMinutes()
       return `${Y}年${M}月${D}日${H}时${m}分`
-    }
+    },
+    ...mapState(['usermoney','agmoney','dsmoney'])
   }
 }
 
