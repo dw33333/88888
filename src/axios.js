@@ -7,7 +7,7 @@ axios.defaults.timeout = 15000 // 15s的超时验证
 axios.defaults.baseURL = 'https://m.98208.com/api/'; //这是调用数据接口
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 
-http response 拦截器
+//http response 拦截器
 axios.interceptors.response.use((res) => {
   if (res.data.code === 2) {
     MessageBox.confirm('请先登录', '温馨提示').then(() => {
