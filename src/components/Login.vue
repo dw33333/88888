@@ -12,7 +12,7 @@
             <h1>用户登陆</h1>
             <!--<a href="#">线路选择</a> -->
           </div>
-          <div class="login-form" action="/Home/Login" autocomplete="off" method="post" data-bind="submit:submit">
+          <div class="login-form" autocomplete="off" method="post">
             <input type="text" style="visibility:hidden;position:absolute;z-index:-999;">
             <input type="password" style="visibility:hidden;position:absolute;z-index:-999;">
             <ul>
@@ -23,6 +23,9 @@
               <li>
                 <label for="ph1523347205304" style="display: block;"></label>
                 <input type="password" placeholder="密码" class="fieldWithIcon3" v-model='pass_word'>
+              </li>
+              <li>
+                <input type="text" class="code" v-model="code"><img @click='codeImgFn' class="code-img" :src="codeImg" alt="">
               </li>
               <li class="loginbtn" @click="loginFn">
                 <input type="submit" title="登录" class="btn btn_login" value="">
@@ -38,11 +41,11 @@
                 <a href="https://tb.53kf.com/code/client/10172705/1" target="_blank" class="online_service" style="text-align:right;margin-top: 12px;color:#eaeaec;text-decoration:underline;font-size:14px;text-decoration:none;display:inline-block;">在线客服</a>
                 <span class="separate separate_hidden">|</span>
               </li>
-              <li class="browser_hidden">
+             <!--  <li class="browser_hidden">
                 <p>推荐使用浏览器：</p>
                 <a href="http://rj.baidu.com/soft/detail/14744.html?ald" class="chrome_icon">Chrome</a>
                 <a href="http://rj.baidu.com/soft/detail/11843.html" class="firefox_icon">Firefox</a>
-              </li>
+              </li> -->
             </ul>
           </div>
           <div clsas="clear_both"></div>
@@ -56,7 +59,7 @@
 <script>
 import footervue from '@/components/Footer.vue'
 import maskLayer from '@/components/base/mask-layer'
-import { mapMutations } from 'vuex'
+import { mapState,mapMutations } from 'vuex'
 export default {
   name: 'Login',
   data () {
@@ -64,10 +67,33 @@ export default {
       user_name: '',
       pass_word: '',
       ifopen: false,
-      content: ''
+      content: '',
+      codeImg:'',
+      temcodeToken:'',
+      code:''
     }
   },
+  mounted(){
+    this.codeImgFn()
+  },
   methods: {
+    codeImgFn(){
+      this.$http.get('http://192.167.9.166/site/captcha').then((res) => {
+        
+          if (res.status === 200) {
+            console.log(res.data.codeToken)
+
+              this.codeImg=res.data.src
+              this.temcodeToken=res.data.codeToken
+              // this.mytoast(res.data.msg)
+            
+             this.getUserToken(this.temcodeToken)
+
+          }
+        }).catch((error) => {
+          console.log(error)
+        })
+    },
     // 封装提示信息函数
     mytoast (msg) {
       this.ifopen = true
@@ -82,14 +108,20 @@ export default {
 
     loginFn () {
       let data = {
-        action: 'login',
+        // action: 'login',
         username: this.user_name,
-        password: this.pass_word
+        password: this.pass_word,
+        code:this.code,
+        codeToken:this.codeToken
       }
       
-      this.$http.post('/json/api.php?r=login', data).then((res) => {
-        this.mytoast(res.data.msg)
+      this.$http.post('http://192.167.9.112/user/login', data).then((res) => {
+        
+        // console.log("登录-----:"+JSON.stringify(res.data.data.money))
+          this.mytoast(res.data.msg)
         if (res.status === 200 && res.data.code === 0) {
+        console.log("登录-----:"+JSON.stringify(res))
+
           // this.usermoney = res.data.data.user_money
           // sessionStorage.setItem('username', this.username)
           // sessionStorage.setItem('isShow', this.username)
@@ -98,19 +130,29 @@ export default {
           // this.$store.dispatch('SET_userMoney', this.mymoney)
 
           this.changeUserName(this.user_name)
-          this.changeUserMoney(res.data.data.user_money)
-          this.userIsLogin(true)
-          this.$router.push('/')
+          this.changeUserMoney(res.data.data.money)
+
+           setTimeout(() => {      
+              this.$router.push('/')
+          }, 1500)
+
+
+          this.codeImgFn()
         }
       }).catch((error) => {
-        console.log(error)
+        // this.mytoast(res.dada.msg)
+        this.codeImgFn()
+        console.log('err:'+error)
       })
     },
-    ...mapMutations(['changeUserName','changeUserMoney','userIsLogin']),
+    ...mapMutations(['changeUserName','changeUserMoney','getUserToken']),
   },
   components: {
     footervue,
     maskLayer
+  },
+  computed: {
+    ...mapState(['codeToken'])
   }
 }
 
@@ -155,7 +197,15 @@ export default {
   padding-left: 45px;
   color: #fff;
 }
-
+.code{
+  width: 180px!important;
+}
+.code-img{
+  position: absolute;
+  top:10px;
+  right: 24px;
+  width: 70px;
+}
 .login-area .login-form {
   float: left;
   width: 357px;

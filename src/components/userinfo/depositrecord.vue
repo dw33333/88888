@@ -122,6 +122,7 @@ export default {
     // 银行汇款记录
     this.$http.get('/json/center/?r=ChaHuiKuan').then((res) => {
       if (res.data.code === 0) {
+        console.log('汇款记录：'+res.data.data)
         this.bankDepositDatas = res.data.data
       }
     }).catch((error) => {

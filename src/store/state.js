@@ -56,15 +56,15 @@ try {
 	}
 } catch (e) {}
 
-// 判断是否登录
-let isLogin=''
+// 用户用户token
+let codeToken=''
 try {
-	if(sessionStorage.getItem('isLogin')){
-		isLogin=JSON.parse(sessionStorage.getItem('isLogin'))
+	if(sessionStorage.getItem('codeToken')){
+		codeToken=sessionStorage.getItem('codeToken')
 	}
 } catch (e) {}
 
-// 判断是否登录
+// 用户真实姓名
 let userRealName=''
 try {
 	if(sessionStorage.getItem('userRealName')){
@@ -78,7 +78,7 @@ const state = {
   agmoney, // AG余额
   dsmoney, // DS余额
   agentId,// 代理ID
-  isLogin,// 判断是否登录
+  codeToken,// token
   userRealName,
   
   bbinmoney: bbinmoney, // BBIN余额

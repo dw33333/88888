@@ -10,20 +10,28 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {
-        '/json':{
-            target: 'http://185.224.171.148:81',
-            changeOrigin: true,
-            // pathRewrite: {
-            //     '^/api': ''
-            // },
-            headers: {
-                referer: 'http://185.224.171.148:81',
-                host: '185.224.171.148:81'
-            }
-        }
-    },
-
+    // proxyTable: {
+    //     '/json':{
+    //         target: 'http://185.224.171.148:81',
+    //         changeOrigin: true,
+    //         // pathRewrite: {
+    //         //     '^/api': ''
+    //         // },
+    //         headers: {
+    //             referer: 'http://185.224.171.148:81',
+    //             host: '185.224.171.148:81'
+    //         }
+    //     }
+    // },
+    // proxyTable: {
+    //     '/api': {    //访问api这个目录的时候
+    //         target: 'http://192.167.9.112',//转发到当前服务器的8080端口
+    //         pathRewrite: {
+    //             '^/api':''   //当请求地址是以api开头的，
+    //             // 就把api替换为/static/mock
+    //         }
+    //     }
+    // },
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined

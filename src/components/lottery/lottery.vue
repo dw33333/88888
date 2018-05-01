@@ -1,7 +1,7 @@
 <template>
   <div class="container" id="container">
     <!-- 头部 -->
-    <div class="head">
+   <!--  <div class="head">
       <div class='logo'><img src="../../assets/GD11X5.png" height="97" width="97" alt="">
       </div>
       <div class="pull-left">
@@ -64,7 +64,7 @@
           </li>
         </ul>
       </div>
-      <!-- 下拉菜单开始 -->
+    
       <div class="menu-child" @mouseover="showAllgame" @mouseout="hideAllgame" v-show="isShowMenu" id="lot_sec_menu">
         <div>
           <div class="gamelist clear">
@@ -265,15 +265,16 @@
           <div class="triangles_back"></div>
         </div>
       </div>
-      <!-- 下拉菜单结束 -->
-    </div>
+    
+    </div> -->
     <!-- 主体部分 -->
+    <home-header></home-header>    
     <div class="main-body">
       <!-- 主体部分左边 -->
       <div class="left-bar">
         <div class="userbox">
           <div class="account">账号:{{username}}</div>
-          <div class="balance">余额:{{user_money}}</div>
+          <div class="balance">余额:{{usermoney}}</div>
         </div>
         <div class="userinfo">
           <router-link to="/UserCenter" class="recharge">
@@ -286,415 +287,97 @@
           <a href="javascript:void(0);" class="usercenter">会员中心</a>
         </div>
         <div class="status-toggle">
-          <div :class="{result:true,active:isShow}" @click="showOpenMsg(1);">开奖结果</div>
-          <div :class="{ontime:true,active:!isShow}" @click="showOpenMsg(2);">本期投注</div>
+          <div class="result">投注选择</div>
+         
         </div>
-        <div class="overdue-wrap" v-if="isShow">
-          <ul class="overdue-nums">
-            <li class="serial-num">1</li>
-            <li class="issue ">041160</li>
-            <li class="result-num">9,10,6,3,7</li>
-          </ul>
-          <ul class="overdue-nums">
-            <li class="serial-num ">2</li>
-            <li class="issue ">041160</li>
-            <li class="result-num ">9,1,6,3,7</li>
-          </ul>
-          <ul class="overdue-nums">
-            <li class="serial-num">3</li>
-            <li class="issue ">041160</li>
-            <li class="result-num">9,1,6,3,7</li>
-          </ul>
-          <ul class="overdue-nums">
-            <li class="serial-num ">4</li>
-            <li class="issue ">041160</li>
-            <li class="result-num">9,1,6,3,7</li>
-          </ul>
-          <ul class="overdue-nums ">
-            <li class="serial-num">5</li>
-            <li class="issue ">041160</li>
-            <li class="result-num">9,1,6,3,7</li>
-          </ul>
-          <div class="more-result ">
-            更多开奖结果
-          </div>
-        </div>
-        <div class="overdue-wrap " v-if="!isShow ">
-          <table>
-            <tr>
-              <th>时间</th>
-              <th>赔率</th>
-              <th>金额</th>
-            </tr>
-            <tr>
-              <td colspan="3 " class="colorred ">暂无最新注单信息</td>
-            </tr>
-          </table>
-        </div>
+
         <div class="side-menu">
           <div class="lottery">
             <div :class="{item:true,active:showIndex==1}" @click="leftBarfolding(1);">
-              <span class="logo dipin"></span> 低频彩
+              <span class="logo dipin"></span> 重庆时时彩
             </div>
-            <ul class="item-list" v-if="showIndex==1">
-              <li>
-                <span class="icon"></span> 香港六合彩
-              </li>
-              <li>
-                <span class="icon"></span> 香港六合彩
-              </li>
-            </ul>
           </div>
           <div class="lottery">
             <div :class="{item:true,active:showIndex==2}" @click="leftBarfolding(2);">
-              <span class="logo ssc"></span> 时时彩
+              <span class="logo ssc"></span> 广西十分彩
             </div>
-            <ul class="item-list" v-if="showIndex==2">
-              <li>
-                <span class="icon"></span> 香港六合彩
-              </li>
-              <li>
-                <span class="icon"></span> 香港六合彩
-              </li>
-            </ul>
           </div>
           <div class="lottery">
             <div :class="{item:true,active:showIndex==3}" @click="leftBarfolding(3);">
-              <span class="logo ffc"></span> 分分彩
+              <span class="logo ffc"></span> 重庆快乐十分
             </div>
-            <ul class="item-list" v-if="showIndex==3">
-              <li>
-                <span class="icon"></span> 香港六合彩
-              </li>
-              <li>
-                <span class="icon"></span> 香港六合彩
-              </li>
-            </ul>
           </div>
           <div class="lottery">
             <div :class="{item:true,active:showIndex==4}" @click="leftBarfolding(4);">
-              <span class="logo pk"></span> PK拾
+              <span class="logo pk"></span> 广东快乐十分
             </div>
-            <ul class="item-list" v-if="showIndex==4">
-              <li>
-                <span class="icon"></span> 香港六合彩
-              </li>
-              <li>
-                <span class="icon"></span> 香港六合彩
-              </li>
-            </ul>
           </div>
           <div class="lottery">
             <div :class="{item:true,active:showIndex==5}" @click="leftBarfolding(5);">
-              <span class="logo pc"></span> PC蛋蛋
+              <span class="logo pc"></span> 天津快乐十分
             </div>
-            <ul class="item-list" v-if="showIndex==5">
-              <li>
-                <span class="icon"></span> 香港六合彩
-              </li>
-              <li>
-                <span class="icon"></span> 香港六合彩
-              </li>
-            </ul>
           </div>
           <div class="lottery">
             <div :class="{item:true,active:showIndex==6}" @click="leftBarfolding(6);">
-              <span class="logo kuai"></span> 快乐彩
+              <span class="logo kuai"></span> 北京PK拾
             </div>
-            <ul class="item-list" v-if="showIndex==6">
-              <li>
-                <span class="icon"></span> 香港六合彩
-              </li>
-              <li>
-                <span class="icon"></span> 香港六合彩
-              </li>
-            </ul>
           </div>
           <div class="lottery">
             <div :class="{item:true,active:showIndex==7}" @click="leftBarfolding(7);">
-              <span class="logo shiyi"></span> 11选5
+              <span class="logo shiyi"></span> 福彩3D
             </div>
-            <ul class="item-list" v-if="showIndex==7">
-              <li>
-                <span class="icon"></span> 香港六合彩
-              </li>
-              <li>
-                <span class="icon"></span> 香港六合彩
-              </li>
-            </ul>
           </div>
           <div class="lottery">
             <div :class="{item:true,active:showIndex==8}" @click="leftBarfolding(8);">
-              <span class="logo san"></span> 快三
+              <span class="logo san"></span> 排列3
             </div>
-            <ul class="item-list" v-if="showIndex==8">
-              <li>
-                <span class="icon"></span> 香港六合彩
-              </li>
-              <li>
-                <span class="icon"></span> 香港六合彩
-              </li>
-            </ul>
+          </div>
+          <div class="lottery">
+            <div :class="{item:true,active:showIndex==9}" @click="leftBarfolding(9);">
+              <span class="logo san"></span> 上海时时乐
+            </div>
+          </div>
+          <div class="lottery">
+            <div :class="{item:true,active:showIndex==10}" @click="leftBarfolding(10);">
+              <span class="logo san"></span> 北京快乐8
+            </div>
+          </div>
+          <div class="lottery">
+            <div :class="{item:true,active:showIndex==11}" @click="leftBarfolding(11);">
+              <span class="logo san"></span> 天津时时彩
+            </div>
+          </div>
+          <div class="lottery">
+            <div :class="{item:true,active:showIndex==12}" @click="leftBarfolding(12);">
+              <span class="logo san"></span> 江西时时彩
+            </div>
+          </div>
+          <div class="lottery">
+            <div :class="{item:true,active:showIndex==13}" @click="leftBarfolding(13);">
+              <span class="logo san"></span> 广东11选5
+            </div>
           </div>
         </div>
       </div>
       <!-- 主体部分右边 -->
       <div class="content ">
-        <ul class="title">
-          <li :class="{act:titleindex==showIndex}" :key='titleindex' v-for="(item,titleindex) in titleArr" @click="selectType(titleindex);"><a href="javascript:void(0);">{{item}}</a></li>
-          <!-- <li class="active1"><a href="javascript:void(0);">特码</a></li> -->
-          <!--  <li><a href="javascript:void(0);">正码一</a></li>
-                    <li><a href="javascript:void(0);">正码二</a></li>
-                    <li><a href="javascript:void(0);">正码三</a></li>
-                    <li><a href="javascript:void(0);">正码四</a></li>
-                    <li><a href="javascript:void(0);">龙虎斗</a></li> -->
-        </ul>
-        <div class="guanpaly">
-        </div>
-        <img class="new" src="../../assets/new-ico.gif" alt="">
-        <div class="tables">
-          <div class="pull-left" style="width:901px">
-            <div class="title">
-              <span class="dollar"></span>
-              <span class="text">1.6%</span>
-              <span class="minus"></span>
-              <span class="plus"></span>
-              <span class="range"><input type="range" step="0.01" min="0" max="5" value="0"></span>
-              <ul class="btns">
-                <li>一般</li>
-                <li>快捷</li>
-                <li>快选金额</li>
-              </ul>
-            </div>
-            <table>
-              <tr>
-                <th colspan="3" class="bgred">特码</th>
-                <th colspan="3" class="bgred">正码一</th>
-                <th colspan="3" class="bgred">正码二</th>
-                <th colspan="3" class="bgred">正码三</th>
-                <th colspan="3" class="bgred">正码四</th>
-                <th colspan="3" class="bgred">总和</th>
-              </tr>
-              <tr class="graybg">
-                <td><span class="bordertight">号码</span></td>
-                <td><span class="bordertight">赔率</span></td>
-                <td class="bdr"><span>金额</span></td>
-                <td><span class="bordertight">号码</span></td>
-                <td><span class="bordertight">赔率</span></td>
-                <td class="bdr"><span>金额</span></td>
-                <td><span class="bordertight">号码</span></td>
-                <td><span class="bordertight">赔率</span></td>
-                <td class="bdr"><span>金额</span></td>
-                <td><span class="bordertight">号码</span></td>
-                <td><span class="bordertight">赔率</span></td>
-                <td class="bdr"><span>金额</span></td>
-                <td><span class="bordertight">号码</span></td>
-                <td><span class="bordertight">赔率</span></td>
-                <td class="bdr"><span>金额</span></td>
-                <td><span class="bordertight">号码</span></td>
-                <td><span class="bordertight">赔率</span></td>
-                <td class="bdr"><span>金额</span></td>
-              </tr>
-              <tr class="bdb">
-                <td class="bold">特大</td>
-                <td class="bold colorcf">封盘</td>
-                <td class="bdr">
-                  <input type="text">
-                </td>
-                <td class="bold">特大</td>
-                <td class="bold colorcf">封盘</td>
-                <td class="bdr">
-                  <input type="text">
-                </td>
-                <td class="bold">特大</td>
-                <td class="bold colorcf">封盘</td>
-                <td class="bdr">
-                  <input type="text">
-                </td>
-                <td class="bold">特大</td>
-                <td class="bold colorcf">封盘</td>
-                <td class="bdr">
-                  <input type="text">
-                </td>
-                <td class="bold">特大</td>
-                <td class="bold colorcf">封盘</td>
-                <td class="bdr">
-                  <input type="text">
-                </td>
-                <td class="bold">特大</td>
-                <td class="bold colorcf">封盘</td>
-                <td class="bdr">
-                  <input type="text">
-                </td>
-              </tr>
-              <tr class="bdb">
-                <td class="bold">特大</td>
-                <td class="bold colorcf">封盘</td>
-                <td class="bdr">
-                  <input type="text">
-                </td>
-                <td class="bold">特大</td>
-                <td class="bold colorcf">封盘</td>
-                <td class="bdr">
-                  <input type="text">
-                </td>
-                <td class="bold">特大</td>
-                <td class="bold colorcf">封盘</td>
-                <td class="bdr">
-                  <input type="text">
-                </td>
-                <td class="bold">特大</td>
-                <td class="bold colorcf">封盘</td>
-                <td class="bdr">
-                  <input type="text">
-                </td>
-                <td class="bold">特大</td>
-                <td class="bold colorcf">封盘</td>
-                <td class="bdr">
-                  <input type="text">
-                </td>
-                <td class="bold">特大</td>
-                <td class="bold colorcf">封盘</td>
-                <td class="bdr">
-                  <input type="text">
-                </td>
-              </tr>
-              <tr class="bdb">
-                <td></td>
-                <td></td>
-                <td class="bdr"></td>
-                <td></td>
-                <td></td>
-                <td class="bdr"></td>
-                <td></td>
-                <td></td>
-                <td class="bdr"></td>
-                <td></td>
-                <td></td>
-                <td class="bdr"></td>
-                <td></td>
-                <td></td>
-                <td class="bdr"></td>
-                <td class="bold">总尾大</td>
-                <td class="bold colorcf">封盘</td>
-                <td class="bdr">
-                  <input type="text">
-                </td>
-              </tr>
-              <tr class="bdb">
-                <td></td>
-                <td></td>
-                <td class="bdr"></td>
-                <td></td>
-                <td></td>
-                <td class="bdr"></td>
-                <td></td>
-                <td></td>
-                <td class="bdr"></td>
-                <td></td>
-                <td></td>
-                <td class="bdr"></td>
-                <td></td>
-                <td></td>
-                <td class="bdr"></td>
-                <td class="bold">总尾小</td>
-                <td class="bold colorcf">封盘</td>
-                <td class="bdr">
-                  <input type="text">
-                </td>
-              </tr>
-              <tr>
-                <td colspan="9" style="text-align:right;">
-                  <span class="sure"></span>
-                </td>
-                <td colspan="9" style="text-align:left;">
-                  <span class="cancle"></span>
-                </td>
-              </tr>
-            </table>
-          </div>
-          <div class="right-content">
-            <div class="btnss">
-              <div :class="{outnum:true,active:isShow2}" @click="selectRange(1);">出码排行</div>
-              <div :class="{leftnum:true,active:!isShow2}" @click="selectRange(2);">遗漏排行</div>
-            </div>
-            <!-- 出码排行 -->
-            <table v-if="isShow2">
-              <tr>
-                <td>次数:</td>
-                <td>
-                  <select>
-                    <option value="">2期</option>
-                    <option value="">3期</option>
-                    <option value="">4期</option>
-                    <option value="">5期</option>
-                    <option value="">6期</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td>总和单双@总双</td>
-                <td>2期</td>
-              </tr>
-              <tr>
-                <td>总和单双@总双</td>
-                <td>2期</td>
-              </tr>
-              <tr>
-                <td>总和单双@总双</td>
-                <td>2期</td>
-              </tr>
-            </table>
-            <!-- 遗漏排行 -->
-            <table v-if="!isShow2">
-              <tr>
-                <td>分类:</td>
-                <td>
-                  <select>
-                    <option value="">2期</option>
-                    <option value="">3期</option>
-                    <option value="">4期</option>
-                    <option value="">5期</option>
-                    <option value="">6期</option>
-                  </select>
-                </td>
-              </tr>
-              <tr>
-                <td>总和单双@总双</td>
-                <td>2期</td>
-              </tr>
-              <tr>
-                <td>总和单双@总双</td>
-                <td>2期</td>
-              </tr>
-              <tr>
-                <td>总和单双@总双</td>
-                <td>2期</td>
-              </tr>
-            </table>
-          </div>
-        </div>
+        <Ssc-Header></Ssc-Header>
       </div>
     </div>
   </div>
 </template>
 <script>
+import HomeHeader from '../Header'
+import SscHeader from './sscHeader'
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      username: sessionStorage.getItem('username'),
-      user_money: '',
-      isShow: true,
+      // username: sessionStorage.getItem('username'),
+      // user_money: '',
       showIndex: 0,
-      titleArr: [
-        '两面盘',
-        '特码',
-        '正码一',
-        '正码二',
-        '正码三',
-        '正码四',
-        '龙虎斗'
-      ],
+      titleindex:0,
+      typeIndex:0,
       isShow2: true,
       isShowMenu: false
     }
@@ -709,19 +392,12 @@ export default {
   },
   methods: {
     selectType (index) {
-      this.showIndex = index
+      this.titleindex = index
+      this.typeIndex = index
     },
     leftBarfolding (index) {
       console.log(index)
       this.showIndex = index
-    },
-    showOpenMsg (index) {
-      if (index === 1) {
-        this.isShow = true
-      }
-      if (index === 2) {
-        this.isShow = false
-      }
     },
     selectRange (index) {
       if (index === 1) {
@@ -737,6 +413,13 @@ export default {
     hideAllgame () {
       this.isShowMenu = false
     }
+  },
+  components:{
+    HomeHeader,
+    SscHeader
+  },
+  computed: {
+    ...mapState(['username','usermoney'])
   }
 }
 
@@ -773,254 +456,6 @@ body {
   position: relative;
 }
 
-/*头部*/
-.head {
-  height: 116px;
-  background-color: #b62929;
-}
-
-.head .logo {
-  width: 97px;
-  height: 87px;
-  margin-left: 25px;
-  padding-top: 10px;
-  float: left;
-}
-
-.game_mane {
-  width: 262px;
-  height: 50px;
-  margin-left: 10px;
-  padding-top: 9px;
-}
-
-.game_mane span {
-  display: inline-block;
-  float: left;
-  height: 50px;
-  padding: 0 9px 0 5px;
-  font-weight: bold;
-  font-size: 27px;
-  font-style: italic;
-  color: #fff;
-  letter-spacing: 2px;
-}
-
-.head .openinfo {
-  width: 250px;
-  height: 36px;
-  line-height: 15px;
-  padding: 7px 8px 3px;
-  font-size: 12px;
-  margin-left: 10px;
-  background: url(../../assets/base-ico.png) no-repeat;
-  background-position: 0 -780px;
-  overflow: hidden;
-  color: #fff;
-  text-align: center;
-}
-
-.pull-left {
-  float: left;
-}
-
-.colorff8400 {
-  color: #ff8400;
-}
-
-.head .openinfo .time {
-  font-size: 32px;
-  line-height: 30px;
-}
-
-.head .currentnum {
-  overflow: hidden;
-  float: left;
-  width: 522px;
-}
-
-.head .currentnum .nums {
-  overflow: hidden;
-  margin-top: 16px;
-  margin-left: 100px;
-}
-
-.head .currentnum .nums li {
-  float: left;
-  height: 47px;
-  width: 47px;
-  background: url("../../assets/ball_b_1.png") no-repeat 0 0;
-  line-height: 44px;
-  font-size: 20px;
-  color: #b62929;
-  text-align: center;
-  font-weight: bold;
-  margin: 0 8px;
-  text-shadow: 0 1px 1px #5e5a5a;
-}
-
-.head .currentnum .text {
-  text-align: center;
-  line-height: 53px;
-  color: #fff;
-  font-size: 14px;
-}
-
-.head .currentnum .text .volume {
-  width: 20px;
-  height: 26px;
-  display: inline-block;
-  margin: 0 5px;
-  vertical-align: middle;
-  background: url("../../assets/volume-ico.png") 0 0 no-repeat;
-}
-
-.text .select-list {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  line-height: 26px;
-  height: 26px;
-  opacity: 0;
-}
-
-.Ringtone {
-  border-radius: 5px;
-  height: 26px;
-  vertical-align: middle;
-  background: rgba(255, 255, 255, 0.65);
-  width: 82px;
-  display: inline-block;
-}
-
-.Ringtone .select-current {
-  height: 100%;
-  line-height: 26px;
-  padding-left: 10px;
-  text-align: left;
-}
-
-.Ringtone .select-current span {
-  color: #000;
-  background: none;
-}
-
-.select-box {
-  position: relative;
-  display: inline-block;
-  z-index: 99;
-}
-
-.Ringtone .select-current i {
-  border: none;
-  background: none;
-}
-
-.select-box div i {
-  position: absolute;
-  right: 0;
-  top: 1px;
-  width: 29px;
-  height: 23px;
-}
-
-.Ringtone .select-current i:before {
-  border-top: 6px solid #000;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-}
-
-.Ringtone .select-current i:before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  margin-top: -3px;
-  margin-right: -3px;
-}
-
-.Ringtone .select-current i:before {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  margin-top: -3px;
-  margin-right: -3px;
-}
-
-.head .nav {
-  /*width: 400px;*/
-  /*height: 88px;*/
-  float: left;
-  margin-top: 18px;
-}
-
-.head .nav ul {
-  overflow: hidden;
-  padding-bottom: 12px;
-}
-
-.head .nav ul li {
-  background-color: #000;
-  float: left;
-  font-size: 12px;
-  padding-top: 48px;
-  width: 52px;
-  margin: 0 12px;
-  cursor: pointer;
-  text-align: center;
-  background: url("../../assets/top_menu_icos.png") no-repeat;
-}
-
-.head .nav ul li a {
-  padding-top: 48px;
-  color: #fff;
-  text-decoration: none;
-  padding-bottom: 12px;
-}
-
-.head .nav ul li.games {
-  background-position: 6px -500px;
-}
-
-.head .nav ul li.home {
-  background-position: 6px 0;
-}
-
-.head .nav ul li.service {
-  background-position: 6px -100px;
-}
-
-.head .nav ul li.rules {
-  background-position: 6px -200px;
-}
-
-.head .nav ul li.layout {
-  background-position: 6px -300px;
-}
-
-.head .nav ul li.games:hover {
-  background-position: -47px -500px;
-}
-
-.head .nav ul li.home:hover {
-  background-position: -47px 0;
-}
-
-.head .nav ul li.service:hover {
-  background-position: -47px -100px;
-}
-
-.head .nav ul li.rules:hover {
-  background-position: -47px -200px;
-}
-
-.head .nav ul li.layout:hover {
-  background-position: -47px -300px;
-}
 
 /*主体部分左边*/
 .main-body {
@@ -1138,10 +573,9 @@ body {
 
 .status-toggle div {
   background-color: #484646;
-  width: 50%;
-  line-height: 33px;
-  height: 33px;
-  float: left;
+  line-height: 40px;
+  height: 40px;
+  /*float: left;*/
   cursor: pointer;
   /*margin-top: 5px;*/
 }
@@ -1156,62 +590,9 @@ body {
   border-top-right-radius: 6px;
 }
 
-.overdue-wrap {
-  height: 196px;
-  width: 100%;
-  font-size: 13px;
-}
 
-.overdue-wrap .overdue-nums {
-  overflow: hidden;
-  border-bottom: 1px solid #e4e1e1;
-}
 
-.overdue-wrap .overdue-nums li {
-  float: left;
-  line-height: 32px;
-  height: 32px;
-  margin: 0 15px;
-  text-align: center;
-}
 
-.overdue-wrap .overdue-nums .serial-num {
-  /*padding: 0 10px;*/
-  width: 20px;
-  height: 20px;
-  background-color: #463e3e;
-  text-align: center;
-  line-height: 20px;
-  border-radius: 4px;
-  margin: 5px;
-  color: #fff;
-}
-
-.overdue-wrap .overdue-nums .result-num {
-  font-weight: bold;
-}
-
-.overdue-wrap .more-result {
-  height: 32px;
-  text-align: center;
-  line-height: 32px;
-  color: #c42133;
-}
-
-/*本期投注*/
-.overdue-wrap table {
-  width: 100%;
-}
-.overdue-wrap table tr {
-  text-align: center;
-}
-.overdue-wrap table th,
-.overdue-wrap table td {
-  height: 26px;
-  width: 33%;
-  text-align: center;
-  border-bottom: 1px solid #e4e1e1;
-}
 .colorred {
   color: #c42133;
 }
@@ -1230,7 +611,7 @@ body {
   line-height: 42px;
   /*text-align: center;*/
   font-size: 14px;
-  text-indent: 45px;
+  text-indent: 8px;
   font-weight: bold;
   background: url(../../assets/base-ico.png) 0 -534px no-repeat;
 }
@@ -1342,185 +723,7 @@ body {
   height: 100%;
   position: relative;
 }
-.content>.title {
-  height: 45px;
-  margin-left: -1px;
-  overflow: hidden;
-  background-color: #e2e0dd;
-}
 
-.content>.title li {
-  float: left;
-}
-.content>.title li a {
-  color: #4d4d4d;
-  text-decoration: none;
-  padding: 0 20px;
-  height: 45px;
-  line-height: 45px;
-  display: inline-block;
-}
-.content>.title li.act a {
-  background-color: #e95959;
-  color: #fff;
-}
-.content .guanpaly {
-  width: 101px;
-  height: 32px;
-  position: absolute;
-  right: 5px;
-  top: 6px;
-  background: url(../../assets/base-ico.png) 0 -731px no-repeat;
-}
-.content .new {
-  position: absolute;
-  top: -0;
-  right: -0;
-}
-.content .tables {
-  position: relative;
-}
-.content .tables .title {
-  height: 41px;
-}
-.content .tables .title span {
-  background: url(../../assets/base-ico.png) no-repeat;
-}
-
-.content .tables .title .dollar {
-  width: 27px;
-  height: 27px;
-  display: inline-block;
-  background-position: 0 -232px;
-  position: absolute;
-  left: 25px;
-  top: 7px;
-}
-
-.content .tables .title .text {
-  background-image: none;
-  position: absolute;
-  top: 8px;
-  left: 80px;
-}
-.content .tables .title .minus {
-  width: 22px;
-  height: 22px;
-  display: inline-block;
-  background-position: 0 -90px;
-  position: absolute;
-  top: 8px;
-  left: 120px;
-}
-
-.content .tables .title .plus {
-  width: 22px;
-  height: 22px;
-  display: inline-block;
-  background-position: 0 -112px;
-  position: absolute;
-  top: 8px;
-  left: 358px;
-}
-
-.content .tables .title .range {
-  background-image: none;
-  position: absolute;
-  left: 150px;
-  top: 7px;
-}
-
-.content .tables table {
-  text-align: center;
-  border-collapse: collapse;
-  border-spacing: 1;
-  border-spacing: 0;
-  width: 100%;
-}
-
-.bgred {
-  background-color: #b62929;
-}
-
-.content .tables table tr {
-  height: 33px;
-
-  font-size: 13px;
-}
-
-.content .tables table th {
-  color: #fff;
-  font-size: 12px;
-  height: 30px;
-  line-height: 30px;
-  border-right: 1px solid #fff;
-}
-
-.content .tables table .graybg {
-  background: url(../../assets/nav-bg.png) 0 -35px repeat-x;
-}
-
-.content .tables table span {
-  padding: 0 8px;
-  font-weight: bold;
-}
-
-.bordertight {
-  border-right: 1px solid #a4a4a4;
-}
-
-.content .tables table input {
-  width: 50px;
-  border-radius: 5px;
-  outline: none;
-  border: none;
-  border: 1px solid #bfbfbf;
-  height: 20px;
-  padding-left: 2px;
-}
-
-.bdr {
-  border-right: 1px solid #c9c7c7;
-}
-
-.bdb {
-  border-bottom: 1px solid #c9c7c7;
-}
-
-.bold {
-  font-weight: bold;
-}
-
-.colorcf {
-  color: #cfcfcf !important;
-}
-
-.pull-left {
-  float: left;
-}
-
-.content .tables table .sure {
-  width: 65px;
-  height: 24px;
-  background: url("../../assets/btn_ok.png") no-repeat;
-  display: inline-block;
-  padding: 0 2px;
-  margin-top: 15px;
-  margin-right: 25px;
-  cursor: pointer;
-}
-
-.content .tables table .cancle {
-  background: url("../../assets/btn_ok.png") no-repeat;
-  height: 24px;
-  width: 65px;
-  display: inline-block;
-  background-position: -76px 0;
-  padding: 0 2px;
-  margin-top: 15px;
-  margin-left: 25px;
-  cursor: pointer;
-}
 
 /*range*/
 /*去除默认样式*/

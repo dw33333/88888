@@ -35,10 +35,18 @@ const mutations = {
   },
 
   // true登录  false未登录
-  userIsLogin (state,data) {
-      state.isLogin = data
+  // userIsLogin (state,data) {
+  //     state.isLogin = data
+  //   try {
+  //     sessionStorage.setItem('isLogin',data)   
+  //   } catch (e) {}
+  // },
+
+  getUserToken (state,data) {
+      state.codeToken = data
     try {
-      sessionStorage.setItem('isLogin',data)   
+      // alert('23222'+data)
+      sessionStorage.setItem('codeToken',data)   
     } catch (e) {}
   },
 
@@ -56,7 +64,7 @@ const mutations = {
       state.agmoney=0.00
       state.dsmoney=0.00
       state.agentId=0.00
-      state.isLogin=false
+      state.codeToken=false
       state.userRealName = ''
     try {
       sessionStorage.setItem('username','')   
@@ -64,7 +72,7 @@ const mutations = {
       sessionStorage.setItem('agmoney',0.00)   
       sessionStorage.setItem('dsmoney',0.00)   
       sessionStorage.setItem('agentId',0.00)   
-      sessionStorage.setItem('isLogin',false)
+      sessionStorage.setItem('codeToken',false)
       sessionStorage.setItem('userRealName','')    
     } catch (e) {}
   }

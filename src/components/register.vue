@@ -72,6 +72,21 @@
             </tr>
             <tr>
               <td class="right">
+                &nbsp;<span style="color:red;">*</span>&nbsp;性别：
+              </td>
+              <td>
+                <label for="male" class="male">
+                  <input id='male' class="" type="radio" name='' :checked="sex==0" @click='selectSex(0)'> 男
+                </label>
+                <label for="female" class="female">
+                  <input class="" id='female' type="radio" :checked="sex==1" @click='selectSex(1)'> 女
+                </label>
+              </td>
+              <td>
+              </td>
+            </tr>
+            <tr>
+              <td class="right">
                 &nbsp;<span style="color:red;">*</span>&nbsp;手机号：
               </td>
               <td>
@@ -80,6 +95,32 @@
               <td>
                 <font color="#ce8b00">
                   *请输入有效的手机号码
+                </font>
+              </td>
+            </tr>
+            <tr>
+              <td class="right">
+                &nbsp;<span style="color:red;">*</span>&nbsp;QQ：
+              </td>
+              <td>
+                <input class="inp" type="text" placeholder="请输入有效的QQ号码" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" maxlength="12" size="14" v-model="qq" ref="phonenum">
+              </td>
+              <td>
+                <font color="#ce8b00">
+                  *请输入有效的QQ号码
+                </font>
+              </td>
+            </tr>
+            <tr>
+              <td class="right">
+                &nbsp;<span style="color:red;">*</span>&nbsp;E-mail：
+              </td>
+              <td>
+                <input class="inp" type="text" placeholder="请输入有效的电子邮箱" v-model="email" ref="phonenum">
+              </td>
+              <td>
+                <font color="#ce8b00">
+                  *请输入有效的电子邮箱
                 </font>
               </td>
             </tr>
@@ -178,10 +219,10 @@
 import headervue from '@/components/Header'
 import footervue from '@/components/Footer'
 import maskLayer from '@/components/base/mask-layer'
-import { mapState,mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
-  data () {
+  data() {
     return {
       isShowAgreement: false,
       ifopen: false,
@@ -192,28 +233,34 @@ export default {
       realname: '',
       email: '',
       phonenum: null,
+      qq: '',
       bankCode: '',
       captcha: '',
       value: [],
-      ifcheck: true
+      ifcheck: true,
+      sex: 0
     }
   },
   methods: {
-    showAgreement () {
+    selectSex(index) {
+      this.sex = index
+      // alert(this.sex)
+    },
+    showAgreement() {
       this.isShowAgreement = true
     },
-    hideAgreement () {
+    hideAgreement() {
       this.isShowAgreement = false
     },
 
     // 限制真实姓名输入框只能输入中文
-    realTis () {
+    realTis() {
       this.realname = this.realname.replace(/[^\u4e00-\u9fa5]+$/, '')
       return this.realname
     },
 
     // 封装提示信息函数
-    mytoast (msg) {
+    mytoast(msg) {
       this.ifopen = !this.ifopen
       // let instance = Toast(msg);
       this.content = msg
@@ -225,7 +272,7 @@ export default {
     },
 
     // 提交注册
-    registerSubmit () {
+    registerSubmit() {
       if (!this.username) {
         this.mytoast('请输入用户名！')
       } else if (this.username.length < 4) {
@@ -246,6 +293,10 @@ export default {
         this.mytoast('真实姓名只能为中文！')
       } else if (!this.phonenum) {
         this.mytoast('请输入手机号码！')
+      } else if (!this.qq) {
+        this.mytoast('请输入有效的QQ号码')
+      } else if (!/\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/.test(this.email)) {
+        this.mytoast('请输入有效的电子邮箱')
       } else if (this.phonenum.length < 11) {
         this.mytoast('请输入11位数手机号码！')
       } else if (!this.bankCode) {
@@ -256,45 +307,45 @@ export default {
         this.mytoast('请勾选开户协议！')
       } else {
         let data = {
-          key: 'add',
           username: this.username,
           password: this.password,
-          passwd: this.confirmPassword,
           real_name: this.realname,
+          repassword: this.confirmPassword,
           tel: this.phonenum,
-          pwd1: this.bankCode,
-          agent_id:this.agentId
+          MultiPwd: this.bankCode,
+          qq: this.qq,
+          sex: this.sex,
+          email: this.email
         }
+         
+        this.$http.post('http://192.167.9.112/user/regster', data).then(res => {
 
-        this.$http.post('/json/api.php?r=regster', data).then(res => {
-          this.mytoast(res.data.msg)
-          if (res.status === 200 && res.data.code === 0) {
-          // this.$store.dispatch('UserLogin', this.username)
+         
+            this.mytoast(res.data.msg)
 
-          // sessionStorage.setItem('username', this.username)
-          // sessionStorage.setItem('isShowLogin', this.username)
+            if (res.status === 200 && res.data.code === 0) {
+            
+              this.changeUserName(this.username)
+              this.changeUserMoney('0.00')
+              // this.userIsLogin(true)
 
-          // this.$store.dispatch('SET_userMoney', '0.00')
-
-          this.changeUserName(this.username)
-          this.changeUserMoney('0.00')
-          this.userIsLogin(true)
-      
-          this.$router.push('/')
-          }
-        })
+                setTimeout(() => {      
+                  this.$router.push('/')
+                }, 1500)
+            }
+          })
           .catch(error => {
             console.log(error)
           })
       }
     },
-    ...mapMutations(['changeUserName','changeUserMoney','userIsLogin']), 
+    ...mapMutations(['changeUserName', 'changeUserMoney']),
     // 点击本人同意
-    sureAgreement () {
+    sureAgreement() {
       this.ifcheck = !this.ifcheck
     },
     // 点击勾选框
-    checkSelect () {
+    checkSelect() {
       if (this.$refs.agreementCheck.checked) {
         this.ifcheck = true
       } else {
@@ -306,14 +357,19 @@ export default {
     headervue,
     footervue,
     maskLayer
-  },
-  computed: {
-    ...mapState(['agentId'])
   }
+  // computed: {
+  //   ...mapState(['agentId'])
+  // }
 }
 
 </script>
 <style scoped>
+.male,
+.female {
+  margin-right: 20px;
+}
+
 .registration-c {
   width: 830px;
   min-height: 228px;

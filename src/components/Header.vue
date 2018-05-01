@@ -7,12 +7,16 @@
           <span style="padding-left:10px;">{{nowTime}}</span>
         </div>
         <!-- 登录界面 -->
-        <div class="bar-right" v-if="!isLogin">
+        <div class="bar-right" v-if="!codeToken">
           <div class="item preson-info preson-balance">
             <input type="text" autoComplete='off' placeholder="账号" v-model="user_name">
           </div>
           <div class="item preson-balance personpwd">
             <input type="password" autoComplete='off' placeholder="密码" v-model="pass_word">
+          </div>
+          <div class="yanzheng">
+            <input type="text" class="inputcode" v-model="code">
+            <img :src="codeImg" @click='codeImgFn' class="code" alt="">
           </div>
           <div class="item login">
             <a href="javascript:void(0);" @click='loginSubmit();'>登录</a>
@@ -37,16 +41,16 @@
           
           <router-link to='/UserCenter'>
             
-            <div class="recharge">
+            <div class="recharge items">
               充值
             </div>
           </router-link>
           <router-link to='/withdrawal'>
-            <div class="withdraw">
+            <div class="withdraw items">
               提款
             </div>
           </router-link>
-          <div class="login-out" @click="loginout();">
+          <div class="login-out items" @click="loginout();">
             退出
           </div>
         </div>
@@ -55,13 +59,13 @@
     <nav>
       <!-- 导航 -->
       <div class="nav">
-        <img class="logo" src="../assets/base-ico2.png" alt="">
+        <img class="logo" src="../assets/logo.png" alt="">
         <ul>
           <li class="buy-center">
-            <a href="javascript:void(0)">
+            <router-link to="/lottery">
               <div>购彩中心</div>
               <span>LOTTERY</span>
-            </a>
+            </router-link>
           </li>
           <li class="user-center">
             <a href='javascript:void(0);' @click='enterUserCenter();'>
@@ -243,15 +247,40 @@ export default {
       pass_word: '',
       content: '',
       ifopen: false,
+      codeImg:'',
+      temcodeToken:'',
+      code:''
       // usermoney: '',
       // isShowLogin: sessionStorage.getItem('isLogin')
 
     }
   },
+  mounted () {
+    this.codeImgFn()
+    this.clockon()
+
+  },
   computed: {
-    ...mapState(['usermoney','username','isLogin'])
+    ...mapState(['usermoney','username','codeToken'])
   },
   methods: {
+    codeImgFn(){
+      this.$http.get('http://192.167.9.166/site/captcha').then((res) => {
+            
+          if (res.status === 200) {
+            console.log(res.data.codeToken)
+
+              this.codeImg=res.data.src
+              this.temcodeToken=res.data.codeToken
+              // this.mytoast(res.data.msg)
+                // alert("11111"+this.temcodeToken)
+              this.getUserToken(this.temcodeToken)
+     
+          }
+        }).catch((error) => {
+          console.log(error)
+        })
+    },
     // 封装提示信息函数
     mytoast (msg) {
       this.ifopen = true
@@ -264,7 +293,7 @@ export default {
     },
 
     enterUserCenter () {
-      if (!this.isLogin) {
+      if (!this.codeToken) {
         this.mytoast('请先登录')
         setTimeout(() => {
           this.$router.push('/Login')
@@ -278,9 +307,11 @@ export default {
     // 登录提交
     loginSubmit () {
       let data = {
-        action: 'login',
+        // action: 'login',
         username: this.user_name,
-        password: this.pass_word
+        password: this.pass_word,
+        code:this.code,
+        codeToken:this.codeToken
       }
 
       if (!this.user_name) {
@@ -288,7 +319,7 @@ export default {
       } else if (!this.pass_word) {
         this.mytoast('请输入密码')
       } else {
-        this.$http.post('/json/api.php?r=login', data).then((res) => {
+        this.$http.post('/api/user/login', data).then((res) => {
           if (res.status === 200 && res.data.code === 0) {
               this.mytoast(res.data.msg)
             // this.usermoney = res.data.data.user_money
@@ -306,7 +337,7 @@ export default {
               // alert(this.user_name)
           this.changeUserName(this.user_name)
           this.changeUserMoney(res.data.data.user_money)
-          this.userIsLogin(true)
+          // this.userIsLogin(true)
           }
         }).catch((error) => {
           console.log(error)
@@ -338,7 +369,7 @@ export default {
         console.log(error)
       })
     },
-    ...mapMutations(['changeUserName','changeUserMoney','userIsLogin','userLoginOut']),
+    ...mapMutations(['changeUserName','changeUserMoney','getUserToken','userLoginOut']),
     // getUserMoney(){
     //     // >获取用户余额
     //   this.$http.get('/json/center/?r=Money').then((res) => {
@@ -406,21 +437,37 @@ export default {
 }
 
 .bar-right div {
-  margin-right: 22px;
+  /*margin-right: 22px;*/
+
   float: left;
 }
+.bar-right .yanzheng{
+  width: 128px;
+}
+.bar-right .yanzheng .inputcode{
+  width: 44px;
+  height: 26px;
+  border:2px solid #b62929;
+  padding-left: 4px;
+}
+.bar-right .yanzheng .code{
+  vertical-align: middle;
+}
+
 
 .bar-right .item {
   margin-right: 0;
   float: left;
 }
-
+.bar-right div.login{
+  /*margin-left: 140px;*/
+}
 .bar-right .login,
 .bar-right .regster {
   height: 34px;
   line-height: 34px;
   width: 100px;
-  margin: 0 20px;
+  margin: 0 8px;
   margin-top: 10px;
   background: url(../assets/base-ico2.png) no-repeat;
   cursor: pointer;
@@ -494,9 +541,12 @@ input:-ms-input-placeholder {
   background: url(../assets/base-ico2.png) no-repeat;
 }
 
+.items{
+  margin:0 10px;
+}
 .preson-info {
   padding: 0;
-  margin-left: 100px;
+  margin-left: 16px;
   background-position: 0 -390px;
 }
 
