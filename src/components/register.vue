@@ -317,19 +317,19 @@ export default {
           sex: this.sex,
           email: this.email
         }
-         
-        this.$http.post('http://192.167.9.112/user/regster', data).then(res => {
 
-         
+        this.$http.post('/api/user/regster', data).then(res => {
+
+
             this.mytoast(res.data.msg)
 
             if (res.status === 200 && res.data.code === 0) {
-            
+
               this.changeUserName(this.username)
               this.changeUserMoney('0.00')
               // this.userIsLogin(true)
 
-                setTimeout(() => {      
+                setTimeout(() => {
                   this.$router.push('/')
                 }, 1500)
             }

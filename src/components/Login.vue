@@ -25,7 +25,7 @@
                 <input type="password" placeholder="密码" class="fieldWithIcon3" v-model='pass_word'>
               </li>
               <li>
-                <input type="text" class="code" v-model="code"><img @click='codeImgFn' class="code-img" :src="codeImg" alt="">
+                <input type="text" class="code" v-model="code"><img @click='codeImgFn' class="code-img" :src="codeImg" alt="asdas">
               </li>
               <li class="loginbtn" @click="loginFn">
                 <input type="submit" title="登录" class="btn btn_login" value="">
@@ -78,15 +78,12 @@ export default {
   },
   methods: {
     codeImgFn(){
-      this.$http.get('http://192.167.9.166/site/captcha').then((res) => {
-        
+      this.$http.get('/api/site/captcha').then((res) => {
           if (res.status === 200) {
-            console.log(res.data.codeToken)
-
               this.codeImg=res.data.src
               this.temcodeToken=res.data.codeToken
               // this.mytoast(res.data.msg)
-            
+
              this.getUserToken(this.temcodeToken)
 
           }
@@ -114,25 +111,24 @@ export default {
         code:this.code,
         codeToken:this.codeToken
       }
-      
-      this.$http.post('http://192.167.9.112/user/login', data).then((res) => {
-        
+
+      this.$http.post('/api/user/login', data).then((res) => {
+
         // console.log("登录-----:"+JSON.stringify(res.data.data.money))
           this.mytoast(res.data.msg)
         if (res.status === 200 && res.data.code === 0) {
-        console.log("登录-----:"+JSON.stringify(res))
 
           // this.usermoney = res.data.data.user_money
           // sessionStorage.setItem('username', this.username)
           // sessionStorage.setItem('isShow', this.username)
-          
+
           // this.$store.dispatch('UserLogin', this.username)
           // this.$store.dispatch('SET_userMoney', this.mymoney)
 
           this.changeUserName(this.user_name)
           this.changeUserMoney(res.data.data.money)
 
-           setTimeout(() => {      
+           setTimeout(() => {
               this.$router.push('/')
           }, 1500)
 

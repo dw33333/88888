@@ -23,15 +23,16 @@ module.exports = {
     //         }
     //     }
     // },
-    // proxyTable: {
-    //     '/api': {    //访问api这个目录的时候
-    //         target: 'http://192.167.9.112',//转发到当前服务器的8080端口
-    //         pathRewrite: {
-    //             '^/api':''   //当请求地址是以api开头的，
-    //             // 就把api替换为/static/mock
-    //         }
-    //     }
-    // },
+    proxyTable: {
+        '/api': {    //访问api这个目录的时候
+            target: 'http://192.167.9.166',//转发到当前服务器的8080端口
+            changeOrigin:true,
+            pathRewrite: {
+                '^/api':'/'   //当请求地址是以api开头的，
+                // 就把api替换为/static/mock
+            }
+        }
+    },
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined

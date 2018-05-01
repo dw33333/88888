@@ -4,7 +4,7 @@ import router from './router'
 import store from './store/index'
 // 设置全局axios默认值
 axios.defaults.timeout = 15000 // 15s的超时验证
-axios.defaults.baseURL = 'https://m.98208.com/api/'; //这是调用数据接口
+axios.defaults.baseURL = 'http://192.167.9.166/'; //这是调用数据接口
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 
 //http response 拦截器
