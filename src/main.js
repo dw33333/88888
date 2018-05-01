@@ -7,7 +7,7 @@ import 'babel-polyfill'  //ie11打开空白
 Vue.config.productionTip = true
 axios.defaults.withCredentials = true
 Vue.prototype.$http = axios
-
+Vue.prototype.$http.defaults.headers.EasySecret=store.state.easysecret;
 /* eslint-disable no-new */
 
 // Vue.prototype.$http = axios
@@ -22,4 +22,4 @@ new Vue({
   router,
   store,
   render: h => h(App)
-})
+});

@@ -2,35 +2,35 @@ const mutations = {
   changeUserName (state,data) {
       state.username = data
     try {
-      sessionStorage.setItem('username',data)   
+      sessionStorage.setItem('username',data)
     } catch (e) {}
   },
 
   changeUserMoney (state,data) {
       state.usermoney = data
     try {
-      sessionStorage.setItem('usermoney',data)   
+      sessionStorage.setItem('usermoney',data)
     } catch (e) {}
   },
 
   changeAgMoney (state,data) {
       state.agmoney = data
     try {
-      sessionStorage.setItem('agmoney',data)   
+      sessionStorage.setItem('agmoney',data)
     } catch (e) {}
   },
 
   changeDsMoney (state,data) {
       state.dsmoney = data
     try {
-      sessionStorage.setItem('dsmoney',data)   
+      sessionStorage.setItem('dsmoney',data)
     } catch (e) {}
   },
-  
+
   changeAgentId (state,data) {
       state.agentId = data
     try {
-      sessionStorage.setItem('agentId',data)   
+      sessionStorage.setItem('agentId',data)
     } catch (e) {}
   },
 
@@ -38,7 +38,7 @@ const mutations = {
   // userIsLogin (state,data) {
   //     state.isLogin = data
   //   try {
-  //     sessionStorage.setItem('isLogin',data)   
+  //     sessionStorage.setItem('isLogin',data)
   //   } catch (e) {}
   // },
 
@@ -46,7 +46,7 @@ const mutations = {
       state.codeToken = data
     try {
       // alert('23222'+data)
-      sessionStorage.setItem('codeToken',data)   
+      sessionStorage.setItem('codeToken',data)
     } catch (e) {}
   },
 
@@ -54,10 +54,19 @@ const mutations = {
   getUserRealName (state,data) {
       state.userRealName = data
     try {
-      sessionStorage.setItem('userRealName',data)   
+      sessionStorage.setItem('userRealName',data)
     } catch (e) {}
   },
-
+  EASYSECRET (state,data) {
+    state.easysecret = data;
+    try {
+      sessionStorage.setItem('easysecret',data);
+    } catch (e) {}
+  },
+  //BOOTBOX
+  ROOTBOX(state,data){
+    state.rootbox=data;
+  },
   userLoginOut (state,data) {
       state.username=''
       state.usermoney=0.00
@@ -67,13 +76,13 @@ const mutations = {
       state.codeToken=false
       state.userRealName = ''
     try {
-      sessionStorage.setItem('username','')   
-      sessionStorage.setItem('usermoney',0.00)   
-      sessionStorage.setItem('agmoney',0.00)   
-      sessionStorage.setItem('dsmoney',0.00)   
-      sessionStorage.setItem('agentId',0.00)   
+      sessionStorage.setItem('username','')
+      sessionStorage.setItem('usermoney',0.00)
+      sessionStorage.setItem('agmoney',0.00)
+      sessionStorage.setItem('dsmoney',0.00)
+      sessionStorage.setItem('agentId',0.00)
       sessionStorage.setItem('codeToken',false)
-      sessionStorage.setItem('userRealName','')    
+      sessionStorage.setItem('userRealName','')
     } catch (e) {}
   }
 }

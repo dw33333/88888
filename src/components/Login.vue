@@ -5,7 +5,7 @@
         <div class="mainloginbox" id="LOGIN-FORM">
           <div class="site-logo">
             <div class="logo-items">
-              <embed width="340" height="150" class="logo_none" autostart="true" loop="true" src="../assets/logo.swf" quality="high" wmode="Transparent" type="application/x-shockwave-flash" param="transparent" id="swfNav">
+              <embed width="340" height="150" class="logo_none" autostart="true" loop="true" src="/static/logo.swf" quality="high" wmode="Transparent" type="application/x-shockwave-flash" param="transparent" id="swfNav">
             </div>
           </div>
           <div class="login_tit">
@@ -25,7 +25,7 @@
                 <input type="password" placeholder="密码" class="fieldWithIcon3" v-model='pass_word'>
               </li>
               <li>
-                <input type="text" class="code" v-model="code"><img @click='codeImgFn' class="code-img" :src="codeImg" alt="asdas">
+                <input type="text" class="code" v-model="code"><img @click='codeImgFn' class="code-img" :src="codeImg">
               </li>
               <li class="loginbtn" @click="loginFn">
                 <input type="submit" title="登录" class="btn btn_login" value="">
@@ -104,6 +104,19 @@ export default {
     },
 
     loginFn () {
+      if (!this.user_name) {
+        this.mytoast('请输入用户名！')
+        return;
+      } else if (this.user_name.length < 4) {
+        this.mytoast('用户名长度最少4位！')
+        return;
+      } else if (!this.pass_word) {
+        this.mytoast('请输入密码！')
+        return;
+      } else if (this.pass_word.length < 6) {
+        this.mytoast('密码长度最少6位！')
+        return;
+      }
       let data = {
         // action: 'login',
         username: this.user_name,
@@ -114,8 +127,9 @@ export default {
 
       this.$http.post('/api/user/login', data).then((res) => {
 
-        // console.log("登录-----:"+JSON.stringify(res.data.data.money))
-          this.mytoast(res.data.msg)
+        this.$http.defaults.headers.EasySecret=res.headers.easysecret;
+        this.EASYSECRET(res.headers.easysecret);
+
         if (res.status === 200 && res.data.code === 0) {
 
           // this.usermoney = res.data.data.user_money
@@ -132,8 +146,9 @@ export default {
               this.$router.push('/')
           }, 1500)
 
-
           this.codeImgFn()
+        }else{
+          this.mytoast(res.data.msg)
         }
       }).catch((error) => {
         // this.mytoast(res.dada.msg)
@@ -141,7 +156,7 @@ export default {
         console.log('err:'+error)
       })
     },
-    ...mapMutations(['changeUserName','changeUserMoney','getUserToken']),
+    ...mapMutations(['changeUserName','changeUserMoney','getUserToken',"EASYSECRET"]),
   },
   components: {
     footervue,
