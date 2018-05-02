@@ -14,7 +14,8 @@
         <li class="layout"><a href="#" @click="loginout();">登出账号</a></li>
       </ul>
       <!-- 下拉游戏选择 -->
-      <div class="menu-child" @mouseover="showAllgame" @mouseout="hideAllgame" v-if="isShowMenu" id="lot_sec_menu">
+      <transition name="fade">
+        <div class="menu-child" @mouseover="showAllgame" @mouseout="hideAllgame" v-if="isShowMenu" id="lot_sec_menu">
         <div class="gamelist clear">
           <div class="official_play">
             <div class="gamelist_tit clear">
@@ -212,6 +213,7 @@
         </div>
         <div class="triangles_back"></div>
       </div>
+      </transition>
       <!-- 下拉游戏选择 -->
     </div>
     <div class="main-body">
@@ -222,7 +224,7 @@
         <div class="balance">
           用户余额: <span>{{usermoney}}</span>
         </div>
-        <div class="balance" style="background-position:-96px -36px;">
+        <!--<div class="balance" style="background-position:-96px -36px;">
           真实姓名: <span>{{userRealName}}</span>
         </div>
         <div class="balance">
@@ -230,7 +232,7 @@
         </div>
         <div class="balance">
           DS真人余额: <span>{{dsmoney}}</span>
-        </div>
+        </div>-->
         <div class="money">
           <router-link to='/recharge' class="recharge">
             <span>充值</span>
@@ -245,7 +247,7 @@
             <div class="item" @click="isShow(1)">
               <a href="javascript:void(0);">密码管理</a>
             </div>
-            <ul class='list-item' v-if="isDisplay==1">
+            <ul class='list-item'  :style="{height:isDisplay==1?((34*1)+'px'):'0px',visibility:isDisplay==1?'visible':'hidden',overflow:'hidden'}">
               <li>
                 <router-link to="/PasswordManagement">修改密码</router-link>
               </li>
@@ -253,7 +255,7 @@
             <div class="item" @click="isShow(2)">
               <a href="javascript:void(0);">投注报表</a>
             </div>
-            <ul class="list-item" v-if="isDisplay==2">
+            <ul class="list-item"  :style="{height:isDisplay==2?((34*5)+'px'):'0px',visibility:isDisplay==2?'visible':'hidden',overflow:'hidden'}">
               <li>
                 <router-link to="/sportsgame">体育</router-link>
               </li>
@@ -273,15 +275,15 @@
             <div class="item" @click="isShow(3)">
               <a href="javascript:void(0);">额度转换</a>
             </div>
-            <ul class='list-item' v-if="isDisplay==3">
+            <ul class='list-item'  :style="{height:isDisplay==3?((34*1)+'px'):'0px',visibility:isDisplay==3?'visible':'hidden',overflow:'hidden'}">
               <li>
                 <router-link to="/moneymanagemen">额度管理</router-link>
               </li>
             </ul>
-            <div class="item" @click="isShow(4)">
+            <div class="item" @click="isShow(4)" >
               <a href="javascript:void(0);">信息中心</a>
             </div>
-            <ul class='list-item' v-if="isDisplay==4">
+            <ul class='list-item'  :style="{height:isDisplay==4?((34*2)+'px'):'0px',visibility:isDisplay==4?'visible':'hidden',overflow:'hidden'}">
               <li>
                 <router-link to="/Messge">站内短信</router-link>
               </li>
@@ -311,10 +313,10 @@ export default {
       ifopen: false,
       isShowMenu: false,
       unread_count: '',
-      lock10: false,
+      /*lock10: false,
       lock20: false,
       lock30: false,
-      lock40: false,
+      lock40: false,*/
       realname: '',
       bankCardNum: '',
       bankName: ''
@@ -325,14 +327,14 @@ export default {
   },
   mounted () {
     // 获取个人信息
-    this.getuserinfo()
+    /*this.getuserinfo()*/
   },
   computed: {
     ...mapState(['agmoney','dsmoney','usermoney','username','userRealName'])
   },
   methods: {
     // 获取个人信息
-    getuserinfo () {
+    /*getuserinfo () {
       this.$http.get('/json/center/?r=UsrInfo').then((res) => {
 
         this.getUserRealName(res.data.data.pay_name)
@@ -343,7 +345,7 @@ export default {
 
       // >获取AG真人余额
       this.$http.get('/json/center/?r=AginMoney').then((res) => {
-    
+
          this.changeAgMoney(res.data.data.money)
 
       }).catch((error) => {
@@ -352,9 +354,9 @@ export default {
 
       // >获取DS真人余额：
       this.$http.get('/json/center/?r=DsMoney').then((res) => {
-   
+
         this.changeDsMoney(res.data.data.money)
-        
+
       }).catch((error) => {
         console.log(error)
       })
@@ -367,7 +369,7 @@ export default {
       }).catch((error) => {
         console.log(error)
       })
-    },
+    },*/
     ...mapMutations(['getUserRealName','changeAgMoney','changeDsMoney','changeUserMoney','userLoginOut']),
     // 封装提示信息函数
     mytoast (msg) {
@@ -381,9 +383,9 @@ export default {
 
     // 退出登录
     loginout () {
-      this.$http.get('/json/api.php?r=logout').then((res) => {
+      /*this.$http.get('/json/api.php?r=logout').then((res) => {
         if (res.data.code === 0) {
-      
+
           this.mytoast(res.data.msg)
 
           this.userLoginOut()
@@ -397,7 +399,7 @@ export default {
         }
       }).catch((error) => {
         console.log(error)
-      })
+      })*/
     },
     showAllgame () {
       this.isShowMenu = true
@@ -406,8 +408,12 @@ export default {
       this.isShowMenu = false
     },
     isShow (index) {
-      console.log(index)
-      if (index === 1) {
+      if(this.isDisplay==index)
+        this.isDisplay=0;
+      else
+        this.isDisplay=index;
+      return;
+      /*if (index === 1) {
         this.lock10 = !this.lock10
 
         if (this.lock10) {
@@ -441,7 +447,7 @@ export default {
         } else {
           this.isDisplay = 0
         }
-      }
+      }*/
     }
   }
 }
@@ -453,12 +459,14 @@ body {
 }
 
 .container {
-  height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
+  /*height:100%*/;
+  background-color: #363636;
+  box-sizing: border-box;
 }
 
 .container::-webkit-scrollbar {
-  display: none;
+  /*display: none;*/
 }
 
 .header {
@@ -677,8 +685,8 @@ a {
 }
 
 .main-body {
-  overflow: hidden;
-  height: 100%;
+  overflow: visible;
+  /*height: 100%;*/
 }
 
 /*左边区域*/
@@ -688,7 +696,7 @@ a {
   color: #fff;
   width: 200px;
   font-size: 14px;
-  height: 100%;
+  /*height: 100%;*/
 }
 
 .container .select .account,
@@ -759,7 +767,7 @@ a {
   line-height: 40px;
   /* height: 40px; */
   width: 172px;
-  margin: 5px auto;
+  margin: 3px auto;
   background: url(../assets/base-ico3.png) 0 -579px no-repeat;
 }
 
@@ -772,6 +780,8 @@ a {
 }
 
 .sidebar-menu .list-item {
+  box-sizing:border-box;
+  transition:height 0.25s;
   font-size: 14px;
   line-height: 30px;
   width: 95%;
@@ -811,7 +821,7 @@ a {
   margin-left: 0px;
   /*margin-left: 213px;*/
   min-height: 900px;
-  min-width: ;
+  min-width: 500px;
   background-color: #ededed;
 }
 

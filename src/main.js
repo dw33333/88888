@@ -8,6 +8,21 @@ Vue.config.productionTip = true
 axios.defaults.withCredentials = true
 Vue.prototype.$http = axios
 Vue.prototype.$http.defaults.headers.EasySecret=store.state.easysecret;
+Vue.prototype.$http.interceptors.response.use(
+  response => {
+    return response;
+  },
+  error => {
+    if (error.response) {
+      switch (error.response.status) {
+        case 401:
+          break;
+      }
+    }
+    //全局处理错误后返回成功一个undefined 免去每次使用 async await 都try catch
+    console.error(error.response);
+    return Promise.resolve();
+  });
 /* eslint-disable no-new */
 
 // Vue.prototype.$http = axios

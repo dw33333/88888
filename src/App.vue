@@ -25,7 +25,6 @@
   body {
     background: url('./assets/bg1.jpg') 0 0 no-repeat;
     height: 100%;
-    background-size: center;
   }
 
   #app {
@@ -35,6 +34,7 @@
     text-align: center;
     color: #333;
     height: 100%;
+    min-width: 1170px;
     /*margin-top: 60px;*/
   }
 
@@ -86,5 +86,37 @@
 
   .ew-slide-leave-active .alert {
     margin-top:64px;
+  }
+
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: all .25s ease-out;
+    backface-visibility: hidden;
+  }
+
+
+  .fade-enter {
+    opacity: 0;
+  }
+
+  .fade-leave-active {
+    opacity:0;
+  }
+  .slide-enter-active,
+  .slide-leave-active {
+    //transition: transform .25s ease-out;
+    transition: height .25s ease-out;
+    backface-visibility: hidden;
+  }
+
+
+  .slide-enter {
+    //transform: translate3d(64px,0 , 0);
+    /*height:*/
+  }
+
+  .slide-leave-active {
+    //transform: translate3d( 64px,0, 0);
   }
 </style>

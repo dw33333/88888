@@ -1,15 +1,15 @@
 <template>
   <div class='container'>
     <div class="main-head">
-      <span>用户中心&gt;账户管理&gt;银行卡列表</span>
+      <span>用户中心&gt;提现</span>
     </div>
-    <div v-if="isShowCardList">
+    <!--<div v-if="isShowCardList">
       <div class="search-box">
         <span>
         <a href="javascript:void(0)" class="btn" @click="newCard(1)">新增</a>
       </span>
       </div>
-      <!-- 表格 -->
+      &lt;!&ndash; 表格 &ndash;&gt;
       <div class="table-list">
         <table>
           <thead>
@@ -28,9 +28,9 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div class="add-card" v-else>
-      <p>提示:<span class="colorf00">*</span>为必填信息，如需要删除请联系客服提供银行卡照片和充值截图进行处理！</p>
+    </div>-->
+    <div class="add-card">
+      <p>您还未绑定银行卡，请填写信息绑定， <span class="colorf00"> * </span>为必填信息。</p>
       <ul class="item">
         <li class='title'><span class="colorf00">*</span>开户银行:</li>
         <li>

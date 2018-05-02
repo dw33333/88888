@@ -322,12 +322,12 @@
           },
           handles:{
             confirm(){
+              if(fn)fn();
               _this.ROOTBOX({
                 open:false
               })
             },
             close(){
-              if(fn)fn();
               _this.ROOTBOX({
                 open:false
               });

@@ -59,6 +59,7 @@
 <script>
 import footervue from '@/components/Footer.vue'
 import maskLayer from '@/components/base/mask-layer'
+import alert from "@/components/base/alert"
 import { mapState,mapMutations } from 'vuex'
 export default {
   name: 'Login',
@@ -102,19 +103,43 @@ export default {
         // clearTimeout();
       }, 1500)
     },
-
+    alert(tit,msg,fn,msgStyle){
+      let _this=this;
+      this.ROOTBOX({
+        open:true,
+        compt:alert,
+        props:{
+          tit:tit,
+          msg:msg,
+          msgstyle:msgStyle
+        },
+        handles:{
+          confirm(){
+            if(fn)fn();
+            _this.ROOTBOX({
+              open:false
+            })
+          },
+          close(){
+            _this.ROOTBOX({
+              open:false
+            });
+          }
+        }
+      });
+    },
     loginFn () {
       if (!this.user_name) {
-        this.mytoast('请输入用户名！')
+        this.alert('提示','请输入用户名！')
         return;
       } else if (this.user_name.length < 4) {
-        this.mytoast('用户名长度最少4位！')
+        this.alert('提示','用户名长度最少4位！')
         return;
       } else if (!this.pass_word) {
-        this.mytoast('请输入密码！')
+        this.alert('提示','请输入密码！')
         return;
       } else if (this.pass_word.length < 6) {
-        this.mytoast('密码长度最少6位！')
+        this.alert('提示','密码长度最少6位！')
         return;
       }
       let data = {
@@ -138,25 +163,26 @@ export default {
 
           // this.$store.dispatch('UserLogin', this.username)
           // this.$store.dispatch('SET_userMoney', this.mymoney)
-
+          this.mytoast("登录成功");
           this.changeUserName(this.user_name)
           this.changeUserMoney(res.data.data.money)
 
            setTimeout(() => {
               this.$router.push('/')
           }, 1500)
-
-          this.codeImgFn()
+          //this.codeImgFn()
         }else{
-          this.mytoast(res.data.msg)
+          this.alert("提示","登录失败");
+          console.error(res);
         }
       }).catch((error) => {
         // this.mytoast(res.dada.msg)
         this.codeImgFn()
+        this.alert("提示","登录失败");
         console.log('err:'+error)
       })
     },
-    ...mapMutations(['changeUserName','changeUserMoney','getUserToken',"EASYSECRET"]),
+    ...mapMutations(['changeUserName','changeUserMoney','getUserToken',"EASYSECRET","ROOTBOX"]),
   },
   components: {
     footervue,
