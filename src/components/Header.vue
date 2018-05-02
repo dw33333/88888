@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <div class="top-wrap">
       <div class="top-box">
         <div class="bar-left">
@@ -7,7 +7,7 @@
           <span style="padding-left:10px;">{{nowTime}}</span>
         </div>
         <!-- 登录界面 -->
-        <div class="bar-right" v-if="!codeToken">
+        <div class="bar-right" v-if="!username">
           <div class="item preson-info preson-balance">
             <input type="text" autoComplete='off' placeholder="账号" v-model="user_name">
           </div>
@@ -61,7 +61,7 @@
       <div class="nav">
         <img class="logo" src="../assets/logo.png" alt="">
         <ul>
-          <li class="buy-center">
+          <li class="buy-center" @mousemove="overShow" @mouseout="outHide">
             <router-link to="/lottery">
               <div>购彩中心</div>
               <span>LOTTERY</span>
@@ -93,6 +93,18 @@
           </li>
           <li>
             <a href="javascript:void(0)">
+              <div>视讯直播</div>
+              <span>GAMEINFORMATION</span>
+            </a>
+          </li>
+           <li>
+            <a href="javascript:void(0)">
+              <div>电子游艺</div>
+              <span>GAMEINFORMATION</span>
+            </a>
+          </li>
+          <li>
+            <a href="javascript:void(0)">
               <div>手机下注</div>
               <span>MOBILE</span>
             </a>
@@ -100,136 +112,22 @@
         </ul>
       </div>
       <!-- 下拉菜单 -->
-      <div class="menu-child1" style="display:none;" id="lot_sec_menu">
+      
+      <div class="menu-child1" v-show="showMenu" @mousemove="overShow" @mouseout="outHide" id="lot_sec_menu">
         <div class="gamelist-1 clear">
           <div class="official_play">
-            <div class="gamelist_tit clear">
-              <h1 class="red_style">官方玩法</h1>
-              <div class="color">官</div>
-            </div>
             <div class="high_wrap">
               <div class="gamelist_l">
-                <ul>
-                  <li>
-                    <a class="game_26" <img src='https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/ZQSSC.png?_=20160805'><span class="hot"><font>重庆时时彩</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_28" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/BJKL8.png?_=20160805"><span class="hot"><font>北京快乐8</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_29" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/BJPKS.png?_=20160805"><span class="hot"><font>北京PK拾</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_30" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/FC3D.png?_=20160805"><span class="hot"><font>福彩3D</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_40" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/XJSSC.png?_=20160805"><span class="hot"><font>新疆时时彩</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_44" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/PLSW.png?_=20160805"><span class="hot"><font>排列三、五</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_45" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/GD11X5.png?_=20160805"><span class="hot"><font>广东11选5</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_50" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/HLJ11X5.png?_=20160805"><span class="hot"><font>黑龙江11选5</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_56" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/BJSSC.png?_=20160805"><span class="hot"><font>北京时时彩</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_78" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/QQFFC.png?_=20160805"><span class="hot"><font>QQ分分彩</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_81" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/SHSSL.png?_=20160805"><span class="hot"><font>上海时时乐</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_80" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/HEBEIKUAI3.png?_=20160805"><span class="hot"><font>河北快3</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_51" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/HGKLC.png?_=20160805"><span class="hot"><font>韩式1.5分彩</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_62" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/JS11X5.png?_=20160805"><span class="hot"><font>江苏11选5</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_68" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/AZ3FC.png?_=20160805"><span class="hot"><font>澳洲3分彩</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_72" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/SH11X5.png?_=20160805"><span class="hot"><font>上海11选5</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_76" <img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/TXFFC.png?_=20160805"><span class="hot"><font>腾讯分分彩</font></span></a>
+                <ul v-for="item in headersArry" :key="item.id">
+                  <li  v-for="items in item.type" :key="items.id">
+                    <a class="game_26"><img :src="`/static/img/${items.name}.png`" alt=""> <span class="hot"><font>{{items.short_name}}</font></span></a>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
-          <div class="credit_play">
-            <div class="gamelist_tit clear">
-              <h1 class="orange_style">信用玩法</h1>
-              <div class="color">信</div>
-            </div>
-            <div class="high_wrap">
-              <div class="gamelist_r">
-                <ul>
-                  <li>
-                    <a class="game_1" href="/six/index"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/⑥HC.png?_=20160805"><span class="hot"><font>香港六合彩</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_4" href="/OtherGame/Index/4"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/GD11X5.png?_=20160805"><span class="hot"><font>广东11选5</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_6" href="/OtherGame/Index/6"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/GXKS.png?_=20160805"><span class="hot"><font>广西快十</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_7" href="/OtherGame/Index/7"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/ZQSSC.png?_=20160805"><span class="hot"><font>重庆时时彩</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_10" href="/OtherGame/Index/10"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/XJSSC.png?_=20160805"><span class="hot"><font>新疆时时彩</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_13" href="/OtherGame/Index/13"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/ZQKS.png?_=20160805"><span class="hot"><font>幸运农场</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_15" href="/OtherGame/Index/15"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/BJPKS.png?_=20160805"><span class="hot"><font>北京PK拾</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_55" href="/OtherGame/Index/55"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/BJSSC.png?_=20160805"><span class="hot"><font>北京时时彩</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_77" href="/OtherGame/Index/77"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/QQFFC.png?_=20160805"><span class="hot"><font>QQ分分彩</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_63" href="/OtherGame/Index/63"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/JS11X5.png?_=20160805"><span class="hot"><font>江苏11选5</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_69" href="/OtherGame/Index/69"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/AZ3FC.png?_=20160805"><span class="hot"><font>澳洲3分彩</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_73" href="/OtherGame/Index/73"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/SH11X5.png?_=20160805"><span class="hot"><font>上海11选5</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_79" href="/OtherGame/Index/79"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/HEBEIKUAI3.png?_=20160805"><span class="hot"><font>河北快3</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_53" href="/OtherGame/Index/53"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/HGKLC.png?_=20160805"><span class="hot"><font>韩式1.5分彩</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_101" href="/OtherGame/Index/101"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/XY28.png?_=20160805"><span class="hot"><font>幸运28</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_5" href="/OtherGame/Index/5"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/GDKS.png?_=20160805"><span class="hot"><font>广东快十</font></span></a>
-                  </li>
-                  <li>
-                    <a class="game_75" href="/OtherGame/Index/75"><img src="https://zzzy3qqqt.52notice.net//Content/default/images/gameIcon/TXFFC.png?_=20160805"><span class="hot"><font>腾讯分分彩</font></span></a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          
         </div>
-        <div class="triangles_back"></div>
       </div>
     </nav>
     <maskLayer :ifopen="ifopen" :content='content'></maskLayer>
@@ -249,7 +147,9 @@ export default {
       ifopen: false,
       codeImg:'',
       temcodeToken:'',
-      code:''
+      code:'',
+      showMenu:true,
+      headersArry:[]
       // usermoney: '',
       // isShowLogin: sessionStorage.getItem('isLogin')
 
@@ -263,13 +163,25 @@ export default {
   computed: {
     ...mapState(['usermoney','username','codeToken'])
   },
+  created () {
+    this.getArry();
+  },
   methods: {
+    getArry () {
+      this.$http.get('/api/lottery/basic/LotteryGroup').then((res) => {
+        this.headersArry = res.data;
+        console.log(this.headersArry)
+      })
+    },
+    overShow () {
+      this.showMenu = true;
+    },
+    outHide () {
+      this.showMenu = false;
+    },
     codeImgFn(){
-      this.$http.get('http://192.167.9.166/site/captcha').then((res) => {
-            
+      this.$http.get('/api/site/captcha').then((res) => {
           if (res.status === 200) {
-            console.log(res.data.codeToken)
-
               this.codeImg=res.data.src
               this.temcodeToken=res.data.codeToken
               // this.mytoast(res.data.msg)
@@ -346,14 +258,15 @@ export default {
     }, 
     // 退出登录
     loginout () {
-      this.$http.get('/json/api.php?r=logout').then((res) => {
+      this.$http.get('/api/user/logout',{headers:{EasySecret:this.temcodeToken,emulateJSON:true}}).then((res) => {
         if (res.data.code === 0) {
           // this.$store.dispatch('UserLogout')
 
           this.userLoginOut()
 
           this.mytoast(res.data.msg)
-          
+          sessionStorage.clear();
+          this.codeImgFn().stop
           setTimeout(() => {
             // alert(1)
             // instance.close()
@@ -604,7 +517,7 @@ nav {
 }
 
 .nav {
-  width: 1050px;
+  width: 1320px;
   height: 69px;
   margin: 0 auto;
   overflow: hidden;
@@ -624,7 +537,7 @@ nav {
 
 .nav ul>li {
   float: left;
-  padding: 12px 26px;
+  padding: 12px 18px;
   line-height: 22px;
   cursor: pointer;
   -webkit-transition: all .5s;
@@ -682,7 +595,7 @@ nav {
 .official_play {
   border-right: 1px solid #2b2b2b;
   display: inline-block;
-  width: 490px;
+  /* width: 490px; */
   zoom: 1;
   font-size: 0;
   float: left;
@@ -690,7 +603,7 @@ nav {
 
 .gamelist_tit {
   border-bottom: 1px solid #2b2b2b;
-  width: 490px;
+  /* width: 490px; */
   display: block;
   margin: 8px 0 0 0;
   padding-bottom: 8px;
@@ -722,7 +635,7 @@ nav {
 }
 
 .high_wrap {
-  width: 464px;
+  /* width: 464px; */
   height: auto;
   float: none;
 }
@@ -732,10 +645,9 @@ nav {
 }
 
 .menu-child1 ul {
-  min-height: 62px;
+  /* min-height: 62px;
   padding: 11px 0;
-  width: 464px;
-  overflow: hidden;
+  /* width: 464px; */
 }
 
 .high_wrap ul {
@@ -749,13 +661,15 @@ nav {
 .menu-child1 li {
   float: left;
   line-height: 28px;
-  margin: 5px 0;
+  margin: 5px 4px;
   height: 104px;
   width: 92px;
   position: relative;
   text-align: center;
 }
-
+.menu-child1 li:hover {
+    background: url(/static/img/Wbg_03.png) repeat;
+}
 .menu-child1 li a {
   display: block;
   width: 80px;
@@ -770,7 +684,7 @@ nav {
 
 .menu-child1 li a img {
   width: 80%;
-  height: 80%;
+  height: 80%; 
   margin: 10%;
   display: none;
 }
@@ -791,7 +705,7 @@ img {
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 28px;
+  height: 22px;
   line-height: 28px;
   overflow: hidden;
 }
