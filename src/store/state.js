@@ -1,6 +1,6 @@
 
 // 用户名
-let username=''
+let username='';
 try {
 	if(sessionStorage.getItem('username')){
 		username=sessionStorage.getItem('username');
@@ -71,8 +71,18 @@ try {
 		userRealName=JSON.parse(sessionStorage.getItem('userRealName'))
 	}
 } catch (e) {}
-
+let easysecret='';
+try {
+  if(sessionStorage.getItem('easysecret')){
+    easysecret=sessionStorage.getItem('easysecret')
+  }
+} catch (e) {}
+let rootbox={
+  open:false
+}
 const state = {
+  easysecret,
+  rootbox,
   username, // 用户名
   usermoney, // 用户余额
   agmoney, // AG余额
@@ -80,7 +90,7 @@ const state = {
   agentId,// 代理ID
   codeToken,// token
   userRealName,
-  
+
   bbinmoney: bbinmoney, // BBIN余额
   mgmoney: mgmoney, // MG余额
 }

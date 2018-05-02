@@ -107,7 +107,7 @@ export default {
       inputMoney: null
     }
   },
- 
+
   methods: {
     // 提交银行汇款
     submitRecharge () {
@@ -268,7 +268,7 @@ export default {
     // 获取个人信息
     getuserinfo () {
       // 获取银行
-      this.$http.get('/json/center/?r=HuikuanInfo').then((res) => {
+      this.$http.get('/HuikuanList/showBank').then((res) => {
         this.bankArr = res.data.data.bank
         this.bankNumArr = res.data.data.InfoList
       }).catch((error) => {
@@ -306,7 +306,7 @@ export default {
       // })
 
       // 在线网银
-      this.$http.get('/json/api.php?r=wap').then((res) => {
+      this.$http.get('/pay/mobilelist').then((res) => {
         // if (res.data.data.length === 0) {
         //   this.modeWidth = '100%'
         // } else {
@@ -358,7 +358,7 @@ export default {
   mounted () {
     this.getuserinfo()
   },
- 
+
   computed: {
     currentTime () {
       let Y = new Date().getFullYear()
