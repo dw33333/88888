@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
+import store from "@/store"
+/*import alert from "@/components/base/alert"*/
 // 首页头部导航栏
 
  // username
@@ -198,8 +200,7 @@ const USERCENTER = (resolve) => {
     resolve(module)
   })
 }
-
-export default new Router({
+const route =new Router({
   routes: [
     {
       path: '/',
@@ -294,4 +295,15 @@ export default new Router({
       ]
     }
   ]
+});
+route.beforeEach((to,from,next)=>{
+  let exclude=["register","Login"];
+  if(!store.state.easysecret&&(exclude.indexOf(to.name)===-1)){//除登录和注册页面其他页面未登录跳到登录页
+    route.push("login");
+  }else if(store.state.easysecret&&(exclude.indexOf(to.name)!==-1)){//登录的状态不能访问登录页和注册页
+    route.push("/");
+  }else{
+    next();
+  }
 })
+export default  route;

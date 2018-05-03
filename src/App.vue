@@ -65,6 +65,39 @@
     padding: 0;
     margin: 0;
   }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-text-fill-color: rgba(255, 255, 255, 1);;
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+  }
+
+  @-webkit-keyframes autofill { //去除chrome浏览器自动填充表单的黄色背景
+    to {
+      color: rgba(255, 255, 255, 1);
+      background: transparent;
+    }
+  }
+
+  @-webkit-keyframes autofill2 { //去除chrome浏览器自动填充表单的黄色背景
+    to {
+      color: #aaa;
+      background: transparent;
+    }
+  }
+
+  body {
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-animation-name: autofill2;
+      -webkit-animation-fill-mode: both;
+      color: #aaa !important;
+    }
+  }
 
   .ew-slide-enter-active,
   .ew-slide-leave-active {

@@ -19,7 +19,7 @@ export default {
     banner,
     moregame,
     footervue
-  }
+  },
 }
 
 </script>

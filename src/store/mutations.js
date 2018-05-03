@@ -60,12 +60,20 @@ const mutations = {
   EASYSECRET (state,data) {
     state.easysecret = data;
     try {
+      if(data)
       sessionStorage.setItem('easysecret',data);
     } catch (e) {}
   },
   //BOOTBOX
   ROOTBOX(state,data){
     state.rootbox=data;
+  },
+  USERINFO(state,data){
+    state.userinfo = data;
+    try {
+      if(data)
+      sessionStorage.setItem('userinfo',JSON.stringify(data));
+    } catch (e) {}
   },
   userLoginOut (state,data) {
       state.username=''

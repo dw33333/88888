@@ -299,28 +299,7 @@
         }
       }
     }
-    textarea {
-      line-height: 1.5em;
-      width: 300px;
-      border: 1px solid #ccc;
-      border-radius: 3px 3px;
-      padding-left: 10px;
-      color: #999;
-      position: relative;
-      top: 3px;
-      font-family: "Microsoft YaHei";
-      box-sizing: border-box;
-    }
-    select, input {
-      line-height: 30px;
-      height: 36px;
-      width: 300px;
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      border-radius: 3px 3px;
-      padding-left: 10px;
-      color: #999;
-    }
+
     .other_content {
 
       color: #666;

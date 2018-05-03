@@ -75,7 +75,10 @@ export default {
     }
   },
   mounted(){
-    this.codeImgFn()
+    this.codeImgFn();
+    /*if(this.easysecret){
+      this.$router.push("/");
+    }*/
   },
   methods: {
     codeImgFn(){
@@ -149,34 +152,24 @@ export default {
         code:this.code,
         codeToken:this.codeToken
       }
-
+      this.$http.defaults.headers.EasySecret=undefined;
       this.$http.post('/api/user/login', data).then((res) => {
-
         this.$http.defaults.headers.EasySecret=res.headers.easysecret;
         this.EASYSECRET(res.headers.easysecret);
-
-        if (res.status === 200 && res.data.code === 0) {
-
-          // this.usermoney = res.data.data.user_money
-          // sessionStorage.setItem('username', this.username)
-          // sessionStorage.setItem('isShow', this.username)
-
-          // this.$store.dispatch('UserLogin', this.username)
-          // this.$store.dispatch('SET_userMoney', this.mymoney)
+        if( res.data.code === 0) {
           this.mytoast("登录成功");
-          this.changeUserName(this.user_name)
-          this.changeUserMoney(res.data.data.money)
-
-           setTimeout(() => {
-              this.$router.push('/')
-          }, 1500)
+          this.changeUserName(this.user_name);
+          this.changeUserMoney(res.data.data.money);
+          setTimeout(() => {
+            console.log(22222);
+              this.$router.push({path:"/"});
+            }, 1500)
           //this.codeImgFn()
         }else{
-          this.alert("提示","登录失败");
-          console.error(res);
+          this.alert('提示',res.data.msg);
+          this.codeImgFn()
         }
       }).catch((error) => {
-        // this.mytoast(res.dada.msg)
         this.codeImgFn()
         this.alert("提示","登录失败");
         console.log('err:'+error)
@@ -189,7 +182,7 @@ export default {
     maskLayer
   },
   computed: {
-    ...mapState(['codeToken'])
+    ...mapState(['codeToken','easysecret'])
   }
 }
 
