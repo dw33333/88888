@@ -189,7 +189,24 @@ const Notice = (resolve) => {
     resolve(module)
   })
 }
-
+//优惠中心
+const Activity = (resolve) => {
+  import('@/components/Activity').then((module) => {
+    resolve(module)
+  })
+}
+//手机下注
+const mobile = (resolve) => {
+  import('@/components/mobile').then((module) => {
+    resolve(module)
+  })
+}
+//视讯直播
+const live = (resolve) => {
+  import('@/components/live/live1').then((module) => {
+    resolve(module)
+  })
+}
 Vue.use(Router)
 Vue.use(VueAwesomeSwiper)
 
@@ -218,6 +235,21 @@ export default new Router({
       path: '/Login',
       name: 'Login',
       component: Login
+    },
+    {
+      path:'/live',
+      name:'live1',
+      component:live
+    },
+    {
+      path:'/mobile',
+      name:'mobile',
+      component:mobile
+    },
+    {
+      path: '/Activity',
+      name: 'Activity',
+      component: Activity
     },
     {
       path: '/lottery',

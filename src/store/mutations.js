@@ -7,9 +7,9 @@ const mutations = {
   },
 
   changeUserMoney (state,data) {
-      state.usermoney = data
+      state.money = data
     try {
-      sessionStorage.setItem('usermoney',data)
+      sessionStorage.setItem('money',data)
     } catch (e) {}
   },
 
@@ -66,6 +66,9 @@ const mutations = {
   //BOOTBOX
   ROOTBOX(state,data){
     state.rootbox=data;
+  },
+  getData(state,data){
+    state.headerArry = data;
   },
   userLoginOut (state,data) {
       state.username=''

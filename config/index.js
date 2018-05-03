@@ -25,7 +25,7 @@ module.exports = {
     // },
     proxyTable: {
         '/api': {    //访问api这个目录的时候
-            target: 'http://192.167.9.116',//转发到当前服务器的8080端口
+            target: 'http://192.167.9.166',//转发到当前服务器的8080端口
             changeOrigin:true,
             pathRewrite: {
                 '^/api':'/'   //当请求地址是以api开头的，

@@ -16,7 +16,7 @@
           </div>
           <div class="yanzheng">
             <input type="text" class="inputcode" v-model="code">
-            <img :src="codeImg" @click='codeImgFn' class="code" alt="">
+            <img :src="codeImg" @click='codeImgFn' class="code" alt="" title="点击更换">
           </div>
           <div class="item login">
             <a href="javascript:void(0);" @click='loginSubmit();'>登录</a>
@@ -24,9 +24,9 @@
           <div class="item regster">
             <router-link to="/register">免费开户</router-link>
           </div>
-          <div class="item resetpwd">
-            <a href="javascript:void(0);">忘记密码</a>
-          </div>
+          <!-- <div class="item resetpwd">
+            <a href="javascript:void(0);" @click="forgorWord">忘记密码</a>
+          </div> -->
         </div>
         <!-- 登录后显示账户名余额信息 -->
         <div class="bar-right" v-else>
@@ -34,7 +34,7 @@
             账号：{{username}}
           </div>
           <div class="preson-balance personpwd leftMoney">
-            余额:{{usermoney}}
+            余额:{{money}}
 
 
           </div>
@@ -59,13 +59,15 @@
     <nav>
       <!-- 导航 -->
       <div class="nav">
-        <img class="logo" src="../assets/logo.png" alt="">
+        <router-link to="/">
+          <img class="logo" src="../assets/logo.png" alt="">
+        </router-link>
         <ul>
           <li class="buy-center" @mousemove="overShow" @mouseout="outHide">
-            <router-link to="/lottery">
+            <a href="javascript:;" to="/lottery">
               <div>购彩中心</div>
               <span>LOTTERY</span>
-            </router-link>
+            </a>
           </li>
           <li class="user-center">
             <a href='javascript:void(0);' @click='enterUserCenter();'>
@@ -73,14 +75,18 @@
               <span>USERCENTER</span>
             </a>
           </li>
-          <li>
-            <a href="javascript:void(0)">
+          <router-link to="/Activity" tag="li">
+            <a @click="enterActivity">
               <div>优惠活动</div>
               <span>ACTIVITY</span>
             </a>
-          </li>
+          </router-link>
           <li>
-            <a href="javascript:void(0)">
+            <a href="javascript:void(0)" v-if="!username" @click="showMessge">
+              <div>平台公告</div>
+              <span>ANNOUNCEMENT</span>
+            </a>
+             <a href="#" v-else >
               <div>平台公告</div>
               <span>ANNOUNCEMENT</span>
             </a>
@@ -91,24 +97,35 @@
               <span>GAMEINFORMATION</span>
             </a>
           </li>
-          <li>
-            <a href="javascript:void(0)">
+          <router-link to="/live" tag="li" style="position:relative;" @click="goVideo" @mousemove.native="showmenu" @mouseout.native="hidemenu">
+            <a>
               <div>视讯直播</div>
-              <span>GAMEINFORMATION</span>
+              <span>LIVEVIDEO</span>
             </a>
-          </li>
-           <li>
+            <div class="hide" @mousemove.native="showmenu" @mouseout.native="hidemenu" v-show="menuVideo">
+              <a href="javascript:;" class="p10">DS</a>
+              <a href="javascript:;" class="p10">AG</a>
+              <a href="javascript:;" class="p10">BB</a>
+              <a href="javascript:;" class="p10">MG</a>
+            </div>
+          </router-link>
+           <li style="position:relative;"  @mousemove="showmenu2" @mouseout="hidemenu2" >
             <a href="javascript:void(0)">
               <div>电子游艺</div>
-              <span>GAMEINFORMATION</span>
+              <span>ELECTRONICGAMES</span>
             </a>
+            <div class="hide" @mousemove="showmenu2" @mouseout="hidemenu2" v-show="menugame" style="left:-11px;width:200px;">
+              <a href="javascript:;" class="p20">BB</a>
+              <a href="javascript:;" class="p20">AG</a>
+              <a href="javascript:;" class="p20">MG</a>
+            </div>
           </li>
-          <li>
+          <router-link to="/mobile" tag="li">
             <a href="javascript:void(0)">
               <div>手机下注</div>
               <span>MOBILE</span>
             </a>
-          </li>
+          </router-link>
         </ul>
       </div>
       <!-- 下拉菜单 -->
@@ -118,7 +135,7 @@
           <div class="official_play">
             <div class="high_wrap">
               <div class="gamelist_l">
-                <ul v-for="item in headersArry" :key="item.id">
+                <ul v-for="item in this.headerArry" :key="item.id">
                   <li  v-for="items in item.type" :key="items.id">
                     <a class="game_26"><img :src="`/static/img/${items.name}.png`" alt=""> <span class="hot"><font>{{items.short_name}}</font></span></a>
                   </li>
@@ -126,9 +143,75 @@
               </div>
             </div>
           </div>
-          
+        </div>
+        <div class="triangles_bacK"></div>
+      </div>
+      <!-- 平台公告 -->
+      <div class="ui-popup-backdrop" v-show="showMessgeBox" @click="closeMessge"></div>
+      <div class="alertdialog" v-show="showMessgeBox">
+        <div class="ui-dialog">
+          <table class="ui-dialog-grid">
+            <tbody>
+              <tr>
+                <td  class="ui-dialog-header">
+                  <button i="close" class="ui-dialog-close" title="取消" @click="closeMessge">×</button>
+                  <div class="ui-dialog-title">平台公告</div>
+                </td>
+                </tr>
+                <tr>
+                <td class="ui-dialog-body">
+                  <div class="ui-dialog-content">
+                    <div id="DIALOG-VM" data-bind="template:__DIALOG_TPL" style="display: block;">
+                     <div class="notice_main">
+                       <div class="notice_title">
+                         <h1>温馨提示：银行卡更新通告</h1>
+                       </div>
+                       <div class="notice_text">
+                         <div class="notice_item"></div>
+                         <div class="fright">{{nowTime}}</div>
+                       </div>
+                     </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
+      <!-- 忘记密码 -->
+      <!-- <div class="alertdialog" v-show="showforgotPassword">
+        <div class="ui-dialog">
+          <table class="ui-dialog-grid">
+            <tbody>
+              <tr>
+                <td  class="ui-dialog-header">
+                  <button i="close" class="ui-dialog-close" title="取消" @click="closeMessge">×</button>
+                  <div class="ui-dialog-title" style="font-size:15px;text-align:left;">忘记密码</div>
+                </td>
+                </tr>
+                <tr>
+                <td class="ui-dialog-body" style="text-align:center;background:#fff;">
+                  <div class="ui-dialog-content" style="width: 440px;height:340px;">
+                    <div id="DIALOG-VM" data-bind="template:__DIALOG_TPL" style="display: block;">
+                      <div style="" class="passModel">
+                        <ul>
+                          <li>请输入账号以及取款密码</li>
+                          <li><label>会员账号: </label><input type="text"></li>
+                          <li><label>真实姓名: </label><input type="text"></li>
+                          <li><label>取款密码: </label><input type="password"></li>
+                          <li><label style="margin-left:14px;">验证码: </label><input type="text" v-model="code" value="验证码"><img :src="codeImg" @click='codeImgFn' class="code" title="点击更换"></li>
+                        </ul>
+                      </div>
+                      <span>★&nbsp;会员账号、真实姓名及取款密码核对正确后，系统自动为您重置密码。</span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div> -->
     </nav>
     <maskLayer :ifopen="ifopen" :content='content'></maskLayer>
   </div>
@@ -136,6 +219,7 @@
 <script>
 import maskLayer from './base/mask-layer'
 import { mapState,mapMutations } from 'vuex'
+import alert from "@/components/base/alert"
 export default {
   name: 'Header',
   data () {
@@ -148,8 +232,12 @@ export default {
       codeImg:'',
       temcodeToken:'',
       code:'',
-      showMenu:true,
-      headersArry:[]
+      showMenu:false,
+      // headersArry:[],
+      showMessgeBox:false,
+      menuVideo:false,
+      menugame:false
+      // showforgotPassword:false
       // usermoney: '',
       // isShowLogin: sessionStorage.getItem('isLogin')
 
@@ -158,21 +246,60 @@ export default {
   mounted () {
     this.codeImgFn()
     this.clockon()
-
+    this.checkUser();
   },
   computed: {
-    ...mapState(['usermoney','username','codeToken'])
+    ...mapState(['money','username','codeToken','headerArry'])
   },
   created () {
-    this.getArry();
+    // this.getArry();
   },
   methods: {
-    getArry () {
-      this.$http.get('/api/lottery/basic/LotteryGroup').then((res) => {
-        this.headersArry = res.data;
-        console.log(this.headersArry)
-      })
+    goVideo () {
+      this.$router.push('/live1');
     },
+    showmenu () {
+      this.menuVideo = true;
+    },
+    hidemenu () {
+      this.menuVideo = false;
+    },
+    showmenu2 () {
+      this.menugame = true;
+    },
+    hidemenu2 () {
+      this.menugame = false;
+    },
+    checkUser () {
+      if(!window.name){
+        this.showMessgeBox = true;
+        window.name = 'already';
+      }else{
+              
+      }
+    },
+    forgorWord () {
+      this.showforgotPassword = true;
+      this.showMessgeBoxM = true;
+    },
+    enterActivity () {
+      this.$router.push('/Activity')
+    },
+    closeMessge () {
+      this.showMessgeBox = false;
+      this.showMessgeBoxM = false;
+      this.showforgotPassword = false;
+    },
+    showMessge () {
+      this.showMessgeBox = true;
+      this.showMessgeBoxM = true;
+    },
+    // getArry () {
+    //   this.$http.get('/api/lottery/basic/LotteryGroup').then((res) => {
+    //     this.headersArry = res.data;
+        
+    //   })
+    // },
     overShow () {
       this.showMenu = true;
     },
@@ -203,9 +330,33 @@ export default {
         clearTimeout()
       }, 1500)
     },
-
+    alert(tit,msg,fn,msgStyle){
+      let _this=this;
+      this.ROOTBOX({
+        open:true,
+        compt:alert,
+        props:{
+          tit:tit,
+          msg:msg,
+          msgstyle:msgStyle
+        },
+        handles:{
+          confirm(){
+            _this.ROOTBOX({
+              open:false
+            })
+          },
+          close(){
+            if(fn)fn();
+            _this.ROOTBOX({
+              open:false
+            });
+          }
+        }
+      });
+    },
     enterUserCenter () {
-      if (!this.codeToken) {
+      if (!this.username) {
         this.mytoast('请先登录')
         setTimeout(() => {
           this.$router.push('/Login')
@@ -244,11 +395,8 @@ export default {
             // this.$store.dispatch('SET_userMoney', this.usermoney)
             // this.$router.push('/UserCenter')
             // this.$router.push(this.$route.query.redirect || '/')
-
-
-              // alert(this.user_name)
           this.changeUserName(this.user_name)
-          this.changeUserMoney(res.data.data.user_money)
+          this.changeUserMoney(res.data.data.money)
           // this.userIsLogin(true)
           }
         }).catch((error) => {
@@ -282,7 +430,7 @@ export default {
         console.log(error)
       })
     },
-    ...mapMutations(['changeUserName','changeUserMoney','getUserToken','userLoginOut']),
+    ...mapMutations(['changeUserName','changeUserMoney','getUserToken','userLoginOut','ROOTBOX','getData']),
     // getUserMoney(){
     //     // >获取用户余额
     //   this.$http.get('/json/center/?r=Money').then((res) => {
@@ -314,8 +462,202 @@ export default {
 }
 </script>
 <style scoped>
+/* 平台公告 */
+.router-link-active{
+  width: 128px;
+  height: 45px;
+  background: #af1313;
+  margin: 0;
+}
+.p10{
+  padding-right: 10px;
+}
+.p20{
+  padding-right: 20px;
+}
+.hide{
+  position: absolute;
+  top: 68px;
+  width: 200px;
+  z-index: 6;
+  left: -24px;
+  background: #f14a4a;
+  height: 30px;
+  line-height: 30px;
+}
+.passModel{
+  margin:auto;width:350px;padding: 20px;
+}
+.passModel li{
+  width: 350px;
+  height: 42px;
+  padding: 2px 0;
+  color: #000000;
+  font-size: 14px;
+}
+.passModel li input{
+  width: 180px;
+  height: 20px;
+  padding: 5px;
+  line-height: 20px;
+  margin: 5px 7px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  outline: none;
+}
+#DIALOG-VM span{
+  font-size: 12px;
+  color:#000;
+  padding-left: 30px;
+}
+.dialog-forgot table {
+    width: 350px;
+    margin: 0 auto;
+}
+.ui-dialog-close:hover, .ui-dialog-close:focus {
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
+  outline: 0;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+.notice_main {
+  float: left;
+  width: 762px;
+  height: 542px;
+  overflow: auto;
+  background: #fff;
+}
+.notice_title {
+  padding: 5px 0;
+  text-align: center;
+  border-bottom: 1px solid #e5e4e4;
+}
+.notice_text {
+  padding: 0 20px;
+  font-size: 16px;
+  color: #5c5c5c;
+  text-align: center;
+}
+.notice_text div {
+  line-height: 30px;
+  margin-top: 22px;
+  word-spacing: normal;
+  width:100%;
+  text-align: left;
+  word-break: break-all;
+  /* float: left; */
+}
+.notice_title h1 {
+    font-size: 22px;
+    color: #f4354a;
+    font-weight: bold;
+}
+.ui-dialog-content {
+  color: #fff;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  text-align: left;
+}
+.notice_main {
+  float: left;
+  width: 762px;
+  height: 542px;
+  overflow: auto;
+  background: #fff;
+}
+.ui-dialog-body {
+    padding: 0 !important;
+}
+.ui-dialog-header {
+  border-bottom: none;
+  color: #fff;
+  background: #b62929;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f83737), to(#b62929));
+  background-image: -moz-linear-gradient(top, #f83737, #b62929);
+  background-image: -o-linear-gradient(top, #f83737, #b62929);
+  background-image: -webkit-linear-gradient(top, #f83737, #b62929);
+  background-image: linear-gradient(to bottom, #f83737, #b62929);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#f83737', endColorstr='#b62929')";
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f83737', endColorstr='#b62929');
+  zoom: 1;
+  white-space: nowrap;
+  padding: 0;
+  border: 0 none;
+  text-align: left;
+}
+.ui-dialog-title {
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: 8px;
+  margin: 0;
+  line-height: 1.428571429;
+  min-height: 16.428571429px;
+  padding: 15px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: bold;
+  cursor: default;
+}
+.ui-dialog-close {
+  position: absolute;
+  opacity: 1;
+  font-weight: normal;
+  height: 64px;
+  top: 0;
+  font-size: 30px;
+  color: #fff;
+  background: url("../../static/img/popup-close.png") no-repeat center;
+  right: 10px;
+  border: none;
+}
+.ui-dialog {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1), 0 0 256px rgba(255, 255, 255, .3);
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  border-radius: 8px;
+  display: inline-block;
+  border: 1px solid #175e84;
+  border: 5px solid rgba(255,255,255,0.2);
+  box-shadow: 0 0 8px rgba(136, 136, 136, 0.5);
+  overflow: hidden;
+}
+.ui-dialog-grid {
+  width: auto;
+  margin: 0;
+  border: 0 none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  background: transparent;
+}
+.ui-popup-backdrop{
+  opacity: 0.7;
+  background: rgb(0, 0, 0);
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  user-select: none;
+  z-index: 1024;
+}
+.alertdialog{
+  position: absolute;
+  outline: 0px;
+  left: 0;
+  top: 20%;
+  z-index: 1024;
+  right: 0;
+  bottom: 0;
+  margin:auto;
+}
 /*登录*/
-
 .top-wrap {
   height: 48px;
   overflow: hidden;
@@ -356,11 +698,15 @@ export default {
 }
 .bar-right .yanzheng{
   width: 128px;
+  border: 2px solid #822b29;
+  line-height: 0;
+  margin-top: 9px;
+  border-radius: 16px;
 }
 .bar-right .yanzheng .inputcode{
   width: 44px;
-  height: 26px;
-  border:2px solid #b62929;
+  height: 27px;
+  /* border:2px solid #b62929; */
   padding-left: 4px;
 }
 .bar-right .yanzheng .code{
@@ -392,18 +738,21 @@ export default {
 .bar-right .login a {
   color: #fff;
   text-decoration: none;
+  font-size: 14px;
 }
 
 .bar-right .regster a {
   color: #fff;
   padding: 8px 10px;
   text-decoration: none;
+  font-size: 14px;
 }
 
 .resetpwd a {
   color: #fff;
   padding: 10px 0;
   text-decoration: none;
+  font-size: 14px;
 }
 
 .bar-right div input {
@@ -520,7 +869,7 @@ nav {
   width: 1320px;
   height: 69px;
   margin: 0 auto;
-  overflow: hidden;
+  /* overflow: hidden; */
   font-size: 14px;
   color: #fff;
 }
@@ -551,14 +900,23 @@ nav {
   color: #fff;
   text-decoration: none !important;
   outline: none !important;
+  display: inline-block;
+  transition: All .3s ease;
+  -webkit-transition: All .3s ease;
+  -moz-transition: All .3s ease;
+  -o-transition: All .3s 
 }
-
+.nav ul > li a:hover {
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    color: #fff;
+}
 .nav ul>li:hover {
-  -webkit-transform: scale(1.1);
-  -ms-transform: scale(1.1);
-  -o-transform: scale(1.1);
-  transform: scale(1.1);
-  background-color: #f14a4a;
+  background: #f14a4a;
+  color: #fff;
 }
 
 /*下拉菜单*/
@@ -568,7 +926,7 @@ nav {
   width: 1050px;
   margin: 0 5px;
   padding: 1px;
-  z-index: 9999;
+  z-index: 99999;
   border-radius: 0 0 8px 8px;
   zoom: 1;
   box-shadow: 0 1px 30px #A9A9A9;

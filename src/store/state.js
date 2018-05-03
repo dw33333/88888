@@ -8,11 +8,11 @@ try {
 } catch (e) {}
 
 // 用户余额
-let usermoney=0.00
+let money=0.00
 try {
-	if(sessionStorage.getItem('usermoney')){
+	if(sessionStorage.getItem('money')){
 		// alert(sessionStorage.getItem('usermoney'))
-		usermoney=sessionStorage.getItem('usermoney')
+		money=sessionStorage.getItem('money')
 	}
 } catch (e) {}
 
@@ -80,17 +80,18 @@ try {
 let rootbox={
   open:false
 }
+let headerArry='';
 const state = {
   easysecret,
   rootbox,
   username, // 用户名
-  usermoney, // 用户余额
+  money, // 用户余额
   agmoney, // AG余额
   dsmoney, // DS余额
   agentId,// 代理ID
   codeToken,// token
   userRealName,
-
+  headerArry,
   bbinmoney: bbinmoney, // BBIN余额
   mgmoney: mgmoney, // MG余额
 }

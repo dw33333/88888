@@ -3,84 +3,20 @@
     <div class="more_game">
       <div class="hotgame">
         <div class="title">
-          <span :class="{guan:true,active:tabIndex==2}" @click="selectType(2)">信</span>
-          <span :class="{xin:true,active:tabIndex==1}" @click="selectType(1)">官</span>
+          
         </div>
         <!-- 官方玩法 -->
-        <ul class="guantype" v-if="tabIndex==1">
-          <li>官方玩法 <span>官</span></li>
-          <li class="border-top ov padbottom">
-            <div class="font16 lh40">高频游戏</div>
-            <div class="item">重庆时时彩</div>
-            <div class="item">北京快乐8</div>
-            <div class="item">北京PK拾</div>
-            <div class="item">新疆时时彩</div>
-            <div class="item">广东11选5</div>
-            <div class="item">黑龙江11选5</div>
-            <div class="item">北京时时彩</div>
-            <div class="item">QQ分分彩</div>
-            <div class="item">河北快3</div>
-            <div class="item">韩式1.5分彩</div>
-            <div class="item">江苏11选5</div>
-            <div class="item">澳洲3分彩</div>
-            <div class="item">上海11选5</div>
-            <div class="item">腾讯分分彩</div>
-          </li>
-          <li class="border-top ov padbottom">
-            <div class="font16 lh40">低频游戏</div>
-            <div class="item">福彩3D</div>
-            <div class="item">排列三、五</div>
-            <div class="item">上海时时乐</div>
-          </li>
-        </ul>
-        <!-- 信用玩法 -->
-        <ul class="guantype" v-if="tabIndex==2">
-          <li>信用玩法 <span>信</span></li>
-          <li class="border-top ov padbottom">
-            <div class="item">香港六合彩</div>
-            <div class="item">广东11选5</div>
-            <div class="item">广西快十</div>
-            <div class="item">重庆时时彩</div>
-            <div class="item">新疆时时彩</div>
-            <div class="item">幸运农场</div>
-            <div class="item">北京PK拾</div>
-            <div class="item">北京时时彩</div>
-            <div class="item">QQ分分彩</div>
-            <div class="item">江苏11选5</div>
-            <div class="item">澳洲3分彩</div>
-            <div class="item">上海11选5</div>
-            <div class="item">河北快3</div>
-            <div class="item">韩式1.5分彩</div>
-            <div class="item">幸运28</div>
-            <div class="item">广东快十</div>
-            <div class="item">腾讯分分彩</div>
-          </li>
-          <li class="border-top ov padbottom">
-            <div class="font16 lh40">彩票游戏</div>
-            <div class="item">其他游戏</div>
+        <ul class="guantype" v-for="item in LotteryGroupArry" :key="item.id">
+          <li class="border-top ov padbottom" v-for="items in item.type" :key="items.id">
+            <div class="item" ><span>{{items.short_name}}</span></div>
           </li>
         </ul>
       </div>
       <div class="hottype">
         <div class="title"></div>
         <ul>
-          <li>
-            <div>北京PK拾</div>
-          </li>
-          <li>
-            <div>江苏快三</div>
-          </li>
-          <li>
-            <div>重庆时时彩</div>
-          </li>
-          <li>
-            <div>六合彩</div>
-          </li>
-          <li>
-            <div>韩国1.5分彩</div>
-          </li>
-          <li>
-            <div>腾讯分分彩</div>
+          <li  v-for="item in lotteryHot" :key="item.id">
+            <div>{{item.short_name}}</div>
           </li>
         </ul>
       </div>
@@ -142,17 +78,38 @@
   </div>
 </template>
 <script>
+import { mapState,mapMutations } from 'vuex'
 export default {
   name: 'Moregame',
   data () {
     return {
-      tabIndex: 1
-    }
+      lotteryHot: [],
+      LotteryGroupArry: []
+  }
+  },
+   computed: {
+    ...mapState(['money','username','codeToken','headerArry'])
+  },
+  created () {
+    this.LotteryHot();
+    this.LotteryGroup();
   },
   methods: {
     selectType (index) {
       this.tabIndex = index
-    }
+    },
+    LotteryGroup () {
+      this.$http.get('/api/lottery/basic/LotteryGroup').then((res) => {
+      this.LotteryGroupArry = res.data;
+      this.getData(this.LotteryGroupArry)
+      })
+    },
+    LotteryHot () {
+    this.$http.get('/api/lottery/basic/LotteryHot').then((res)=>{
+      this.lotteryHot = res.data;
+      })
+    },
+    ...mapMutations(['changeUserName','changeUserMoney','getUserToken','userLoginOut','ROOTBOX','getData']),
   }
 }
 
@@ -175,7 +132,8 @@ export default {
 .hottype {
   width: 50%;
   float: left;
-  height: 56px;
+  height: 304px;
+  background-color: #8e2020;
 }
 
 .hotgame .title {
@@ -218,22 +176,16 @@ export default {
 }
 
 .hotgame .guantype {
-  text-align: left;
   background-color: #b62929;
   color: #fff;
-  overflow: hidden;
-  height: 304px;
 }
 
 .hotgame .guantype li {
-  vertical-align: sub;
-  line-height: 50px;
-  margin: 0 20px;
+  float: left;
 }
 
 .hotgame .guantype span {
   color: #fff;
-  background-color: #EF4949;
   padding: 4px;
   border-radius: 8px;
   margin-left: 8px;
@@ -244,9 +196,6 @@ export default {
 }
 
 .hotgame .guantype .item {
-  float: left;
-  font-size: 14px;
-  width: 25%;
   line-height: 30px;
 }
 
@@ -263,7 +212,7 @@ export default {
 }
 
 .padbottom {
-  padding-bottom: 10px;
+  padding: 10px 0;
 }
 
 /*热门类型*/
@@ -303,12 +252,13 @@ export default {
 }
 
 .hottype ul li:nth-child(6) {
-  background-position: 0 -533px;
+  background-position: 0 -666px;
 }
 
 .hottype ul li div {
   text-align: center;
   margin-top: 106px;
+  font-size: 14px;
 }
 
 /*游戏下载 二维码*/
