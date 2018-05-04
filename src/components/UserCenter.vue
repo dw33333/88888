@@ -1,5 +1,5 @@
 <template>
-  <div class='container'>
+  <div class='container usercenter'>
     <div class="header">
       <img class="logo" src="../assets/logo1.png" height="82" width="136" alt="">
       <ul class="nav">
@@ -14,204 +14,206 @@
         <li class="layout"><a href="#" @click="loginout();">登出账号</a></li>
       </ul>
       <!-- 下拉游戏选择 -->
-      <div class="menu-child" @mouseover="showAllgame" @mouseout="hideAllgame" v-if="isShowMenu" id="lot_sec_menu">
-        <div class="gamelist clear">
-          <div class="official_play">
-            <div class="gamelist_tit clear">
-              <h1 class="red_style">官方玩法</h1>
+      <transition name="fade">
+        <div class="menu-child" @mouseover="showAllgame" @mouseout="hideAllgame" v-if="isShowMenu" id="lot_sec_menu">
+          <div class="gamelist clear">
+            <div class="official_play">
+              <div class="gamelist_tit clear">
+                <h1 class="red_style">官方玩法</h1>
+              </div>
+              <div class="high_wrap">
+                <div class="gamelist_l">
+                  <ul>
+                    <li>
+                      <a class="game_26" href="#">
+                        <font>重庆时时彩</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_26" href="#">
+                        <font>北京快乐8</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_26" href="#">
+                        <font>北京PK拾</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_26" href="#">
+                        <font>福彩3D</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_26" href="#">
+                        <font>新疆时时彩</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_26" href="#">
+                        <font>排列三、五</font>
+                      </a>
+                    </li>
+                    <li>
+                      <router-link class="game_26" to="/lottery">
+                        <font>广东11选5</font>
+                      </router-link>
+                    </li>
+                    <li>
+                      <a class="game_26" href="#">
+                        <font>黑龙江11选5</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_26" href="#">
+                        <font>北京时时彩</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_26" href="#">
+                        <font>QQ分分彩</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_26" href="#">
+                        <font>上海时时乐</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_26" href="#">
+                        <font>河北快3</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_26" href="#">
+                        <font>韩式1.5分彩</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_26" href="#">
+                        <font>江苏11选5</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_26" href="#">
+                        <font>澳洲3分彩</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_26" href="#">
+                        <font>上海11选5</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_26" href="#">
+                        <font>腾讯分分彩</font>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
-            <div class="high_wrap">
-              <div class="gamelist_l">
-                <ul>
-                  <li>
-                    <a class="game_26" href="#">
-                      <font>重庆时时彩</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_26" href="#">
-                      <font>北京快乐8</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_26" href="#">
-                      <font>北京PK拾</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_26" href="#">
-                      <font>福彩3D</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_26" href="#">
-                      <font>新疆时时彩</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_26" href="#">
-                      <font>排列三、五</font>
-                    </a>
-                  </li>
-                  <li>
-                    <router-link class="game_26" to="/lottery">
-                      <font>广东11选5</font>
-                    </router-link>
-                  </li>
-                  <li>
-                    <a class="game_26" href="#">
-                      <font>黑龙江11选5</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_26" href="#">
-                      <font>北京时时彩</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_26" href="#">
-                      <font>QQ分分彩</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_26" href="#">
-                      <font>上海时时乐</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_26" href="#">
-                      <font>河北快3</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_26" href="#">
-                      <font>韩式1.5分彩</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_26" href="#">
-                      <font>江苏11选5</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_26" href="#">
-                      <font>澳洲3分彩</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_26" href="#">
-                      <font>上海11选5</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_26" href="#">
-                      <font>腾讯分分彩</font>
-                    </a>
-                  </li>
-                </ul>
+            <div class="cut-line"></div>
+            <div class="credit_play">
+              <div class="gamelist_tit clear">
+                <h1 class="orange_style">信用玩法</h1>
+              </div>
+              <div class="high_wrap">
+                <div class="gamelist_r">
+                  <ul data-bind="foreach:credit">
+                    <li>
+                      <a class="game_1" href="#">
+                        <font>香港六合彩</font>
+                      </a>
+                    </li>
+                    <li>
+                      <router-link class="game_26" to="/lottery">
+                        <font>广东11选5</font>
+                      </router-link>
+                    </li>
+                    <li>
+                      <a class="game_1">
+                        <font>广西快十</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_1" href="#">
+                        <font>重庆时时彩</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_1" href="#">
+                        <font>新疆时时彩</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_1" href="#">
+                        <font>幸运农场</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_1" href="#">
+                        <font>北京PK拾</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_1" href="#">
+                        <font>北京时时彩</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_1" href="#">
+                        <font>QQ分分彩</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_1" href="#">
+                        <font>江苏11选5</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_1" href="#">
+                        <font>澳洲3分彩</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_1" href="#">
+                        <font>上海11选5</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_1" href="#">
+                        <font>河北快3</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_1" href="#">
+                        <font>韩式1.5分彩</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_1">
+                        <font>幸运28</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_1" href="#">
+                        <font>广东快十</font>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="game_1" href="#">
+                        <font>腾讯分分彩</font>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-          <div class="cut-line"></div>
-          <div class="credit_play">
-            <div class="gamelist_tit clear">
-              <h1 class="orange_style">信用玩法</h1>
-            </div>
-            <div class="high_wrap">
-              <div class="gamelist_r">
-                <ul data-bind="foreach:credit">
-                  <li>
-                    <a class="game_1" href="#">
-                      <font>香港六合彩</font>
-                    </a>
-                  </li>
-                  <li>
-                    <router-link class="game_26" to="/lottery">
-                      <font>广东11选5</font>
-                    </router-link>
-                  </li>
-                  <li>
-                    <a class="game_1">
-                      <font>广西快十</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_1" href="#">
-                      <font>重庆时时彩</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_1" href="#">
-                      <font>新疆时时彩</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_1" href="#">
-                      <font>幸运农场</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_1" href="#">
-                      <font>北京PK拾</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_1" href="#">
-                      <font>北京时时彩</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_1" href="#">
-                      <font>QQ分分彩</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_1" href="#">
-                      <font>江苏11选5</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_1" href="#">
-                      <font>澳洲3分彩</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_1" href="#">
-                      <font>上海11选5</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_1" href="#">
-                      <font>河北快3</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_1" href="#">
-                      <font>韩式1.5分彩</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_1">
-                      <font>幸运28</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_1" href="#">
-                      <font>广东快十</font>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="game_1" href="#">
-                      <font>腾讯分分彩</font>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <div class="triangles_back"></div>
         </div>
-        <div class="triangles_back"></div>
-      </div>
+      </transition>
       <!-- 下拉游戏选择 -->
     </div>
     <div class="main-body">
@@ -222,7 +224,7 @@
         <div class="balance">
           用户余额: <span>{{usermoney}}</span>
         </div>
-        <div class="balance" style="background-position:-96px -36px;">
+        <!--<div class="balance" style="background-position:-96px -36px;">
           真实姓名: <span>{{userRealName}}</span>
         </div>
         <div class="balance">
@@ -230,7 +232,7 @@
         </div>
         <div class="balance">
           DS真人余额: <span>{{dsmoney}}</span>
-        </div>
+        </div>-->
         <div class="money">
           <router-link to='/recharge' class="recharge">
             <span>充值</span>
@@ -245,35 +247,32 @@
             <div class="item" @click="isShow(1)">
               <a href="javascript:void(0);">密码管理</a>
             </div>
-            <ul class='list-item' v-if="isDisplay==1">
+            <ul class='list-item'
+                :style="{height:isDisplay==1?((34*1)+'px'):'0px',visibility:isDisplay==1?'visible':'hidden',overflow:'hidden'}">
               <li>
                 <router-link to="/PasswordManagement">修改密码</router-link>
               </li>
             </ul>
             <div class="item" @click="isShow(2)">
-              <a href="javascript:void(0);">投注报表</a>
+              <a href="javascript:void(0);">报表管理</a>
             </div>
-            <ul class="list-item" v-if="isDisplay==2">
+            <ul class="list-item"
+                :style="{height:isDisplay==2?((34*3)+'px'):'0px',visibility:isDisplay==2?'visible':'hidden',overflow:'hidden'}">
               <li>
-                <router-link to="/sportsgame">体育</router-link>
+                <router-link to="/charge_record">充提记录</router-link>
               </li>
               <li>
-                <router-link to="/videogame">视讯</router-link>
+                <router-link to="/bet_record">下注记录</router-link>
               </li>
               <li>
-                <router-link to="/lotterygame">彩票</router-link>
-              </li>
-              <li>
-                <router-link to="/depositrecord">存取款</router-link>
-              </li>
-              <li>
-                <router-link to="/conversionchange">额度转换</router-link>
+                <router-link to="/week_statistic">报表统计</router-link>
               </li>
             </ul>
             <div class="item" @click="isShow(3)">
               <a href="javascript:void(0);">额度转换</a>
             </div>
-            <ul class='list-item' v-if="isDisplay==3">
+            <ul class='list-item'
+                :style="{height:isDisplay==3?((34*1)+'px'):'0px',visibility:isDisplay==3?'visible':'hidden',overflow:'hidden'}">
               <li>
                 <router-link to="/moneymanagemen">额度管理</router-link>
               </li>
@@ -281,7 +280,8 @@
             <div class="item" @click="isShow(4)">
               <a href="javascript:void(0);">信息中心</a>
             </div>
-            <ul class='list-item' v-if="isDisplay==4">
+            <ul class='list-item'
+                :style="{height:isDisplay==4?((34*2)+'px'):'0px',visibility:isDisplay==4?'visible':'hidden',overflow:'hidden'}">
               <li>
                 <router-link to="/Messge">站内短信</router-link>
               </li>
@@ -300,519 +300,640 @@
 </template>
 <script>
 
-import maskLayer from './base/mask-layer'
-import { mapState,mapMutations } from 'vuex'
+  import maskLayer from './base/mask-layer'
+  import {mapState, mapMutations} from 'vuex'
+  import alert from "@/components/base/alert"
 
-export default {
-  data () {
-    return {
-      isDisplay: 0,
-      content: '',
-      ifopen: false,
-      isShowMenu: false,
-      unread_count: '',
-      lock10: false,
-      lock20: false,
-      lock30: false,
-      lock40: false,
-      realname: '',
-      bankCardNum: '',
-      bankName: ''
-    }
-  },
-  components: {
-    maskLayer
-  },
-  mounted () {
-    // 获取个人信息
-    this.getuserinfo()
-  },
-  computed: {
-    ...mapState(['agmoney','dsmoney','usermoney','username','userRealName'])
-  },
-  methods: {
-    // 获取个人信息
-    getuserinfo () {
-      this.$http.get('/json/center/?r=UsrInfo').then((res) => {
-
-        this.getUserRealName(res.data.data.pay_name)
-
-      }).catch((error) => {
-        console.log(error)
-      })
-
-      // >获取AG真人余额
-      this.$http.get('/json/center/?r=AginMoney').then((res) => {
-    
-         this.changeAgMoney(res.data.data.money)
-
-      }).catch((error) => {
-        console.log(error)
-      })
-
-      // >获取DS真人余额：
-      this.$http.get('/json/center/?r=DsMoney').then((res) => {
-   
-        this.changeDsMoney(res.data.data.money)
-        
-      }).catch((error) => {
-        console.log(error)
-      })
-
-      // >获取用户余额
-      this.$http.get('/json/center/?r=Money').then((res) => {
-
-        this.changeUserMoney(res.data.data.user_money)
-
-      }).catch((error) => {
-        console.log(error)
-      })
-    },
-    ...mapMutations(['getUserRealName','changeAgMoney','changeDsMoney','changeUserMoney','userLoginOut']),
-    // 封装提示信息函数
-    mytoast (msg) {
-      this.ifopen = true
-      this.content = msg
-      setTimeout(() => {
-        this.ifopen = false
-        clearTimeout()
-      }, 1500)
-    },
-
-    // 退出登录
-    loginout () {
-      this.$http.get('/json/api.php?r=logout').then((res) => {
-        if (res.data.code === 0) {
-      
-          this.mytoast(res.data.msg)
-
-          this.userLoginOut()
-
-          setTimeout(() => {
-            this.ifopen = false
-            clearTimeout()
-            this.$router.replace('/')
-            // location.reload();
-          }, 1500)
-        }
-      }).catch((error) => {
-        console.log(error)
-      })
-    },
-    showAllgame () {
-      this.isShowMenu = true
-    },
-    hideAllgame () {
-      this.isShowMenu = false
-    },
-    isShow (index) {
-      console.log(index)
-      if (index === 1) {
-        this.lock10 = !this.lock10
-
-        if (this.lock10) {
-          this.isDisplay = 1
-        } else {
-          this.isDisplay = 0
-        }
+  export default {
+    data() {
+      return {
+        isDisplay: 0,
+        content: '',
+        ifopen: false,
+        isShowMenu: false,
+        unread_count: '',
+        /*lock10: false,
+        lock20: false,
+        lock30: false,
+        lock40: false,*/
+        realname: '',
+        bankCardNum: '',
+        bankName: ''
       }
+    },
+    components: {
+      maskLayer
+    },
+    mounted() {
+      // 获取个人信息
+      /*this.getuserinfo()*/
+      this.getuserinfo();
+    },
+    computed: {
+      ...mapState(['agmoney', 'dsmoney', 'usermoney', 'username', 'userRealName', 'userinfo'])
+    },
+    methods: {
+      alert(tit, msg, fn, msgStyle) {
+        let _this = this;
+        this.ROOTBOX({
+          open: true,
+          compt: alert,
+          props: {
+            tit: tit,
+            msg: msg,
+            msgstyle: msgStyle
+          },
+          handles: {
+            confirm() {
+              if (fn) fn();
+              _this.ROOTBOX({
+                open: false
+              })
+            },
+            close() {
+              _this.ROOTBOX({
+                open: false
+              });
+            }
+          }
+        });
+      },
+      async getuserinfo() {
+        let res = await this.$http.get('/api/users/info');
+        if (!res) return
+        if (res.data.code != 0) {
+          this.alert("提示", res.data.msg);
+          return;
+        }
+        this.USERINFO({
+          bankname: res.data.data.BandName,
+          cardnum: res.data.data.CardNumber,
+          logintime: res.data.data.LoginTime,
+          mobile: res.data.data.Mobile,
+          money: res.data.data.Money,
+          msgnum: res.data.data.MsgNumber,
+          name: res.data.data.Name,
+          username: res.data.data.UserName,
+          email: res.data.data.email,
+          qq: res.data.data.qq
+        });
+        this.getUserRealName(res.data.data.Name);
+        this.changeUserMoney(res.data.data.Money);
+        this.changeUserName(res.data.data.UserName);
+      },
+      // 获取个人信息
+      /*getuserinfo () {
+        this.$http.get('/json/center/?r=UsrInfo').then((res) => {
 
-      if (index === 2) {
-        this.lock20 = !this.lock20
-        if (this.lock20) {
-          this.isDisplay = 2
-        } else {
-          this.isDisplay = 0
-        }
-      }
+          this.getUserRealName(res.data.data.pay_name)
 
-      if (index === 3) {
-        this.lock30 = !this.lock30
-        if (this.lock30) {
-          this.isDisplay = 3
-        } else {
-          this.isDisplay = 0
+        }).catch((error) => {
+          console.log(error)
+        })
+
+        // >获取AG真人余额
+        this.$http.get('/json/center/?r=AginMoney').then((res) => {
+
+           this.changeAgMoney(res.data.data.money)
+
+        }).catch((error) => {
+          console.log(error)
+        })
+
+        // >获取DS真人余额：
+        this.$http.get('/json/center/?r=DsMoney').then((res) => {
+
+          this.changeDsMoney(res.data.data.money)
+
+        }).catch((error) => {
+          console.log(error)
+        })
+
+        // >获取用户余额
+        this.$http.get('/json/center/?r=Money').then((res) => {
+
+          this.changeUserMoney(res.data.data.user_money)
+
+        }).catch((error) => {
+          console.log(error)
+        })
+      },*/
+      ...mapMutations(['getUserRealName', 'changeUserMoney', 'changeUserName', 'userLoginOut', 'USERINFO', 'ROOTBOX']),
+      // 封装提示信息函数
+      mytoast(msg) {
+        this.ifopen = true
+        this.content = msg
+        setTimeout(() => {
+          this.ifopen = false
+          clearTimeout()
+        }, 1500)
+      },
+
+      // 退出登录
+      loginout() {
+        /*this.$http.get('/json/api.php?r=logout').then((res) => {
+          if (res.data.code === 0) {
+
+            this.mytoast(res.data.msg)
+
+            this.userLoginOut()
+
+            setTimeout(() => {
+              this.ifopen = false
+              clearTimeout()
+              this.$router.replace('/')
+              // location.reload();
+            }, 1500)
+          }
+        }).catch((error) => {
+          console.log(error)
+        })*/
+      },
+      showAllgame() {
+        this.isShowMenu = true
+      },
+      hideAllgame() {
+        this.isShowMenu = false
+      },
+      isShow(index) {
+        if (this.isDisplay == index)
+          this.isDisplay = 0;
+        else
+          this.isDisplay = index;
+        return;
+        /*if (index === 1) {
+          this.lock10 = !this.lock10
+
+          if (this.lock10) {
+            this.isDisplay = 1
+          } else {
+            this.isDisplay = 0
+          }
         }
-      }
-      if (index === 4) {
-        this.lock40 = !this.lock40
-        if (this.lock40) {
-          this.isDisplay = 4
-        } else {
-          this.isDisplay = 0
+
+        if (index === 2) {
+          this.lock20 = !this.lock20
+          if (this.lock20) {
+            this.isDisplay = 2
+          } else {
+            this.isDisplay = 0
+          }
         }
+
+        if (index === 3) {
+          this.lock30 = !this.lock30
+          if (this.lock30) {
+            this.isDisplay = 3
+          } else {
+            this.isDisplay = 0
+          }
+        }
+        if (index === 4) {
+          this.lock40 = !this.lock40
+          if (this.lock40) {
+            this.isDisplay = 4
+          } else {
+            this.isDisplay = 0
+          }
+        }*/
       }
     }
   }
-}
 
 </script>
-<style scoped>
-body {
-  background-image: none;
-}
+<style lang="less">
+  .usercenter {
+    textarea {
+      line-height: 1.5em;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 3px 3px;
+      padding-left: 10px;
+      color: #999;
+      position: relative;
+      top: 3px;
+      font-family: "Microsoft YaHei";
+      box-sizing: border-box;
+    }
 
-.container {
-  height: 100%;
-  overflow-y: scroll;
-}
+    select, input[type=text], input[type=password], input[type=number] {
+      line-height: 30px;
+      height: 36px;
+      width: 300px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 3px 3px;
+      padding-left: 10px;
+      color: #999;
+    }
 
-.container::-webkit-scrollbar {
-  display: none;
-}
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      outline: 0;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-text-fill-color: rgba(255, 255, 255, 1);;
+      -webkit-animation-name: autofill;
+      -webkit-animation-fill-mode: both;
+    }
 
-.header {
-  background-color: #363636;
-  /*height: 18px;*/
-  overflow: hidden;
-}
+    @-webkit-keyframes autofill { //去除chrome浏览器自动填充表单的黄色背景
+      to {
+        color: rgba(255, 255, 255, 1);
+        background: transparent;
+      }
+    }
 
-.header .logo {
-  float: left;
-  margin: 14px 0 0 36px;
-}
+    @-webkit-keyframes autofill2 { //去除chrome浏览器自动填充表单的黄色背景
+      to {
+        color: #aaa;
+        background: transparent;
+      }
+    }
 
-.header .nav {
-  float: right;
-  color: #fff;
-  text-align: center;
-  margin-right: 30px;
-}
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        -webkit-text-fill-color: #aaa;
+        -webkit-animation-name: autofill2;
+        -webkit-animation-fill-mode: both;
+        color: #aaa !important;
+      }
+  }
 
-.header .nav li {
-  background: url(../assets/top_menu_icos.png) no-repeat;
-  float: left;
-  height: 18px;
-  padding-top: 78px;
-  margin: 0 10px;
-  padding-bottom: 10px;
-  cursor: pointer;
-}
+  body {
+    background-image: none;
+  }
 
-.header .nav li a {
-  color: #fff;
-  font-size: 14px;
-  text-decoration: none;
-  padding-top: 78px;
-}
+  .container {
+    overflow-y: auto;
+    /*height:100%*/;
+    background-color: #363636;
+    box-sizing: border-box;
+  }
 
-.header .nav li.game {
-  background-position: 8px -470px;
-}
+  .container::-webkit-scrollbar {
+    /*display: none;*/
+  }
 
-.header .nav li.game:hover {
-  background-position: -45px -470px;
-}
+  .header {
+    background-color: #363636;
+    /*height: 18px;*/
+    overflow: hidden;
+  }
 
-.header .nav li.game:hover .menu-child {
-  display: block;
-}
+  .header .logo {
+    float: left;
+    margin: 14px 0 0 36px;
+  }
 
-.header .nav li.home {
-  background-position: 8px 30px;
-}
+  .header .nav {
+    float: right;
+    color: #fff;
+    text-align: center;
+    margin-right: 30px;
+  }
 
-.header .nav li.home:hover {
-  background-position: -45px 30px;
-}
+  .header .nav li {
+    background: url(../assets/top_menu_icos.png) no-repeat;
+    float: left;
+    height: 18px;
+    padding-top: 78px;
+    margin: 0 10px;
+    padding-bottom: 10px;
+    cursor: pointer;
+  }
 
-.header .nav li.server {
-  background-position: 8px -71px;
-}
+  .header .nav li a {
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+    padding-top: 78px;
+  }
 
-.header .nav li.server:hover {
-  background-position: -45px -71px;
-}
+  .header .nav li.game {
+    background-position: 8px -470px;
+  }
 
-.header .nav li.rules {
-  background-position: 8px -172px;
-}
+  .header .nav li.game:hover {
+    background-position: -45px -470px;
+  }
 
-.header .nav li.rules:hover {
-  background-position: -45px -172px;
-}
+  .header .nav li.game:hover .menu-child {
+    display: block;
+  }
 
-.header .nav li.help {
-  background-position: 8px -372px;
-}
+  .header .nav li.home {
+    background-position: 8px 30px;
+  }
 
-.header .nav li.help:hover {
-  background-position: -45px -372px;
-}
+  .header .nav li.home:hover {
+    background-position: -45px 30px;
+  }
 
-.header .nav li.layout {
-  background-position: 8px -274px;
-}
+  .header .nav li.server {
+    background-position: 8px -71px;
+  }
 
-.header .nav li.layout:hover {
-  background-position: -45px -274px;
-}
+  .header .nav li.server:hover {
+    background-position: -45px -71px;
+  }
 
-/*下拉游戏选择*/
-.menu-child {
-  position: absolute;
-  zoom: 1;
-  top: 104px;
-  right: 50px;
-  width: 780px;
-  background: url("../assets/nav_bg.png") repeat;
-  margin: 2px 0 0;
-  height: auto;
-  padding: 15px 0;
-  border-radius: 5px;
-  box-shadow: 0 2px 10px #000;
-  z-index: 99;
-}
+  .header .nav li.rules {
+    background-position: 8px -172px;
+  }
 
-.gamelist {
-  position: relative;
-  height: 100%;
-  width: 100%;
-}
+  .header .nav li.rules:hover {
+    background-position: -45px -172px;
+  }
 
-.triangles_back {
-  display: none;
-}
+  .header .nav li.help {
+    background-position: 8px -372px;
+  }
 
-.official_play {
-  border-bottom: none;
-  width: 50%;
-  font-size: 12px;
-  float: left;
-}
+  .header .nav li.help:hover {
+    background-position: -45px -372px;
+  }
 
-.gamelist_tit {
-  width: 370px;
-  display: block;
-  margin: 8px 0;
-  border-bottom: none;
-  text-align: left;
-}
+  .header .nav li.layout {
+    background-position: 8px -274px;
+  }
 
-.menu-child h1.red_style {
-  height: 28px;
-  background: url("../assets/icon51.png") no-repeat center left;
-}
+  .header .nav li.layout:hover {
+    background-position: -45px -274px;
+  }
 
-.menu-child h1 {
-  padding: 4px 0 4px 38px;
-  margin-left: 30px;
-  font-size: 15px;
-  font-weight: normal;
-  width: 70px;
-  height: 20px;
-  font-size: 16px;
-  display: inline-block;
-  color: #fff;
-}
+  /*下拉游戏选择*/
+  .menu-child {
+    position: absolute;
+    zoom: 1;
+    top: 104px;
+    right: 50px;
+    width: 780px;
+    background: url("../assets/nav_bg.png") repeat;
+    margin: 2px 0 0;
+    height: auto;
+    padding: 15px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px #000;
+    z-index: 99;
+  }
 
-.high_wrap {
-  float: left;
-  border-bottom: none;
-  width: auto;
-  height: auto;
-}
+  .gamelist {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
 
-.cut-line {
-  position: absolute;
-  height: 100%;
-  width: 1px;
-  left: 50%;
-  background: #fff;
-  text-align: center;
-}
+  .triangles_back {
+    display: none;
+  }
 
-.credit_play {
-  font-size: 0;
-  float: left;
-  width: 50%;
-}
+  .official_play {
+    border-bottom: none;
+    width: 50%;
+    font-size: 12px;
+    float: left;
+  }
 
-.menu-child h1.orange_style {
-  height: 28px;
-  background: url("../assets/icon52.png") no-repeat center left;
-}
+  .gamelist_tit {
+    width: 370px;
+    display: block;
+    margin: 8px 0;
+    border-bottom: none;
+    text-align: left;
+  }
 
-.menu-child ul {
-  min-height: 62px;
-  float: left;
-  margin-left: 30px;
-  padding: 0;
-}
+  .menu-child h1.red_style {
+    height: 28px;
+    background: url("../assets/icon51.png") no-repeat center left;
+  }
 
-ul {
-  list-style: none;
-}
+  .menu-child h1 {
+    padding: 4px 0 4px 38px;
+    margin-left: 30px;
+    font-size: 15px;
+    font-weight: normal;
+    width: 70px;
+    height: 20px;
+    font-size: 16px;
+    display: inline-block;
+    color: #fff;
+  }
 
-.menu-child li {
-  float: left;
-  line-height: 28px;
-  width: 80px;
-  height: 28px;
-  margin: 5px 0;
-  text-align: left;
-  margin-right: 10px;
-}
+  .high_wrap {
+    float: left;
+    border-bottom: none;
+    width: auto;
+    height: auto;
+  }
 
-.menu-child li a {
-  display: block;
-  width: 80px;
-  height: 28px;
-  color: #fff;
+  .cut-line {
+    position: absolute;
+    height: 100%;
+    width: 1px;
+    left: 50%;
+    background: #fff;
+    text-align: center;
+  }
 
-  background: none;
-  font-size: 12px;
-  margin: 0;
-}
+  .credit_play {
+    font-size: 0;
+    float: left;
+    width: 50%;
+  }
 
-.top_menu a {
-  width: 52px;
-  margin: 0 14px;
-  color: #fff;
-  background: url("../assets/top_menu_icos.png") no-repeat;
-}
+  .menu-child h1.orange_style {
+    height: 28px;
+    background: url("../assets/icon52.png") no-repeat center left;
+  }
 
-a {
-  text-decoration: none;
-}
+  .menu-child ul {
+    min-height: 62px;
+    float: left;
+    margin-left: 30px;
+    padding: 0;
+  }
 
-.main-body {
-  overflow: hidden;
-  height: 100%;
-}
+  ul {
+    list-style: none;
+  }
 
-/*左边区域*/
-.container .select {
-  float: left;
-  background-color: #363636;
-  color: #fff;
-  width: 200px;
-  font-size: 14px;
-  height: 100%;
-}
+  .menu-child li {
+    float: left;
+    line-height: 28px;
+    width: 80px;
+    height: 28px;
+    margin: 5px 0;
+    text-align: left;
+    margin-right: 10px;
+  }
 
-.container .select .account,
-.container .select .balance {
-  padding-top: 10px;
-  width: 154px;
-  height: 31px;
-  line-height: 28px;
-  background: url("../assets/base-ico2.png") no-repeat;
-}
+  .menu-child li a {
+    display: block;
+    width: 80px;
+    height: 28px;
+    color: #fff;
 
-.container .select .account {
-  background-position: -96px -36px;
-  text-align: left;
-  padding-left: 52px;
-}
+    background: none;
+    font-size: 12px;
+    margin: 0;
+  }
 
-.container .select .balance {
-  background-position: -96px -83px;
-  text-align: left;
-  padding-left: 46px;
+  .top_menu a {
+    width: 52px;
+    margin: 0 14px;
+    color: #fff;
+    background: url("../assets/top_menu_icos.png") no-repeat;
+  }
 
-  margin-top: 16px;
-}
+  a {
+    text-decoration: none;
+  }
 
-.container .select .money {
-  padding-top: 10px;
-  width: 197px;
-  height: 41px;
-  line-height: 28px;
-  margin-top: 20px;
-}
+  .main-body {
+    overflow: visible;
+    /*height: 100%;*/
+  }
 
-.container .select .money a {
-  float: left;
-  width: 26%;
-  padding-left: 40px;
-  line-height: 55px;
-  background: url("../assets/user-btn.png") no-repeat;
-  color: #fff;
-}
+  /*左边区域*/
+  .container .select {
+    float: left;
+    background-color: #363636;
+    color: #fff;
+    width: 200px;
+    font-size: 14px;
+    /*height: 100%;*/
+  }
 
-.container .select>a {
-  margin: 0 auto;
-  padding-top: 20px;
-}
+  .container .select .account,
+  .container .select .balance {
+    padding-top: 10px;
+    width: 154px;
+    height: 31px;
+    line-height: 28px;
+    background: url("../assets/base-ico2.png") no-repeat;
+  }
 
-.container .select .money a span {
-  margin-left: 10px;
-}
+  .container .select .account {
+    background-position: -96px -36px;
+    text-align: left;
+    padding-left: 52px;
+  }
 
-.container .select .money a.recharge {
-  background-position: 10px 8px;
-}
+  .container .select .balance {
+    background-position: -96px -83px;
+    text-align: left;
+    padding-left: 46px;
 
-.container .select .money a.withdraw {
-  background-position: -71px 10px;
-}
+    margin-top: 16px;
+  }
 
-.sidebar {
-  margin-top: 20px;
-}
+  .container .select .money {
+    padding-top: 10px;
+    width: 197px;
+    height: 41px;
+    line-height: 28px;
+    margin-top: 20px;
+  }
 
-.sidebar-menu .item {
-  text-align: left;
-  padding-left: 20px;
-  cursor: pointer;
-  line-height: 40px;
-  /* height: 40px; */
-  width: 172px;
-  margin: 5px auto;
-  background: url(../assets/base-ico3.png) 0 -579px no-repeat;
-}
+  .container .select .money a {
+    float: left;
+    width: 26%;
+    padding-left: 40px;
+    line-height: 55px;
+    background: url("../assets/user-btn.png") no-repeat;
+    color: #fff;
+  }
 
-.sidebar-menu .item a {
-  text-decoration: none;
-  color: #fff;
-  padding: 11px 0;
-  padding-right: 102px;
-  background: url(../assets/base-ico.png) 128px -12px no-repeat;
-}
+  .container .select > a {
+    margin: 0 auto;
+    padding-top: 20px;
+  }
 
-.sidebar-menu .list-item {
-  font-size: 14px;
-  line-height: 30px;
-  width: 95%;
-  margin: 0 auto;
-}
+  .container .select .money a span {
+    margin-left: 10px;
+  }
 
-.sidebar-menu .list-item li {
-  cursor: pointer;
-  text-align: left;
-  margin-top: 2px;
-  width: 100%;
-}
+  .container .select .money a.recharge {
+    background-position: 10px 8px;
+  }
 
-.sidebar-menu .list-item li a {
-  color: #fff;
-  text-decoration: none;
-  text-indent: 1rem;
-  display: inline-block;
-  height: 100%;
-  width: 100%;
-}
+  .container .select .money a.withdraw {
+    background-position: -71px 10px;
+  }
 
-.sidebar-menu .list-item li a:hover {
-  color: #000;
-  background-color: #fff;
-}
+  .sidebar {
+    margin-top: 20px;
+  }
 
-.sidebar-menu .list-item li .router-link-exact-active.router-link-active {
-  color: #000;
-  background-color: #fff;
-}
+  .sidebar-menu .item {
+    text-align: left;
+    padding-left: 20px;
+    cursor: pointer;
+    line-height: 40px;
+    /* height: 40px; */
+    width: 172px;
+    margin: 3px auto;
+    background: url(../assets/base-ico3.png) 0 -579px no-repeat;
+  }
 
-/*右边区域*/
-.container .content {
-  /*width: 1600px;*/
-  /*height: 100%;*/
-  margin-left: 0px;
-  /*margin-left: 213px;*/
-  min-height: 900px;
-  min-width: ;
-  background-color: #ededed;
-}
+  .sidebar-menu .item a {
+    text-decoration: none;
+    color: #fff;
+    padding: 11px 0;
+    padding-right: 102px;
+    background: url(../assets/base-ico.png) 128px -12px no-repeat;
+  }
+
+  .sidebar-menu .list-item {
+    box-sizing: border-box;
+    transition: height 0.25s;
+    font-size: 14px;
+    line-height: 30px;
+    width: 95%;
+    margin: 0 auto;
+  }
+
+  .sidebar-menu .list-item li {
+    cursor: pointer;
+    text-align: left;
+    margin-top: 2px;
+    width: 100%;
+  }
+
+  .sidebar-menu .list-item li a {
+    color: #fff;
+    text-decoration: none;
+    text-indent: 1rem;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+  }
+
+  .sidebar-menu .list-item li a:hover {
+    color: #000;
+    background-color: #fff;
+  }
+
+  .sidebar-menu .list-item li .router-link-exact-active.router-link-active {
+    color: #000;
+    background-color: #fff;
+  }
+
+  /*右边区域*/
+  .container .content {
+    /*width: 1600px;*/
+    /*height: 100%;*/
+    margin-left: 0px;
+    /*margin-left: 213px;*/
+    min-height: 900px;
+    min-width: 500px;
+    background-color: #ededed;
+  }
 
 </style>

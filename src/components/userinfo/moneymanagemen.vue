@@ -167,7 +167,7 @@ export default {
     // 封装提示信息函数
     mytoast (msg) {
       this.ifopen = true
-      this.content = msg   
+      this.content = msg
     },
     // 提交
     submitQuota () {
@@ -197,7 +197,7 @@ export default {
                 this.ifopen = false
                 // clearTimeout()
               }, 1500)
-          
+
               this.changeAgMoney(res.data.data.liveMoney)
               this.changeUserMoney(res.data.data.money)
 
@@ -239,7 +239,7 @@ export default {
                 this.ifopen = false
                 clearTimeout()
               }, 1500)
-          
+
               this.changeDsMoney(res.data.data.liveMoney)
               this.changeUserMoney(res.data.data.money)
               this.inputMoney = ''
@@ -277,7 +277,7 @@ export default {
           data['change_live'] = 1
 
           this.$http.post('/json/center/?r=AginTransfer', data).then((res) => {
-            
+
               this.mytoast(res.data.msg)
             if (res.data.code === 0) {
               console.log('res.data.code-----' + res.data.code)
@@ -361,11 +361,11 @@ export default {
             console.log(error)
           })
         }
-      }  
+      }
     },
     ...mapMutations(['changeAgMoney','changeDsMoney','changeUserMoney','userLoginOut']),
 
-  }, 
+  },
   computed: {
     ...mapState(['agmoney','dsmoney','usermoney'])
   },

@@ -38,9 +38,9 @@
 
 
           </div>
-          
+
           <router-link to='/UserCenter'>
-            
+
             <div class="recharge items">
               充值
             </div>
@@ -129,10 +129,14 @@
         </ul>
       </div>
       <!-- 下拉菜单 -->
-      
+
       <div class="menu-child1" v-show="showMenu" @mousemove="overShow" @mouseout="outHide" id="lot_sec_menu">
         <div class="gamelist-1 clear">
           <div class="official_play">
+            <div class="gamelist_tit clear">
+              <h1 class="red_style">官方玩法</h1>
+              <div class="color">官</div>
+            </div>
             <div class="high_wrap">
               <div class="gamelist_l">
                 <ul v-for="item in this.headerArry" :key="item.id">
@@ -275,7 +279,7 @@ export default {
         this.showMessgeBox = true;
         window.name = 'already';
       }else{
-              
+
       }
     },
     forgorWord () {
@@ -297,7 +301,7 @@ export default {
     // getArry () {
     //   this.$http.get('/api/lottery/basic/LotteryGroup').then((res) => {
     //     this.headersArry = res.data;
-        
+
     //   })
     // },
     overShow () {
@@ -309,6 +313,8 @@ export default {
     codeImgFn(){
       this.$http.get('/api/site/captcha').then((res) => {
           if (res.status === 200) {
+            console.log(res.data.codeToken)
+
               this.codeImg=res.data.src
               this.temcodeToken=res.data.codeToken
               // this.mytoast(res.data.msg)
@@ -319,10 +325,10 @@ export default {
         }).catch((error) => {
           console.log(error)
         })
-    },
-    // 封装提示信息函数
-    mytoast (msg) {
-      this.ifopen = true
+      },
+      // 封装提示信息函数
+      mytoast(msg) {
+        this.ifopen = true
 
       this.content = msg
       setTimeout(() => {
@@ -366,30 +372,41 @@ export default {
         this.$router.push('/UserCenter')
       }
     },
+      enterUserCenter() {
+        if (!this.codeToken) {
+          this.mytoast('请先登录')
+          setTimeout(() => {
+            this.$router.push('/Login')
+            // this.$router.go('/');
+          }, 1500)
+        } else {
+          this.$router.push('/UserCenter')
+        }
+      },
 
-    // 登录提交
-    loginSubmit () {
-      let data = {
-        // action: 'login',
-        username: this.user_name,
-        password: this.pass_word,
-        code:this.code,
-        codeToken:this.codeToken
-      }
+      // 登录提交
+      loginSubmit() {
+        let data = {
+          // action: 'login',
+          username: this.user_name,
+          password: this.pass_word,
+          code: this.code,
+          codeToken: this.codeToken
+        }
 
-      if (!this.user_name) {
-        this.mytoast('请输入帐号')
-      } else if (!this.pass_word) {
-        this.mytoast('请输入密码')
-      } else {
-        this.$http.post('/api/user/login', data).then((res) => {
-          if (res.status === 200 && res.data.code === 0) {
+        if (!this.user_name) {
+          this.mytoast('请输入帐号')
+        } else if (!this.pass_word) {
+          this.mytoast('请输入密码')
+        } else {
+          this.$http.post('/api/user/login', data).then((res) => {
+            if (res.status === 200 && res.data.code === 0) {
               this.mytoast(res.data.msg)
-            // this.usermoney = res.data.data.user_money
-            
-            // sessionStorage.setItem('username', this.username)
-            // sessionStorage.setItem('isShowLogin', this.username)
-            // sessionStorage.setItem('usermoney', res.data.data.user_money)
+              // this.usermoney = res.data.data.user_money
+
+              // sessionStorage.setItem('username', this.username)
+              // sessionStorage.setItem('isShowLogin', this.username)
+              // sessionStorage.setItem('usermoney', res.data.data.user_money)
 
             // this.$store.dispatch('UserLogin', this.username)
             // this.$store.dispatch('SET_userMoney', this.usermoney)
@@ -403,7 +420,7 @@ export default {
           console.log(error)
         })
       }
-    }, 
+    },
     // 退出登录
     loginout () {
       this.$http.get('/api/user/logout',{headers:{EasySecret:this.temcodeToken,emulateJSON:true}}).then((res) => {
@@ -425,41 +442,65 @@ export default {
           }, 1500)
 
           // this.isShow=false;
+              // this.$store.dispatch('UserLogin', this.username)
+              // this.$store.dispatch('SET_userMoney', this.usermoney)
+              // this.$router.push('/UserCenter')
+              // this.$router.push(this.$route.query.redirect || '/')
+
+
+              // alert(this.user_name)
+              this.changeUserName(this.user_name)
+              this.changeUserMoney(res.data.data.user_money)
+              // this.userIsLogin(true)
+            }
+          }).catch((error) => {
+            console.log(error)
+          })
         }
-      }).catch((error) => {
-        console.log(error)
-      })
+      },
+      // 退出登录
+      async loginout() {
+        let res = await this.$http.post('/api/user/logout');
+        if (!res) return
+        if (res.data.code != 0) {
+          this.alert("提示", res.data.msg);
+          return;
+        }
+        this.EASYSECRET("");
+        sessionStorage.clear();
+        this.$http.defaults.headers.EasySecret=undefined;
+        this.$router.push("login");
+      },
+      ...mapMutations(['changeUserName', 'changeUserMoney', 'getUserToken', 'userLoginOut',"EASYSECRET"]),
+      // getUserMoney(){
+      //     // >获取用户余额
+      //   this.$http.get('/json/center/?r=Money').then((res) => {
+      //     this.user_money = res.data.data.user_money;
+      //   }).catch((error) => {
+      //     console.log(error)
+      //   })
+      // },
+
+      clockon() {
+        var now = new Date()
+        // var day = now.getDay()
+        var hour = now.getHours()
+        var minu = now.getMinutes()
+        var sec = now.getSeconds()
+
+        if (hour < 10) hour = '0' + hour
+        if (minu < 10) minu = '0' + minu
+        if (sec < 10) sec = '0' + sec
+        var time = ''
+        time = hour + ':' + minu + ':' + sec
+        setTimeout(this.clockon, 1000)
+        this.nowTime = time
+      }
     },
-    ...mapMutations(['changeUserName','changeUserMoney','getUserToken','userLoginOut','ROOTBOX','getData']),
-    // getUserMoney(){
-    //     // >获取用户余额
-    //   this.$http.get('/json/center/?r=Money').then((res) => {
-    //     this.user_money = res.data.data.user_money;
-    //   }).catch((error) => {
-    //     console.log(error)
-    //   })
-    // },
-
-    clockon () {
-      var now = new Date()
-      // var day = now.getDay()
-      var hour = now.getHours()
-      var minu = now.getMinutes()
-      var sec = now.getSeconds()
-
-      if (hour < 10) hour = '0' + hour
-      if (minu < 10) minu = '0' + minu
-      if (sec < 10) sec = '0' + sec
-      var time = ''
-      time = hour + ':' + minu + ':' + sec
-      setTimeout(this.clockon, 1000)
-      this.nowTime = time
+    components: {
+      maskLayer
     }
-  },
-  components: {
-    maskLayer
   }
-}
 </script>
 <style scoped>
 /* 平台公告 */
@@ -665,34 +706,34 @@ export default {
   background-color: rgba(0, 0, 0, .73);
 }
 
-.top-box {
-  width: 1050px;
-  margin: 0 auto;
-  overflow: hidden;
-}
+  .top-box {
+    width: 1050px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
 
-.top-box .bar-left {
-  float: left;
-  background: url(../assets/base-ico2.png) 0 -176px no-repeat;
-}
+  .top-box .bar-left {
+    float: left;
+    background: url(../assets/base-ico2.png) 0 -176px no-repeat;
+  }
 
-.top-box .bar-left span {
-  display: inline-block;
-  padding-left: 48px;
-  font-size: 14px;
-  font-style: italic;
-  line-height: 48px;
-  background-position: 0 -180px;
-}
+  .top-box .bar-left span {
+    display: inline-block;
+    padding-left: 48px;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 48px;
+    background-position: 0 -180px;
+  }
 
-.bar-right {
-  float: left;
-  overflow: hidden;
-  line-height: 48px;
-}
+  .bar-right {
+    float: left;
+    overflow: hidden;
+    line-height: 48px;
+  }
 
-.bar-right div {
-  /*margin-right: 22px;*/
+  .bar-right div {
+    /*margin-right: 22px;*/
 
   float: left;
 }
@@ -713,27 +754,28 @@ export default {
   vertical-align: middle;
 }
 
+  .bar-right .item {
+    margin-right: 0;
+    float: left;
+  }
 
-.bar-right .item {
-  margin-right: 0;
-  float: left;
-}
-.bar-right div.login{
-  /*margin-left: 140px;*/
-}
-.bar-right .login,
-.bar-right .regster {
-  height: 34px;
-  line-height: 34px;
-  width: 100px;
-  margin: 0 8px;
-  margin-top: 10px;
-  background: url(../assets/base-ico2.png) no-repeat;
-  cursor: pointer;
-  border-radius: 8px;
-  background-position: 0px -334px;
-  text-align: center;
-}
+  .bar-right div.login {
+    /*margin-left: 140px;*/
+  }
+
+  .bar-right .login,
+  .bar-right .regster {
+    height: 34px;
+    line-height: 34px;
+    width: 100px;
+    margin: 0 8px;
+    margin-top: 10px;
+    background: url(../assets/base-ico2.png) no-repeat;
+    cursor: pointer;
+    border-radius: 8px;
+    background-position: 0px -334px;
+    text-align: center;
+  }
 
 .bar-right .login a {
   color: #fff;
@@ -755,115 +797,116 @@ export default {
   font-size: 14px;
 }
 
-.bar-right div input {
-  width: 120px;
-  border: none;
-  color: #fff;
-  outline: none;
-  background-color: transparent!important;
-}
+  .bar-right div input {
+    width: 120px;
+    border: none;
+    color: #fff;
+    outline: none;
+    background-color: transparent !important;
+  }
 
-input:-webkit-autofill {
-  background-color: transparent!important;
-}
+  input:-webkit-autofill {
+    background-color: transparent !important;
+  }
 
-.bar-right div input:focus {
-  border: none;
-  background-color: transparent;
-  color: #fff;
-  outline: none;
-}
+  .bar-right div input:focus {
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    outline: none;
+  }
 
-input::-webkit-input-placeholder {
-  color: #fff;
-}
+  input::-webkit-input-placeholder {
+    color: #fff;
+  }
 
-input::-moz-placeholder {
-  /* Mozilla Firefox 19+ */
-  color: #fff;
-}
+  input::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #fff;
+  }
 
-input:-moz-placeholder {
-  /* Mozilla Firefox 4 to 18 */
-  color: #fff;
-}
+  input:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #fff;
+  }
 
-input:-ms-input-placeholder {
-  /* Internet Explorer 10-11 */
-  color: #fff;
-}
+  input:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #fff;
+  }
 
-.preson-info,
-.preson-balance,
-.recharge,
-.withdraw,
-.login-out {
-  float: left;
-  cursor: pointer;
-  background: url(../assets/base-ico2.png) no-repeat;
-}
+  .preson-info,
+  .preson-balance,
+  .recharge,
+  .withdraw,
+  .login-out {
+    float: left;
+    cursor: pointer;
+    background: url(../assets/base-ico2.png) no-repeat;
+  }
 
-.items{
-  margin:0 10px;
-}
-.preson-info {
-  padding: 0;
-  margin-left: 16px;
-  background-position: 0 -390px;
-}
+  .items {
+    margin: 0 10px;
+  }
 
-.preson-balance {
-  /*padding: 0 20px;*/
-  width: 125px;
-  padding-left: 40px;
-  text-align: left;
-}
+  .preson-info {
+    padding: 0;
+    margin-left: 16px;
+    background-position: 0 -390px;
+  }
 
-.leftMoney {
-  padding-left: 40px;
-  padding-right: 23px;
-}
+  .preson-balance {
+    /*padding: 0 20px;*/
+    width: 125px;
+    padding-left: 40px;
+    text-align: left;
+  }
 
-.personpwd {
-  background-position: 0 -434px;
-}
+  .leftMoney {
+    padding-left: 40px;
+    padding-right: 23px;
+  }
 
-.recharge {
-  padding-left: 45px;
-  background-position: -108px -677px;
-  color: #fff;
-}
+  .personpwd {
+    background-position: 0 -434px;
+  }
 
-.withdraw {
-  padding-left: 45px;
-  color: #fff;
-  background-position: 0 -677px;
-}
+  .recharge {
+    padding-left: 45px;
+    background-position: -108px -677px;
+    color: #fff;
+  }
 
-.login-out {
-  padding-left: 45px;
-  background-position: -201px -677px;
-}
+  .withdraw {
+    padding-left: 45px;
+    color: #fff;
+    background-position: 0 -677px;
+  }
 
-.recharge:hover {
-  color: #b62929;
-  background-position: -108px -750px;
-}
+  .login-out {
+    padding-left: 45px;
+    background-position: -201px -677px;
+  }
 
-.withdraw:hover {
-  color: #b62929;
-  background-position: 0 -750px;
-}
+  .recharge:hover {
+    color: #b62929;
+    background-position: -108px -750px;
+  }
 
-.login-out:hover {
-  color: #b62929;
-  background-position: -201px -750px;
-}
+  .withdraw:hover {
+    color: #b62929;
+    background-position: 0 -750px;
+  }
 
-/*导航栏*/
-nav {
-  background-color: #b62929;
-}
+  .login-out:hover {
+    color: #b62929;
+    background-position: -201px -750px;
+  }
+
+  /*导航栏*/
+  nav {
+    background-color: #b62929;
+  }
 
 .nav {
   width: 1320px;
@@ -874,15 +917,15 @@ nav {
   color: #fff;
 }
 
-.nav .logo {
-  float: left;
-  width: 200px;
-  height: 68px;
-}
+  .nav .logo {
+    float: left;
+    width: 200px;
+    height: 68px;
+  }
 
-.nav ul {
-  float: left;
-}
+  .nav ul {
+    float: left;
+  }
 
 .nav ul>li {
   float: left;
@@ -904,7 +947,7 @@ nav {
   transition: All .3s ease;
   -webkit-transition: All .3s ease;
   -moz-transition: All .3s ease;
-  -o-transition: All .3s 
+  -o-transition: All .3s
 }
 .nav ul > li a:hover {
     transform: scale(1.1);
@@ -967,30 +1010,30 @@ nav {
   padding-bottom: 8px;
 }
 
-.menu-child1 h1 {
-  width: 70px;
-  height: 20px;
-  font-size: 16px;
-  display: inline-block;
-  margin-left: 26px;
-  margin-top: 2px;
-  float: left;
-  color: #fff;
-}
+  .menu-child1 h1 {
+    width: 70px;
+    height: 20px;
+    font-size: 16px;
+    display: inline-block;
+    margin-left: 26px;
+    margin-top: 2px;
+    float: left;
+    color: #fff;
+  }
 
-.color {
-  width: 23px;
-  height: 23px;
-  text-align: center;
-  display: inline-block;
-  line-height: 22px;
-  font-size: 15px;
-  margin-left: 12px;
-  margin-top: 0;
-  background: url('../assets/red_bg.png') no-repeat;
-  color: #fff;
-  float: left;
-}
+  .color {
+    width: 23px;
+    height: 23px;
+    text-align: center;
+    display: inline-block;
+    line-height: 22px;
+    font-size: 15px;
+    margin-left: 12px;
+    margin-top: 0;
+    background: url('../assets/red_bg.png') no-repeat;
+    color: #fff;
+    float: left;
+  }
 
 .high_wrap {
   /* width: 464px; */
@@ -998,9 +1041,9 @@ nav {
   float: none;
 }
 
-.gamelist-1 .gamelist_l {
-  margin-left: 0;
-}
+  .gamelist-1 .gamelist_l {
+    margin-left: 0;
+  }
 
 .menu-child1 ul {
   /* min-height: 62px;
@@ -1008,13 +1051,13 @@ nav {
   /* width: 464px; */
 }
 
-.high_wrap ul {
-  float: none;
-}
+  .high_wrap ul {
+    float: none;
+  }
 
-.menu-box ul {
-  background-image: none;
-}
+  .menu-box ul {
+    background-image: none;
+  }
 
 .menu-child1 li {
   float: left;
@@ -1042,18 +1085,18 @@ nav {
 
 .menu-child1 li a img {
   width: 80%;
-  height: 80%; 
+  height: 80%;
   margin: 10%;
   display: none;
 }
 
-.menu-child1 li a img {
-  display: block;
-}
+  .menu-child1 li a img {
+    display: block;
+  }
 
-img {
-  border: none;
-}
+  img {
+    border: none;
+  }
 
 .menu-child1 li span {
   font-size: 12px;
@@ -1068,25 +1111,25 @@ img {
   overflow: hidden;
 }
 
-.credit_play {
-  display: inline-block;
-  width: 490px;
-  zoom: 1;
-  font-size: 0;
-  /* margin-left: -4px; */
-  float: left;
-}
+  .credit_play {
+    display: inline-block;
+    width: 490px;
+    zoom: 1;
+    font-size: 0;
+    /* margin-left: -4px; */
+    float: left;
+  }
 
-.gamelist-1 .gamelist_r {
-  margin-left: 15px;
-}
+  .gamelist-1 .gamelist_r {
+    margin-left: 15px;
+  }
 
-.triangles_back {
-  width: 26px;
-  height: 19px;
-  position: absolute;
-  background: url('../assets/triangles_back.png') no-repeat;
-  left: 246px;
-  top: -8px;
-}
+  .triangles_back {
+    width: 26px;
+    height: 19px;
+    position: absolute;
+    background: url('../assets/triangles_back.png') no-repeat;
+    left: 246px;
+    top: -8px;
+  }
 </style>

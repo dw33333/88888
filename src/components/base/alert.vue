@@ -3,7 +3,7 @@
     <div class="alert">
       <div class="title clearfix"><span class="tishi">{{tit}}</span><span class="close" @click="($emit('close'))">×</span></div>
       <div class="content">
-        <div class="txt" v-html="msg" :style="msgstyle"></div>
+        <div class="txt" v-html="msg" :style="msgstyle?msgstyle:{}"></div>
         <div class="btn" @click="($emit('confirm'))">确定</div>
       </div>
     </div>

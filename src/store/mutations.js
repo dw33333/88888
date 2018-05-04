@@ -60,6 +60,7 @@ const mutations = {
   EASYSECRET (state,data) {
     state.easysecret = data;
     try {
+      if(data)
       sessionStorage.setItem('easysecret',data);
     } catch (e) {}
   },
@@ -69,6 +70,13 @@ const mutations = {
   },
   getData(state,data){
     state.headerArry = data;
+  },
+  USERINFO(state,data){
+    state.userinfo = data;
+    try {
+      if(data)
+      sessionStorage.setItem('userinfo',JSON.stringify(data));
+    } catch (e) {}
   },
   userLoginOut (state,data) {
       state.username=''

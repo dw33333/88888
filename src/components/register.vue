@@ -263,7 +263,7 @@
       }
     },
     methods: {
-      ...mapMutations(['changeUserName', 'changeUserMoney','ROOTBOX']),
+      ...mapMutations(['changeUserName', 'changeUserMoney','ROOTBOX',"EASYSECRET"]),
       selectSex(index) {
         this.sex = index
         // alert(this.sex)
@@ -322,12 +322,12 @@
           },
           handles:{
             confirm(){
+              if(fn)fn();
               _this.ROOTBOX({
                 open:false
               })
             },
             close(){
-              if(fn)fn();
               _this.ROOTBOX({
                 open:false
               });
@@ -391,11 +391,11 @@
           }
 
           this.$http.post('/api/user/regster', data).then(res => {
-
-
-            this.mytoast(res.data.msg)
-
-            if (res.status === 200 && res.data.code === 0) {
+            this.$http.defaults.headers.EasySecret=res.headers.easysecret;
+            this.EASYSECRET(res.headers.easysecret)
+            this.mytoast(res.data.msg);
+            console.log(res.data.msg);
+            if(res.data.code === 0) {
 
               this.changeUserName(this.username)
               this.changeUserMoney('0.00')
@@ -404,6 +404,8 @@
               setTimeout(() => {
                 this.$router.push('/')
               }, 1500)
+            }else{
+              this.alert("提示",res.data.msg);
             }
           })
             .catch(error => {
