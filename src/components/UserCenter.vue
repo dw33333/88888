@@ -357,29 +357,6 @@
           }
         });
       },
-      async getuserinfo() {
-        let res = await this.$http.get('/api/users/info');
-        if (!res) return
-        if (res.data.code != 0) {
-          this.alert("提示", res.data.msg);
-          return;
-        }
-        this.USERINFO({
-          bankname: res.data.data.BandName,
-          cardnum: res.data.data.CardNumber,
-          logintime: res.data.data.LoginTime,
-          mobile: res.data.data.Mobile,
-          money: res.data.data.Money,
-          msgnum: res.data.data.MsgNumber,
-          name: res.data.data.Name,
-          username: res.data.data.UserName,
-          email: res.data.data.email,
-          qq: res.data.data.qq
-        });
-        this.getUserRealName(res.data.data.Name);
-        this.changeUserMoney(res.data.data.Money);
-        this.changeUserName(res.data.data.UserName);
-      },
       // 获取个人信息
       /*getuserinfo () {
         this.$http.get('/json/center/?r=UsrInfo').then((res) => {

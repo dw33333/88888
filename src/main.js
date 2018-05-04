@@ -49,10 +49,40 @@ Vue.prototype.$http.interceptors.response.use(
     }
   },
   error => {
+    let wAlert=(msg)=>{
+      store.commit("ROOTBOX",{
+        open: true,
+        compt: alert,
+        props: {
+          tit: "提示",
+          msg: msg,
+          msgstyle: {}
+        },
+        handles: {
+          confirm() {
+            store.commit("ROOTBOX",{
+              open: false
+            })
+          },
+          close() {
+            if (fn) fn();
+            store.commit("ROOTBOX",{
+              open: false
+            });
+          }
+        }
+      });
+    }
     if (error.response) {
       switch (error.response.status) {//根据状态码提示对应消息
         case 401:
           break;
+        case 504:
+          wAlert("请求超时");
+          break;
+        default:
+          wAlert("请求错误");
+
       }
     }
     //全局处理错误后返回成功一个undefined 免去每次使用 async await 都try catch
