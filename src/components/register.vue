@@ -263,7 +263,7 @@
       }
     },
     methods: {
-      ...mapMutations(['changeUserName', 'changeUserMoney','ROOTBOX',"EASYSECRET"]),
+      ...mapMutations(['changeUserName', 'changeUserMoney','ROOTBOX',"EASYSECRET","AGENT_ID"]),
       selectSex(index) {
         this.sex = index
         // alert(this.sex)
@@ -389,12 +389,25 @@
             sex: this.sex,
             email: this.email
           }
-
+          if(this.agent_id==-1){//还没写入agent_id
+            res = await this.$http({
+              method:"post",
+              url:'/api/user/getAgentId',
+              data:{domain:window.location.host},
+              headers:{EasySecret:""},
+            });
+            if(!res)return;
+            if (res.data.code==1) {
+              this.AGENT_ID(0);
+            }else if(res.data.code==0){
+              this.AGENT_ID(res.data.data);
+            }
+          }
+          data.agent_id=this.agent_id;
           this.$http.post('/api/user/regster', data).then(res => {
             this.$http.defaults.headers.EasySecret=res.headers.easysecret;
             this.EASYSECRET(res.headers.easysecret)
             this.mytoast(res.data.msg);
-            console.log(res.data.msg);
             if(res.data.code === 0) {
 
               this.changeUserName(this.username)
@@ -427,13 +440,11 @@
       }
     },
     components: {
+      ...mapState(['agent_id']),
       headervue,
       footervue,
       maskLayer
     }
-    // computed: {
-    //   ...mapState(['agentId'])
-    // }
   }
 
 </script>

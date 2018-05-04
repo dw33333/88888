@@ -98,12 +98,23 @@ try {
   }
 } catch (e) {
 }
+let agent_id=-1;
+try{
+  if (sessionStorage.getItem('agent_id')) {
+    agent_id = JSON.parse(sessionStorage.getItem('agent_id'));
+  }else{
+    agent_id = -1;
+  }
+}catch(e){
+
+}
 
 
 const state = {
   easysecret,
   rootbox,
   userinfo,
+  agent_id,
   username, // 用户名
   money, // 用户余额
   agmoney, // AG余额
