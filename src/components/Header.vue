@@ -323,7 +323,7 @@
             this.temcodeToken = res.data.codeToken
             // this.mytoast(res.data.msg)
             // alert("11111"+this.temcodeToken)
-            this.getUserToken(this.temcodeToken)
+            // this.getUserToken(this.temcodeToken)
 
           }
         }).catch((error) => {
@@ -404,6 +404,8 @@
           this.mytoast('请输入密码')
         } else {
           this.$http.post('/api/user/login', data).then((res) => {
+            this.$http.defaults.headers.EasySecret=res.headers.easysecret;
+            this.EASYSECRET(res.headers.easysecret);
             if (res.status === 200 && res.data.code === 0) {
               this.mytoast(res.data.msg)
               // this.usermoney = res.data.data.user_money
@@ -423,48 +425,49 @@
           }).catch((error) => {
             console.log(error)
           })
-        },
-      // 退出登录
-      loginout() {
-        this.$http.get('/api/user/logout', {
-          headers: {
-            EasySecret: this.temcodeToken,
-            emulateJSON: true
-          }
-        }).then((res) => {
-          if (res.data.code === 0) {
-            // this.$store.dispatch('UserLogout')
-
-            this.userLoginOut()
-
-            this.mytoast(res.data.msg)
-            sessionStorage.clear();
-            this.codeImgFn().stop
-            setTimeout(() => {
-              // alert(1)
-              // instance.close()
-              this.ifopen = false
-              clearTimeout()
-              this.$router.replace('/')
-              location.reload()
-            }, 1500)
-
-            // this.isShow=false;
-            // this.$store.dispatch('UserLogin', this.username)
-            // this.$store.dispatch('SET_userMoney', this.usermoney)
-            // this.$router.push('/UserCenter')
-            // this.$router.push(this.$route.query.redirect || '/')
-
-
-            // alert(this.user_name)
-            this.changeUserName(this.user_name)
-            this.changeUserMoney(res.data.data.user_money)
-            // this.userIsLogin(true)
-          }
-        }).catch((error) => {
-          console.log(error)
-        })
+        }
       },
+      // 退出登录
+      // loginout() {
+      //   this.$http.get('/api/user/logout', {
+      //     headers: {
+      //       EasySecret: this.temcodeToken,
+      //       emulateJSON: true
+      //     }
+      //   }).then((res) => {
+      //     if (res.data.code === 0) {
+      //       // this.$store.dispatch('UserLogout')
+
+      //       this.userLoginOut()
+
+      //       this.mytoast(res.data.msg)
+      //       sessionStorage.clear();
+      //       this.codeImgFn().stop
+      //       setTimeout(() => {
+      //         // alert(1)
+      //         // instance.close()
+      //         this.ifopen = false
+      //         clearTimeout()
+      //         this.$router.replace('/')
+      //         location.reload()
+      //       }, 1500)
+
+      //       // this.isShow=false;
+      //       // this.$store.dispatch('UserLogin', this.username)
+      //       // this.$store.dispatch('SET_userMoney', this.usermoney)
+      //       // this.$router.push('/UserCenter')
+      //       // this.$router.push(this.$route.query.redirect || '/')
+
+
+      //       // alert(this.user_name)
+      //       this.changeUserName(this.user_name)
+      //       this.changeUserMoney(res.data.data.user_money)
+      //       // this.userIsLogin(true)
+      //     }
+      //   }).catch((error) => {
+      //     console.log(error)
+      //   })
+      // },
       // 退出登录
       async loginout() {
         let res = await this.$http.post('/api/user/logout');
