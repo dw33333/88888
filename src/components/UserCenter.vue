@@ -327,7 +327,6 @@
     mounted() {
       // 获取个人信息
       /*this.getuserinfo()*/
-      this.getuserinfo();
     },
     computed: {
       ...mapState(['agmoney', 'dsmoney', 'money', 'username', 'userRealName', 'userinfo'])

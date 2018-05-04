@@ -131,6 +131,29 @@ export default {
         }
       });
     },
+    async getuserinfo() {
+      let res = await this.$http.get('/api/users/info');
+      if (!res) return
+      if (res.data.code != 0) {
+        this.alert("提示", res.data.msg);
+        return;
+      }
+      this.USERINFO({
+        bankname: res.data.data.BandName,
+        cardnum: res.data.data.CardNumber,
+        logintime: res.data.data.LoginTime,
+        mobile: res.data.data.Mobile,
+        money: res.data.data.Money,
+        msgnum: res.data.data.MsgNumber,
+        name: res.data.data.Name,
+        username: res.data.data.UserName,
+        email: res.data.data.email,
+        qq: res.data.data.qq
+      });
+      this.getUserRealName(res.data.data.Name);
+      this.changeUserMoney(res.data.data.Money);
+      this.changeUserName(res.data.data.UserName);
+    },
     loginFn () {
       if (!this.user_name) {
         this.alert('提示','请输入用户名！')
@@ -153,13 +176,14 @@ export default {
         codeToken:this.codeToken
       }
       this.$http.defaults.headers.EasySecret=undefined;
-      this.$http.post('/api/user/login', data).then((res) => {
+      this.$http.post('/api/user/login', data).then(async (res) => {
         this.$http.defaults.headers.EasySecret=res.headers.easysecret;
         this.EASYSECRET(res.headers.easysecret);
         if( res.data.code === 0) {
+          await this.getuserinfo();
+          //this.changeUserName(this.user_name);
+          //this.changeUserMoney(res.data.data.money);
           this.mytoast("登录成功");
-          this.changeUserName(this.user_name);
-          this.changeUserMoney(res.data.data.money);
           setTimeout(() => {
             console.log(22222);
               this.$router.push({path:"/"});
@@ -175,7 +199,7 @@ export default {
         console.log('err:'+error)
       })
     },
-    ...mapMutations(['changeUserName','changeUserMoney','getUserToken',"EASYSECRET","ROOTBOX"]),
+    ...mapMutations(['changeUserName','getUserRealName','changeUserMoney','getUserToken',"EASYSECRET","ROOTBOX","USERINFO"]),
   },
   components: {
     footervue,

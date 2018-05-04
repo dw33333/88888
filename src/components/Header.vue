@@ -24,7 +24,9 @@
           <div class="item regster">
             <router-link to="/register">免费开户</router-link>
           </div>
-
+          <div class="item regster">
+            <span @click="trial">试玩</span>
+          </div>
           <!-- <div class="item resetpwd">
             <a href="javascript:void(0);" @click="forgorWord">忘记密码</a>
           </div> -->
@@ -263,6 +265,9 @@
       // this.getArry();
     },
     methods: {
+      trial(){
+
+      },
       goVideo() {
         this.$router.push('/live1');
       },
@@ -805,8 +810,8 @@
   .bar-right .regster {
     height: 34px;
     line-height: 34px;
-    width: 80px;
-    margin: 0 8px;
+    width: 100px;
+    margin: 0 2px;
     margin-top: 10px;
     background: url(../assets/base-ico2.png) no-repeat;
     cursor: pointer;
