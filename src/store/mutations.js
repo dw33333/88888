@@ -61,7 +61,9 @@ const mutations = {
     state.easysecret = data;
     try {
       if(data)
-      sessionStorage.setItem('easysecret',data);
+        sessionStorage.setItem('easysecret',data);
+      else
+        sessionStorage.setItem('easysecret',"");
     } catch (e) {}
   },
   //BOOTBOX
@@ -76,6 +78,18 @@ const mutations = {
     try {
       if(data)
       sessionStorage.setItem('userinfo',JSON.stringify(data));
+      else
+      sessionStorage.setItem('userinfo',"");
+
+    } catch (e) {}
+  },
+  AGENT_ID(state,data){
+    state.agent_id = data;
+    try {
+      if(data)
+        sessionStorage.setItem('agent_id',data);
+      else
+        sessionStorage.setItem('agent_id',0);
     } catch (e) {}
   },
   userLoginOut (state,data) {

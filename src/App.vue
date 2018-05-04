@@ -7,12 +7,32 @@
   </div>
 </template>
 <script>
-  import {mapState} from "vuex";
+  import {mapState,mapMutations} from "vuex";
 
   export default {
     name: 'App',
     computed: {
       ...mapState(["rootbox"])
+    },
+    created(){
+      this.getAgentId()
+    },
+    methods:{
+      ...mapMutations(["AGENT_ID"]),
+      async getAgentId(){
+        let res = await this.$http({
+          method:"post",
+          url:'/api/user/getAgentId',
+          data:{domain:window.location.host},
+          headers:{EasySecret:""},
+        });
+        if(!res)return;
+        if (res.data.code==1) {
+          this.AGENT_ID(0);
+        }else if(res.data.code==0){
+          this.AGENT_ID(res.data.data);
+        }
+      }
     }
   }
 

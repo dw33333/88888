@@ -222,7 +222,7 @@
           账号: <span>{{username}}</span>
         </div>
         <div class="balance">
-          用户余额: <span>{{usermoney}}</span>
+          用户余额: <span>{{money}}</span>
         </div>
         <!--<div class="balance" style="background-position:-96px -36px;">
           真实姓名: <span>{{userRealName}}</span>
@@ -330,7 +330,7 @@
       this.getuserinfo();
     },
     computed: {
-      ...mapState(['agmoney', 'dsmoney', 'usermoney', 'username', 'userRealName', 'userinfo'])
+      ...mapState(['agmoney', 'dsmoney', 'money', 'username', 'userRealName', 'userinfo'])
     },
     methods: {
       alert(tit, msg, fn, msgStyle) {
