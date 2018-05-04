@@ -1,7 +1,7 @@
 <template>
-  <div class="activity_bg">
+  <div>
       <headervue></headervue>
-      <div>
+      <div class="activity_bg">
           <div class="activity-container">
               <div class="activity-site">
                   <div class="activitybar">
