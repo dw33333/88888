@@ -456,8 +456,7 @@ export default {
           }).catch((error) => {
             console.log(error)
           })
-        }
-      },
+        },
       // 退出登录
       async loginout() {
         let res = await this.$http.post('/api/user/logout');
