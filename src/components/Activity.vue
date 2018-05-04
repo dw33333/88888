@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="activity_bg">
       <headervue></headervue>
       <div>
           <div class="activity-container">
@@ -52,6 +52,9 @@ export default {
 }
 </script>
 <style>
+.activity_bg{
+    background: url(/static/img/bg1.a4a4897.jpg) 0 0 no-repeat;
+}
 .activity-footer a{
     background: url('../../static/img/activity-btn.png') no-repeat right top;
     display: inline-block;
