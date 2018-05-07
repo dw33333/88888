@@ -4,14 +4,14 @@
       <span>用户中心&gt;账户充值</span>
     </div>
     <div class="cont">
-      <div class="tab_type clearfix">
+      <div class="tab_type clearfix" v-show="!is_loading_paytype&&!is_loading_banks" >
         <div class="item" v-for="it,idx in typeList" :key="idx"
              :class="{'cur':it.selected,'bank':it.id==-1,'other':it.id!=-1}"
              @click="(typeList.forEach(v=>v.selected=false),it.selected=true,curType=it)">{{it.name}}
         </div>
         <!--<div class="item other">微信</div>-->
       </div>
-      <div class="bank_content" v-if="curType&&curType.id==-1">
+      <div v-show="!is_loading_paytype&&!is_loading_banks" class="bank_content" v-if="curType&&curType.id==-1">
         <div class="step">
           <div class="tit"><i>1</i>请选择入款银行账号：</div>
           <div class="det">
@@ -35,11 +35,11 @@
             <div class="ipt_item"><span style="vertical-align: middle;">备&emsp;&emsp;注 : </span>
               <textarea name="" cols="30" rows="3" v-model="curType.about" placeholder="请备注账号/姓名、微信支付请留言备注"></textarea>
             </div>
-            <div class="ipt_item"><span>转账类型 : </span><select name="" id="" v-model="curType.type" >
+            <div class="ipt_item"><span>转账类型 : </span><select name="" id="" v-model="curType.type">
               <option value="" disabled selected style='display:none;'>请选择转账类型</option>
               <option :value="it" v-for="it,idx in huikuanMode" :key="idx">{{it}}</option>
             </select></div>
-            <div class="btn_next" @click="submit">提交</div>
+            <div class="btn_next" @click="submit">{{is_submiting?"提交中...":"提交"}}</div>
           </div>
         </div>
         <div class="tishi">
@@ -49,14 +49,17 @@
           <div>三、如您是跨行转帐，请您在转帐时选择跨行快速汇款或跨行加急汇款（避免公司不能及时查收您的款项）。</div>
         </div>
       </div>
-      <div class="other_content" v-if="curType&&curType.id!=-1">
+      <div v-show="!is_loading_paytype&&!is_loading_banks"  class="other_content" v-if="curType&&curType.id!=-1">
         <div class="title">请选择通道:</div>
         <div class="online_paytypes clearfix">
-          <div class="item" v-for="it,idx in curType.bankList" :key="idx" :class="{'cur':it.selected}" @click="(curType.selectedBankValue=it.value,curType.bankList.forEach(v=>{v.selected=false;}),it.selected=true)">{{it.name}}</div>
+          <div class="item" v-for="it,idx in curType.bankList" :key="idx" :class="{'cur':it.selected}"
+               @click="(curType.selectedBankValue=it.value,curType.bankList.forEach(v=>{v.selected=false;}),it.selected=true)">
+            {{it.name}}
+          </div>
         </div>
         <div class="ipt">充值金额: <input type="number" v-model="curType.money" style="width:150px;" placeholder="请输入充值金额"/>&emsp;&emsp;&emsp;<span
           style="color:#ea3146;">*单笔最低存款金额{{curType.pay_lowest}}元,最高存款金额{{curType.pay_height}}元</span></div>
-        <div class="btn_next" @click="submit">提交</div>
+        <div class="btn_next" @click="submit">{{is_submiting?"提交中...":"提交"}}</div>
         <div class="tishi">
           <div>在线支付说明：</div>
           <div>(1).请按表格填写准确的在线冲值信息,确认提交后会进入选择的支付通道进行在线付款!</div>
@@ -64,6 +67,7 @@
           <div>(3).如有任何疑问,您可以联系 在线客服为您提供365天×24小时不间断的友善和专业客户咨询服务!</div>
         </div>
       </div>
+      <div style="display: inline-block;color:#B62929;padding-top:20px;" v-show="is_loading_paytype||is_loading_banks">加载中...</div>
     </div>
     <!--<maskLayer :ifopen="ifopen" :content='content'></maskLayer>-->
   </div>
@@ -80,84 +84,89 @@
         huikuanMode: ['银行柜台', 'ATM现金', 'ATM卡转', '网银转账', '支付宝', '微信'],
         typeList: [],
         curType: null,
+        is_loading_paytype:true,
+        is_loading_banks:true,
+        is_submiting:false
       }
     },
 
     methods: {
       ...mapMutations(['ROOTBOX']),
-      alert(tit,msg,fn,msgStyle){
-        let _this=this;
+      alert(tit, msg, fn, msgStyle) {
+        let _this = this;
         this.ROOTBOX({
-          open:true,
-          compt:alert,
-          props:{
-            tit:tit,
-            msg:msg,
-            msgstyle:msgStyle
+          open: true,
+          compt: alert,
+          props: {
+            tit: tit,
+            msg: msg,
+            msgstyle: msgStyle
           },
-          handles:{
-            confirm(){
-              if(fn)fn();
+          handles: {
+            confirm() {
+              if (fn) fn();
               _this.ROOTBOX({
-                open:false
+                open: false
               })
             },
-            close(){
+            close() {
               _this.ROOTBOX({
-                open:false
+                open: false
               });
             }
           }
         });
       },
-      async submit(){
-        if(this.curType&&this.curType.id==-1){
-          if(this.curType.selectedBankId==-1){
-            this.alert("提示","请选择银行卡");
+      async submit() {
+        if (this.curType && this.curType.id == -1) {
+          if (this.curType.selectedBankId == -1) {
+            this.alert("提示", "请选择银行卡");
             return;
-          }else if(!this.curType.money){
-            this.alert("提示","请填写转账金额");
+          } else if (!this.curType.money) {
+            this.alert("提示", "请填写转账金额");
             return;
-          }else if(parseFloat(this.curType.money)<100){
-            this.alert("提示","转账金额不能低于100元");
+          } else if (parseFloat(this.curType.money) < 100) {
+            this.alert("提示", "转账金额不能低于100元");
             return;
-          }else if(!this.curType.about){
-            this.alert("提示","请填写备注")
+          } else if (!this.curType.about) {
+            this.alert("提示", "请填写备注")
             return;
-          }else if(!this.curType.type){
-            this.alert("提示","请选择转账类型")
+          } else if (!this.curType.type) {
+            this.alert("提示", "请选择转账类型")
             return;
           }
-          let res= await this.$http.post("/api/money/deposit",{
-            id:this.curType.selectedBankId,
-            order_value:this.curType.money,
-            about:this.curType.type+this.curType.about,
-            source:1
+          this.is_submiting=true;
+          let res = await this.$http.post("/api/money/deposit", {
+            id: this.curType.selectedBankId,
+            order_value: this.curType.money,
+            about: this.curType.type + this.curType.about,
+            source: 1
           });
-          if(!res)return
-          if(res.status === 200 ){
-            if(res.data.code === 0){
-              this.alert("提示","提交成功！",()=>{
+          this.is_submiting=false;
+          if (!res) return
+          if (res.status === 200) {
+            if (res.data.code === 0) {
+              this.alert("提示", "提交成功！", () => {
                 this.$router.push("depositrecord");
               });
-            }else{
-              this.alert("提示",res.data.msg);
+            } else {
+              this.alert("提示", res.data.msg);
             }
-          }else{
+          } else {
             console.error(res);
           }
-        }else if(this.curType&&this.curType.id!=-1){
-          if(!this.curType.selectedBankValue){
-            this.alert("提示","请选支付通道");
+        } else if (this.curType && this.curType.id != -1) {
+          if (!this.curType.selectedBankValue) {
+            this.alert("提示", "请选支付通道");
             return;
-          }else if(!this.curType.money){
-            this.alert("提示","请填写支付金额");
+          } else if (!this.curType.money) {
+            this.alert("提示", "请填写支付金额");
             return;
-          }else if(parseFloat(this.curType.money)<parseFloat(this.curType.pay_lowest)){
-            this.alert("提示",`支付金额不能低于${this.curType.pay_lowest}元`);
+          } else if (parseFloat(this.curType.money) < parseFloat(this.curType.pay_lowest)) {
+            this.alert("提示", `支付金额不能低于${this.curType.pay_lowest}元`);
             return;
-          }else if(parseFloat(this.curType.money)>parseFloat(this.curType.pay_height)){
-            this.alert("提示",`支付金额不能高于${this.curType.pay_height}元`);
+          } else if (parseFloat(this.curType.money) > parseFloat(this.curType.pay_height)) {
+            this.alert("提示", `支付金额不能高于${this.curType.pay_height}元`);
             return;
           }
         }
@@ -167,42 +176,38 @@
       maskLayer
     },
     async mounted() {
+      this.is_loading_paytype=true;
       let res = await this.$http.get('/api/pay/mobilelist');
+      this.is_loading_paytype=false;
       if (!res) return;
-      if (res.status === 200 ) {
-        if(res.data.code !== 0){
-          this.alert("提示",res.data.msg);
-          return;
-        }
-        let bp = {id: -1, name: "银行卡转账", selected: true, selectedBankId: -1, money: "", about: "", type: ""};
-        let inBankRes = await this.$http.get('/api/HuikuanList/showBank');
-        if (!inBankRes) return;
-        if (inBankRes.status === 200 ) {
-          if(inBankRes.data.code !== 0){
-            this.alert("提示",inBankRes.data.msg);
-            return;
-          }
-          bp.bankList = inBankRes.data.data;
-          bp.bankList.forEach(v => {
-            v.selected = false;
-          });
-        } else {
-          console.error(inBankRes);
-        }
-        let list = res.data.data;
-        list.forEach(v => {
-          v.selected = false;
-          v.selectedBankValue="";
-          v.bankList.forEach(vv=>{
-            vv.selected=false;
-          })
-        });
-        list.unshift(bp);
-        this.typeList = list;
-        this.curType = this.typeList[0];
-      } else {
-        console.error(res);
+      if (res.data.code !== 0) {
+        this.alert("提示", res.data.msg);
+        return;
       }
+      let bp = {id: -1, name: "银行卡转账", selected: true, selectedBankId: -1, money: "", about: "", type: ""};
+      this.is_loading_banks=true;
+      let inBankRes = await this.$http.get('/api/HuikuanList/showBank');
+      this.is_loading_banks=false;
+      if (!inBankRes) return;
+      if (inBankRes.data.code !== 0) {
+        this.alert("提示", inBankRes.data.msg);
+        return;
+      }
+      bp.bankList = inBankRes.data.data;
+      bp.bankList.forEach(v => {
+        v.selected = false;
+      });
+      let list = res.data.data;
+      list.forEach(v => {
+        v.selected = false;
+        v.selectedBankValue = "";
+        v.bankList.forEach(vv => {
+          vv.selected = false;
+        })
+      });
+      list.unshift(bp);
+      this.typeList = list;
+      this.curType = this.typeList[0];
     },
 
     computed: {
@@ -239,7 +244,7 @@
   .cont {
     margin: 10px;
     color: #666;
-    min-height:400px;
+    min-height: 400px;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.35);
     background-color: #fff;
     padding: 30px 25px;
@@ -443,46 +448,46 @@
     }
   }
 
- /* input[type=text]::-webkit-input-placeholder {
-    !* Mozilla Firefox 4 to 18 *!
-    color: #e53935;
-  }
+  /* input[type=text]::-webkit-input-placeholder {
+     !* Mozilla Firefox 4 to 18 *!
+     color: #e53935;
+   }
 
-  input[type=text]:-moz-placeholder {
-    !* Mozilla Firefox 4 to 18 *!
-    color: #e53935;
-  }
+   input[type=text]:-moz-placeholder {
+     !* Mozilla Firefox 4 to 18 *!
+     color: #e53935;
+   }
 
-  input[type=text]::-moz-placeholder {
-    !* Mozilla Firefox 19+ *!
-    color: #e53935;
-  }
+   input[type=text]::-moz-placeholder {
+     !* Mozilla Firefox 19+ *!
+     color: #e53935;
+   }
 
-  input[type=text]:-ms-input-placeholder {
-    !* Internet Explorer 10+ *!
-    color: #e53935;
-  }
+   input[type=text]:-ms-input-placeholder {
+     !* Internet Explorer 10+ *!
+     color: #e53935;
+   }
 
-  textarea::-webkit-input-placeholder {
-    !* Mozilla Firefox 4 to 18 *!
-    color: #e53935;
-  }
+   textarea::-webkit-input-placeholder {
+     !* Mozilla Firefox 4 to 18 *!
+     color: #e53935;
+   }
 
-  textarea:-moz-placeholder {
-    !* Mozilla Firefox 4 to 18 *!
-    color: #e53935;
-  }
+   textarea:-moz-placeholder {
+     !* Mozilla Firefox 4 to 18 *!
+     color: #e53935;
+   }
 
-  textarea::-moz-placeholder {
-    !* Mozilla Firefox 19+ *!
-    color: #e53935;
-  }
+   textarea::-moz-placeholder {
+     !* Mozilla Firefox 19+ *!
+     color: #e53935;
+   }
 
-  textarea:-ms-input-placeholder {
-    !* Internet Explorer 10+ *!
-    color: #e53935;
-  }
-*/
+   textarea:-ms-input-placeholder {
+     !* Internet Explorer 10+ *!
+     color: #e53935;
+   }
+ */
   input:focus {
     outline: none;
   }

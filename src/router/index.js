@@ -122,6 +122,30 @@ const PasswordManagement = (resolve) => {
   })
 }
 
+
+const bet_record = (resolve) => {
+  import('@/components/userinfo/bet_record').then((module) => {
+    resolve(module)
+  })
+}
+const charge_record = (resolve) => {
+  import('@/components/userinfo/charge_record').then((module) => {
+    resolve(module)
+  })
+}
+const week_statistic = (resolve) => {
+  import('@/components/userinfo/week_statistic').then((module) => {
+    resolve(module)
+  })
+}
+const msg_list= (resolve) => {
+  import('@/components/userinfo/msg_list').then((module) => {
+    resolve(module)
+  })
+}
+
+
+
 // 用户中心>账户管理>银行卡管理
 // const CardsList = (resolve) => {
 //   import('@/components/userinfo/CardsList').then((module) => {
@@ -209,14 +233,15 @@ const live = (resolve) => {
     resolve(module)
   })
 }
-Vue.use(Router)
-Vue.use(VueAwesomeSwiper)
 
 const USERCENTER = (resolve) => {
   import('@/components/UserCenter').then((module) => {
     resolve(module)
   })
 }
+Vue.use(Router)
+Vue.use(VueAwesomeSwiper)
+
 const route =new Router({
   routes: [
     {
@@ -323,9 +348,26 @@ const route =new Router({
         {
           path: '/Messge',
           component: Messge
+        },
+        {
+          path: '/bet_record',
+          component: bet_record
+        },
+        {
+          path: '/charge_record',
+          component: charge_record
+        },
+        {
+          path: '/week_statistic',
+          component: week_statistic
+        },
+        {
+          path: '/msg_list',
+          component: msg_list
         }
       ]
     }
+
   ]
 });
 route.beforeEach((to,from,next)=>{

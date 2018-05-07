@@ -2,9 +2,15 @@
   <div class="mask">
     <div class="alert">
       <div class="title clearfix"><span class="tishi">{{tit}}</span><span class="close" @click="($emit('close'))">×</span></div>
-      <div class="content">
+      <div class="content clearfix">
         <div class="txt" v-html="msg" :style="msgstyle?msgstyle:{}"></div>
-        <div class="btn" @click="($emit('confirm'))">确定</div>
+        <div v-show="confirm">
+          <div class="btn" @click="($emit('close'))"  style="margin-right:20px;">取消</div>
+          <div class="btn" @click="($emit('confirm'))">确定</div>
+        </div>
+        <div v-show="!confirm">
+          <div class="btn" @click="($emit('confirm'))">确定</div>
+        </div>
       </div>
     </div>
   </div>
@@ -13,7 +19,7 @@
 <script>
   export default {
     name: "alert",
-    props: ["msg","tit","msgstyle"]
+    props: ["msg","tit","msgstyle","confirm"]
   }
 </script>
 
@@ -72,15 +78,17 @@
   }
 
   .mask > .alert > .content .txt {
-    margin: 10px 0;
+    margin: 10px 0 15px 0;
   }
 
   .mask > .alert > .content .btn {
+    display:inline-block;
     line-height: 3em;
     padding: 0 10px;
     min-width: 40px;
     max-width:150px;
-    margin:0 auto;
+    /*margin:0 auto;*/
+
     color: #ffffff;
     background-color: #a7232f;
     border-color: #d22f3e;

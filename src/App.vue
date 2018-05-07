@@ -2,13 +2,14 @@
   <div id="app">
     <router-view></router-view>
     <transition name="ew-slide">
+      <!--最外层动态组件-->
       <component v-if="rootbox.open" :is="rootbox.compt" v-bind="rootbox.props" v-on="rootbox.handles"/>
     </transition>
   </div>
 </template>
 <script>
   import {mapState,mapMutations} from "vuex";
-
+  import 'element-ui/lib/theme-chalk/index.css';
   export default {
     name: 'App',
     computed: {
@@ -52,7 +53,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #333;
+    color: #6f6d6d;
     height: 100%;
     min-width: 1170px;
     /*margin-top: 60px;*/

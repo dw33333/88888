@@ -268,7 +268,7 @@
                 <router-link to="/week_statistic">报表统计</router-link>
               </li>
             </ul>
-            <div class="item" @click="isShow(3)">
+           <!-- <div class="item" @click="isShow(3)">
               <a href="javascript:void(0);">额度转换</a>
             </div>
             <ul class='list-item'
@@ -276,18 +276,18 @@
               <li>
                 <router-link to="/moneymanagemen">额度管理</router-link>
               </li>
-            </ul>
+            </ul>-->
             <div class="item" @click="isShow(4)">
               <a href="javascript:void(0);">信息中心</a>
             </div>
             <ul class='list-item'
                 :style="{height:isDisplay==4?((34*2)+'px'):'0px',visibility:isDisplay==4?'visible':'hidden',overflow:'hidden'}">
               <li>
-                <router-link to="/Messge">站内短信</router-link>
+                <router-link to="/msg_list">站内短信</router-link>
               </li>
-              <li>
+             <!-- <li>
                 <router-link to="/Notice">网站公告</router-link>
-              </li>
+              </li>-->
             </ul>
           </div>
         </div>
@@ -394,7 +394,7 @@
           console.log(error)
         })
       },*/
-      ...mapMutations(['getUserRealName', 'changeUserMoney', 'changeUserName', 'userLoginOut', 'USERINFO', 'ROOTBOX']),
+      ...mapMutations(['getUserRealName', 'changeUserMoney', 'changeUserName', 'userLoginOut', 'USERINFO', 'ROOTBOX','EASYSECRET']),
       // 封装提示信息函数
       mytoast(msg) {
         this.ifopen = true
@@ -406,24 +406,17 @@
       },
 
       // 退出登录
-      loginout() {
-        /*this.$http.get('/json/api.php?r=logout').then((res) => {
-          if (res.data.code === 0) {
-
-            this.mytoast(res.data.msg)
-
-            this.userLoginOut()
-
-            setTimeout(() => {
-              this.ifopen = false
-              clearTimeout()
-              this.$router.replace('/')
-              // location.reload();
-            }, 1500)
-          }
-        }).catch((error) => {
-          console.log(error)
-        })*/
+      async loginout() {
+        let res = await this.$http.post('/api/user/logout');
+        if (!res) return;
+        if (res.data.code != 0) {
+          this.alert("提示", res.data.msg);
+          return;
+        }
+        this.EASYSECRET("");
+        sessionStorage.clear();
+        this.$http.defaults.headers.EasySecret = undefined;
+        this.$router.push("login");
       },
       showAllgame() {
         this.isShowMenu = true
@@ -501,6 +494,7 @@
       border-radius: 3px 3px;
       padding-left: 10px;
       color: #999;
+      vertical-align: middle;
     }
 
     input:focus, select:focus, textarea:focus {
@@ -539,6 +533,70 @@
         -webkit-animation-fill-mode: both;
         color: #aaa !important;
       }
+
+    .search_box {
+      padding: 10px 0px;
+      line-height: 35px;
+      .btn_search {
+        vertical-align: middle;
+        background-color: #b62929;
+        color: #fff;
+        display: inline-block;
+        line-height: 34px;
+        min-width: 60px;
+        text-align: center;
+        border-radius: 3px 3px;
+        cursor:pointer;
+      }
+    }
+    table.tb {
+      width:100%;
+      border-collapse: collapse;
+      border: 1px solid #ccc;
+      text-align: center;
+      tr {
+        border: 1px solid #ccc;
+      }
+      th{
+        background-color:#C7C7C7;
+        padding:8px 0;
+        font-weight: 200;
+      }
+      td{
+        background-color:#fff;
+        padding:8px 0;
+      }
+    }
+    .pager{
+      margin-top:20px;
+      margin-bottom:20px;
+      text-align: center;
+      >.item{
+        margin:0 2px;
+        display: inline-block;
+        padding:7px 10px;
+        cursor:pointer;
+        line-height: 1.2;
+        border:1px solid #ccc;
+        background-color:#fff;
+        &:hover{
+          color:#B62929;
+          border:1px solid #b62929;
+        }
+        &.cur{
+          color:#B62929;
+          border:1px solid #b62929;
+        }
+        &.sl{
+          &:hover{
+            border:none;
+            background:none;
+          }
+          border:none;
+          background:none;
+        }
+      }
+    }
   }
 
   body {
@@ -910,6 +968,7 @@
     min-height: 900px;
     min-width: 500px;
     background-color: #ededed;
+    overflow-y:auto;
   }
 
 </style>

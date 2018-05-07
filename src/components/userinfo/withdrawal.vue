@@ -3,7 +3,10 @@
     <div class="main-head">
       <span>用户中心&gt;提现</span>
     </div>
-    <div class="add-card" v-if="!card">
+    <div class="add-card" v-show="is_loading_car_info" style="color:#B62929;min-height:500px;">
+      加载中...
+    </div>
+    <div class="add-card" v-if="!card" v-show="!is_loading_car_info"  >
       <p>您还未绑定银行卡，请先填写信息绑定， <span class="colorf00"> * </span>为必填信息。</p>
       <ul class="item">
         <li class='title'><span class="colorf00">*</span>真实姓名 :</li>
@@ -134,10 +137,10 @@
         </li>
       </ul>
       <div class="item btns">
-        <button @click="addCard">确定</button>
+        <button @click="addCard">{{is_add_card?"提交中...":"确定"}}</button>
       </div>
     </div>
-    <div class="add-card" v-if="card">
+    <div class="add-card" v-if="card" v-show="!is_loading_car_info">
       <ul class="item">
         <li class='title'>会员卡号 :</li>
         <li>
@@ -166,11 +169,11 @@
       <ul class="item">
         <li class='title'>取款密码 :</li>
         <li>
-          <input type="text" v-model="tixianInputs.qkpwd" placeholder="请输入取款密码"/>
+          <input type="password" v-model="tixianInputs.qkpwd" placeholder="请输入取款密码"/>
         </li>
       </ul>
       <div class="item btns">
-        <button @click="tixian">确定提交</button>
+        <button @click="tixian">{{is_tixian?"提交中...":"确定提交"}}</button>
       </div>
       <div class="tishi">
         <div>提款须知：</div>
@@ -212,6 +215,9 @@
           qkpwd: ""
         },
         city_area: city_area,
+        is_loading_car_info:true,
+        is_add_card:false,
+        is_tixian:false
       }
     },
     created() {
@@ -222,7 +228,6 @@
     },
     async mounted() {
       let res = await this.$http.get('/api/users/Bankcardcat');
-      this.loadCardInfo()
       if (!res) return;
       if (res.status == 200) {
         this.card =!res.data.code;
@@ -267,7 +272,9 @@
         });
       },
       async loadCardInfo(){
+        this.is_loading_car_info=true;
         let res = await this.$http.get('/api/money/getUserBankInfo');
+        this.is_loading_car_info=false;
         if (!res) return;
         this.tixianInputs.min_money=res.data.min_money;
         this.tixianInputs.card_num = res.data.pay_num;
@@ -291,6 +298,7 @@
           this.alert("提示", "银行卡号填写错误");
           return;
         }
+        this.is_add_card=true;
         let res = await this.$http.post('/api/users/Bankcardsave', {
           qk_pass: this.cardInputs.pwd,
           pay_name: this.cardInputs.real_name,
@@ -298,6 +306,7 @@
           pay_num: this.cardInputs.carnum,
           pay_address: city_area[this.cardInputs.prov].name + city_area[this.cardInputs.prov].city[this.cardInputs.city].name + city_area[this.cardInputs.prov].city[this.cardInputs.city].area[this.cardInputs.area]
         });
+        this.is_add_card=false;
         if (!res) return
         if (res.data.code != 0) {
           this.alert("提示", res.data.msg);
@@ -321,10 +330,12 @@
           this.alert("提示", "取款密码必须是4-6位数字");
           return;
         }
+        this.is_tixian=true;
         let res = await this.$http.post('/api/money/withdrawals',{
           order_value:this.tixianInputs.money,
           qk_pass:this.tixianInputs.qkpwd
         });
+        this.is_tixian=false;
         if(!res)return;
         if (res.data.code != 0) {
           this.alert("提示", res.data.msg);

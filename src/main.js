@@ -6,6 +6,7 @@ import axios from 'axios'
 import $ from 'jquery'
 import 'babel-polyfill'  //ie11打开空白
 import alert from "@/components/base/alert"
+import "@/obj/util"
 Vue.config.productionTip = true
 axios.defaults.withCredentials = true
 Vue.prototype.$http = axios
@@ -13,6 +14,7 @@ Vue.prototype.$http.defaults.headers.EasySecret=store.state.easysecret;
 Vue.prototype.$http.interceptors.response.use(
   response => {
     if(response.status!=200){//不确定所有非200状态都进入error 所以价格判断
+      store.commit("LOADING",false);
       console.error(error.response);
       return Promise.resolve();
     }else{
@@ -49,7 +51,7 @@ Vue.prototype.$http.interceptors.response.use(
     }
   },
   error => {
-    let wAlert=(msg)=>{
+    let wAlert=(msg)=>{//todo 放到公共文件中
       store.commit("ROOTBOX",{
         open: true,
         compt: alert,
@@ -87,6 +89,7 @@ Vue.prototype.$http.interceptors.response.use(
     }
     //全局处理错误后返回成功一个undefined 免去每次使用 async await 都try catch
     console.error(error.response);
+    store.commit("LOADING",false);//报错时关闭loading
     return Promise.resolve();
   });
 /* eslint-disable no-new */

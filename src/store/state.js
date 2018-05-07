@@ -98,7 +98,7 @@ try {
   }
 } catch (e) {
 }
-let agent_id=-1;
+let agent_id=-1;//代理id 值-1 是未被写入过 需要传代理id参数的接口判断
 try{
   if (sessionStorage.getItem('agent_id')) {
     agent_id = JSON.parse(sessionStorage.getItem('agent_id'));
@@ -108,9 +108,10 @@ try{
 }catch(e){
 
 }
-
+let loading=false;
 
 const state = {
+  loading,
   easysecret,
   rootbox,
   userinfo,

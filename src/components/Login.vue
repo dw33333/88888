@@ -30,7 +30,8 @@
                 <input type="text" class="code" v-model="code"><img @click='codeImgFn' class="code-img" :src="codeImg">
               </li>
               <li class="loginbtn" @click="loginFn">
-                <input type="submit" title="登录" class="btn btn_login" value="">
+                <input v-show="!is_login" type="submit" title="登录" class="btn btn_login" value="">
+                <div v-show="is_login" style="color:#fff;line-height: 32px;">正在登录...</div>
               </li>
               <li class="loginbtn">
                 <router-link title="免费开户" class="btn btn_register" to="/register"></router-link>
@@ -76,6 +77,7 @@
         content: '',
         codeImg: '',
         temcodeToken: '',
+        is_login:false,
         code: ''
       }
     },
@@ -181,6 +183,7 @@
           codeToken: this.codeToken
         }
         //this.$http.defaults.headers.EasySecret = undefined;
+        this.is_login=true;
         this.$http({
           method:"post",
           url:'/api/user/login',
@@ -191,6 +194,7 @@
           this.$http.defaults.headers.EasySecret = res.headers.easysecret;
           this.EASYSECRET(res.headers.easysecret);
             await this.getuserinfo();
+            this.is_login=false;
             //this.changeUserName(this.user_name);
             //this.changeUserMoney(res.data.data.money);
             this.mytoast("登录成功");
@@ -206,6 +210,7 @@
         }).catch((error) => {
           this.codeImgFn()
           this.alert("提示", "登录失败");
+          this.is_login=false;
           console.log('err:' + error)
         })
       },
