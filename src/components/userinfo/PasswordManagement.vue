@@ -23,7 +23,7 @@
       <!-- 设置取款密码 -->
       <div class="setPwd" v-if='tabIndex==2'>
         <p>
-          提示：取款密码由4-6位数字或字母或数字和字母组成，在线取款时需要输入取款密码才能进行取款
+          提示：取款密码由4位数字组成，在线取款时需要输入取款密码才能进行取款
         </p>
         <p style="padding-left:28px;">请输入旧密码:
           <input type="password" maxlength="6" onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="输入旧密码4-6位" v-model="oldPassWord">
@@ -49,7 +49,8 @@
 </template>
 <script>
 import maskLayer from '../base/mask-layer'
-
+import alert from '../base/alert'
+import {mapState, mapMutations} from 'vuex'
 export default {
   data () {
     return {
@@ -62,6 +63,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['changeUserName', 'changeUserMoney','ROOTBOX',"EASYSECRET","AGENT_ID"]),
     resetPwd () {
       this.oldPassWord = ''
       this.newPassWord = ''
@@ -78,7 +80,31 @@ export default {
         // clearTimeout();
       }, 1500)
     },
-
+    alert(tit,msg,fn,msgStyle){
+        let _this=this;
+        this.ROOTBOX({
+          open:true,
+          compt:alert,
+          props:{
+            tit:tit,
+            msg:msg,
+            msgstyle:msgStyle
+          },
+          handles:{
+            confirm(){
+              if(fn)fn();
+              _this.ROOTBOX({
+                open:false
+              })
+            },
+            close(){
+              _this.ROOTBOX({
+                open:false
+              });
+            }
+          }
+        });
+      },
     modifySubmit () {
       if (this.tabIndex === 1) {
         if (!this.oldPassWord) {
@@ -101,8 +127,9 @@ export default {
           data['password_old'] = this.oldPassWord
           data['password'] = this.newPassWord
           data['REpassword'] = this.againPassWord
-          this.$http.post('/json/center/?r=ChkPasswd', data).then((res) => {
-            this.mytoast(res.data.msg)
+          this.$http.post('/api/users/changepwd', data).then((res) => {
+            console.log(res)
+            this.alert('提示',res.data.msg)
             setTimeout(() => {
               // instance.close()
               clearTimeout()
@@ -148,8 +175,8 @@ export default {
           data['password_old'] = this.oldPassWord
           data['password'] = this.newPassWord
           data['REpassword'] = this.againPassWord
-          this.$http.post('/json/center/?r=ChkQkPasswd', data).then((res) => {
-            this.mytoast(res.data.msg)
+          this.$http.post('/api/users/changeqkpwd', data).then((res) => {
+            this.alert('信息',res.data.msg)
             setTimeout(() => {
               clearTimeout()
             }, 1500)
@@ -234,7 +261,7 @@ export default {
 }
 
 .content-box input {
-  height: 24px;
+  height: 26px;
   border: 1px #ccc solid;
   width: 200px;
   border-radius: 4px;

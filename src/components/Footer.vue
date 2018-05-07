@@ -58,7 +58,7 @@
 </script>
 <style scoped>
 footer {
-  background: url(../assets/footer_bg.jpg) no-repeat center -2px;
+  background: url('../assets/footer_bg.jpg') no-repeat center -2px;
   height: 267px;
   padding-top: 110px;
   margin: 0 auto;
@@ -159,7 +159,7 @@ a {
     vertical-align: middle;
 }
 .icon-browser{
-  background: url(../assets/home-ico.png) no-repeat;
+  background: url('../../static/img/home-ico.png') no-repeat;
 }
 .icon-browserIE {
   background-position: 0 -948px;

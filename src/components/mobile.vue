@@ -206,16 +206,7 @@ export default {
     width: 302px;
     height: 86px;
 }
-.download_s .down .browser .apple{
-    background-position: 0 0 ;
-}
-.download_s .down .browser .android {
-    background-position: 0 -103px;
-}
-.download_s .down .browser {
-    background-position: 0 -206px;
-    margin-right: 0;
-}
+
 .mobile_p p {
     color: #fff;
     font-size: 14px;
@@ -280,6 +271,16 @@ export default {
 .icon_4 {
     background-position: 0 -906px;
      margin-top: 22px;
+}
+.apple{
+    background-position: 0 0 ;
+}
+.android {
+    background-position: 0 -103px;
+}
+.browser {
+    background-position: 0 -206px;
+    margin-right: 0;
 }
 </style>
 

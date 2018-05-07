@@ -209,6 +209,12 @@ const live = (resolve) => {
     resolve(module)
   })
 }
+//电子游艺
+const Games = (resolve) => {
+  import('@/components/Games').then((module) => {
+    resolve(module)
+  })
+}
 Vue.use(Router)
 Vue.use(VueAwesomeSwiper)
 
@@ -233,6 +239,11 @@ const route =new Router({
       component: register
     },
     {
+      path:'/Games',
+      name:'Games',
+      component:Games
+    },
+    {
       path: '/Login',
       name: 'Login',
       component: Login
@@ -253,7 +264,7 @@ const route =new Router({
       component: Activity
     },
     {
-      path: '/lottery',
+      path: '/lottery/:id',
       name: 'lottery',
       component: lottery
     },
