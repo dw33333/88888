@@ -8,7 +8,7 @@
           <span style="padding-left:10px;">{{nowTime}}</span>
         </div>
         <!-- 登录界面 -->
-        <div class="bar-right" v-if="!username">
+        <div class="bar-right" v-if="!easysecret">
           <div class="item preson-info preson-balance">
             <input type="text" autoComplete='off' placeholder="账号" v-model="user_name">
           </div>
@@ -25,7 +25,9 @@
           <div class="item regster">
             <router-link to="/register">免费开户</router-link>
           </div>
-
+          <div class="item regster">
+            <span @click="trial">试玩</span>
+          </div>
           <!-- <div class="item resetpwd">
             <a href="javascript:void(0);" @click="forgorWord">忘记密码</a>
           </div> -->
@@ -49,7 +51,7 @@
               提款
             </div>
           </router-link>
-          <div class="login-out items" @click="loginout();">
+          <div class="login-out items" @click="loginout()">
             退出
           </div>
         </div>
@@ -119,7 +121,7 @@
               <a href="javascript:;" class="p20">AG</a>
               <a href="javascript:;" class="p20">MG</a>
             </div>
-          </router-link>
+          </li>
           <router-link to="/mobile" tag="li">
             <a href="javascript:void(0)">
               <div>手机下注</div>
@@ -257,7 +259,7 @@
       this.checkUser();
     },
     computed: {
-      ...mapState(['money', 'username', 'codeToken', 'headerArry'])
+      ...mapState(['money', 'username', 'codeToken', 'headerArry', 'easysecret'])
     },
     created() {
       this.getArry();
@@ -265,6 +267,22 @@
     methods: {
       backPageclick () {
         this.$router.push('/')
+      },
+      async trial() {
+        let res = await this.$http({
+          method: "post",
+          url: '/api/user/regsterVirtual',
+          headers: {EasySecret: ""}
+        });
+        if(!res)return;
+        if(res.data.code!=0){
+          this.alert("提示",res.msg);
+          return;
+        }
+        this.$http.defaults.headers.EasySecret = res.headers.easysecret;
+        this.EASYSECRET(res.headers.easysecret);
+        await this.getuserinfo(res.data.virtual==1?1:undefined);
+        this.mytoast("登录成功");
       },
       goVideo() {
         this.$router.push('/live1');
@@ -391,7 +409,31 @@
           this.$router.push('/UserCenter')
         }
       },
-
+      async getuserinfo(virtual) {
+        let res = await this.$http.get('/api/users/info');
+        if (!res) return;
+        if (res.data.code != 0) {
+          this.alert("提示", res.data.msg);
+          return;
+        }
+        let userinfo={
+          bankname: res.data.data.BandName,
+          cardnum: res.data.data.CardNumber,
+          logintime: res.data.data.LoginTime,
+          mobile: res.data.data.Mobile,
+          money: res.data.data.Money,
+          msgnum: res.data.data.MsgNumber,
+          name: res.data.data.Name,
+          username: res.data.data.UserName,
+          email: res.data.data.email,
+          qq: res.data.data.qq
+        }
+        if(virtual)userinfo.virtual=virtual;
+        this.USERINFO(userinfo);
+        this.getUserRealName(res.data.data.Name);
+        this.changeUserMoney(res.data.data.Money);
+        this.changeUserName(res.data.data.UserName);
+      },
       // 登录提交
       loginSubmit() {
         let data = {
@@ -399,7 +441,7 @@
           username: this.user_name,
           password: this.pass_word,
           code: this.code,
-          codeToken: this.codeToken
+          codeToken: this.temcodeToken
         }
 
         if (!this.user_name) {
@@ -407,11 +449,17 @@
         } else if (!this.pass_word) {
           this.mytoast('请输入密码')
         } else {
-          this.$http.post('/api/user/login', data).then((res) => {
-            this.$http.defaults.headers.EasySecret=res.headers.easysecret;
-            this.EASYSECRET(res.headers.easysecret);
-            if (res.status === 200 && res.data.code === 0) {
-              this.mytoast(res.data.msg)
+          this.$http({
+            method: "post",
+            url: '/api/user/login',
+            data: data,
+            headers: {EasySecret: ""}
+          }).then(async (res) => {
+            if (res.data.code === 0) {
+              this.$http.defaults.headers.EasySecret = res.headers.easysecret;
+              this.EASYSECRET(res.headers.easysecret);
+              await this.getuserinfo();
+              this.mytoast(res.data.msg);
               // this.usermoney = res.data.data.user_money
 
               // sessionStorage.setItem('username', this.username)
@@ -422,9 +470,11 @@
               // this.$store.dispatch('SET_userMoney', this.usermoney)
               // this.$router.push('/UserCenter')
               // this.$router.push(this.$route.query.redirect || '/')
-              this.changeUserName(this.user_name)
-              this.changeUserMoney(res.data.data.money)
+              //this.changeUserName(this.user_name)
+              //this.changeUserMoney(res.data.data.money)
               // this.userIsLogin(true)
+            } else {
+              this.alert("提示",res.data.msg);
             }
           }).catch((error) => {
             console.log(error)
@@ -475,7 +525,7 @@
       // 退出登录
       async loginout() {
         let res = await this.$http.post('/api/user/logout');
-        if (!res) return
+        if (!res) return;
         if (res.data.code != 0) {
           this.alert("提示", res.data.msg);
           return;
@@ -485,7 +535,7 @@
         this.$http.defaults.headers.EasySecret = undefined;
         this.$router.push("login");
       },
-      ...mapMutations(['changeUserName', 'changeUserMoney', 'getUserToken', 'userLoginOut', "EASYSECRET",'getData']),
+      ...mapMutations(['changeUserName', 'getUserRealName', 'changeUserMoney', 'getUserToken', 'userLoginOut', "EASYSECRET", "ROOTBOX", "USERINFO"]),
       // getUserMoney(){
       //     // >获取用户余额
       //   this.$http.get('/json/center/?r=Money').then((res) => {
@@ -755,14 +805,14 @@
 
   .top-box .bar-left {
     float: left;
-    background: url('../../static/img/base-ico2.png') 0 -176px no-repeat;
+    background: url(../assets/base-ico2.png) 0 -176px no-repeat;
   }
 
   .top-box .bar-left span {
     display: inline-block;
     padding-left: 48px;
     font-size: 14px;
-    font-style: normal;
+    font-style: italic;
     line-height: 48px;
     background-position: 0 -180px;
   }
@@ -775,7 +825,7 @@
 
   .bar-right div {
     /*margin-right: 22px;*/
-    font-size: 14px;
+
     float: left;
   }
 
@@ -811,8 +861,8 @@
   .bar-right .regster {
     height: 34px;
     line-height: 34px;
-    width: 80px;
-    margin: 0 8px;
+    width: 100px;
+    margin: 0 2px;
     margin-top: 10px;
     background: url(../assets/base-ico2.png) no-repeat;
     cursor: pointer;
@@ -901,7 +951,7 @@
 
   .preson-balance {
     /*padding: 0 20px;*/
-    width: 125px;
+    min-width: 125px;
     padding-left: 40px;
     text-align: left;
   }
@@ -924,7 +974,7 @@
   .withdraw {
     padding-left: 45px;
     color: #fff;
-    background-position: 0 -678px;
+    background-position: 0 -677px;
   }
 
   .login-out {
@@ -1039,7 +1089,7 @@
     overflow: hidden;
   }
 
-  .official_play_h {
+  .official_play {
     border-right: 1px solid #2b2b2b;
     display: inline-block;
     /* width: 490px; */

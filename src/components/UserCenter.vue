@@ -13,11 +13,11 @@
         <li class="help"><a href="#">游戏帮助</a></li>
         <li class="layout"><a href="#" @click="loginout();">登出账号</a></li>
       </ul>
-      <!-- 下拉游戏选择 @mouseover="showAllgame" @mouseout="hideAllgame"--> 
+      <!-- 下拉游戏选择 @mouseover="showAllgame" @mouseout="hideAllgame"-->
       <transition name="fade">
         <div class="menu-child"  v-if="isShowMenu" id="lot_sec_menu">
           <div class="gamelist clear">
-            
+
             <div class="cut-line"></div>
             <div class="credit_play">
               <div class="gamelist_tit clear">
@@ -32,7 +32,7 @@
                           {{items.short_name}}
                         </router-link>
                       </span>
-                      
+
                     </li>
                   </ul>
                 </div>
@@ -160,7 +160,7 @@
       // 获取个人信息
       /*this.getuserinfo()*/
       this.getuserinfo();
-      
+
     },
     computed: {
       ...mapState(['agmoney', 'dsmoney', 'money', 'username', 'userRealName', 'userinfo'])
@@ -190,29 +190,6 @@
             }
           }
         });
-      },
-      async getuserinfo() {
-        let res = await this.$http.get('/api/users/info');
-        if (!res) return
-        if (res.data.code != 0) {
-          this.alert("提示", res.data.msg);
-          return;
-        }
-        this.USERINFO({
-          bankname: res.data.data.BandName,
-          cardnum: res.data.data.CardNumber,
-          logintime: res.data.data.LoginTime,
-          mobile: res.data.data.Mobile,
-          money: res.data.data.Money,
-          msgnum: res.data.data.MsgNumber,
-          name: res.data.data.Name,
-          username: res.data.data.UserName,
-          email: res.data.data.email,
-          qq: res.data.data.qq
-        });
-        this.getUserRealName(res.data.data.Name);
-        this.changeUserMoney(res.data.data.Money);
-        this.changeUserName(res.data.data.UserName);
       },
       // 获取个人信息
       /*getuserinfo () {
@@ -396,7 +373,7 @@
       }
   }
 
- 
+
 
   .container {
     overflow-y: auto;
@@ -502,7 +479,7 @@
     zoom: 1;
     top: 104px;
     right: 50px;
-    width: 500px;
+    width: 780px;
     background: url("../assets/nav_bg.png") repeat;
     margin: 2px 0 0;
     height: auto;
@@ -532,7 +509,7 @@
   .gamelist_tit {
     width: 370px;
     display: block;
-    // margin: 8px 0;
+    margin: 8px 0;
     border-bottom: none;
     text-align: left;
   }
@@ -573,7 +550,7 @@
   .credit_play {
     font-size: 0;
     float: left;
-    // width: 50%;
+    width: 50%;
   }
 
   .menu-child h1.orange_style {
@@ -593,21 +570,18 @@
   }
 
   .menu-child li {
-    // float: left;
+    float: left;
     line-height: 28px;
-    // width: 80px;
-    // height: 28px;
+    width: 80px;
+    height: 28px;
     margin: 5px 0;
     text-align: left;
     margin-right: 10px;
   }
- .menu-child li span{
-   float: left;
-   padding: 4px 13px;
- }
+
   .menu-child li a {
     display: block;
-    // width: 80px;
+    width: 80px;
     height: 28px;
     color: #fff;
 
