@@ -6,18 +6,18 @@
           
         </div>
         <!-- 官方玩法 -->
-        <ul class="guantype" v-for="item in LotteryGroupArry" :key="item.id">
+        <ul class="guantype" v-for="item in this.headerArry" :key="item.id">
           <li class="border-top ov padbottom" v-for="items in item.type" :key="items.id">
-            <div class="item" ><span>{{items.short_name}}</span></div>
+            <router-link tag="div" class="item cursor" :to="{path:'/lottery/'+items.name}"><span>{{items.short_name}}</span></router-link>
           </li>
         </ul>
       </div>
       <div class="hottype">
         <div class="title"></div>
         <ul>
-          <li  v-for="item in lotteryHot" :key="item.id">
+          <router-link tag="li" :to="{path:'/lottery/' +item.name}" class="cursor" v-for="item in lotteryHot" :key="item.id">
             <div>{{item.short_name}}</div>
-          </li>
+          </router-link>
         </ul>
       </div>
     </div>
@@ -27,8 +27,8 @@
         <img class="QrcodeImage" src="../assets/QrcodeImage.png" alt="">
       </div>
       <div class="item">
-        <div class="ios"></div>
-        <div class="android"></div>
+        <div class="ios" @click="downloadApp"></div>
+        <div class="android" @click="downloadApp"></div>
       </div>
       <div class="item">
         <img class="address" src="../assets/download-item-tit.png" alt="" />
@@ -60,9 +60,9 @@
         <p>移动互联网时代，机会一手把握</p>
         <p>全面支持苹果APP 安卓APP 手机全部浏览器</p>
         <ul>
-          <li></li>
-          <li></li>
-          <li></li>
+          <li @click="downloadApp"></li>
+          <li @click="downloadApp"></li>
+          <li @click="downloadApp"></li>
         </ul>
       </div>
       <div class="help">
@@ -84,7 +84,7 @@ export default {
   data () {
     return {
       lotteryHot: [],
-      LotteryGroupArry: []
+      // LotteryGroupArry: []
   }
   },
    computed: {
@@ -92,33 +92,38 @@ export default {
   },
   created () {
     this.LotteryHot();
-    this.LotteryGroup();
+    // this.LotteryGroup();
   },
   methods: {
+    downloadApp () {
+      this.$router.push('/mobile')
+    },
     selectType (index) {
       this.tabIndex = index
     },
-    LotteryGroup () {
-      this.$http.get('/api/lottery/basic/LotteryGroup').then((res) => {
-      this.LotteryGroupArry = res.data;
-      this.getData(this.LotteryGroupArry)
-      })
-    },
+    // LotteryGroup () {
+    //   this.$http.get('/api/lottery/basic/LotteryGroup').then((res) => {
+    //   this.LotteryGroupArry = res.data;
+    //   this.getData(this.LotteryGroupArry)
+    //   })
+    // },
     LotteryHot () {
     this.$http.get('/api/lottery/basic/LotteryHot').then((res)=>{
       this.lotteryHot = res.data;
       })
     },
-    ...mapMutations(['changeUserName','changeUserMoney','getUserToken','userLoginOut','ROOTBOX','getData']),
+    ...mapMutations(['changeUserName','changeUserMoney','getUserToken','userLoginOut','ROOTBOX']),
   }
 }
 
 </script>
 <style scoped>
 /*更多游戏*/
-
+.cursor{
+  cursor: pointer;
+}
 .more_game_wrap {
-  background: url(../assets/middle_min_bg.png) no-repeat top center;
+  background: url('../../static/img/middle_min_bg.png') no-repeat top center;
   border-top: 56px solid #b62929;
   height: 868px;
 }
@@ -223,7 +228,7 @@ export default {
 
 .hottype ul li {
   float: left;
-  background-image: url(../assets/bjl_icon.png);
+  background-image: url('../../static/img/bjl_icon.png');
   background-repeat: no-repeat;
   width: 106px;
   height: 106px;
@@ -266,7 +271,7 @@ export default {
 .download {
   height: 280px;
   width: 1050px;
-  background: url(../assets/index-downlogo-bg.jpg);
+  background: url('../../static/img/index-downlogo-bg.jpg');
   margin: 0 auto;
   margin-top: 304px;
 }
@@ -285,7 +290,7 @@ export default {
 .ios {
   width: 230px;
   height: 66px;
-  background-image: url(../assets/index-down-btn.jpg);
+  background-image: url('../../static/img/index-down-btn.jpg');
   background-repeat: no-repeat;
   margin-top: 20px;
   cursor: pointer;
@@ -356,7 +361,7 @@ export default {
 .advantages h2,
 .mobdown h2,
 .help h2 {
-  background: url(../assets/others_all.png);
+  background: url('../../static/img/others_all.png');
   background-repeat: no-repeat;
   background-position: 0 0;
   width: 312px;
@@ -433,7 +438,7 @@ export default {
 .mobdown ul li {
   width: 79px;
   height: 79px;
-  background-image: url(../assets/others_all.png);
+  background-image: url('../../static/img/others_all.png');
   background-repeat: no-repeat;
   float: left;
   margin: 16px;
@@ -480,7 +485,7 @@ export default {
   line-height: 25px;
   float: left;
   padding-left: 34px;
-  background-image: url(../assets/others_all.png);
+  background-image: url('../../static/img/others_all.png');
   background-repeat: no-repeat;
   background-position: 0 -295px;
   width: 29%;

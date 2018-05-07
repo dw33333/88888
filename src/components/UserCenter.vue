@@ -13,106 +13,11 @@
         <li class="help"><a href="#">游戏帮助</a></li>
         <li class="layout"><a href="#" @click="loginout();">登出账号</a></li>
       </ul>
-      <!-- 下拉游戏选择 -->
+      <!-- 下拉游戏选择 @mouseover="showAllgame" @mouseout="hideAllgame"-->
       <transition name="fade">
-        <div class="menu-child" @mouseover="showAllgame" @mouseout="hideAllgame" v-if="isShowMenu" id="lot_sec_menu">
+        <div class="menu-child"  v-if="isShowMenu" id="lot_sec_menu">
           <div class="gamelist clear">
-            <div class="official_play">
-              <div class="gamelist_tit clear">
-                <h1 class="red_style">官方玩法</h1>
-              </div>
-              <div class="high_wrap">
-                <div class="gamelist_l">
-                  <ul>
-                    <li>
-                      <a class="game_26" href="#">
-                        <font>重庆时时彩</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_26" href="#">
-                        <font>北京快乐8</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_26" href="#">
-                        <font>北京PK拾</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_26" href="#">
-                        <font>福彩3D</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_26" href="#">
-                        <font>新疆时时彩</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_26" href="#">
-                        <font>排列三、五</font>
-                      </a>
-                    </li>
-                    <li>
-                      <router-link class="game_26" to="/lottery">
-                        <font>广东11选5</font>
-                      </router-link>
-                    </li>
-                    <li>
-                      <a class="game_26" href="#">
-                        <font>黑龙江11选5</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_26" href="#">
-                        <font>北京时时彩</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_26" href="#">
-                        <font>QQ分分彩</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_26" href="#">
-                        <font>上海时时乐</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_26" href="#">
-                        <font>河北快3</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_26" href="#">
-                        <font>韩式1.5分彩</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_26" href="#">
-                        <font>江苏11选5</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_26" href="#">
-                        <font>澳洲3分彩</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_26" href="#">
-                        <font>上海11选5</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_26" href="#">
-                        <font>腾讯分分彩</font>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+
             <div class="cut-line"></div>
             <div class="credit_play">
               <div class="gamelist_tit clear">
@@ -121,90 +26,13 @@
               <div class="high_wrap">
                 <div class="gamelist_r">
                   <ul data-bind="foreach:credit">
-                    <li>
-                      <a class="game_1" href="#">
-                        <font>香港六合彩</font>
-                      </a>
-                    </li>
-                    <li>
-                      <router-link class="game_26" to="/lottery">
-                        <font>广东11选5</font>
-                      </router-link>
-                    </li>
-                    <li>
-                      <a class="game_1">
-                        <font>广西快十</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_1" href="#">
-                        <font>重庆时时彩</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_1" href="#">
-                        <font>新疆时时彩</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_1" href="#">
-                        <font>幸运农场</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_1" href="#">
-                        <font>北京PK拾</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_1" href="#">
-                        <font>北京时时彩</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_1" href="#">
-                        <font>QQ分分彩</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_1" href="#">
-                        <font>江苏11选5</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_1" href="#">
-                        <font>澳洲3分彩</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_1" href="#">
-                        <font>上海11选5</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_1" href="#">
-                        <font>河北快3</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_1" href="#">
-                        <font>韩式1.5分彩</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_1">
-                        <font>幸运28</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_1" href="#">
-                        <font>广东快十</font>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="game_1" href="#">
-                        <font>腾讯分分彩</font>
-                      </a>
+                    <li v-for="item in headersArry" :key="item.id">
+                      <span v-for="items in item.type" :key="items.id">
+                        <router-link  class="game_1" :to="{path:'/lottery/'+items.name}">
+                          {{items.short_name}}
+                        </router-link>
+                      </span>
+
                     </li>
                   </ul>
                 </div>
@@ -310,7 +138,7 @@
         isDisplay: 0,
         content: '',
         ifopen: false,
-        isShowMenu: false,
+        isShowMenu: true,
         unread_count: '',
         /*lock10: false,
         lock20: false,
@@ -318,8 +146,12 @@
         lock40: false,*/
         realname: '',
         bankCardNum: '',
-        bankName: ''
+        bankName: '',
+        headersArry:[]
       }
+    },
+    created () {
+      this.getArry();
     },
     components: {
       maskLayer
@@ -404,7 +236,12 @@
           clearTimeout()
         }, 1500)
       },
-
+      //玩法列表
+      getArry () {
+        this.$http.get('/api/lottery/basic/LotteryGroup').then((res) => {
+          this.headersArry = res.data;
+        })
+      },
       // 退出登录
       async loginout() {
         let res = await this.$http.post('/api/user/logout');
@@ -599,9 +436,9 @@
     }
   }
 
-  body {
+  /*body {
     background-image: none;
-  }
+  }*/
 
   .container {
     overflow-y: auto;

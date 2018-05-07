@@ -233,6 +233,12 @@ const live = (resolve) => {
     resolve(module)
   })
 }
+//电子游艺
+const Games = (resolve) => {
+  import('@/components/Games').then((module) => {
+    resolve(module)
+  })
+}
 
 const USERCENTER = (resolve) => {
   import('@/components/UserCenter').then((module) => {
@@ -256,6 +262,11 @@ const route =new Router({
       path: '/register',
       name: 'register',
       component: register
+    },
+    {
+      path:'/Games',
+      name:'Games',
+      component:Games
     },
     {
       path: '/Login',

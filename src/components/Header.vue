@@ -3,7 +3,8 @@
     <div class="top-wrap">
       <div class="top-box">
         <div class="bar-left">
-          <span>PLAY RESPONSIBLY</span>
+          <span id="backPage" v-show="backPage" @click="backPageclick" style="cursor:pointer;">返回首页</span>
+          <span id="backhide">PLAY RESPONSIBLY</span>
           <span style="padding-left:10px;">{{nowTime}}</span>
         </div>
         <!-- 登录界面 -->
@@ -33,17 +34,14 @@
         </div>
         <!-- 登录后显示账户名余额信息 -->
         <div class="bar-right" v-else>
-          <div class="preson-info preson-balance">
+          <div class="preson-info preson-balance presonInput" id="presonInput">
             账号：{{username}}
           </div>
-          <div class="preson-balance personpwd leftMoney">
+          <div class="preson-balance personpwd leftMoney presonInput" id="presonInput">
             余额:{{money}}
-
-
           </div>
-
+          <div style="width:540px;display:none;height:48px;" id="showId"></div>
           <router-link to='/UserCenter'>
-
             <div class="recharge items">
               充值
             </div>
@@ -100,8 +98,7 @@
               <span>GAMEINFORMATION</span>
             </a>
           </li>
-          <router-link to="/live" tag="li" style="position:relative;" @click="goVideo" @mousemove.native="showmenu"
-                       @mouseout.native="hidemenu">
+          <router-link to="/live" tag="li" style="position:relative;" @click="goVideo" @mousemove.native="showmenu" @mouseout.native="hidemenu">
             <a>
               <div>视讯直播</div>
               <span>LIVEVIDEO</span>
@@ -113,7 +110,7 @@
               <a href="javascript:;" class="p10">MG</a>
             </div>
           </router-link>
-          <li style="position:relative;" @mousemove="showmenu2" @mouseout="hidemenu2">
+          <router-link to="/Games" tag="li" style="position:relative;" @mousemove.native="showmenu2" @mouseout.native="hidemenu2">
             <a href="javascript:void(0)">
               <div>电子游艺</div>
               <span>ELECTRONICGAMES</span>
@@ -134,19 +131,21 @@
         </ul>
       </div>
       <!-- 下拉菜单 -->
-
       <div class="menu-child1" v-show="showMenu" @mousemove="overShow" @mouseout="outHide" id="lot_sec_menu">
         <div class="gamelist-1 clear">
-          <div class="official_play">
+          <div class="official_play_h">
             <div class="gamelist_tit clear">
-              <h1 class="red_style">官方玩法</h1>
-              <div class="color">官</div>
+              <h1 class="red_style">信用玩法</h1>
+              <div class="color">信</div>
             </div>
             <div class="high_wrap">
               <div class="gamelist_l">
-                <ul v-for="item in this.headerArry" :key="item.id">
+                <ul v-for="item in headersArry" :key="item.id">
                   <li v-for="items in item.type" :key="items.id">
-                    <a class="game_26"><img :src="`/static/img/${items.name}.png`" alt=""> <span class="hot"><font>{{items.short_name}}</font></span></a>
+                    <!-- :href="'./lottery/index.html#/lottery/'+items.name" -->
+                    <router-link  class="game_26" :to="{path:'/lottery/'+items.name}">
+                      <img :src="`/static/img/${items.name}.png`" alt=""> <span class="hot"><font>{{items.short_name}}</font></span>
+                    </router-link>
                   </li>
                 </ul>
               </div>
@@ -234,6 +233,7 @@
     name: 'Header',
     data() {
       return {
+        backPage:false,
         nowTime: '',
         user_name: '',
         pass_word: '',
@@ -243,7 +243,7 @@
         temcodeToken: '',
         code: '',
         showMenu: false,
-        // headersArry:[],
+        headersArry:[],
         showMessgeBox: false,
         menuVideo: false,
         menugame: false
@@ -262,9 +262,12 @@
       ...mapState(['money', 'username', 'codeToken', 'headerArry', 'easysecret'])
     },
     created() {
-      // this.getArry();
+      this.getArry();
     },
     methods: {
+      backPageclick () {
+        this.$router.push('/')
+      },
       async trial() {
         let res = await this.$http({
           method: "post",
@@ -289,6 +292,7 @@
       },
       hidemenu() {
         this.menuVideo = false;
+
       },
       showmenu2() {
         this.menugame = true;
@@ -320,12 +324,12 @@
         this.showMessgeBox = true;
         this.showMessgeBoxM = true;
       },
-      // getArry () {
-      //   this.$http.get('/api/lottery/basic/LotteryGroup').then((res) => {
-      //     this.headersArry = res.data;
-
-      //   })
-      // },
+      getArry () {
+        this.$http.get('/api/lottery/basic/LotteryGroup').then((res) => {
+          this.headersArry = res.data;
+          this.getData(this.headersArry);
+        })
+      },
       overShow() {
         this.showMenu = true;
       },

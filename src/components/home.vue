@@ -22,7 +22,7 @@ export default {
     footervue
   },
   created(){
-
+    
   },
   computed:{
     ...mapState(["agent_id"]),

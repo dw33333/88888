@@ -44,16 +44,24 @@ export default {
           showRulePic:false
       }
   },
+  created () {
+    this.getInfo();  
+  },
   methods: {
       show_list () {
           this.showRulePic = !this.showRulePic;
+      },
+      getInfo () {
+          this.$http.get('api/site/info').then((res) => {
+              console.log(res)
+          })
       }
    }
 }
 </script>
 <style>
 .activity_bg{
-    background: url(/static/img/bg1.a4a4897.jpg) 0 0 no-repeat;
+    background: url(/static/img/bg1.a4a4897.jpg) 0 0 repeat-y;
 }
 .activity-footer a{
     background: url('../../static/img/activity-btn.png') no-repeat right top;
@@ -67,7 +75,7 @@ export default {
 }
 .activity-box{
     background: url('../../static/img/25.jpg') no-repeat;
-    height: 390px;
+    height: 380px;
 }
 .activity-content {
     margin-left: 200px;
