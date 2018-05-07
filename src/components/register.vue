@@ -169,7 +169,7 @@
             </td>
             <td colspan="2">
               <a href="javascript:void(0);" class="regi-btn" style="position:relative">
-                <span>立即注册</span>
+                <span>{{is_reg?"正在注册...":"立即注册"}}</span>
                 <input type="submit" @click="registerSubmit"
                        style="position:absolute;left:0;top:0;width:170px;height:36px;filter:alpha(opacity=0);opacity:0;">
               </a>
@@ -259,7 +259,8 @@
         captcha: '',
         value: [],
         ifcheck: true,
-        sex: 0
+        sex: 0,
+        is_reg:false
       }
     },
     methods: {
@@ -370,14 +371,15 @@
         } else if (!this.ifcheck) {
           this.alert('提示','请勾选开户协议！')
         } else {
+          this.is_reg=true;
           let res = await this.check(this.username, "username");
-          if (!res) return;
+          if (!res) {this.is_reg=false;return;}
           res = await  this.check(this.phonenum, "tel");
-          if (!res) return;
+          if (!res)  {this.is_reg=false;return;}
           res = await  this.check(this.realname, "realname");
-          if (!res) return;
+          if (!res)  {this.is_reg=false;return;}
           res = await  this.check(this.email, "email");
-          if (!res) return;
+          if (!res)  {this.is_reg=false;return;}
           let data = {
             username: this.username,
             password: this.password,
@@ -406,14 +408,14 @@
           data.agent_id=this.agent_id;
           this.$http.post('/api/user/regster', data).then(res => {
             this.$http.defaults.headers.EasySecret=res.headers.easysecret;
-            this.EASYSECRET(res.headers.easysecret)
+            this.EASYSECRET(res.headers.easysecret);
             this.mytoast(res.data.msg);
             if(res.data.code === 0) {
 
               this.changeUserName(this.username)
               this.changeUserMoney('0.00')
               // this.userIsLogin(true)
-
+              this.is_reg=false;
               setTimeout(() => {
                 this.$router.push('/')
               }, 1500)
@@ -422,6 +424,7 @@
             }
           })
             .catch(error => {
+              this.is_reg=false;
               console.log(error)
             })
         }

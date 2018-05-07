@@ -70,6 +70,10 @@ const mutations = {
   ROOTBOX(state,data){
     state.rootbox=data;
   },
+  //LOADING
+  LOADING(state,data){
+    state.loading=data;
+  },
   getData(state,data){
     state.headerArry = data;
   },
