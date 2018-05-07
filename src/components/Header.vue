@@ -121,7 +121,7 @@
               <a href="javascript:;" class="p20">AG</a>
               <a href="javascript:;" class="p20">MG</a>
             </div>
-          </li>
+          </router-link>
           <router-link to="/mobile" tag="li">
             <a href="javascript:void(0)">
               <div>手机下注</div>

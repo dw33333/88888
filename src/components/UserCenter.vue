@@ -159,8 +159,6 @@
     mounted() {
       // 获取个人信息
       /*this.getuserinfo()*/
-      this.getuserinfo();
-
     },
     computed: {
       ...mapState(['agmoney', 'dsmoney', 'money', 'username', 'userRealName', 'userinfo'])
@@ -479,7 +477,7 @@
     zoom: 1;
     top: 104px;
     right: 50px;
-    width: 780px;
+    width: 500px;
     background: url("../assets/nav_bg.png") repeat;
     margin: 2px 0 0;
     height: auto;
@@ -501,7 +499,7 @@
 
   .official_play {
     border-bottom: none;
-    width: 50%;
+    // width: 50%;
     font-size: 12px;
     float: left;
   }
@@ -550,7 +548,7 @@
   .credit_play {
     font-size: 0;
     float: left;
-    width: 50%;
+    // width: 50%;
   }
 
   .menu-child h1.orange_style {
@@ -570,19 +568,22 @@
   }
 
   .menu-child li {
-    float: left;
+    // float: left;
     line-height: 28px;
-    width: 80px;
-    height: 28px;
+    // width: 80px;
+    // height: 28px;
     margin: 5px 0;
     text-align: left;
     margin-right: 10px;
   }
-
+  .menu-child li span{
+    float: left;
+    padding: 2px 13px;
+  }
   .menu-child li a {
     display: block;
     width: 80px;
-    height: 28px;
+    height: 24px;
     color: #fff;
 
     background: none;
