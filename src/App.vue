@@ -108,7 +108,12 @@
       background: transparent;
     }
   }
-
+  @-webkit-keyframes autofill3 { //去除chrome浏览器自动填充表单的黄色背景
+    to {
+      color: rgba(255, 255, 255, 1);
+      background: #fff;
+    }
+  }
   body {
     input:-webkit-autofill,
     input:-webkit-autofill:hover,

@@ -70,7 +70,7 @@
     },
     data() {
       return {
-        pageSize: 20,
+        pageSize: 10,
         pages: [],
         curDate: new Date().format("yyyy-MM-dd"),
         lotteryTypes: [],
@@ -233,9 +233,12 @@
       input {
         padding-left: 30px;
         width: 220px;
-        height: 40px;
-        line-height: 40px;
+        height: 35px;
+        line-height: 35px;
       }
+    }
+    .el-input__icon{
+      line-height:35px;
     }
     text-align: left;
     .header {

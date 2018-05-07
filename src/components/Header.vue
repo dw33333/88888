@@ -20,13 +20,13 @@
             <img :src="codeImg" @click='codeImgFn' class="code" alt="" title="点击更换">
           </div>
           <div class="item login">
-            <a href="javascript:void(0);" @click='loginSubmit();'>登录</a>
+            <a href="javascript:void(0);" @click='loginSubmit();'>{{is_login?"登录中...":"登录"}}</a>
           </div>
           <div class="item regster">
             <router-link to="/register">免费开户</router-link>
           </div>
           <div class="item regster">
-            <span @click="trial">试玩</span>
+            <span @click="trial">{{is_login?"登录中...":"试玩"}}</span>
           </div>
           <!-- <div class="item resetpwd">
             <a href="javascript:void(0);" @click="forgorWord">忘记密码</a>
@@ -37,7 +37,7 @@
           <div class="preson-info preson-balance presonInput" id="presonInput">
             账号：{{username}}
           </div>
-          <div class="preson-balance personpwd leftMoney presonInput" id="presonInput">
+          <div class="preson-balance personpwd leftMoney presonInput" id="presonInput2">
             余额:{{money}}
           </div>
           <div style="width:540px;display:none;height:48px;" id="showId"></div>
@@ -246,7 +246,8 @@
         headersArry:[],
         showMessgeBox: false,
         menuVideo: false,
-        menugame: false
+        menugame: false,
+        is_login:false
         // showforgotPassword:false
         // usermoney: '',
         // isShowLogin: sessionStorage.getItem('isLogin')
@@ -269,11 +270,14 @@
         this.$router.push('/')
       },
       async trial() {
+        if(this.is_login)return;
+        this.is_login=true;
         let res = await this.$http({
           method: "post",
           url: '/api/user/regsterVirtual',
           headers: {EasySecret: ""}
         });
+        this.is_login=false;
         if(!res)return;
         if(res.data.code!=0){
           this.alert("提示",res.msg);
@@ -436,6 +440,7 @@
       },
       // 登录提交
       loginSubmit() {
+        if(this.is_login)return;
         let data = {
           // action: 'login',
           username: this.user_name,
@@ -449,12 +454,14 @@
         } else if (!this.pass_word) {
           this.mytoast('请输入密码')
         } else {
+          this.is_login=true;
           this.$http({
             method: "post",
             url: '/api/user/login',
             data: data,
             headers: {EasySecret: ""}
           }).then(async (res) => {
+            this.is_login=false;
             if (res.data.code === 0) {
               this.$http.defaults.headers.EasySecret = res.headers.easysecret;
               this.EASYSECRET(res.headers.easysecret);
@@ -477,6 +484,7 @@
               this.alert("提示",res.data.msg);
             }
           }).catch((error) => {
+            this.is_login=false;
             console.log(error)
           })
         }
