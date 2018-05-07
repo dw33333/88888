@@ -40,6 +40,7 @@ export default {
     // }).catch((error) => {
     //   console.log(error)
     // })
+    console.log(this.src)
      $('.nav').hide();
      $('#backhide').hide();
      $('#backPage').show();

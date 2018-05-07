@@ -13,9 +13,9 @@
         <li class="help"><a href="#">游戏帮助</a></li>
         <li class="layout"><a href="#" @click="loginout();">登出账号</a></li>
       </ul>
-      <!-- 下拉游戏选择 @mouseover="showAllgame" @mouseout="hideAllgame"-->
+      <!-- 下拉游戏选择 -->
       <transition name="fade">
-        <div class="menu-child"  v-if="isShowMenu" id="lot_sec_menu">
+        <div class="menu-child" @mouseover="showAllgame" @mouseout="hideAllgame" v-if="isShowMenu" id="lot_sec_menu">
           <div class="gamelist clear">
 
             <div class="cut-line"></div>
@@ -138,7 +138,7 @@
         isDisplay: 0,
         content: '',
         ifopen: false,
-        isShowMenu: true,
+        isShowMenu: false,
         unread_count: '',
         /*lock10: false,
         lock20: false,
