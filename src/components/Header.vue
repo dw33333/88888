@@ -339,8 +339,6 @@
       codeImgFn() {
         this.$http.get('/api/site/captcha').then((res) => {
           if (res.status === 200) {
-            console.log(res.data.codeToken)
-
             this.codeImg = res.data.src
             this.temcodeToken = res.data.codeToken
             // this.mytoast(res.data.msg)
@@ -535,7 +533,7 @@
         this.$http.defaults.headers.EasySecret = undefined;
         this.$router.push("login");
       },
-      ...mapMutations(['changeUserName', 'getUserRealName', 'changeUserMoney', 'getUserToken', 'userLoginOut', "EASYSECRET", "ROOTBOX", "USERINFO"]),
+      ...mapMutations(['changeUserName', 'getUserRealName', 'changeUserMoney', 'getUserToken', 'userLoginOut', "EASYSECRET", "ROOTBOX", "USERINFO",'getData']),
       // getUserMoney(){
       //     // >获取用户余额
       //   this.$http.get('/json/center/?r=Money').then((res) => {
