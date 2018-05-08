@@ -190,11 +190,11 @@
           data: data,
           headers:{EasySecret:""}
         }).then(async (res) => {
+          this.is_login=false;
           if (res.data.code === 0) {
           this.$http.defaults.headers.EasySecret = res.headers.easysecret;
           this.EASYSECRET(res.headers.easysecret);
             await this.getuserinfo();
-            this.is_login=false;
             //this.changeUserName(this.user_name);
             //this.changeUserMoney(res.data.data.money);
             this.mytoast("登录成功");

@@ -6,10 +6,10 @@ import store from "@/store"
 /*import alert from "@/components/base/alert"*/
 // 首页头部导航栏
 
- // username
- // user_money
- // ag_money
- // ds_money
+// username
+// user_money
+// ag_money
+// ds_money
 
 const home = (resolve) => {
   import('@/components/home').then((module) => {
@@ -138,12 +138,11 @@ const week_statistic = (resolve) => {
     resolve(module)
   })
 }
-const msg_list= (resolve) => {
+const msg_list = (resolve) => {
   import('@/components/userinfo/msg_list').then((module) => {
     resolve(module)
   })
 }
-
 
 
 // 用户中心>账户管理>银行卡管理
@@ -245,10 +244,16 @@ const USERCENTER = (resolve) => {
     resolve(module)
   })
 }
+//彩票结果
+const lottery_result = (resolve) => {
+  import('@/components/lottery_result').then((module) => {
+    resolve(module)
+  });
+}
 Vue.use(Router)
 Vue.use(VueAwesomeSwiper)
 
-const route =new Router({
+const route = new Router({
   routes: [
     {
       path: '/',
@@ -264,9 +269,9 @@ const route =new Router({
       component: register
     },
     {
-      path:'/Games',
-      name:'Games',
-      component:Games
+      path: '/Games',
+      name: 'Games',
+      component: Games
     },
     {
       path: '/Login',
@@ -274,14 +279,14 @@ const route =new Router({
       component: Login
     },
     {
-      path:'/live',
-      name:'live1',
-      component:live
+      path: '/live',
+      name: 'live1',
+      component: live
     },
     {
-      path:'/mobile',
-      name:'mobile',
-      component:mobile
+      path: '/mobile',
+      name: 'mobile',
+      component: mobile
     },
     {
       path: '/Activity',
@@ -378,16 +383,20 @@ const route =new Router({
         }
       ]
     }
-
+    ,{
+      path: '/lottery_result',
+      name: 'lottery_result',
+      component: lottery_result
+    },
   ]
 });
-route.beforeEach((to,from,next)=>{
-  if(!store.state.easysecret&&(["register","Login","Header"].indexOf(to.name)===-1)){//除登录和注册页面其他页面未登录跳到登录页
+route.beforeEach((to, from, next) => {
+  if (!store.state.easysecret && (["register", "Login", "Header"].indexOf(to.name) === -1)) {//除登录和注册页面其他页面未登录跳到登录页
     route.push("login");
-  }else if(store.state.easysecret&&(["register","Login"].indexOf(to.name)!==-1)){//登录的状态不能访问登录页和注册页
+  } else if (store.state.easysecret && (["register", "Login"].indexOf(to.name) !== -1)) {//登录的状态不能访问登录页和注册页
     route.push("/");
-  }else{
+  } else {
     next();
   }
 })
-export default  route;
+export default route;
