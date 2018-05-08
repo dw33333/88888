@@ -161,7 +161,7 @@
         this.changeUserMoney(res.data.data.Money);
         this.changeUserName(res.data.data.UserName);
       },
-      loginFn() {
+      async loginFn() {
         if (!this.user_name) {
           this.alert('提示', '请输入用户名！')
           return;
@@ -186,15 +186,15 @@
         this.is_login=true;
         this.$http({
           method:"post",
-          url:'/api/user/login',
+          url:'api/user/login',
           data: data,
           headers:{EasySecret:""}
         }).then(async (res) => {
+          this.is_login=false;
           if (res.data.code === 0) {
           this.$http.defaults.headers.EasySecret = res.headers.easysecret;
           this.EASYSECRET(res.headers.easysecret);
             await this.getuserinfo();
-            this.is_login=false;
             //this.changeUserName(this.user_name);
             //this.changeUserMoney(res.data.data.money);
             this.mytoast("登录成功");

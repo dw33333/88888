@@ -175,7 +175,7 @@
                       </div>
                       <div class="notice_text">
                         <div class="notice_item"></div>
-                        <h1 style="color: #f4354a;text-align:left;">温馨提示：<span style="font-size:16px;padding:0;">{{Msg}}</span></h1>
+                        <h1 style="color: #f4354a;text-align:left;">温馨提示：<span style="font-size:16px;padding:0;">{{sitesInfos.Msg}}</span></h1>
                         <div class="fright"></div>
                       </div>
                     </div>
@@ -263,15 +263,17 @@
       this.checkUser();
     },
     computed: {
-      ...mapState(['money', 'username', 'codeToken', 'headerArry', 'easysecret'])
+      ...mapState(['money', 'username', 'codeToken', 'headerArry', 'easysecret','sitesInfos'])
     },
     created() {
       this.getArry();
-      this.$http.get('/api/site/info').then((res) => {
+      this.Msg = this.sitesInfos.Msg;
+      /*移到 home.vue(有些页面没有用到Header组件)
+        this.$http.get('/api/site/info').then((res) => {
         this.siteInfo = res.data;
         this.Msg = res.data.Msg;
         this.getMsg(this.siteInfo);
-      })
+      })*/
     },
     methods: {
       backPageclick () {
@@ -549,7 +551,7 @@
         this.$http.defaults.headers.EasySecret = undefined;
         this.$router.push("login");
       },
-      ...mapMutations(['changeUserName', 'getUserRealName', 'changeUserMoney', 'getUserToken', 'userLoginOut', "EASYSECRET", "ROOTBOX", "USERINFO",'getData','getMsg']),
+      ...mapMutations(['changeUserName', 'getUserRealName', 'changeUserMoney', 'getUserToken', 'userLoginOut', "EASYSECRET", "ROOTBOX", "USERINFO",'getData']),
       // getUserMoney(){
       //     // >获取用户余额
       //   this.$http.get('/json/center/?r=Money').then((res) => {

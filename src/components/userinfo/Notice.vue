@@ -5,10 +5,10 @@
     </div>
     <!-- 公告 -->
     <div class="msg-box">
-      <div class="head">公告列表</div>
-      <div class="item"> 
+      <div class="head">公告</div>
+      <div class="item">
         <!-- <div class="title">{{notice.addtime}}</div> -->
-        <p class="content">{{Msg}} </p>
+        <p class="content">{{sitesInfos.Msg}} </p>
       </div>
       <!--  <div class="item">
         <div class="title">1.温馨提示：银行卡更新通告 【 2018-03-23 20:09:07 】</div>
@@ -19,7 +19,11 @@
   </div>
 </template>
 <script>
+import {mapState} from "vuex"
 export default {
+  computed:{
+    ...mapState(["sitesInfos"])
+  },
   data () {
     return {
       Msg: '',
@@ -28,12 +32,12 @@ export default {
   },
 
   mounted () {
-    this.$http.get('/api/site/info').then((res) => {
+    /*this.$http.get('/api/site/info').then((res) => {
       this.Msg = res.data.Msg;
       // this.total = this.noticeArr.length
     }).catch((error) => {
       console.log(error)
-    })
+    })*/
   }
 }
 
