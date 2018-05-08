@@ -217,7 +217,6 @@
             return;
           }
           this.alert("提示", "删除成功", () => {
-            console.log("成功")
             this.loadMsg(this.curPage);
           })
         });
