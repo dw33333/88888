@@ -826,7 +826,7 @@
   .bar-right {
     float: left;
     overflow: hidden;
-    line-height: 48px;
+    line-height: 46px;
   }
 
   .bar-right div {
@@ -943,6 +943,7 @@
     float: left;
     cursor: pointer;
     background: url(../assets/base-ico2.png) no-repeat;
+    font-size:14px;
   }
 
   .items {
@@ -952,14 +953,16 @@
   .preson-info {
     padding: 0;
     margin-left: 16px;
-    background-position: 0 -390px;
+    background-position: 0 -591px;
   }
 
   .preson-balance {
     /*padding: 0 20px;*/
-    min-width: 125px;
+    min-width: 165px;
     padding-left: 40px;
     text-align: left;
+
+
   }
 
   .leftMoney {
@@ -968,7 +971,7 @@
   }
 
   .personpwd {
-    background-position: 0 -434px;
+    background-position: 0 -635px;
   }
 
   .recharge {

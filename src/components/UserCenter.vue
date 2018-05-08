@@ -113,9 +113,9 @@
               <li>
                 <router-link to="/msg_list">站内短信</router-link>
               </li>
-             <!-- <li>
+             <li>
                 <router-link to="/Notice">网站公告</router-link>
-              </li>-->
+              </li>
             </ul>
           </div>
         </div>

@@ -3,10 +3,10 @@
     <div class="main-head">
       <span>用户中心&gt;提现</span>
     </div>
-    <div class="add-card" v-show="is_loading_car_info" style="color:#B62929;min-height:500px;">
+    <div class="add-card" v-show="is_loading_car_info&&card" style="color:#B62929;min-height:500px;">
       加载中...
     </div>
-    <div class="add-card" v-if="!card" v-show="!is_loading_car_info"  >
+    <div class="add-card" v-if="!card"   >
       <p>您还未绑定银行卡，请先填写信息绑定， <span class="colorf00"> * </span>为必填信息。</p>
       <ul class="item">
         <li class='title'><span class="colorf00">*</span>真实姓名 :</li>
