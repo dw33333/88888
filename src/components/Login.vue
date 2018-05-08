@@ -161,7 +161,7 @@
         this.changeUserMoney(res.data.data.Money);
         this.changeUserName(res.data.data.UserName);
       },
-      loginFn() {
+      async loginFn() {
         if (!this.user_name) {
           this.alert('提示', '请输入用户名！')
           return;
@@ -186,7 +186,7 @@
         this.is_login=true;
         this.$http({
           method:"post",
-          url:'/api/user/login',
+          url:'api/user/login',
           data: data,
           headers:{EasySecret:""}
         }).then(async (res) => {

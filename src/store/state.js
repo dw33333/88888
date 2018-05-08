@@ -8,13 +8,14 @@ try {
 }
 
 // 用户余额
-let money=0.00
+let money = 0.00
 try {
-	if(sessionStorage.getItem('money')){
-		// alert(sessionStorage.getItem('usermoney'))
-		money=sessionStorage.getItem('money')
-	}
-} catch (e) {}
+  if (sessionStorage.getItem('money')) {
+    // alert(sessionStorage.getItem('usermoney'))
+    money = sessionStorage.getItem('money')
+  }
+} catch (e) {
+}
 
 // AG余额
 let agmoney = 0.00
@@ -90,38 +91,39 @@ let rootbox = {
 }
 let sitesInfos = {};
 try {
-	if (sessionStorage.getItem('sitesInfos')) {
-		sitesInfos = JSON.parse(sessionStorage.getItem('sitesInfos'));
-	}
-  } catch (e) {
+  if (sessionStorage.getItem('sitesInfos')) {
+    sitesInfos = JSON.parse(sessionStorage.getItem('sitesInfos'));
   }
-let headerArry='';
+} catch (e) {
+}
+let headerArry = '';
 let userinfo = {};
 try {
   if (sessionStorage.getItem('userinfo')) {
     userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
-  }else{
+  } else {
     userinfo = {};
   }
 } catch (e) {
 }
-let agent_id=-1;//代理id 值-1 是未被写入过 需要传代理id参数的接口判断
-try{
+let agent_id = -1;//代理id 值-1 是未被写入过 需要传代理id参数的接口判断
+try {
   if (sessionStorage.getItem('agent_id')) {
     agent_id = JSON.parse(sessionStorage.getItem('agent_id'));
-  }else{
+  } else {
     agent_id = -1;
   }
-}catch(e){
+} catch (e) {
 
 }
-let loading=false;
+let loading = false;
 
 const state = {
   loading,
   easysecret,
   rootbox,
   userinfo,
+  sitesInfos,
   agent_id,
   username, // 用户名
   money, // 用户余额

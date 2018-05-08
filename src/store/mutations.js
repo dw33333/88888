@@ -74,8 +74,8 @@ const mutations = {
   LOADING(state,data){
     state.loading=data;
   },
-  //MSG
-  getMsg(state,data){
+  //SITE_INFO
+  SITE_INFO(state,data){
     state.sitesInfos = data;
     try {
       if(data)

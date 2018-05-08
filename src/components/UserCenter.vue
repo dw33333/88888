@@ -161,7 +161,7 @@
       /*this.getuserinfo()*/
     },
     computed: {
-      ...mapState(['agmoney', 'dsmoney', 'money', 'username', 'userRealName', 'userinfo'])
+      ...mapState(['agmoney', 'dsmoney', 'money', 'username', 'userRealName', 'userinfo',"sitesInfos"])
     },
     methods: {
       alert(tit, msg, fn, msgStyle) {
@@ -304,7 +304,8 @@
         }*/
       },
       serviceUrl(){
-
+        if(!this.sitesInfos.SiteService)return;
+        window.open(this.sitesInfos.SiteService);
       }
     }
   }

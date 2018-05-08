@@ -22,13 +22,13 @@ export default {
     footervue
   },
   created(){
-    
+    this.loadSiteInfo();
   },
   computed:{
     ...mapState(["agent_id"]),
   },
   methods:{
-    ...mapMutations(["ROOTBOX"]),
+    ...mapMutations(["ROOTBOX","SITE_INFO"]),
     alert(tit, msg, fn, msgStyle) {
       let _this = this;
       this.ROOTBOX({
@@ -54,6 +54,11 @@ export default {
         }
       });
     },
+    async loadSiteInfo(){
+      let res = await this.$http.get('api/site/info');
+      if(!res)return;
+      this.SITE_INFO(res.data);
+    }
   }
 }
 
