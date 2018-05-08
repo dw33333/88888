@@ -175,7 +175,7 @@
                       </div>
                       <div class="notice_text">
                         <div class="notice_item"></div>
-                        <h1 style="color: #f4354a;text-align:left;">温馨提示：<span style="font-size:16px;padding:0;">{{Msg}}</span></h1>
+                        <h1 style="color: #f4354a;text-align:left;">温馨提示：<span style="font-size:16px;padding:0;">{{sitesInfos.Msg}}</span></h1>
                         <div class="fright"></div>
                       </div>
                     </div>
