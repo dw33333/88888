@@ -6,32 +6,31 @@
     <!-- 公告 -->
     <div class="msg-box">
       <div class="head">公告列表</div>
-      <div class="item" v-for="(notice, index) in noticeArr" :key='index'> 
+      <div class="item"> 
         <!-- <div class="title">{{notice.addtime}}</div> -->
-        <p class="content">{{notice.content}} </p>
+        <p class="content">{{Msg}} </p>
       </div>
       <!--  <div class="item">
         <div class="title">1.温馨提示：银行卡更新通告 【 2018-03-23 20:09:07 】</div>
         <p class="content">银行卡更新通告：因公司需要，银行卡入款.微信入款.支付宝入款已使用新的入款账号，已更改为新入款账号了，请您获取我司最新入款账号，存入过期账号概不负责！</p>
       </div> -->
     </div>
-    <div>共 {{total}} 条记录 {{total}}/1页 1</div>
+    <!-- <div>共 {{total}} 条记录 {{total}}/1页 1</div> -->
   </div>
 </template>
 <script>
 export default {
   data () {
     return {
-      noticeArr: [],
+      Msg: '',
       total: 0
     }
   },
 
   mounted () {
-    this.$http.get('/json/center/?r=HotNews').then((res) => {
-      this.noticeArr = res.data.data
-      this.total = this.noticeArr.length
-      console.log(res.data)
+    this.$http.get('/api/site/info').then((res) => {
+      this.Msg = res.data.Msg;
+      // this.total = this.noticeArr.length
     }).catch((error) => {
       console.log(error)
     })

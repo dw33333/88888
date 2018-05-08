@@ -88,7 +88,7 @@ export default {
   }
   },
    computed: {
-    ...mapState(['money','username','codeToken','headerArry'])
+    ...mapState(['headerArry'])
   },
   created () {
     this.LotteryHot();
@@ -112,7 +112,6 @@ export default {
       this.lotteryHot = res.data;
       })
     },
-    ...mapMutations(['changeUserName','changeUserMoney','getUserToken','userLoginOut','ROOTBOX']),
   }
 }
 

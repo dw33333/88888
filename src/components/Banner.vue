@@ -14,13 +14,13 @@
   <div class="mq">
       <div class="mq-mask" id="notices">
         <div style="width: 100%; height: 100%; position: relative; overflow: hidden;">
-          <div style="position: absolute; left: -5px; top: 0px; white-space: nowrap;">
+          <div style="width: 100%;position: absolute; left: -5px; top: 0px; white-space: nowrap;">
             <!-- <span style="padding-right:20px;">
               <label>1、&nbsp;</label>
               温馨提示：银行卡更新通告：银行卡更新通告：因公司需要，银行卡入款.微信入款.支付宝入款已使用新的入款账号，已更改为新入款账号了，请您获取我司最新入款账号，存入过期账号概不负责！
             </span> -->
              <marquee scrollAmount="5" scrolldelay="10" direction="left">
-              温馨提示：银行卡更新通告：银行卡更新通告：因公司需要，银行卡入款.微信入款.支付宝入款已使用新的入款账号，已更改为新入款账号了，请您获取我司最新入款账号，存入过期账号概不负责！
+              温馨提示：{{this.sitesInfos}}
                 </marquee>
           </div>
         </div>
@@ -29,6 +29,7 @@
     </div>
 </template>
 <script>
+import {mapState, mapMutations} from 'vuex'
 export default {
   name: 'banner',
   data () {
@@ -56,7 +57,14 @@ export default {
 
       }
     }
-  }
+  },
+   computed: {
+      ...mapState(['sitesInfos'])
+    },
+    created () {
+      console.log(this.sitesInfos);
+    },
+    ...mapMutations(['changeUserName','changeUserMoney','getUserToken','userLoginOut','ROOTBOX']),
 }
 
 </script>

@@ -88,6 +88,13 @@ try {
 let rootbox = {
   open: false
 }
+let sitesInfos = {};
+try {
+	if (sessionStorage.getItem('sitesInfos')) {
+		sitesInfos = JSON.parse(sessionStorage.getItem('sitesInfos'));
+	}
+  } catch (e) {
+  }
 let headerArry='';
 let userinfo = {};
 try {

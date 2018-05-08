@@ -74,6 +74,16 @@ const mutations = {
   LOADING(state,data){
     state.loading=data;
   },
+  //MSG
+  getMsg(state,data){
+    state.sitesInfos = data;
+    try {
+      if(data)
+      sessionStorage.setItem('sitesInfos',JSON.stringify(data));
+      else
+      sessionStorage.setItem('sitesInfos',"");
+    } catch (e) {}
+  },
   getData(state,data){
     state.headerArry = data;
   },

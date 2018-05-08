@@ -87,10 +87,10 @@
               <div>平台公告</div>
               <span>ANNOUNCEMENT</span>
             </a>
-            <a href="#" v-else>
+            <router-link to="/Notice" v-else>
               <div>平台公告</div>
               <span>ANNOUNCEMENT</span>
-            </a>
+            </router-link>
           </li>
           <li>
             <a href="javascript:void(0)">
@@ -172,11 +172,11 @@
                   <div id="DIALOG-VM" data-bind="template:__DIALOG_TPL" style="display: block;">
                     <div class="notice_main">
                       <div class="notice_title">
-                        <h1>温馨提示：银行卡更新通告</h1>
                       </div>
                       <div class="notice_text">
                         <div class="notice_item"></div>
-                        <div class="fright">{{nowTime}}</div>
+                        <h1 style="color: #f4354a;text-align:left;">温馨提示：<span style="font-size:16px;padding:0;">{{Msg}}</span></h1>
+                        <div class="fright"></div>
                       </div>
                     </div>
                   </div>
@@ -246,7 +246,9 @@
         headersArry:[],
         showMessgeBox: false,
         menuVideo: false,
-        menugame: false
+        menugame: false,
+        Msg:'',
+        siteInfo:''
         // showforgotPassword:false
         // usermoney: '',
         // isShowLogin: sessionStorage.getItem('isLogin')
@@ -263,6 +265,11 @@
     },
     created() {
       this.getArry();
+      this.$http.get('/api/site/info').then((res) => {
+        this.siteInfo = res.data;
+        this.Msg = res.data.Msg;
+        this.getMsg(this.siteInfo);
+      })
     },
     methods: {
       backPageclick () {
@@ -533,7 +540,7 @@
         this.$http.defaults.headers.EasySecret = undefined;
         this.$router.push("login");
       },
-      ...mapMutations(['changeUserName', 'getUserRealName', 'changeUserMoney', 'getUserToken', 'userLoginOut', "EASYSECRET", "ROOTBOX", "USERINFO",'getData']),
+      ...mapMutations(['changeUserName', 'getUserRealName', 'changeUserMoney', 'getUserToken', 'userLoginOut', "EASYSECRET", "ROOTBOX", "USERINFO",'getData','getMsg']),
       // getUserMoney(){
       //     // >获取用户余额
       //   this.$http.get('/json/center/?r=Money').then((res) => {
@@ -810,7 +817,7 @@
     display: inline-block;
     padding-left: 48px;
     font-size: 14px;
-    font-style: italic;
+    font-style: normal;
     line-height: 48px;
     background-position: 0 -180px;
   }
@@ -823,7 +830,7 @@
 
   .bar-right div {
     /*margin-right: 22px;*/
-
+    font-size: 14px;
     float: left;
   }
 

@@ -45,16 +45,11 @@ export default {
       }
   },
   created () {
-    this.getInfo();  
+       
   },
   methods: {
       show_list () {
           this.showRulePic = !this.showRulePic;
-      },
-      getInfo () {
-          this.$http.get('api/site/info').then((res) => {
-              console.log(res)
-          })
       }
    }
 }
