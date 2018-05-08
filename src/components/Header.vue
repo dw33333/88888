@@ -814,7 +814,7 @@
   }
 
   .top-box {
-    width: 1050px;
+    width: 1170px;
     margin: 0 auto;
     overflow: hidden;
   }
