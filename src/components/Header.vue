@@ -834,7 +834,7 @@
   .bar-right {
     float: left;
     overflow: hidden;
-    line-height: 46px;
+    line-height: 44px;
   }
 
   .bar-right div {
@@ -965,6 +965,7 @@
   }
 
   .preson-balance {
+    padding-top:2px;
     /*padding: 0 20px;*/
     min-width: 165px;
     padding-left: 40px;
@@ -980,6 +981,7 @@
 
   .personpwd {
     background-position: 0 -635px;
+    padding-top:2px;
   }
 
   .recharge {

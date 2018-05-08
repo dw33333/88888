@@ -199,7 +199,6 @@
             //this.changeUserMoney(res.data.data.money);
             this.mytoast("登录成功");
             setTimeout(() => {
-              console.log(22222);
               this.$router.push({path: "/"});
             }, 1500)
             //this.codeImgFn()

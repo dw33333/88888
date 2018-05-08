@@ -46,79 +46,6 @@
     </div>
     <div class="main-body">
       <div class='select'>
-        <div class="account">
-          账号: <span>{{username}}</span>
-        </div>
-        <div class="balance">
-          用户余额: <span>{{money}}</span>
-        </div>
-        <!--<div class="balance" style="background-position:-96px -36px;">
-          真实姓名: <span>{{userRealName}}</span>
-        </div>
-        <div class="balance">
-          AG真人余额: <span>{{agmoney}}</span>
-        </div>
-        <div class="balance">
-          DS真人余额: <span>{{dsmoney}}</span>
-        </div>-->
-        <div class="money">
-          <router-link to='/recharge' class="recharge">
-            <span>充值</span>
-          </router-link>
-          <router-link to='/withdrawal' class="withdraw">
-            <span>提现</span>
-          </router-link>
-        </div>
-        <!-- 折叠菜单 -->
-        <div class="sidebar">
-          <div class="sidebar-menu">
-            <div class="item" @click="isShow(1)">
-              <a href="javascript:void(0);">密码管理</a>
-            </div>
-            <ul class='list-item'
-                :style="{height:isDisplay==1?((34*1)+'px'):'0px',visibility:isDisplay==1?'visible':'hidden',overflow:'hidden'}">
-              <li>
-                <router-link to="/PasswordManagement">修改密码</router-link>
-              </li>
-            </ul>
-            <div class="item" @click="isShow(2)">
-              <a href="javascript:void(0);">报表管理</a>
-            </div>
-            <ul class="list-item"
-                :style="{height:isDisplay==2?((34*3)+'px'):'0px',visibility:isDisplay==2?'visible':'hidden',overflow:'hidden'}">
-              <li>
-                <router-link to="/charge_record">充提记录</router-link>
-              </li>
-              <li>
-                <router-link to="/bet_record">下注记录</router-link>
-              </li>
-              <li>
-                <router-link to="/week_statistic">报表统计</router-link>
-              </li>
-            </ul>
-           <!-- <div class="item" @click="isShow(3)">
-              <a href="javascript:void(0);">额度转换</a>
-            </div>
-            <ul class='list-item'
-                :style="{height:isDisplay==3?((34*1)+'px'):'0px',visibility:isDisplay==3?'visible':'hidden',overflow:'hidden'}">
-              <li>
-                <router-link to="/moneymanagemen">额度管理</router-link>
-              </li>
-            </ul>-->
-            <div class="item" @click="isShow(4)">
-              <a href="javascript:void(0);">信息中心</a>
-            </div>
-            <ul class='list-item'
-                :style="{height:isDisplay==4?((34*2)+'px'):'0px',visibility:isDisplay==4?'visible':'hidden',overflow:'hidden'}">
-              <li>
-                <router-link to="/msg_list">站内短信</router-link>
-              </li>
-             <li>
-                <router-link to="/Notice">网站公告</router-link>
-              </li>
-            </ul>
-          </div>
-        </div>
       </div>
       <router-view class="content">
       </router-view>
@@ -364,15 +291,15 @@
       }
     }
 
-      input:-webkit-autofill,
-      input:-webkit-autofill:hover,
-      input:-webkit-autofill:focus,
-      input:-webkit-autofill:active {
-        -webkit-text-fill-color: #aaa;
-        -webkit-animation-name: autofill2;
-        -webkit-animation-fill-mode: both;
-        color: #aaa !important;
-      }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-text-fill-color: #aaa;
+      -webkit-animation-name: autofill2;
+      -webkit-animation-fill-mode: both;
+      color: #aaa !important;
+    }
 
     .search_box {
       padding: 10px 0px;
@@ -780,6 +707,7 @@
     cursor: pointer;
     text-align: left;
     margin-top: 2px;
+    height:30px;
     width: 100%;
   }
 

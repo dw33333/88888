@@ -74,7 +74,7 @@
     background-color: #fff;
     padding: 15px;
     text-align: center;
-    color: #000;
+    color:#5f5f5f;
   }
 
   .mask > .alert > .content .txt {

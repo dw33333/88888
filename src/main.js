@@ -9,7 +9,7 @@ import alert from "@/components/base/alert"
 import "@/obj/util"
 Vue.config.productionTip = true
 axios.defaults.withCredentials = true
-Vue.prototype.$http = axios
+Vue.prototype.$http = axios;
 Vue.prototype.$http.defaults.headers.EasySecret=store.state.easysecret;
 Vue.prototype.$http.interceptors.response.use(
   response => {
@@ -78,6 +78,9 @@ Vue.prototype.$http.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {//根据状态码提示对应消息
         case 401:
+          break;
+        case 404:
+          wAlert("请求未找到");
           break;
         case 504:
           wAlert("请求超时");
