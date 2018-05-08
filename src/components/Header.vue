@@ -248,7 +248,7 @@
         menuVideo: false,
         menugame: false,
         Msg:'',
-        siteInfo:''
+        siteInfo:'',
         menugame: false,
         is_login:false
         // showforgotPassword:false

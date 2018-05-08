@@ -143,6 +143,7 @@ const msg_list= (resolve) => {
     resolve(module)
   })
 }
+//帮助
 
 
 
@@ -239,7 +240,23 @@ const Games = (resolve) => {
     resolve(module)
   })
 }
-
+const Help = (resolve) => {
+    import('@/components/Help').then((module) => {
+      resolve(module)
+    })
+}
+//常见问题
+const Generalq = (resolve) => {
+  import('@/components/Help/Generalq').then((module) => {
+    resolve(module)
+  }) 
+}
+//存款
+const Deposit = (resolve) => {
+  import('@/components/Help/Deposit').then((module) => {
+    resolve(module)
+  })
+}
 const USERCENTER = (resolve) => {
   import('@/components/UserCenter').then((module) => {
     resolve(module)
@@ -289,9 +306,25 @@ const route =new Router({
       component: Activity
     },
     {
-      path: '/lottery',
+      path: '/lottery/:id',
       name: 'lottery',
       component: lottery
+    },
+    {
+      path: '/Help',
+      redirect:'/Generalq',
+      name:'Help',
+      component:Help,
+      children: [
+        {
+          path: '/Generalq',
+          component:Generalq
+        },
+        {
+          path: '/Deposit',
+          component:Deposit
+        }
+      ]
     },
     {
       path: '/UserCenter',
