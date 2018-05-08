@@ -1,6 +1,6 @@
 <template>
   <div class="mask-layer-wrapper" v-show="ifopen">
-    <span class="content">{{content}}</span>
+    <span class="ms-content">{{content}}</span>
   </div>
 </template>
 <script>
@@ -32,7 +32,7 @@ export default {
   align-items: center;
 }
 
-.content {
+.mask-layer-wrapper>.ms-content {
   color: #fff;
   padding: 10px;
   border-radius: 5px;

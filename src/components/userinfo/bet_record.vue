@@ -13,11 +13,11 @@
         >
         </date-picker>&emsp;&emsp;彩种 ：
         <select name="" id="" class="short" v-model="curLotteryType">
-          <!--<option :value="-1" disabled selected style="display:none;">请选择彩种</option>-->
+          <option :value="-1" disabled selected style="display:none;">{{is_loading_lottery_type?"加载中...":"请选择彩种"}}</option>
           <option :value="idx" v-for="it,idx in lotteryTypes">{{it.title}}</option>
         </select>
         <div class="btn_search" @click="search">查询</div>
-        <div style="display: inline-block;color:#B62929;" v-show="is_loading_lottery_type">加载中...</div>
+        <!--<div style="display: inline-block;color:#B62929;" v-show="">加载中...</div>-->
       </div>
       <table class="tb" cellpadding="0" cellspacing="0">
         <tr>
@@ -70,11 +70,11 @@
     },
     data() {
       return {
-        pageSize: 20,
+        pageSize: 10,
         pages: [],
         curDate: new Date().format("yyyy-MM-dd"),
         lotteryTypes: [],
-        curLotteryType: 0,//index
+        curLotteryType: -1,//index
         dpStartPickerOptions: {
           disabledDate(time) {
             return time.getTime() > Date.now() || time.getTime() < Date.now() - 30 * 24 * 60 * 60 * 1000;
@@ -177,6 +177,7 @@
         }
         res.data.data.unshift({id: -1, title: "香港六合彩"});
         this.lotteryTypes = res.data.data;
+        this.curLotteryType=0;
       },
       async loadRecords(page) {
         if (!this.lotteryTypes[this.curLotteryType]||this.is_loading_lottery_type||this.is_loading_records) {
@@ -193,7 +194,7 @@
         if(this.lotteryTypes[this.curLotteryType].id==-1){
           url="/api/lhc/LhcInfo/betRecord/";
           data={
-            p: page,
+            page: page,
             ps: this.pageSize,
             d: this.curDate
           }
@@ -233,9 +234,12 @@
       input {
         padding-left: 30px;
         width: 220px;
-        height: 40px;
-        line-height: 40px;
+        height: 35px;
+        line-height: 35px;
       }
+    }
+    .el-input__icon{
+      line-height:35px;
     }
     text-align: left;
     .header {
