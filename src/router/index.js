@@ -256,6 +256,12 @@ const Deposit = (resolve) => {
     resolve(module)
   })
 }
+//取款
+const Teller = (resolve) => {
+  import('@/components/Help/Teller').then((module) => {
+    resolve(module)
+  })
+}
 const USERCENTER = (resolve) => {
   import('@/components/UserCenter').then((module) => {
     resolve(module)
@@ -266,6 +272,17 @@ const lottery_result = (resolve) => {
   import('@/components/lottery_result').then((module) => {
     resolve(module)
   });
+}
+//彩票规则
+const Cqssc = (resolve) => {
+  import('@/components/Help/Cqssc').then((module) => {
+    resolve(module)
+  })
+}
+const Tjscc = (resolve) => {
+  import('@/components/Help/Tjssc').then((module) => {
+    resolve(module)
+  })
 }
 Vue.use(Router)
 Vue.use(VueAwesomeSwiper)
@@ -317,7 +334,7 @@ const route = new Router({
     },
     {
       path: '/Help',
-      redirect:'/Generalq',
+      // redirect:'/Generalq',
       name:'Help',
       component:Help,
       children: [
@@ -328,6 +345,17 @@ const route = new Router({
         {
           path: '/Deposit',
           component:Deposit
+        },{
+          path:'/Teller',
+          component:Teller
+        },
+        {
+          path:'/Cqssc',
+          component:Cqssc
+        },
+        {
+          path:'/Tjssc',
+          component:Tjscc
         }
       ]
     },

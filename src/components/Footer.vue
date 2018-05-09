@@ -17,12 +17,12 @@
           <h1><em>使用帮助</em><span>Guide</span></h1>
           <div class="new-con">
             <ul>
-              <li>关于我们</li>
-              <li>联络我们</li>
-              <li>合作伙伴</li>
-              <li>存款帮助</li>
-              <li>取款帮助</li>
-              <li>常见问题</li>
+              <router-link tag="li" to="/Generalq">关于我们</router-link>
+              <li><a :href="this.sitesInfos.SiteService" target="_blank" style="color:#fff;">联络我们</a></li>
+              <router-link tag="li" to="/Generalq">合作伙伴</router-link>
+              <router-link tag="li" to="/Deposit">存款帮助</router-link>
+              <router-link tag="li" to="/Teller">取款帮助</router-link>
+              <router-link tag="li" to="/Generalq">常见问题</router-link>
             </ul>
           </div>
         </div>
@@ -34,13 +34,13 @@
             <div class="clear">
               <ul class="browser-list commonlist notitle clear">
                 <li>
-                  <a target="_blank" href="http://rj.baidu.com/soft/detail/14917.html"><i class="icon icon-browser icon-browserIE"></i><span>IE新版下载</span></a>
+                  <a target="_blank" href="https://support.microsoft.com/zh-tw/help/17621/internet-explorer-downloads"><i class="icon icon-browser icon-browserIE"></i><span>IE新版下载</span></a>
                 </li>
                 <li>
-                  <a target="_blank" href="http://rj.baidu.com/soft/detail/14744.html?ald"><i class="icon icon-browser icon-browserFF"></i><span>Chrome浏览器</span></a>
+                  <a target="_blank" href="https://www.google.cn/intl/zh-CN/chrome/?brand=CHBD&gclid=CjwKCAjwlcXXBRBhEiwApfHGTQW5ANvOW-CpXX8s5fmgSeGzzkFpAJPSGb6pFCUUt4ex2PMZqNHQ8xoCyLQQAvD_BwE"><i class="icon icon-browser icon-browserFF"></i><span>Chrome浏览器</span></a>
                 </li>
                 <li>
-                  <a target="_blank" href="http://rj.baidu.com/soft/detail/11843.html"><i class="icon icon-browser icon-browserGL"></i><span>Firefox浏览器</span></a>
+                  <a target="_blank" href="http://www.firefox.com.cn/download/"><i class="icon icon-browser icon-browserGL"></i><span>Firefox浏览器</span></a>
                 </li>
               </ul>
               <div class="browser-tip">
@@ -54,8 +54,21 @@
     </div>
   </footer>
 </template>
+
 <script>
+import {mapState, mapMutations} from 'vuex'
+export default {
+  data () {
+    return {
+      
+    }
+  },
+  computed: {
+    ...mapState(['sitesInfos'])
+  },
+}
 </script>
+
 <style scoped>
 footer {
   background: url('../assets/footer_bg.jpg') no-repeat center -2px;

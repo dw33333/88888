@@ -96,7 +96,13 @@ try {
   }
 } catch (e) {
 }
-let headerArry = '';
+let headerArry = {};
+try {
+  if (sessionStorage.getItem('headerArry')) {
+    headerArry = JSON.parse(sessionStorage.getItem('headerArry'));
+  }
+} catch (e) {
+}
 let userinfo = {};
 try {
   if (sessionStorage.getItem('userinfo')) {

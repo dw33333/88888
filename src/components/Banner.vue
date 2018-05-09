@@ -20,7 +20,7 @@
               温馨提示：银行卡更新通告：银行卡更新通告：因公司需要，银行卡入款.微信入款.支付宝入款已使用新的入款账号，已更改为新入款账号了，请您获取我司最新入款账号，存入过期账号概不负责！
             </span> -->
              <marquee scrollAmount="5" scrolldelay="10" direction="left">
-              温馨提示：{{this.sitesInfos}}
+              温馨提示：{{this.sitesInfos.Msg}}
                 </marquee>
           </div>
         </div>
@@ -62,9 +62,7 @@ export default {
       ...mapState(['sitesInfos'])
     },
     created () {
-      console.log(this.sitesInfos);
     },
-    ...mapMutations(['changeUserName','changeUserMoney','getUserToken','userLoginOut','ROOTBOX']),
 }
 
 </script>

@@ -119,7 +119,7 @@
                  style="left:-11px;width:200px;">
               <a href="javascript:;" class="p20">BB</a>
               <a href="javascript:;" class="p20">AG</a>
-              <a href="javascript:;" class="p20">MG</a>
+              <a @click="GoMg" class="p20">MG</a>
             </div>
           </router-link>
           <router-link to="/mobile" tag="li">
@@ -276,6 +276,9 @@
       })*/
     },
     methods: {
+      GoMg () {
+        this.$router.push('/Games')
+      },
       backPageclick () {
         this.$router.push('/')
       },
@@ -341,7 +344,7 @@
       getArry () {
         this.$http.get('/api/lottery/basic/LotteryGroup').then((res) => {
           this.headersArry = res.data;
-          this.getData(this.headersArry);
+          this.GETDATA(this.headersArry);
         })
       },
       overShow() {
@@ -549,9 +552,9 @@
         this.EASYSECRET("");
         sessionStorage.clear();
         this.$http.defaults.headers.EasySecret = undefined;
-        this.$router.push("login");
+        this.$router.push("/login");
       },
-      ...mapMutations(['changeUserName', 'getUserRealName', 'changeUserMoney', 'getUserToken', 'userLoginOut', "EASYSECRET", "ROOTBOX", "USERINFO",'getData']),
+      ...mapMutations(['changeUserName', 'getUserRealName', 'changeUserMoney', 'getUserToken', 'userLoginOut', "EASYSECRET", "ROOTBOX", "USERINFO",'GETDATA']),
       // getUserMoney(){
       //     // >获取用户余额
       //   this.$http.get('/json/center/?r=Money').then((res) => {
@@ -995,7 +998,7 @@
   .withdraw {
     padding-left: 45px;
     color: #fff;
-    background-position: 0 -677px;
+    background-position: 0 -678px;
   }
 
   .login-out {

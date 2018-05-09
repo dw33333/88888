@@ -84,8 +84,14 @@ const mutations = {
       sessionStorage.setItem('sitesInfos',"");
     } catch (e) {}
   },
-  getData(state,data){
+  GETDATA(state,data){
     state.headerArry = data;
+    try {
+      if(data)
+      sessionStorage.setItem('headerArry',JSON.stringify(data));
+      else
+      sessionStorage.setItem('headerArry',"");
+    } catch (e) {}
   },
   USERINFO(state,data){
     state.userinfo = data;
