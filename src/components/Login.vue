@@ -199,8 +199,12 @@
             //this.changeUserMoney(res.data.data.money);
             this.mytoast("登录成功");
             setTimeout(() => {
-              this.$router.push({path: "/"});
-            }, 1500)
+              if(this.$route.params.hback){
+                this.$router.go(-1);
+              }else{
+                this.$router.push({path: "/"});
+              }
+            }, 1500);
             //this.codeImgFn()
           } else {
             this.alert('提示', res.data.msg);

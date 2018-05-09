@@ -42,7 +42,6 @@
   html {
     height: 100%;
   }
-
   body {
     background: url('./assets/bg1.jpg') 0 0 no-repeat;
     height: 100%;
@@ -92,9 +91,29 @@
   input:-webkit-autofill:active {
     -webkit-text-fill-color: rgba(255, 255, 255, 1);;
     -webkit-animation-name: autofill;
+    animation-name: autofill;
     -webkit-animation-fill-mode: both;
   }
 
+  @keyframes autofill { //去除chrome浏览器自动填充表单的黄色背景
+    to {
+      color: rgba(255, 255, 255, 1);
+      background: transparent;
+    }
+  }
+
+  @keyframes autofill2 { //去除chrome浏览器自动填充表单的黄色背景
+    to {
+      color: #aaa;
+      background: transparent;
+    }
+  }
+  @keyframes autofill3 { //去除chrome浏览器自动填充表单的黄色背景
+    to {
+      color: rgba(255, 255, 255, 1);
+      background: #fff;
+    }
+  }
   @-webkit-keyframes autofill { //去除chrome浏览器自动填充表单的黄色背景
     to {
       color: rgba(255, 255, 255, 1);
@@ -121,6 +140,7 @@
     input:-webkit-autofill:active {
       -webkit-animation-name: autofill2;
       -webkit-animation-fill-mode: both;
+      animation-name: autofill2;
       color: #aaa !important;
     }
   }
