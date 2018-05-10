@@ -143,6 +143,7 @@ const msg_list = (resolve) => {
     resolve(module)
   })
 }
+//帮助
 
 
 // 用户中心>账户管理>银行卡管理
@@ -238,7 +239,29 @@ const Games = (resolve) => {
     resolve(module)
   })
 }
-
+const Help = (resolve) => {
+    import('@/components/Help').then((module) => {
+      resolve(module)
+    })
+}
+//常见问题
+const Generalq = (resolve) => {
+  import('@/components/Help/Generalq').then((module) => {
+    resolve(module)
+  }) 
+}
+//存款
+const Deposit = (resolve) => {
+  import('@/components/Help/Deposit').then((module) => {
+    resolve(module)
+  })
+}
+//取款
+const Teller = (resolve) => {
+  import('@/components/Help/Teller').then((module) => {
+    resolve(module)
+  })
+}
 const USERCENTER = (resolve) => {
   import('@/components/UserCenter').then((module) => {
     resolve(module)
@@ -249,6 +272,17 @@ const lottery_result = (resolve) => {
   import('@/components/lottery_result').then((module) => {
     resolve(module)
   });
+}
+//彩票规则
+const Cqssc = (resolve) => {
+  import('@/components/Help/Cqssc').then((module) => {
+    resolve(module)
+  })
+}
+const Tjscc = (resolve) => {
+  import('@/components/Help/Tjssc').then((module) => {
+    resolve(module)
+  })
 }
 Vue.use(Router)
 Vue.use(VueAwesomeSwiper)
@@ -294,9 +328,36 @@ const route = new Router({
       component: Activity
     },
     {
-      path: '/lottery',
+      path: '/lottery/:id',
       name: 'lottery',
       component: lottery
+    },
+    {
+      path: '/Help',
+      // redirect:'/Generalq',
+      name:'Help',
+      component:Help,
+      children: [
+        {
+          path: '/Generalq',
+          component:Generalq
+        },
+        {
+          path: '/Deposit',
+          component:Deposit
+        },{
+          path:'/Teller',
+          component:Teller
+        },
+        {
+          path:'/Cqssc',
+          component:Cqssc
+        },
+        {
+          path:'/Tjssc',
+          component:Tjscc
+        }
+      ]
     },
     {
       path: '/UserCenter',

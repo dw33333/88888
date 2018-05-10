@@ -122,7 +122,6 @@ export default {
             this.currentPage = res.data.current;
             this.gameLists = res.data.data;
             this.gameId = res.data.id;
-            console.log(res)
             });
         },
         gameCategory () {

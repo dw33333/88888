@@ -25,11 +25,6 @@ export default {
     }
   },
   created(){
-    //  this.$nextTick(() => {
-    //     (function () {
-    //      $('.nav').hide();
-    //     })
-    //  });
     this.fc_id = this.$route.params.id;
     this.src = './lottery/index.html#/lottery/'+this.fc_id;
   },
@@ -40,7 +35,6 @@ export default {
     // }).catch((error) => {
     //   console.log(error)
     // })
-    console.log(this.src)
      $('.nav').hide();
      $('#backhide').hide();
      $('#backPage').show();
