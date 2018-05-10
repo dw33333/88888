@@ -16,10 +16,11 @@
       ...mapState(["rootbox"])
     },
     created(){
-      this.getAgentId()
+      this.getAgentId();
+      this.loadSiteInfo();
     },
     methods:{
-      ...mapMutations(["AGENT_ID"]),
+      ...mapMutations(["AGENT_ID","SITE_INFO"]),
       async getAgentId(){
         let res = await this.$http({
           method:"post",
@@ -33,6 +34,12 @@
         }else if(res.data.code==0){
           this.AGENT_ID(res.data.data);
         }
+      },
+      async loadSiteInfo(){
+        let res = await this.$http.get('api/site/info');
+        if(!res)return;
+        this.SITE_INFO(res.data);
+        document.title=res.data.SiteName;
       }
     }
   }

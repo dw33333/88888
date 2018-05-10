@@ -28,7 +28,7 @@
                   <ul data-bind="foreach:credit">
                     <li v-for="item in headersArry" :key="item.id">
                       <span v-for="items in item.type" :key="items.id">
-                        <router-link  class="game_1" :to="{path:'/lottery/'+items.name}">
+                        <router-link  class="game_1" :to="{path:'/lottery_ifm/'+items.name}">
                           {{items.short_name}}
                         </router-link>
                       </span>

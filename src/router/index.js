@@ -248,7 +248,7 @@ const Help = (resolve) => {
 const Generalq = (resolve) => {
   import('@/components/Help/Generalq').then((module) => {
     resolve(module)
-  }) 
+  })
 }
 //存款
 const Deposit = (resolve) => {
@@ -328,7 +328,7 @@ const route = new Router({
       component: Activity
     },
     {
-      path: '/lottery/:id',
+      path: '/lottery_ifm/:id',
       name: 'lottery',
       component: lottery
     },

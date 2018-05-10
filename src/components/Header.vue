@@ -143,7 +143,7 @@
                 <ul v-for="item in headersArry" :key="item.id">
                   <li v-for="items in item.type" :key="items.id">
                     <!-- :href="'./lottery/index.html#/lottery/'+items.name" -->
-                    <router-link  class="game_26" :to="{path:'/lottery/'+items.name}">
+                    <router-link  class="game_26" :to="{path:'/lottery_ifm/'+items.name}">
                       <img :src="`/static/img/${items.name}.png`" alt=""> <span class="hot"><font>{{items.short_name}}</font></span>
                     </router-link>
                   </li>
