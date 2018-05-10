@@ -3,7 +3,7 @@
     <div class="main-head">
       <span>用户中心&gt;提现</span>
     </div>
-    <div class="add-card" v-show="is_loading_car_info&&card" style="color:#B62929;min-height:500px;">
+    <div class="add-card" v-show="is_loading_car_info&&card" style="color:#B62929;min-height:500px;text-align: center;">
       加载中...
     </div>
     <div class="add-card" v-if="!card"   >

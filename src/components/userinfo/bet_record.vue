@@ -42,7 +42,7 @@
           <td>{{it.title }}</td>
           <td>{{it.type_name }}</td>
           <td>{{it.net_amt }}</td>
-          <td>{{it.status}}</td>
+          <td>{{it.status==1?"已结算":"未结算"}}</td>
         </tr>
       </table>
       <div style="text-align: center;padding:10px;" v-show="records.length<1&&!is_loading_records">暂无数据</div>

@@ -26,7 +26,7 @@
             <router-link to="/register">免费开户</router-link>
           </div>
           <div class="item regster">
-            <span @click="trial">{{is_login?"登录中...":"试玩"}}</span>
+            <span @click="trial">试玩</span>
           </div>
           <!-- <div class="item resetpwd">
             <a href="javascript:void(0);" @click="forgorWord">忘记密码</a>

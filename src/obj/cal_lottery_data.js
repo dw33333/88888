@@ -544,9 +544,9 @@ export const six_lottery = (nums) => {
   if (nums.length != 7) return;
   let jiaqing = [1, 2, 4, 5, 10, 12, 13, 14, 16, 17, 22, 24, 25, 26, 28, 29, 34, 36, 37, 38, 40, 41, 46, 48, 49];
   let yeshou = [3, 6, 7, 8, 9, 11, 15, 18, 19, 20, 21, 23, 27, 30, 31, 32, 33, 35, 39, 42, 43, 44, 45, 47];
-  let color_red=[1, 2, 7, 8, 12, 13, 18, 19, 23, 24, 29, 30, 34, 35, 40, 45, 46];
-  let color_blue=[3, 4, 9, 10, 14, 15, 20, 25, 26, 31, 36, 37, 41, 42, 47, 48];
-  let color_green=[5, 6, 11, 16, 17, 21, 22, 27, 28, 32, 33, 38, 39, 43, 44, 49];
+  let color_red = [1, 2, 7, 8, 12, 13, 18, 19, 23, 24, 29, 30, 34, 35, 40, 45, 46];
+  let color_blue = [3, 4, 9, 10, 14, 15, 20, 25, 26, 31, 36, 37, 41, 42, 47, 48];
+  let color_green = [5, 6, 11, 16, 17, 21, 22, 27, 28, 32, 33, 38, 39, 43, 44, 49];
 
   let special_num = parseInt(nums[6]);
   let spe_arr = nums[6].split('');
@@ -559,10 +559,10 @@ export const six_lottery = (nums) => {
     spe_sum_oddoreven: "",//特码合单双
     spe_sum_overorunder: "",//特码合大小
     spe_tailnum_overorunder: "",//特码尾大小
-    spe_jiaqingoryeshou:"",
+    spe_jiaqingoryeshou: "",
 
   };
-  let getCHChar=(key)=> {
+  let getCHChar = (key) => {
     switch (key) {
       case "ji":
         return "鸡"
@@ -604,34 +604,34 @@ export const six_lottery = (nums) => {
         return "绿波"
     }
   }
-  let calballNum=(num)=>{
-    let color="";
-    if(color_red.indexOf(num)!==-1){
-      color="red";
-    }else if(color_blue.indexOf(num)!==-1){
-      color="blue";
-    }else if(color_green.indexOf(num)!==-1){
-      color="green";
+  let calballNum = (num) => {
+    let color = "";
+    if (color_red.indexOf(num) !== -1) {
+      color = "red";
+    } else if (color_blue.indexOf(num) !== -1) {
+      color = "blue";
+    } else if (color_green.indexOf(num) !== -1) {
+      color = "green";
     }
-    let animal="";
-    let idx= balls.findIndex(v=>{
-      return parseInt(v.num)==num;
+    let animal = "";
+    let idx = balls.findIndex(v => {
+      return parseInt(v.num) == num;
     })
-    animal=balls[idx].animal;
-    animal=getCHChar(animal);
+    animal = balls[idx].animal;
+    animal = getCHChar(animal);
     return {
-      color:color,
-      animal:animal,
-      num:num
+      color: color,
+      animal: animal,
+      num: num
     }
   }
-  res.num1=calballNum(parseInt(nums[0]));
-  res.num2=calballNum(parseInt(nums[1]));
-  res.num3=calballNum(parseInt(nums[2]));
-  res.num4=calballNum(parseInt(nums[3]));
-  res.num5=calballNum(parseInt(nums[4]));
-  res.num6=calballNum(parseInt(nums[5]));
-  res.num7=calballNum(parseInt(nums[6]));
+  res.num1 = calballNum(parseInt(nums[0]));
+  res.num2 = calballNum(parseInt(nums[1]));
+  res.num3 = calballNum(parseInt(nums[2]));
+  res.num4 = calballNum(parseInt(nums[3]));
+  res.num5 = calballNum(parseInt(nums[4]));
+  res.num6 = calballNum(parseInt(nums[5]));
+  res.num7 = calballNum(parseInt(nums[6]));
   nums.forEach(v => {
     v = parseInt(v);
     res.sum += v;
@@ -696,114 +696,674 @@ export const six_lottery = (nums) => {
   } else {
     res.spe_tailnum_overorunder = "和";
   }
-  if(jiaqing.indexOf(special_num)!==-1){
-    res.spe_jiaqingoryeshou="家禽";
+  if (jiaqing.indexOf(special_num) !== -1) {
+    res.spe_jiaqingoryeshou = "家禽";
   }
-  if(yeshou.indexOf(special_num)!==-1){
-    res.spe_jiaqingoryeshou="野兽";
+  if (yeshou.indexOf(special_num) !== -1) {
+    res.spe_jiaqingoryeshou = "野兽";
   }
   //龙虎斗
-  let tres={
-    t_oddoreven:"",
-    t_overorunder:"",
-    n1vsn2:"",
-    n1vsn3:"",
-    n1vsn4:"",
-    n1vsn5:"",
-    n1vsn6:"",
-    n1vssp:"",
-    n2vsn3:"",
-    n2vsn4:"",
-    n2vsn5:"",
-    n2vsn6:"",
-    n2vssp:"",
-    n3vsn4:"",
-    n3vsn5:"",
-    n3vsn6:"",
-    n3vssp:"",
-    n4vsn5:"",
-    n4vsn6:"",
-    n4vssp:"",
-    n5vsn6:"",
-    n5vssp:"",
-    n6vssp:""
+  let tres = {
+    t_oddoreven: "",
+    t_overorunder: "",
+    n1vsn2: "",
+    n1vsn3: "",
+    n1vsn4: "",
+    n1vsn5: "",
+    n1vsn6: "",
+    n1vssp: "",
+    n2vsn3: "",
+    n2vsn4: "",
+    n2vsn5: "",
+    n2vsn6: "",
+    n2vssp: "",
+    n3vsn4: "",
+    n3vsn5: "",
+    n3vsn6: "",
+    n3vssp: "",
+    n4vsn5: "",
+    n4vsn6: "",
+    n4vssp: "",
+    n5vsn6: "",
+    n5vssp: "",
+    n6vssp: ""
   };
-  res={...res,...tres};
-  let t_odd_count=0;
-  let t_even_count=0;
-  let t_over_count=0;
-  let t_under_count=0;
-  for(let i=0,len=nums.length-1;i<len;i++){
-    let num=parseInt(nums[i]);
-    if(num%2==0){
+  res = {...res, ...tres};
+  let t_odd_count = 0;
+  let t_even_count = 0;
+  let t_over_count = 0;
+  let t_under_count = 0;
+  for (let i = 0, len = nums.length - 1; i < len; i++) {
+    let num = parseInt(nums[i]);
+    if (num % 2 == 0) {
       t_even_count++;
-    }else{
+    } else {
       t_odd_count++;
     }
-    if(num==49){//如果为49用特码替换
-      num=parseInt(nums[6]);
+    if (num == 49) {//如果为49用特码替换
+      num = parseInt(nums[6]);
     }
-    if(num>=1&&num<=24){
+    if (num >= 1 && num <= 24) {
       t_over_count++;
-    }else
-    if(num>=25&&num<=48){
+    } else if (num >= 25 && num <= 48) {
       t_under_count++;
     }
   }
-  if(t_odd_count>=4){
-    res.t_oddoreven="奇";
+  if (t_odd_count >= 4) {
+    res.t_oddoreven = "奇";
   }
-  if(t_even_count>=4){
-    res.t_oddoreven="偶";
+  if (t_even_count >= 4) {
+    res.t_oddoreven = "偶";
   }
-  if(t_odd_count==3&&t_even_count==3){
-    res.t_oddoreven="和";
+  if (t_odd_count == 3 && t_even_count == 3) {
+    res.t_oddoreven = "和";
   }
-  if(t_over_count>=4){
-    res.t_overorunder="上";
+  if (t_over_count >= 4) {
+    res.t_overorunder = "上";
   }
-  if(t_under_count>=4){
-    res.t_overorunder="下";
+  if (t_under_count >= 4) {
+    res.t_overorunder = "下";
   }
-  if(t_over_count==3&&t_under_count==3){
-    res.t_overorunder="和";
+  if (t_over_count == 3 && t_under_count == 3) {
+    res.t_overorunder = "和";
   }
 
 
-
-  let calLongHu=(num1,num2)=>{
-    let res="";
-    if(num1>num2){
-      res="龙";
-    }else{
-      res="虎";
+  let calLongHu = (num1, num2) => {
+    let res = "";
+    if (num1 > num2) {
+      res = "龙";
+    } else {
+      res = "虎";
     }
-    if(num1==49||num2==49)
-      res="和";
+    if (num1 == 49 || num2 == 49)
+      res = "和";
     return res;
   }
-  res.n1vsn2=calLongHu(parseInt(nums[0]),parseInt(nums[1]));
-  res.n1vsn3=calLongHu(parseInt(nums[0]),parseInt(nums[2]));
-  res.n1vsn4=calLongHu(parseInt(nums[0]),parseInt(nums[3]));
-  res.n1vsn5=calLongHu(parseInt(nums[0]),parseInt(nums[4]));
-  res.n1vsn6=calLongHu(parseInt(nums[0]),parseInt(nums[5]));
-  res.n1vssp=calLongHu(parseInt(nums[0]),parseInt(nums[6]));
-  res.n2vsn3=calLongHu(parseInt(nums[1]),parseInt(nums[2]));
-  res.n2vsn4=calLongHu(parseInt(nums[1]),parseInt(nums[3]));
-  res.n2vsn5=calLongHu(parseInt(nums[1]),parseInt(nums[4]));
-  res.n2vsn6=calLongHu(parseInt(nums[1]),parseInt(nums[5]));
-  res.n2vssp=calLongHu(parseInt(nums[1]),parseInt(nums[6]));
-  res.n3vsn4=calLongHu(parseInt(nums[2]),parseInt(nums[3]));
-  res.n3vsn5=calLongHu(parseInt(nums[2]),parseInt(nums[4]));
-  res.n3vsn6=calLongHu(parseInt(nums[2]),parseInt(nums[5]));
-  res.n3vssp=calLongHu(parseInt(nums[2]),parseInt(nums[6]));
-  res.n4vsn5=calLongHu(parseInt(nums[3]),parseInt(nums[4]));
-  res.n4vsn6=calLongHu(parseInt(nums[3]),parseInt(nums[5]));
-  res.n4vssp=calLongHu(parseInt(nums[3]),parseInt(nums[6]));
-  res.n5vsn6=calLongHu(parseInt(nums[4]),parseInt(nums[5]));
-  res.n5vssp=calLongHu(parseInt(nums[4]),parseInt(nums[6]));
-  res.n6vssp=calLongHu(parseInt(nums[5]),parseInt(nums[6]));
-  res.color=getCHChar(res.num7.color);
-  res.colorkey=res.num7.color;
+  res.n1vsn2 = calLongHu(parseInt(nums[0]), parseInt(nums[1]));
+  res.n1vsn3 = calLongHu(parseInt(nums[0]), parseInt(nums[2]));
+  res.n1vsn4 = calLongHu(parseInt(nums[0]), parseInt(nums[3]));
+  res.n1vsn5 = calLongHu(parseInt(nums[0]), parseInt(nums[4]));
+  res.n1vsn6 = calLongHu(parseInt(nums[0]), parseInt(nums[5]));
+  res.n1vssp = calLongHu(parseInt(nums[0]), parseInt(nums[6]));
+  res.n2vsn3 = calLongHu(parseInt(nums[1]), parseInt(nums[2]));
+  res.n2vsn4 = calLongHu(parseInt(nums[1]), parseInt(nums[3]));
+  res.n2vsn5 = calLongHu(parseInt(nums[1]), parseInt(nums[4]));
+  res.n2vsn6 = calLongHu(parseInt(nums[1]), parseInt(nums[5]));
+  res.n2vssp = calLongHu(parseInt(nums[1]), parseInt(nums[6]));
+  res.n3vsn4 = calLongHu(parseInt(nums[2]), parseInt(nums[3]));
+  res.n3vsn5 = calLongHu(parseInt(nums[2]), parseInt(nums[4]));
+  res.n3vsn6 = calLongHu(parseInt(nums[2]), parseInt(nums[5]));
+  res.n3vssp = calLongHu(parseInt(nums[2]), parseInt(nums[6]));
+  res.n4vsn5 = calLongHu(parseInt(nums[3]), parseInt(nums[4]));
+  res.n4vsn6 = calLongHu(parseInt(nums[3]), parseInt(nums[5]));
+  res.n4vssp = calLongHu(parseInt(nums[3]), parseInt(nums[6]));
+  res.n5vsn6 = calLongHu(parseInt(nums[4]), parseInt(nums[5]));
+  res.n5vssp = calLongHu(parseInt(nums[4]), parseInt(nums[6]));
+  res.n6vssp = calLongHu(parseInt(nums[5]), parseInt(nums[6]));
+  res.color = getCHChar(res.num7.color);
+  res.colorkey = res.num7.color;
+  return res;
+}
+
+
+export const cqssc = (nums) => {
+
+  if (nums.length != 5) return;
+  let num1 = parseInt(nums[0]);
+  let num2 = parseInt(nums[1]);
+  let num3 = parseInt(nums[2]);
+  let num4 = parseInt(nums[3]);
+  let num5 = parseInt(nums[4]);
+
+  //两面
+  let res = {
+    sum: 0,//总和
+    sum_oddoreven: "",//总和单双
+    sum_overorunder: "",//总和大小
+    num1_oddoreven: "",
+    num1_overorunder: "",
+    num2_oddoreven: "",
+    num2_overorunder: "",
+    num3_oddoreven: "",
+    num3_overorunder: "",
+    num4_oddoreven: "",
+    num4_overorunder: "",
+    num5_oddoreven: "",
+    num5_overorunder: "",
+    num6_oddoreven: "",
+    num6_overorunder: "",
+    num1:num1,
+    num2:num2,
+    num3:num3,
+    num4:num4,
+    num5:num5
+  };
+  nums.forEach(v => {
+    v = parseInt(v);
+    res.sum += v;
+  });
+  if (res.sum % 2 == 0) {//总和单双
+    res.sum_oddoreven = "总双";
+  } else {
+    res.sum_oddoreven = "总单";
+  }
+  if (res.sum >= 23 && res.sum <= 45) {//总和大小
+    res.sum_overorunder = "总大"
+  } else {
+    res.sum_overorunder = "总小";
+  }
+  if (num1 % 2 == 0) {//单双
+    res.num1_oddoreven = "双";
+  } else {
+    res.num1_oddoreven = "单";
+  }
+  if (num1 >= 5) {//大小
+    res.num1_overorunder = "大"
+  } else {
+    res.num1_overorunder = "小";
+  }
+
+  if (num2 % 2 == 0) {//单双
+    res.num2_oddoreven = "双";
+  } else {
+    res.num2_oddoreven = "单";
+  }
+  if (num2 >= 5) {//大小
+    res.num2_overorunder = "大"
+  } else {
+    res.num2_overorunder = "小";
+  }
+  if (num3 % 2 == 0) {//单双
+    res.num3_oddoreven = "双";
+  } else {
+    res.num3_oddoreven = "单";
+  }
+  if (num3 >= 5) {//大小
+    res.num3_overorunder = "大"
+  } else {
+    res.num3_overorunder = "小";
+  }
+  if (num4 % 2 == 0) {//单双
+    res.num4_oddoreven = "双";
+  } else {
+    res.num4_oddoreven = "单";
+  }
+  if (num4 >= 5) {//大小
+    res.num4_overorunder = "大"
+  } else {
+    res.num4_overorunder = "小";
+  }
+  if (num5 % 2 == 0) {//单双
+    res.num5_oddoreven = "双";
+  } else {
+    res.num5_oddoreven = "单";
+  }
+  if (num5 >= 5) {//大小
+    res.num5_overorunder = "大"
+  } else {
+    res.num5_overorunder = "小";
+  }
+
+
+
+
+  //龙虎斗
+  let tres = {
+    n1vsn2: "",
+    n1vsn3: "",
+    n1vsn4: "",
+    n1vsn5: "",
+    n2vsn3: "",
+    n2vsn4: "",
+    n2vsn5: "",
+    n3vsn4: "",
+    n3vsn5: "",
+    n4vsn5: "",
+  };
+  res = {...res, ...tres};
+
+  let calLongHu = (num1, num2) => {
+    let res = "";
+    if (num1 > num2) {
+      res = "龙";
+    } else {
+      res = "虎";
+    }
+    if (num1==num2)
+      res = "和";
+    return res;
+  }
+  res. n1vsn2 = calLongHu(num1, num2);
+  res. n1vsn3 = calLongHu(num1, num3);
+  res. n1vsn4 = calLongHu(num1, num4);
+  res. n1vsn5 = calLongHu(num1, num5);
+  res. n2vsn3 = calLongHu(num2, num3);
+  res. n2vsn4 = calLongHu(num2, num4);
+  res. n2vsn5 = calLongHu(num2, num5);
+  res. n3vsn4 = calLongHu(num3, num4);
+  res. n3vsn5 = calLongHu(num3, num5);
+  res. n4vsn5 = calLongHu(num4, num5);
+  return res;
+}
+
+export const tjssc = (nums) => {
+
+  if (nums.length != 5) return;
+  let num1 = parseInt(nums[0]);
+  let num2 = parseInt(nums[1]);
+  let num3 = parseInt(nums[2]);
+  let num4 = parseInt(nums[3]);
+  let num5 = parseInt(nums[4]);
+
+  //两面
+  let res = {
+    sum: 0,//总和
+    sum_oddoreven: "",//总和单双
+    sum_overorunder: "",//总和大小
+    num1_oddoreven: "",
+    num1_overorunder: "",
+    num2_oddoreven: "",
+    num2_overorunder: "",
+    num3_oddoreven: "",
+    num3_overorunder: "",
+    num4_oddoreven: "",
+    num4_overorunder: "",
+    num5_oddoreven: "",
+    num5_overorunder: "",
+    num6_oddoreven: "",
+    num6_overorunder: "",
+    num1:num1,
+    num2:num2,
+    num3:num3,
+    num4:num4,
+    num5:num5
+  };
+  nums.forEach(v => {
+    v = parseInt(v);
+    res.sum += v;
+  });
+  if (res.sum % 2 == 0) {//总和单双
+    res.sum_oddoreven = "总双";
+  } else {
+    res.sum_oddoreven = "总单";
+  }
+  if (res.sum >= 23 && res.sum <= 45) {//总和大小
+    res.sum_overorunder = "总大"
+  } else {
+    res.sum_overorunder = "总小";
+  }
+  if (num1 % 2 == 0) {//单双
+    res.num1_oddoreven = "双";
+  } else {
+    res.num1_oddoreven = "单";
+  }
+  if (num1 >= 5) {//大小
+    res.num1_overorunder = "大"
+  } else {
+    res.num1_overorunder = "小";
+  }
+
+  if (num2 % 2 == 0) {//单双
+    res.num2_oddoreven = "双";
+  } else {
+    res.num2_oddoreven = "单";
+  }
+  if (num2 >= 5) {//大小
+    res.num2_overorunder = "大"
+  } else {
+    res.num2_overorunder = "小";
+  }
+  if (num3 % 2 == 0) {//单双
+    res.num3_oddoreven = "双";
+  } else {
+    res.num3_oddoreven = "单";
+  }
+  if (num3 >= 5) {//大小
+    res.num3_overorunder = "大"
+  } else {
+    res.num3_overorunder = "小";
+  }
+  if (num4 % 2 == 0) {//单双
+    res.num4_oddoreven = "双";
+  } else {
+    res.num4_oddoreven = "单";
+  }
+  if (num4 >= 5) {//大小
+    res.num4_overorunder = "大"
+  } else {
+    res.num4_overorunder = "小";
+  }
+  if (num5 % 2 == 0) {//单双
+    res.num5_oddoreven = "双";
+  } else {
+    res.num5_oddoreven = "单";
+  }
+  if (num5 >= 5) {//大小
+    res.num5_overorunder = "大"
+  } else {
+    res.num5_overorunder = "小";
+  }
+
+
+
+
+  //龙虎斗
+  let tres = {
+    n1vsn2: "",
+    n1vsn3: "",
+    n1vsn4: "",
+    n1vsn5: "",
+    n2vsn3: "",
+    n2vsn4: "",
+    n2vsn5: "",
+    n3vsn4: "",
+    n3vsn5: "",
+    n4vsn5: "",
+  };
+  res = {...res, ...tres};
+
+  let calLongHu = (num1, num2) => {
+    let res = "";
+    if (num1 > num2) {
+      res = "龙";
+    } else {
+      res = "虎";
+    }
+    if (num1==num2)
+      res = "和";
+    return res;
+  }
+  res. n1vsn2 = calLongHu(num1, num2);
+  res. n1vsn3 = calLongHu(num1, num3);
+  res. n1vsn4 = calLongHu(num1, num4);
+  res. n1vsn5 = calLongHu(num1, num5);
+  res. n2vsn3 = calLongHu(num2, num3);
+  res. n2vsn4 = calLongHu(num2, num4);
+  res. n2vsn5 = calLongHu(num2, num5);
+  res. n3vsn4 = calLongHu(num3, num4);
+  res. n3vsn5 = calLongHu(num3, num5);
+  res. n4vsn5 = calLongHu(num4, num5);
+  return res;
+}
+
+export const xjssc = (nums) => {
+
+  if (nums.length != 5) return;
+  let num1 = parseInt(nums[0]);
+  let num2 = parseInt(nums[1]);
+  let num3 = parseInt(nums[2]);
+  let num4 = parseInt(nums[3]);
+  let num5 = parseInt(nums[4]);
+
+  //两面
+  let res = {
+    sum: 0,//总和
+    sum_oddoreven: "",//总和单双
+    sum_overorunder: "",//总和大小
+    num1_oddoreven: "",
+    num1_overorunder: "",
+    num2_oddoreven: "",
+    num2_overorunder: "",
+    num3_oddoreven: "",
+    num3_overorunder: "",
+    num4_oddoreven: "",
+    num4_overorunder: "",
+    num5_oddoreven: "",
+    num5_overorunder: "",
+    num6_oddoreven: "",
+    num6_overorunder: "",
+    num1:num1,
+    num2:num2,
+    num3:num3,
+    num4:num4,
+    num5:num5
+  };
+  nums.forEach(v => {
+    v = parseInt(v);
+    res.sum += v;
+  });
+  if (res.sum % 2 == 0) {//总和单双
+    res.sum_oddoreven = "总双";
+  } else {
+    res.sum_oddoreven = "总单";
+  }
+  if (res.sum >= 23 && res.sum <= 45) {//总和大小
+    res.sum_overorunder = "总大"
+  } else {
+    res.sum_overorunder = "总小";
+  }
+  if (num1 % 2 == 0) {//单双
+    res.num1_oddoreven = "双";
+  } else {
+    res.num1_oddoreven = "单";
+  }
+  if (num1 >= 5) {//大小
+    res.num1_overorunder = "大"
+  } else {
+    res.num1_overorunder = "小";
+  }
+
+  if (num2 % 2 == 0) {//单双
+    res.num2_oddoreven = "双";
+  } else {
+    res.num2_oddoreven = "单";
+  }
+  if (num2 >= 5) {//大小
+    res.num2_overorunder = "大"
+  } else {
+    res.num2_overorunder = "小";
+  }
+  if (num3 % 2 == 0) {//单双
+    res.num3_oddoreven = "双";
+  } else {
+    res.num3_oddoreven = "单";
+  }
+  if (num3 >= 5) {//大小
+    res.num3_overorunder = "大"
+  } else {
+    res.num3_overorunder = "小";
+  }
+  if (num4 % 2 == 0) {//单双
+    res.num4_oddoreven = "双";
+  } else {
+    res.num4_oddoreven = "单";
+  }
+  if (num4 >= 5) {//大小
+    res.num4_overorunder = "大"
+  } else {
+    res.num4_overorunder = "小";
+  }
+  if (num5 % 2 == 0) {//单双
+    res.num5_oddoreven = "双";
+  } else {
+    res.num5_oddoreven = "单";
+  }
+  if (num5 >= 5) {//大小
+    res.num5_overorunder = "大"
+  } else {
+    res.num5_overorunder = "小";
+  }
+
+
+
+
+  //龙虎斗
+  let tres = {
+    n1vsn2: "",
+    n1vsn3: "",
+    n1vsn4: "",
+    n1vsn5: "",
+    n2vsn3: "",
+    n2vsn4: "",
+    n2vsn5: "",
+    n3vsn4: "",
+    n3vsn5: "",
+    n4vsn5: "",
+  };
+  res = {...res, ...tres};
+
+  let calLongHu = (num1, num2) => {
+    let res = "";
+    if (num1 > num2) {
+      res = "龙";
+    } else {
+      res = "虎";
+    }
+    if (num1==num2)
+      res = "和";
+    return res;
+  }
+  res. n1vsn2 = calLongHu(num1, num2);
+  res. n1vsn3 = calLongHu(num1, num3);
+  res. n1vsn4 = calLongHu(num1, num4);
+  res. n1vsn5 = calLongHu(num1, num5);
+  res. n2vsn3 = calLongHu(num2, num3);
+  res. n2vsn4 = calLongHu(num2, num4);
+  res. n2vsn5 = calLongHu(num2, num5);
+  res. n3vsn4 = calLongHu(num3, num4);
+  res. n3vsn5 = calLongHu(num3, num5);
+  res. n4vsn5 = calLongHu(num4, num5);
+  return res;
+}
+
+export const gdklsf = (nums) => {
+
+  if (nums.length != 8) return;
+  let num1 = parseInt(nums[0]);
+  let num2 = parseInt(nums[1]);
+  let num3 = parseInt(nums[2]);
+  let num4 = parseInt(nums[3]);
+  let num5 = parseInt(nums[4]);
+  let num6 = parseInt(nums[5]);
+  let num7 = parseInt(nums[6]);
+  let num8 = parseInt(nums[7]);
+
+  //两面
+  let res = {
+    sum: 0,//总和
+    sum_oddoreven: "",//总和单双
+    sum_overorunder: "",//总和大小
+    num1_oddoreven: "",
+    num1_overorunder: "",
+    num2_oddoreven: "",
+    num2_overorunder: "",
+    num3_oddoreven: "",
+    num3_overorunder: "",
+    num4_oddoreven: "",
+    num4_overorunder: "",
+    num5_oddoreven: "",
+    num5_overorunder: "",
+    num6_oddoreven: "",
+    num6_overorunder: "",
+    num7_oddoreven: "",
+    num7_overorunder: "",
+    num8_oddoreven: "",
+    num8_overorunder: "",
+    num1:num1,
+    num2:num2,
+    num3:num3,
+    num4:num4,
+    num5:num5,
+    num6:num6,
+    num7:num7,
+    num8:num8
+  };
+  nums.forEach(v => {
+    v = parseInt(v);
+    res.sum += v;
+  });
+  if (res.sum % 2 == 0) {//总和单双
+    res.sum_oddoreven = "总双";
+  } else {
+    res.sum_oddoreven = "总单";
+  }
+  if (res.sum >= 85 && res.sum <= 132) {//总和大小
+    res.sum_overorunder = "总大"
+  } else if(res.sum >= 36 && res.sum <= 83){
+    res.sum_overorunder = "总小";
+  }else if(res.sum==84){
+    res.sum_overorunder="和";
+  }
+  if (num1 % 2 == 0) {//单双
+    res.num1_oddoreven = "双";
+  } else {
+    res.num1_oddoreven = "单";
+  }
+  if (num1 >= 11) {//大小
+    res.num1_overorunder = "大"
+  } else {
+    res.num1_overorunder = "小";
+  }
+  if (num2 % 2 == 0) {//单双
+    res.num2_oddoreven = "双";
+  } else {
+    res.num2_oddoreven = "单";
+  }
+  if (num2 >= 11) {//大小
+    res.num2_overorunder = "大"
+  } else {
+    res.num2_overorunder = "小";
+  }
+  if (num3 % 2 == 0) {//单双
+    res.num3_oddoreven = "双";
+  } else {
+    res.num3_oddoreven = "单";
+  }
+  if (num3 >= 11) {//大小
+    res.num3_overorunder = "大"
+  } else {
+    res.num3_overorunder = "小";
+  }
+  if (num4 % 2 == 0) {//单双
+    res.num4_oddoreven = "双";
+  } else {
+    res.num4_oddoreven = "单";
+  }
+  if (num4 >= 11) {//大小
+    res.num4_overorunder = "大"
+  } else {
+    res.num4_overorunder = "小";
+  }
+  if (num5 % 2 == 0) {//单双
+    res.num5_oddoreven = "双";
+  } else {
+    res.num5_oddoreven = "单";
+  }
+  if (num5 >= 11) {//大小
+    res.num5_overorunder = "大"
+  } else {
+    res.num5_overorunder = "小";
+  }
+  if (num6 % 2 == 0) {//单双
+    res.num6_oddoreven = "双";
+  } else {
+    res.num6_oddoreven = "单";
+  }
+  if (num6 >= 11) {//大小
+    res.num6_overorunder = "大"
+  } else {
+    res.num6_overorunder = "小";
+  }
+  if (num7 % 2 == 0) {//单双
+    res.num7_oddoreven = "双";
+  } else {
+    res.num7_oddoreven = "单";
+  }
+  if (num7 >= 11) {//大小
+    res.num7_overorunder = "大"
+  } else {
+    res.num7_overorunder = "小";
+  }
+  if (num8 % 2 == 0) {//单双
+    res.num8_oddoreven = "双";
+  } else {
+    res.num8_oddoreven = "单";
+  }
+  if (num8 >= 11) {//大小
+    res.num8_overorunder = "大"
+  } else {
+    res.num8_overorunder = "小";
+  }
   return res;
 }

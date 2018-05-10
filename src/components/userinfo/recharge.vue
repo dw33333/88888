@@ -67,7 +67,7 @@
           <div>(3).如有任何疑问,您可以联系 在线客服为您提供365天×24小时不间断的友善和专业客户咨询服务!</div>
         </div>
       </div>
-      <div style="display: inline-block;color:#B62929;padding-top:20px;" v-show="is_loading_paytype||is_loading_banks">加载中...</div>
+      <div style="display: inline-block;color:#B62929;padding-top:20px;text-align:center;" v-show="is_loading_paytype||is_loading_banks">加载中...</div>
     </div>
     <!--<maskLayer :ifopen="ifopen" :content='content'></maskLayer>-->
   </div>
