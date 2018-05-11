@@ -399,7 +399,7 @@
             .card {
               float: left;
               box-sizing: border-box;
-              width: 280px;
+              width: 300px;
               border: 1px dashed #CACACA;
               padding: 12px 12px 12px 80px;
               min-height: 80px;

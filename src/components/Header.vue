@@ -1028,7 +1028,7 @@
   }
 
   .nav {
-    width: 1320px;
+    width: 1170px;
     height: 69px;
     margin: 0 auto;
     /* overflow: hidden; */
@@ -1043,7 +1043,7 @@
   }
 
   .nav ul {
-    float: left;
+    float: right;
   }
 
   .nav ul > li {

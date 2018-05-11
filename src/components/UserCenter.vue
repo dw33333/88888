@@ -9,7 +9,7 @@
           <router-link to="/">返回首页</router-link>
         </li>
         <li class="server"><a href="javascript:void(0);" @click="serviceUrl">在线客服</a></li>
-        <li class="rules"><a href="#">规则说明</a></li>
+        <li class="rules"><a href="javascript:void(0);" @click="($router.push({name:'Generalq'}))">规则说明</a></li>
         <!--<li class="help"><a href="#">游戏帮助</a></li>-->
         <li class="layout"><a href="#" @click="loginout();">登出账号</a></li>
       </ul>

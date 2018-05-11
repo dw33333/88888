@@ -47,7 +47,7 @@
       </table>
       <div style="text-align: center;padding:10px;" v-show="records.length<1&&!is_loading_records">暂无数据</div>
 
-      <div class="pager">
+      <div class="pager" v-show="pages.length>1">
         <div class="item" @click="pageClick(it.page)" v-for="it,idx in pages" :key="idx"
              :class="{cur:it.cur,sl:it.page==-1}">{{it.txt}}
         </div>
