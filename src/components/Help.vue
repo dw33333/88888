@@ -192,6 +192,7 @@
       },
       isShowtop () {
         this.isDisplay = 4;
+        this.num =0;
       }
     }
   }
