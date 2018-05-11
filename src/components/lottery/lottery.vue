@@ -2,7 +2,11 @@
   <div class="container" id="container">
     <!-- 头部 -->
     <!-- 主体部分 -->
-    <home-header ></home-header>    
+    <home-header >
+      <div slot="lottery_result" class="items" @click="($router.push({name:'lottery_result'}))">
+        开奖结果
+      </div>
+    </home-header>
     <iframe id="show-iframe" frameborder=0 name="showHere" scrolling=no width="1200"  height="700" :src="src"></iframe>
   </div>
 </template>
@@ -110,7 +114,7 @@ body {
   margin: 0 auto;
   /*overflow: hidden;*/
   position: relative;
-  background-color:#e8e8e8; 
+  background-color:#e8e8e8;
 }
 
 

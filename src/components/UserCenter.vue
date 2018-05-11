@@ -152,6 +152,18 @@
     },
     created () {
       this.getArry();
+      let arr1=["PasswordManagement"];
+      let arr2=["charge_record","bet_record","week_statistic"];
+      let arr3=["msg_list","Notice"];
+      if(arr1.indexOf(this.$route.name)!==-1){
+        this.isDisplay=1;
+      }else if(arr2.indexOf(this.$route.name)!==-1){
+        this.isDisplay=2;
+      }else if(arr3.indexOf(this.$route.name)!==-1){
+        this.isDisplay=4;
+      }else{
+        this.isDisplay=0;
+      }
     },
     components: {
       maskLayer
@@ -159,6 +171,7 @@
     mounted() {
       // 获取个人信息
       /*this.getuserinfo()*/
+
     },
     computed: {
       ...mapState(['agmoney', 'dsmoney', 'money', 'username', 'userRealName', 'userinfo',"sitesInfos"])

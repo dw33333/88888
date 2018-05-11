@@ -2,6 +2,7 @@
   <div class="lottery_result">
     <div class="search_box">
       <div class="item" style="padding-left:10px;">
+        {{tempParam.typeTitle}}
       </div>
       <div class="item">
         游戏 :
@@ -27,11 +28,13 @@
       </div>-->
       <div class="btn_search" @click="search">查询</div>
       <div class="item">
-        <span v-for="it in show_types" @click="(show_type=it)" :style="{color:show_type.value==it.value?'#e53935':'inherit'}" style="display: inline-block;padding:0 5px;cursor:pointer;">{{it.tit}}</span>
+        <span v-for="it in show_types" @click="(show_type=it)"
+              :style="{color:show_type.value==it.value?'#e53935':'inherit'}"
+              style="display: inline-block;padding:0 5px;cursor:pointer;">{{it.tit}}</span>
       </div>
     </div>
-    <div class="cont">
-      <table class="tb xglhc" v-show="show_type.value=='liangmian'"  v-if="tempParam.typeName=='Xglhc'">
+    <div class="cont" v-if="!is_loading_result">
+      <table class="tb xglhc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Xglhc'">
         <tr>
           <th rowspan="2">期数</th>
           <th rowspan="2">开奖时间</th>
@@ -65,43 +68,43 @@
             {{it.datetime}}
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors[it.num1.color]}">
+            <div class="ball" :style="{background:colors[it.num1.color]}">
               {{it.num1.num}}
             </div>
             <div class="animal">{{it.num1.animal}}</div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors[it.num2.color]}">
+            <div class="ball" :style="{background:colors[it.num2.color]}">
               {{it.num2.num}}
             </div>
             <div class="animal">{{it.num2.animal}}</div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors[it.num3.color]}">
+            <div class="ball" :style="{background:colors[it.num3.color]}">
               {{it.num3.num}}
             </div>
             <div class="animal">{{it.num3.animal}}</div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors[it.num4.color]}">
+            <div class="ball" :style="{background:colors[it.num4.color]}">
               {{it.num4.num}}
             </div>
             <div class="animal">{{it.num4.animal}}</div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors[it.num5.color]}">
+            <div class="ball" :style="{background:colors[it.num5.color]}">
               {{it.num5.num}}
             </div>
             <div class="animal">{{it.num5.animal}}</div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors[it.num6.color]}">
+            <div class="ball" :style="{background:colors[it.num6.color]}">
               {{it.num6.num}}
             </div>
             <div class="animal">{{it.num6.animal}}</div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors[it.num7.color]}">
+            <div class="ball" :style="{background:colors[it.num7.color]}">
               {{it.num7.num}}
             </div>
             <div class="animal">{{it.num7.animal}}</div>
@@ -119,13 +122,13 @@
           <td :style="{color:colors[it.colorkey]}">{{it.color}}</td>
         </tr>
       </table>
-      <table class="tb xglhc" v-show="show_type.value=='longhudou'"  v-if="tempParam.typeName=='Xglhc'">
+      <table class="tb xglhc" v-show="show_type.value=='longhudou'" v-if="tempParam.typeName=='Xglhc'">
         <tr>
           <th rowspan="2">期数</th>
           <th rowspan="2">开奖时间</th>
           <th colspan="7">彩球号码</th>
           <th colspan="2">上下奇偶</th>
-          <th colspan="21">上下奇偶</th>
+          <th colspan="21">龙虎斗</th>
         </tr>
         <tr>
           <th>正码一</th>
@@ -167,74 +170,74 @@
             {{it.datetime}}
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors[it.num1.color]}">
+            <div class="ball" :style="{background:colors[it.num1.color]}">
               {{it.num1.num}}
             </div>
             <div class="animal">{{it.num1.animal}}</div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors[it.num2.color]}">
+            <div class="ball" :style="{background:colors[it.num2.color]}">
               {{it.num2.num}}
             </div>
             <div class="animal">{{it.num2.animal}}</div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors[it.num3.color]}">
+            <div class="ball" :style="{background:colors[it.num3.color]}">
               {{it.num3.num}}
             </div>
             <div class="animal">{{it.num3.animal}}</div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors[it.num4.color]}">
+            <div class="ball" :style="{background:colors[it.num4.color]}">
               {{it.num4.num}}
             </div>
             <div class="animal">{{it.num4.animal}}</div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors[it.num5.color]}">
+            <div class="ball" :style="{background:colors[it.num5.color]}">
               {{it.num5.num}}
             </div>
             <div class="animal">{{it.num5.animal}}</div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors[it.num6.color]}">
+            <div class="ball" :style="{background:colors[it.num6.color]}">
               {{it.num6.num}}
             </div>
             <div class="animal">{{it.num6.animal}}</div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors[it.num7.color]}">
+            <div class="ball" :style="{background:colors[it.num7.color]}">
               {{it.num7.num}}
             </div>
             <div class="animal">{{it.num7.animal}}</div>
           </td>
 
-          <td  :style="{color:getColors(it.t_overorunder)}">{{it.t_overorunder}}</td>
-          <td  :style="{color:getColors(it.t_oddoreven)}">{{it.t_oddoreven}}</td>
-          <td  :style="{color:getColors(it.n1vsn2)}">{{it.n1vsn2}}</td>
-          <td  :style="{color:getColors(it.n1vsn3)}">{{it.n1vsn3}}</td>
-          <td  :style="{color:getColors(it.n1vsn4)}">{{it.n1vsn4}}</td>
-          <td  :style="{color:getColors(it.n1vsn5)}">{{it.n1vsn5}}</td>
-          <td  :style="{color:getColors(it.n1vsn6)}">{{it.n1vsn6}}</td>
-          <td  :style="{color:getColors(it.n1vssp)}">{{it.n1vssp}}</td>
-          <td  :style="{color:getColors(it.n2vsn3)}">{{it.n2vsn3}}</td>
-          <td  :style="{color:getColors(it.n2vsn4)}">{{it.n2vsn4}}</td>
-          <td  :style="{color:getColors(it.n2vsn5)}">{{it.n2vsn5}}</td>
-          <td  :style="{color:getColors(it.n2vsn6)}">{{it.n2vsn6}}</td>
-          <td  :style="{color:getColors(it.n2vssp)}">{{it.n2vssp}}</td>
-          <td  :style="{color:getColors(it.n3vsn4)}">{{it.n3vsn4}}</td>
-          <td  :style="{color:getColors(it.n3vsn5)}">{{it.n3vsn5}}</td>
-          <td  :style="{color:getColors(it.n3vsn6)}">{{it.n3vsn6}}</td>
-          <td  :style="{color:getColors(it.n3vssp)}">{{it.n3vssp}}</td>
-          <td  :style="{color:getColors(it.n4vsn5)}">{{it.n4vsn5}}</td>
-          <td  :style="{color:getColors(it.n4vsn6)}">{{it.n4vsn6}}</td>
-          <td  :style="{color:getColors(it.n4vssp)}">{{it.n4vssp}}</td>
-          <td  :style="{color:getColors(it.n5vsn6)}">{{it.n5vsn6}}</td>
-          <td  :style="{color:getColors(it.n5vssp)}">{{it.n5vssp}}</td>
-          <td  :style="{color:getColors(it.n6vssp)}">{{it.n6vssp}}</td>
+          <td :style="{color:getColors(it.t_overorunder)}">{{it.t_overorunder}}</td>
+          <td :style="{color:getColors(it.t_oddoreven)}">{{it.t_oddoreven}}</td>
+          <td :style="{color:getColors(it.n1vsn2)}">{{it.n1vsn2}}</td>
+          <td :style="{color:getColors(it.n1vsn3)}">{{it.n1vsn3}}</td>
+          <td :style="{color:getColors(it.n1vsn4)}">{{it.n1vsn4}}</td>
+          <td :style="{color:getColors(it.n1vsn5)}">{{it.n1vsn5}}</td>
+          <td :style="{color:getColors(it.n1vsn6)}">{{it.n1vsn6}}</td>
+          <td :style="{color:getColors(it.n1vssp)}">{{it.n1vssp}}</td>
+          <td :style="{color:getColors(it.n2vsn3)}">{{it.n2vsn3}}</td>
+          <td :style="{color:getColors(it.n2vsn4)}">{{it.n2vsn4}}</td>
+          <td :style="{color:getColors(it.n2vsn5)}">{{it.n2vsn5}}</td>
+          <td :style="{color:getColors(it.n2vsn6)}">{{it.n2vsn6}}</td>
+          <td :style="{color:getColors(it.n2vssp)}">{{it.n2vssp}}</td>
+          <td :style="{color:getColors(it.n3vsn4)}">{{it.n3vsn4}}</td>
+          <td :style="{color:getColors(it.n3vsn5)}">{{it.n3vsn5}}</td>
+          <td :style="{color:getColors(it.n3vsn6)}">{{it.n3vsn6}}</td>
+          <td :style="{color:getColors(it.n3vssp)}">{{it.n3vssp}}</td>
+          <td :style="{color:getColors(it.n4vsn5)}">{{it.n4vsn5}}</td>
+          <td :style="{color:getColors(it.n4vsn6)}">{{it.n4vsn6}}</td>
+          <td :style="{color:getColors(it.n4vssp)}">{{it.n4vssp}}</td>
+          <td :style="{color:getColors(it.n5vsn6)}">{{it.n5vsn6}}</td>
+          <td :style="{color:getColors(it.n5vssp)}">{{it.n5vssp}}</td>
+          <td :style="{color:getColors(it.n6vssp)}">{{it.n6vssp}}</td>
         </tr>
       </table>
-      <table class="tb cqssc" v-show="show_type.value=='liangmian'"  v-if="tempParam.typeName=='Cqssc'">
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Cqssc'">
         <tr>
           <th rowspan="2">期数</th>
           <th rowspan="2">开奖时间</th>
@@ -254,7 +257,6 @@
           <th>第三球</th>
           <th>第四球</th>
           <th>第五球</th>
-          <th>大小</th>
           <th>单双</th>
           <th>大小</th>
           <th>单双</th>
@@ -264,6 +266,7 @@
           <th>单双</th>
           <th>大小</th>
           <th>单双</th>
+          <th>大小</th>
         </tr>
         <tr v-for="it,idx in results">
           <td>
@@ -273,27 +276,27 @@
             {{it.opentime}}
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num1}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num2}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num3}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num4}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num5}}
             </div>
           </td>
@@ -312,7 +315,7 @@
           <td :style="{color:getColors(it.num5_overorunder)}">{{it.num5_overorunder}}</td>
         </tr>
       </table>
-      <table class="tb cqssc" v-show="show_type.value=='longhudou'"  v-if="tempParam.typeName=='Cqssc'">
+      <table class="tb cqssc" v-show="show_type.value=='longhudou'" v-if="tempParam.typeName=='Cqssc'">
         <tr>
           <th rowspan="2">期数</th>
           <th rowspan="2">开奖时间</th>
@@ -344,43 +347,43 @@
             {{it.opentime}}
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num1}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num2}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num3}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num4}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num5}}
             </div>
           </td>
-          <td  :style="{color:getColors(it.n1vsn2)}">{{it.n1vsn2}}</td>
-          <td  :style="{color:getColors(it.n1vsn3)}">{{it.n1vsn3}}</td>
-          <td  :style="{color:getColors(it.n1vsn4)}">{{it.n1vsn4}}</td>
-          <td  :style="{color:getColors(it.n1vsn5)}">{{it.n1vsn5}}</td>
-          <td  :style="{color:getColors(it.n2vsn3)}">{{it.n2vsn3}}</td>
-          <td  :style="{color:getColors(it.n2vsn4)}">{{it.n2vsn4}}</td>
-          <td  :style="{color:getColors(it.n2vsn5)}">{{it.n2vsn5}}</td>
-          <td  :style="{color:getColors(it.n3vsn4)}">{{it.n3vsn4}}</td>
-          <td  :style="{color:getColors(it.n3vsn5)}">{{it.n3vsn5}}</td>
-          <td  :style="{color:getColors(it.n4vsn5)}">{{it.n4vsn5}}</td>
+          <td :style="{color:getColors(it.n1vsn2)}">{{it.n1vsn2}}</td>
+          <td :style="{color:getColors(it.n1vsn3)}">{{it.n1vsn3}}</td>
+          <td :style="{color:getColors(it.n1vsn4)}">{{it.n1vsn4}}</td>
+          <td :style="{color:getColors(it.n1vsn5)}">{{it.n1vsn5}}</td>
+          <td :style="{color:getColors(it.n2vsn3)}">{{it.n2vsn3}}</td>
+          <td :style="{color:getColors(it.n2vsn4)}">{{it.n2vsn4}}</td>
+          <td :style="{color:getColors(it.n2vsn5)}">{{it.n2vsn5}}</td>
+          <td :style="{color:getColors(it.n3vsn4)}">{{it.n3vsn4}}</td>
+          <td :style="{color:getColors(it.n3vsn5)}">{{it.n3vsn5}}</td>
+          <td :style="{color:getColors(it.n4vsn5)}">{{it.n4vsn5}}</td>
         </tr>
       </table>
-      <table class="tb cqssc" v-show="show_type.value=='liangmian'"  v-if="tempParam.typeName=='Tjssc'">
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Tjssc'">
         <tr>
           <th rowspan="2">期数</th>
           <th rowspan="2">开奖时间</th>
@@ -400,7 +403,6 @@
           <th>第三球</th>
           <th>第四球</th>
           <th>第五球</th>
-          <th>大小</th>
           <th>单双</th>
           <th>大小</th>
           <th>单双</th>
@@ -410,6 +412,7 @@
           <th>单双</th>
           <th>大小</th>
           <th>单双</th>
+          <th>大小</th>
         </tr>
         <tr v-for="it,idx in results">
           <td>
@@ -419,27 +422,27 @@
             {{it.opentime}}
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num1}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num2}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num3}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num4}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num5}}
             </div>
           </td>
@@ -458,7 +461,7 @@
           <td :style="{color:getColors(it.num5_overorunder)}">{{it.num5_overorunder}}</td>
         </tr>
       </table>
-      <table class="tb cqssc" v-show="show_type.value=='longhudou'"  v-if="tempParam.typeName=='Tjssc'">
+      <table class="tb cqssc" v-show="show_type.value=='longhudou'" v-if="tempParam.typeName=='Tjssc'">
         <tr>
           <th rowspan="2">期数</th>
           <th rowspan="2">开奖时间</th>
@@ -490,43 +493,43 @@
             {{it.opentime}}
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num1}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num2}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num3}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num4}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num5}}
             </div>
           </td>
-          <td  :style="{color:getColors(it.n1vsn2)}">{{it.n1vsn2}}</td>
-          <td  :style="{color:getColors(it.n1vsn3)}">{{it.n1vsn3}}</td>
-          <td  :style="{color:getColors(it.n1vsn4)}">{{it.n1vsn4}}</td>
-          <td  :style="{color:getColors(it.n1vsn5)}">{{it.n1vsn5}}</td>
-          <td  :style="{color:getColors(it.n2vsn3)}">{{it.n2vsn3}}</td>
-          <td  :style="{color:getColors(it.n2vsn4)}">{{it.n2vsn4}}</td>
-          <td  :style="{color:getColors(it.n2vsn5)}">{{it.n2vsn5}}</td>
-          <td  :style="{color:getColors(it.n3vsn4)}">{{it.n3vsn4}}</td>
-          <td  :style="{color:getColors(it.n3vsn5)}">{{it.n3vsn5}}</td>
-          <td  :style="{color:getColors(it.n4vsn5)}">{{it.n4vsn5}}</td>
+          <td :style="{color:getColors(it.n1vsn2)}">{{it.n1vsn2}}</td>
+          <td :style="{color:getColors(it.n1vsn3)}">{{it.n1vsn3}}</td>
+          <td :style="{color:getColors(it.n1vsn4)}">{{it.n1vsn4}}</td>
+          <td :style="{color:getColors(it.n1vsn5)}">{{it.n1vsn5}}</td>
+          <td :style="{color:getColors(it.n2vsn3)}">{{it.n2vsn3}}</td>
+          <td :style="{color:getColors(it.n2vsn4)}">{{it.n2vsn4}}</td>
+          <td :style="{color:getColors(it.n2vsn5)}">{{it.n2vsn5}}</td>
+          <td :style="{color:getColors(it.n3vsn4)}">{{it.n3vsn4}}</td>
+          <td :style="{color:getColors(it.n3vsn5)}">{{it.n3vsn5}}</td>
+          <td :style="{color:getColors(it.n4vsn5)}">{{it.n4vsn5}}</td>
         </tr>
       </table>
-      <table class="tb cqssc" v-show="show_type.value=='liangmian'"  v-if="tempParam.typeName=='Xjssc'">
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Xjssc'">
         <tr>
           <th rowspan="2">期数</th>
           <th rowspan="2">开奖时间</th>
@@ -546,7 +549,6 @@
           <th>第三球</th>
           <th>第四球</th>
           <th>第五球</th>
-          <th>大小</th>
           <th>单双</th>
           <th>大小</th>
           <th>单双</th>
@@ -556,6 +558,7 @@
           <th>单双</th>
           <th>大小</th>
           <th>单双</th>
+          <th>大小</th>
         </tr>
         <tr v-for="it,idx in results">
           <td>
@@ -565,27 +568,27 @@
             {{it.opentime}}
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num1}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num2}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num3}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num4}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num5}}
             </div>
           </td>
@@ -604,7 +607,7 @@
           <td :style="{color:getColors(it.num5_overorunder)}">{{it.num5_overorunder}}</td>
         </tr>
       </table>
-      <table class="tb cqssc" v-show="show_type.value=='longhudou'"  v-if="tempParam.typeName=='Xjssc'">
+      <table class="tb cqssc" v-show="show_type.value=='longhudou'" v-if="tempParam.typeName=='Xjssc'">
         <tr>
           <th rowspan="2">期数</th>
           <th rowspan="2">开奖时间</th>
@@ -636,74 +639,1739 @@
             {{it.opentime}}
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num1}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num2}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num3}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num4}}
             </div>
           </td>
           <td>
-            <div class="ball" :style="{backgroundColor:colors['blue']}">
+            <div class="ball" :style="{background:colors['red']}">
               {{it.num5}}
             </div>
           </td>
-          <td  :style="{color:getColors(it.n1vsn2)}">{{it.n1vsn2}}</td>
-          <td  :style="{color:getColors(it.n1vsn3)}">{{it.n1vsn3}}</td>
-          <td  :style="{color:getColors(it.n1vsn4)}">{{it.n1vsn4}}</td>
-          <td  :style="{color:getColors(it.n1vsn5)}">{{it.n1vsn5}}</td>
-          <td  :style="{color:getColors(it.n2vsn3)}">{{it.n2vsn3}}</td>
-          <td  :style="{color:getColors(it.n2vsn4)}">{{it.n2vsn4}}</td>
-          <td  :style="{color:getColors(it.n2vsn5)}">{{it.n2vsn5}}</td>
-          <td  :style="{color:getColors(it.n3vsn4)}">{{it.n3vsn4}}</td>
-          <td  :style="{color:getColors(it.n3vsn5)}">{{it.n3vsn5}}</td>
-          <td  :style="{color:getColors(it.n4vsn5)}">{{it.n4vsn5}}</td>
+          <td :style="{color:getColors(it.n1vsn2)}">{{it.n1vsn2}}</td>
+          <td :style="{color:getColors(it.n1vsn3)}">{{it.n1vsn3}}</td>
+          <td :style="{color:getColors(it.n1vsn4)}">{{it.n1vsn4}}</td>
+          <td :style="{color:getColors(it.n1vsn5)}">{{it.n1vsn5}}</td>
+          <td :style="{color:getColors(it.n2vsn3)}">{{it.n2vsn3}}</td>
+          <td :style="{color:getColors(it.n2vsn4)}">{{it.n2vsn4}}</td>
+          <td :style="{color:getColors(it.n2vsn5)}">{{it.n2vsn5}}</td>
+          <td :style="{color:getColors(it.n3vsn4)}">{{it.n3vsn4}}</td>
+          <td :style="{color:getColors(it.n3vsn5)}">{{it.n3vsn5}}</td>
+          <td :style="{color:getColors(it.n4vsn5)}">{{it.n4vsn5}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Gdklsf'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="8">球号</th>
+          <th rowspan="2">总和</th>
+          <th rowspan="2">总单双</th>
+          <th rowspan="2">总大小</th>
+          <th colspan="2">第一球</th>
+          <th colspan="2">第二球</th>
+          <th colspan="2">第三球</th>
+          <th colspan="2">第四球</th>
+          <th colspan="2">第五球</th>
+          <th colspan="2">第六球</th>
+          <th colspan="2">第七球</th>
+          <th colspan="2">第八球</th>
+        </tr>
+        <tr>
+          <th>第一球</th>
+          <th>第二球</th>
+          <th>第三球</th>
+          <th>第四球</th>
+          <th>第五球</th>
+          <th>第六球</th>
+          <th>第七球</th>
+          <th>第八球</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num4}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num5}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num6}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num7}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num8}}
+            </div>
+          </td>
+
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_oddoreven)}">{{it.sum_oddoreven}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+          <td :style="{color:getColors(it.num1_oddoreven)}">{{it.num1_oddoreven}}</td>
+          <td :style="{color:getColors(it.num1_overorunder)}">{{it.num1_overorunder}}</td>
+          <td :style="{color:getColors(it.num2_oddoreven)}">{{it.num2_oddoreven}}</td>
+          <td :style="{color:getColors(it.num2_overorunder)}">{{it.num2_overorunder}}</td>
+          <td :style="{color:getColors(it.num3_oddoreven)}">{{it.num3_oddoreven}}</td>
+          <td :style="{color:getColors(it.num3_overorunder)}">{{it.num3_overorunder}}</td>
+          <td :style="{color:getColors(it.num4_oddoreven)}">{{it.num4_oddoreven}}</td>
+          <td :style="{color:getColors(it.num4_overorunder)}">{{it.num4_overorunder}}</td>
+          <td :style="{color:getColors(it.num5_oddoreven)}">{{it.num5_oddoreven}}</td>
+          <td :style="{color:getColors(it.num5_overorunder)}">{{it.num5_overorunder}}</td>
+          <td :style="{color:getColors(it.num6_oddoreven)}">{{it.num6_oddoreven}}</td>
+          <td :style="{color:getColors(it.num6_overorunder)}">{{it.num6_overorunder}}</td>
+          <td :style="{color:getColors(it.num7_oddoreven)}">{{it.num7_oddoreven}}</td>
+          <td :style="{color:getColors(it.num7_overorunder)}">{{it.num7_overorunder}}</td>
+          <td :style="{color:getColors(it.num8_oddoreven)}">{{it.num8_oddoreven}}</td>
+          <td :style="{color:getColors(it.num8_overorunder)}">{{it.num8_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Cqklsf'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="8">球号</th>
+          <th rowspan="2">总和</th>
+          <th rowspan="2">总单双</th>
+          <th rowspan="2">总大小</th>
+          <th colspan="2">第一球</th>
+          <th colspan="2">第二球</th>
+          <th colspan="2">第三球</th>
+          <th colspan="2">第四球</th>
+          <th colspan="2">第五球</th>
+          <th colspan="2">第六球</th>
+          <th colspan="2">第七球</th>
+          <th colspan="2">第八球</th>
+        </tr>
+        <tr>
+          <th>第一球</th>
+          <th>第二球</th>
+          <th>第三球</th>
+          <th>第四球</th>
+          <th>第五球</th>
+          <th>第六球</th>
+          <th>第七球</th>
+          <th>第八球</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num4}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num5}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num6}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num7}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num8}}
+            </div>
+          </td>
+
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_oddoreven)}">{{it.sum_oddoreven}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+          <td :style="{color:getColors(it.num1_oddoreven)}">{{it.num1_oddoreven}}</td>
+          <td :style="{color:getColors(it.num1_overorunder)}">{{it.num1_overorunder}}</td>
+          <td :style="{color:getColors(it.num2_oddoreven)}">{{it.num2_oddoreven}}</td>
+          <td :style="{color:getColors(it.num2_overorunder)}">{{it.num2_overorunder}}</td>
+          <td :style="{color:getColors(it.num3_oddoreven)}">{{it.num3_oddoreven}}</td>
+          <td :style="{color:getColors(it.num3_overorunder)}">{{it.num3_overorunder}}</td>
+          <td :style="{color:getColors(it.num4_oddoreven)}">{{it.num4_oddoreven}}</td>
+          <td :style="{color:getColors(it.num4_overorunder)}">{{it.num4_overorunder}}</td>
+          <td :style="{color:getColors(it.num5_oddoreven)}">{{it.num5_oddoreven}}</td>
+          <td :style="{color:getColors(it.num5_overorunder)}">{{it.num5_overorunder}}</td>
+          <td :style="{color:getColors(it.num6_oddoreven)}">{{it.num6_oddoreven}}</td>
+          <td :style="{color:getColors(it.num6_overorunder)}">{{it.num6_overorunder}}</td>
+          <td :style="{color:getColors(it.num7_oddoreven)}">{{it.num7_oddoreven}}</td>
+          <td :style="{color:getColors(it.num7_overorunder)}">{{it.num7_overorunder}}</td>
+          <td :style="{color:getColors(it.num8_oddoreven)}">{{it.num8_oddoreven}}</td>
+          <td :style="{color:getColors(it.num8_overorunder)}">{{it.num8_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Tjklsf'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="8">球号</th>
+          <th rowspan="2">总和</th>
+          <th rowspan="2">总单双</th>
+          <th rowspan="2">总大小</th>
+          <th colspan="2">第一球</th>
+          <th colspan="2">第二球</th>
+          <th colspan="2">第三球</th>
+          <th colspan="2">第四球</th>
+          <th colspan="2">第五球</th>
+          <th colspan="2">第六球</th>
+          <th colspan="2">第七球</th>
+          <th colspan="2">第八球</th>
+        </tr>
+        <tr>
+          <th>第一球</th>
+          <th>第二球</th>
+          <th>第三球</th>
+          <th>第四球</th>
+          <th>第五球</th>
+          <th>第六球</th>
+          <th>第七球</th>
+          <th>第八球</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num4}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num5}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num6}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num7}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num8}}
+            </div>
+          </td>
+
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_oddoreven)}">{{it.sum_oddoreven}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+          <td :style="{color:getColors(it.num1_oddoreven)}">{{it.num1_oddoreven}}</td>
+          <td :style="{color:getColors(it.num1_overorunder)}">{{it.num1_overorunder}}</td>
+          <td :style="{color:getColors(it.num2_oddoreven)}">{{it.num2_oddoreven}}</td>
+          <td :style="{color:getColors(it.num2_overorunder)}">{{it.num2_overorunder}}</td>
+          <td :style="{color:getColors(it.num3_oddoreven)}">{{it.num3_oddoreven}}</td>
+          <td :style="{color:getColors(it.num3_overorunder)}">{{it.num3_overorunder}}</td>
+          <td :style="{color:getColors(it.num4_oddoreven)}">{{it.num4_oddoreven}}</td>
+          <td :style="{color:getColors(it.num4_overorunder)}">{{it.num4_overorunder}}</td>
+          <td :style="{color:getColors(it.num5_oddoreven)}">{{it.num5_oddoreven}}</td>
+          <td :style="{color:getColors(it.num5_overorunder)}">{{it.num5_overorunder}}</td>
+          <td :style="{color:getColors(it.num6_oddoreven)}">{{it.num6_oddoreven}}</td>
+          <td :style="{color:getColors(it.num6_overorunder)}">{{it.num6_overorunder}}</td>
+          <td :style="{color:getColors(it.num7_oddoreven)}">{{it.num7_oddoreven}}</td>
+          <td :style="{color:getColors(it.num7_overorunder)}">{{it.num7_overorunder}}</td>
+          <td :style="{color:getColors(it.num8_oddoreven)}">{{it.num8_oddoreven}}</td>
+          <td :style="{color:getColors(it.num8_overorunder)}">{{it.num8_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Hnklsf'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="8">球号</th>
+          <th rowspan="2">总和</th>
+          <th rowspan="2">总单双</th>
+          <th rowspan="2">总大小</th>
+          <th colspan="2">第一球</th>
+          <th colspan="2">第二球</th>
+          <th colspan="2">第三球</th>
+          <th colspan="2">第四球</th>
+          <th colspan="2">第五球</th>
+          <th colspan="2">第六球</th>
+          <th colspan="2">第七球</th>
+          <th colspan="2">第八球</th>
+        </tr>
+        <tr>
+          <th>第一球</th>
+          <th>第二球</th>
+          <th>第三球</th>
+          <th>第四球</th>
+          <th>第五球</th>
+          <th>第六球</th>
+          <th>第七球</th>
+          <th>第八球</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num4}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num5}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num6}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num7}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num8}}
+            </div>
+          </td>
+
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_oddoreven)}">{{it.sum_oddoreven}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+          <td :style="{color:getColors(it.num1_oddoreven)}">{{it.num1_oddoreven}}</td>
+          <td :style="{color:getColors(it.num1_overorunder)}">{{it.num1_overorunder}}</td>
+          <td :style="{color:getColors(it.num2_oddoreven)}">{{it.num2_oddoreven}}</td>
+          <td :style="{color:getColors(it.num2_overorunder)}">{{it.num2_overorunder}}</td>
+          <td :style="{color:getColors(it.num3_oddoreven)}">{{it.num3_oddoreven}}</td>
+          <td :style="{color:getColors(it.num3_overorunder)}">{{it.num3_overorunder}}</td>
+          <td :style="{color:getColors(it.num4_oddoreven)}">{{it.num4_oddoreven}}</td>
+          <td :style="{color:getColors(it.num4_overorunder)}">{{it.num4_overorunder}}</td>
+          <td :style="{color:getColors(it.num5_oddoreven)}">{{it.num5_oddoreven}}</td>
+          <td :style="{color:getColors(it.num5_overorunder)}">{{it.num5_overorunder}}</td>
+          <td :style="{color:getColors(it.num6_oddoreven)}">{{it.num6_oddoreven}}</td>
+          <td :style="{color:getColors(it.num6_overorunder)}">{{it.num6_overorunder}}</td>
+          <td :style="{color:getColors(it.num7_oddoreven)}">{{it.num7_oddoreven}}</td>
+          <td :style="{color:getColors(it.num7_overorunder)}">{{it.num7_overorunder}}</td>
+          <td :style="{color:getColors(it.num8_oddoreven)}">{{it.num8_oddoreven}}</td>
+          <td :style="{color:getColors(it.num8_overorunder)}">{{it.num8_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Gd11x5'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="5">球号</th>
+          <th rowspan="2">总和</th>
+          <th rowspan="2">总单双</th>
+          <th rowspan="2">总大小</th>
+          <th colspan="2">第一球</th>
+          <th colspan="2">第二球</th>
+          <th colspan="2">第三球</th>
+          <th colspan="2">第四球</th>
+          <th colspan="2">第五球</th>
+        </tr>
+        <tr>
+          <th>第一球</th>
+          <th>第二球</th>
+          <th>第三球</th>
+          <th>第四球</th>
+          <th>第五球</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num4}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num5}}
+            </div>
+          </td>
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_oddoreven)}">{{it.sum_oddoreven}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+          <td :style="{color:getColors(it.num1_oddoreven)}">{{it.num1_oddoreven}}</td>
+          <td :style="{color:getColors(it.num1_overorunder)}">{{it.num1_overorunder}}</td>
+          <td :style="{color:getColors(it.num2_oddoreven)}">{{it.num2_oddoreven}}</td>
+          <td :style="{color:getColors(it.num2_overorunder)}">{{it.num2_overorunder}}</td>
+          <td :style="{color:getColors(it.num3_oddoreven)}">{{it.num3_oddoreven}}</td>
+          <td :style="{color:getColors(it.num3_overorunder)}">{{it.num3_overorunder}}</td>
+          <td :style="{color:getColors(it.num4_oddoreven)}">{{it.num4_oddoreven}}</td>
+          <td :style="{color:getColors(it.num4_overorunder)}">{{it.num4_overorunder}}</td>
+          <td :style="{color:getColors(it.num5_oddoreven)}">{{it.num5_oddoreven}}</td>
+          <td :style="{color:getColors(it.num5_overorunder)}">{{it.num5_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Bjkl8'">
+        <tr>
+          <th>期数</th>
+          <th>开奖时间</th>
+          <th>总和</th>
+          <th>总单双</th>
+          <th>总大小</th>
+          <th>总和过关</th>
+          <th>前后和</th>
+          <th>单双和</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_oddoreven)}">{{it.sum_oddoreven}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+          <td :style="{color:getColors(it.sum_oddorevenandoverorunder)}">{{it.sum_oddorevenandoverorunder}}</td>
+          <td :style="{color:getColors(it.frontorback_more)}">{{it.frontorback_more}}</td>
+          <td :style="{color:getColors(it.oddoreven_more)}">{{it.oddoreven_more}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='paiming'" v-if="tempParam.typeName=='Bjpk10'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="10">车号</th>
+          <th rowspan="2">冠亚和值</th>
+          <th rowspan="2">冠亚和值单双</th>
+          <th rowspan="2">冠亚和值大小</th>
+        </tr>
+        <tr>
+          <th>冠军</th>
+          <th>亚军</th>
+          <th>季军</th>
+          <th>第四名</th>
+          <th>第五名</th>
+          <th>第六名</th>
+          <th>第七名</th>
+          <th>第八名</th>
+          <th>第九名</th>
+          <th>第十名</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num1]}">{{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num2]}">{{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num3]}">{{it.num3}}
+            </div>
+          </td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num4]}">{{it.num4}}
+            </div>
+          </td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num5]}">{{it.num5}}
+            </div>
+          </td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num6]}">{{it.num6}}
+            </div>
+          </td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num7]}">{{it.num7}}
+            </div>
+          </td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num8]}">{{it.num8}}
+            </div>
+          </td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num9]}">{{it.num9}}
+            </div>
+          </td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num10]}">{{it.num10}}
+            </div>
+          </td>
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_oddoreven)}">{{it.sum_oddoreven}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Bjpk10'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="4">冠军</th>
+          <th colspan="4">亚军</th>
+          <th colspan="4">季军</th>
+          <th colspan="4">第四名</th>
+          <th colspan="4">第五名</th>
+          <th colspan="3">第六名</th>
+          <th colspan="3">第七名</th>
+          <th colspan="3">第八名</th>
+          <th colspan="3">第九名</th>
+          <th colspan="3">第十名</th>
+        </tr>
+        <tr>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>龙虎</th>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>龙虎</th>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>龙虎</th>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>龙虎</th>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>龙虎</th>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num1]}">{{it.num1}}
+            </div>
+          </td>
+          <td :style="{color:getColors(it.num1_oddoreven)}">{{it.num1_oddoreven}}</td>
+          <td :style="{color:getColors(it.num1_overorunder)}">{{it.num1_overorunder}}</td>
+          <td :style="{color:getColors(it.num1_longorhu)}">{{it.num1_longorhu}}</td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num2]}">{{it.num2}}
+            </div>
+          </td>
+          <td :style="{color:getColors(it.num2_oddoreven)}">{{it.num2_oddoreven}}</td>
+          <td :style="{color:getColors(it.num2_overorunder)}">{{it.num2_overorunder}}</td>
+          <td :style="{color:getColors(it.num2_longorhu)}">{{it.num2_longorhu}}</td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num3]}">{{it.num3}}
+            </div>
+          </td>
+          <td :style="{color:getColors(it.num3_oddoreven)}">{{it.num3_oddoreven}}</td>
+          <td :style="{color:getColors(it.num3_overorunder)}">{{it.num3_overorunder}}</td>
+          <td :style="{color:getColors(it.num3_longorhu)}">{{it.num3_longorhu}}</td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num4]}">{{it.num4}}
+            </div>
+          </td>
+          <td :style="{color:getColors(it.num4_oddoreven)}">{{it.num4_oddoreven}}</td>
+          <td :style="{color:getColors(it.num4_overorunder)}">{{it.num4_overorunder}}</td>
+          <td :style="{color:getColors(it.num4_longorhu)}">{{it.num4_longorhu}}</td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num5]}">{{it.num5}}
+            </div>
+          </td>
+          <td :style="{color:getColors(it.num5_oddoreven)}">{{it.num5_oddoreven}}</td>
+          <td :style="{color:getColors(it.num5_overorunder)}">{{it.num5_overorunder}}</td>
+          <td :style="{color:getColors(it.num5_longorhu)}">{{it.num5_longorhu}}</td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num6]}">{{it.num6}}
+            </div>
+          </td>
+          <td :style="{color:getColors(it.num6_oddoreven)}">{{it.num6_oddoreven}}</td>
+          <td :style="{color:getColors(it.num6_overorunder)}">{{it.num6_overorunder}}</td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num7]}">{{it.num7}}
+            </div>
+          </td>
+          <td :style="{color:getColors(it.num7_oddoreven)}">{{it.num7_oddoreven}}</td>
+          <td :style="{color:getColors(it.num7_overorunder)}">{{it.num7_overorunder}}</td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num8]}">{{it.num8}}
+            </div>
+          </td>
+          <td :style="{color:getColors(it.num8_oddoreven)}">{{it.num8_oddoreven}}</td>
+          <td :style="{color:getColors(it.num8_overorunder)}">{{it.num8_overorunder}}</td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num9]}">{{it.num9}}
+            </div>
+          </td>
+          <td :style="{color:getColors(it.num9_oddoreven)}">{{it.num9_oddoreven}}</td>
+          <td :style="{color:getColors(it.num9_overorunder)}">{{it.num9_overorunder}}</td>
+          <td>
+            <div class="car icon-c1" :style="{color:car_colors[it.num10]}">{{it.num10}}
+            </div>
+          </td>
+          <td :style="{color:getColors(it.num10_oddoreven)}">{{it.num10_oddoreven}}</td>
+          <td :style="{color:getColors(it.num10_overorunder)}">{{it.num10_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='paiming'" v-if="tempParam.typeName=='Xyft'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="10">车号</th>
+          <th rowspan="2">冠亚和值</th>
+          <th rowspan="2">冠亚和值单双</th>
+          <th rowspan="2">冠亚和值大小</th>
+        </tr>
+        <tr>
+          <th>冠军</th>
+          <th>亚军</th>
+          <th>季军</th>
+          <th>第四名</th>
+          <th>第五名</th>
+          <th>第六名</th>
+          <th>第七名</th>
+          <th>第八名</th>
+          <th>第九名</th>
+          <th>第十名</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num4}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num5}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num6}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num7}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num8}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num9}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num10}}
+            </div>
+          </td>
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_oddoreven)}">{{it.sum_oddoreven}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Xyft'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="4">冠军</th>
+          <th colspan="4">亚军</th>
+          <th colspan="4">季军</th>
+          <th colspan="4">第四名</th>
+          <th colspan="4">第五名</th>
+          <th colspan="3">第六名</th>
+          <th colspan="3">第七名</th>
+          <th colspan="3">第八名</th>
+          <th colspan="3">第九名</th>
+          <th colspan="3">第十名</th>
+        </tr>
+        <tr>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>龙虎</th>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>龙虎</th>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>龙虎</th>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>龙虎</th>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>龙虎</th>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>车号</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>车号</th>
+          <th>单双</th>
+          <th>大小</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td :style="{color:getColors(it.num1)}">{{it.num1}}</td>
+          <td :style="{color:getColors(it.num1_oddoreven)}">{{it.num1_oddoreven}}</td>
+          <td :style="{color:getColors(it.num1_overorunder)}">{{it.num1_overorunder}}</td>
+          <td :style="{color:getColors(it.num1_longorhu)}">{{it.num1_longorhu}}</td>
+          <td :style="{color:getColors(it.num2)}">{{it.num2}}</td>
+          <td :style="{color:getColors(it.num2_oddoreven)}">{{it.num2_oddoreven}}</td>
+          <td :style="{color:getColors(it.num2_overorunder)}">{{it.num2_overorunder}}</td>
+          <td :style="{color:getColors(it.num2_longorhu)}">{{it.num2_longorhu}}</td>
+          <td :style="{color:getColors(it.num3)}">{{it.num3}}</td>
+          <td :style="{color:getColors(it.num3_oddoreven)}">{{it.num3_oddoreven}}</td>
+          <td :style="{color:getColors(it.num3_overorunder)}">{{it.num3_overorunder}}</td>
+          <td :style="{color:getColors(it.num3_longorhu)}">{{it.num3_longorhu}}</td>
+          <td :style="{color:getColors(it.num4)}">{{it.num4}}</td>
+          <td :style="{color:getColors(it.num4_oddoreven)}">{{it.num4_oddoreven}}</td>
+          <td :style="{color:getColors(it.num4_overorunder)}">{{it.num4_overorunder}}</td>
+          <td :style="{color:getColors(it.num4_longorhu)}">{{it.num4_longorhu}}</td>
+          <td :style="{color:getColors(it.num5)}">{{it.num5}}</td>
+          <td :style="{color:getColors(it.num5_oddoreven)}">{{it.num5_oddoreven}}</td>
+          <td :style="{color:getColors(it.num5_overorunder)}">{{it.num5_overorunder}}</td>
+          <td :style="{color:getColors(it.num5_longorhu)}">{{it.num5_longorhu}}</td>
+          <td :style="{color:getColors(it.num6)}">{{it.num6}}</td>
+          <td :style="{color:getColors(it.num6_oddoreven)}">{{it.num6_oddoreven}}</td>
+          <td :style="{color:getColors(it.num6_overorunder)}">{{it.num6_overorunder}}</td>
+          <td :style="{color:getColors(it.num7)}">{{it.num7}}</td>
+          <td :style="{color:getColors(it.num7_oddoreven)}">{{it.num7_oddoreven}}</td>
+          <td :style="{color:getColors(it.num7_overorunder)}">{{it.num7_overorunder}}</td>
+          <td :style="{color:getColors(it.num8)}">{{it.num8}}</td>
+          <td :style="{color:getColors(it.num8_oddoreven)}">{{it.num8_oddoreven}}</td>
+          <td :style="{color:getColors(it.num8_overorunder)}">{{it.num8_overorunder}}</td>
+          <td :style="{color:getColors(it.num9)}">{{it.num9}}</td>
+          <td :style="{color:getColors(it.num9_oddoreven)}">{{it.num9_oddoreven}}</td>
+          <td :style="{color:getColors(it.num9_overorunder)}">{{it.num9_overorunder}}</td>
+          <td :style="{color:getColors(it.num10)}">{{it.num10}}</td>
+          <td :style="{color:getColors(it.num10_oddoreven)}">{{it.num10_oddoreven}}</td>
+          <td :style="{color:getColors(it.num10_overorunder)}">{{it.num10_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Fc3d'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="3">彩球号码</th>
+          <th colspan="2">第一球</th>
+          <th colspan="2">第二球</th>
+          <th colspan="2">第三球</th>
+          <th rowspan="2">龙虎和</th>
+        </tr>
+        <tr>
+          <th>第一球</th>
+          <th>第二球</th>
+          <th>第三球</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td :style="{color:getColors(it.num1_overorunder)}">{{it.num1_overorunder}}</td>
+          <td :style="{color:getColors(it.num1_oddoreven)}">{{it.num1_oddoreven}}</td>
+          <td :style="{color:getColors(it.num2_overorunder)}">{{it.num2_overorunder}}</td>
+          <td :style="{color:getColors(it.num2_oddoreven)}">{{it.num2_oddoreven}}</td>
+          <td :style="{color:getColors(it.num3_overorunder)}">{{it.num3_overorunder}}</td>
+          <td :style="{color:getColors(it.num3_oddoreven)}">{{it.num3_oddoreven}}</td>
+          <td>{{it.longorhu}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Tcpl3'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="3">彩球号码</th>
+          <th colspan="2">第一球</th>
+          <th colspan="2">第二球</th>
+          <th colspan="2">第三球</th>
+          <th rowspan="2">龙虎和</th>
+        </tr>
+        <tr>
+          <th>第一球</th>
+          <th>第二球</th>
+          <th>第三球</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td :style="{color:getColors(it.num1_overorunder)}">{{it.num1_overorunder}}</td>
+          <td :style="{color:getColors(it.num1_oddoreven)}">{{it.num1_oddoreven}}</td>
+          <td :style="{color:getColors(it.num2_overorunder)}">{{it.num2_overorunder}}</td>
+          <td :style="{color:getColors(it.num2_oddoreven)}">{{it.num2_oddoreven}}</td>
+          <td :style="{color:getColors(it.num3_overorunder)}">{{it.num3_overorunder}}</td>
+          <td :style="{color:getColors(it.num3_oddoreven)}">{{it.num3_oddoreven}}</td>
+          <td>{{it.longorhu}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Shssl'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="3">彩球号码</th>
+          <th colspan="2">第一球</th>
+          <th colspan="2">第二球</th>
+          <th colspan="2">第三球</th>
+          <th rowspan="2">龙虎和</th>
+        </tr>
+        <tr>
+          <th>第一球</th>
+          <th>第二球</th>
+          <th>第三球</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td :style="{color:getColors(it.num1_overorunder)}">{{it.num1_overorunder}}</td>
+          <td :style="{color:getColors(it.num1_oddoreven)}">{{it.num1_oddoreven}}</td>
+          <td :style="{color:getColors(it.num2_overorunder)}">{{it.num2_overorunder}}</td>
+          <td :style="{color:getColors(it.num2_oddoreven)}">{{it.num2_oddoreven}}</td>
+          <td :style="{color:getColors(it.num3_overorunder)}">{{it.num3_overorunder}}</td>
+          <td :style="{color:getColors(it.num3_oddoreven)}">{{it.num3_oddoreven}}</td>
+          <td>{{it.longorhu}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Bj28'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="3">彩球号码</th>
+          <th rowspan="2">和</th>
+          <th rowspan="2">大小</th>
+          <th rowspan="2">单双</th>
+          <th rowspan="2">大小单双</th>
+          <th rowspan="2">极大小</th>
+          <th rowspan="2">波色</th>
+        </tr>
+        <tr>
+          <th>第一球</th>
+          <th>第二球</th>
+          <th>第三球</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.daxiao)}">{{it.daxiao}}</td>
+          <td :style="{color:getColors(it.danshuang)}">{{it.danshuang}}</td>
+          <td :style="{color:getColors(it.daxiaodanshuang)}">{{it.daxiaodanshuang}}</td>
+          <td :style="{color:getColors(it.jidaxiao)}">{{it.jidaxiao}}</td>
+          <td :style="{color:colors[it.color]}">{{it.bose}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Gxklsf'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="5">球号</th>
+          <th rowspan="2">总和</th>
+          <th rowspan="2">总单双</th>
+          <th rowspan="2">总大小</th>
+          <th colspan="2">第一球</th>
+          <th colspan="2">第二球</th>
+          <th colspan="2">第三球</th>
+          <th colspan="2">第四球</th>
+          <th colspan="2">第五球</th>
+        </tr>
+        <tr>
+          <th>第一球</th>
+          <th>第二球</th>
+          <th>第三球</th>
+          <th>第四球</th>
+          <th>第五球</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+          <th>单双</th>
+          <th>大小</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num4}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num5}}
+            </div>
+          </td>
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_oddoreven)}">{{it.sum_oddoreven}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+          <td :style="{color:getColors(it.num1_oddoreven)}">{{it.num1_oddoreven}}</td>
+          <td :style="{color:getColors(it.num1_overorunder)}">{{it.num1_overorunder}}</td>
+          <td :style="{color:getColors(it.num2_oddoreven)}">{{it.num2_oddoreven}}</td>
+          <td :style="{color:getColors(it.num2_overorunder)}">{{it.num2_overorunder}}</td>
+          <td :style="{color:getColors(it.num3_oddoreven)}">{{it.num3_oddoreven}}</td>
+          <td :style="{color:getColors(it.num3_overorunder)}">{{it.num3_overorunder}}</td>
+          <td :style="{color:getColors(it.num4_oddoreven)}">{{it.num4_oddoreven}}</td>
+          <td :style="{color:getColors(it.num4_overorunder)}">{{it.num4_overorunder}}</td>
+          <td :style="{color:getColors(it.num5_oddoreven)}">{{it.num5_oddoreven}}</td>
+          <td :style="{color:getColors(it.num5_overorunder)}">{{it.num5_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Jlk3'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="3">球号</th>
+          <th rowspan="2">总和</th>
+          <th rowspan="2">总和大小</th>
+        </tr>
+        <tr>
+          <th>骰1</th>
+          <th>骰2</th>
+          <th>骰3</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Hbk3'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="3">球号</th>
+          <th rowspan="2">总和</th>
+          <th rowspan="2">总和大小</th>
+        </tr>
+        <tr>
+          <th>骰1</th>
+          <th>骰2</th>
+          <th>骰3</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Ahk3'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="3">球号</th>
+          <th rowspan="2">总和</th>
+          <th rowspan="2">总和大小</th>
+        </tr>
+        <tr>
+          <th>骰1</th>
+          <th>骰2</th>
+          <th>骰3</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Nmgk3'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="3">球号</th>
+          <th rowspan="2">总和</th>
+          <th rowspan="2">总和大小</th>
+        </tr>
+        <tr>
+          <th>骰1</th>
+          <th>骰2</th>
+          <th>骰3</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Fjk3'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="3">球号</th>
+          <th rowspan="2">总和</th>
+          <th rowspan="2">总和大小</th>
+        </tr>
+        <tr>
+          <th>骰1</th>
+          <th>骰2</th>
+          <th>骰3</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Hubk3'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="3">球号</th>
+          <th rowspan="2">总和</th>
+          <th rowspan="2">总和大小</th>
+        </tr>
+        <tr>
+          <th>骰1</th>
+          <th>骰2</th>
+          <th>骰3</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Bjk3'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="3">球号</th>
+          <th rowspan="2">总和</th>
+          <th rowspan="2">总和大小</th>
+        </tr>
+        <tr>
+          <th>骰1</th>
+          <th>骰2</th>
+          <th>骰3</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Shk3'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="3">球号</th>
+          <th rowspan="2">总和</th>
+          <th rowspan="2">总和大小</th>
+        </tr>
+        <tr>
+          <th>骰1</th>
+          <th>骰2</th>
+          <th>骰3</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Gsk3'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="3">球号</th>
+          <th rowspan="2">总和</th>
+          <th rowspan="2">总和大小</th>
+        </tr>
+        <tr>
+          <th>骰1</th>
+          <th>骰2</th>
+          <th>骰3</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Gxk3'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="3">球号</th>
+          <th rowspan="2">总和</th>
+          <th rowspan="2">总和大小</th>
+        </tr>
+        <tr>
+          <th>骰1</th>
+          <th>骰2</th>
+          <th>骰3</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+        </tr>
+      </table>
+      <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Jsk3'">
+        <tr>
+          <th rowspan="2">期数</th>
+          <th rowspan="2">开奖时间</th>
+          <th colspan="3">球号</th>
+          <th rowspan="2">总和</th>
+          <th rowspan="2">总和大小</th>
+        </tr>
+        <tr>
+          <th>骰1</th>
+          <th>骰2</th>
+          <th>骰3</th>
+        </tr>
+        <tr v-for="it,idx in results">
+          <td>
+            {{it.issue}}
+          </td>
+          <td>
+            {{it.opentime}}
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num1}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num2}}
+            </div>
+          </td>
+          <td>
+            <div class="ball" :style="{background:colors['red']}">
+              {{it.num3}}
+            </div>
+          </td>
+          <td>{{it.sum}}</td>
+          <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
         </tr>
       </table>
       <div v-show="results.length<1&&!is_loading_result" style="text-align: center;padding-top:20px;">暂无数据</div>
-      <div v-show="is_loading_result" style="text-align: center;padding-top:20px;color:rgb(229, 57, 53);">加载中...</div>
       <div class="pager" v-show="pages.length>1">
-        <div class="item"  @click="pageClick(it.page)" v-for="it,idx in pages" :key="idx"
+        <div class="item" @click="pageClick(it.page)" v-for="it,idx in pages" :key="idx"
              :class="{cur:it.cur,sl:it.page==-1}">{{it.txt}}
         </div>
         <div style="display: inline-block;color:#B62929;" v-show="is_loading_result">加载中...</div>
         <div style="display: inline-block;color:#B62929;opacity:0" v-show="!is_loading_result">加载中...</div>
       </div>
     </div>
+    <div v-show="is_loading_result" style="text-align: center;padding-top:20px;color:rgb(229, 57, 53);">加载中...</div>
   </div>
 </template>
 
 <script>
-  import {DatePicker} from "element-ui"
   import {mapMutations} from "vuex"
   import alert from "@/components/base/alert"
-  import {six_lottery,cqssc,tjssc,xjssc} from "@/obj/cal_lottery_data"
+  import {
+    six_lottery,
+    cqssc,
+    tjssc,
+    xjssc,
+    gdklsf,
+    cqklsf,
+    tjklsf,
+    hnklsf,
+    gd11x5,
+    bjkl8,
+    bjpk10,
+    xyft,
+    fc3d,
+    pl3,
+    shssl,
+    bj28,
+    gxklsf,
+    jlk3,
+    hbk3,
+    ahk3,
+    nmgk3,
+    fjk3,
+    hubk3,
+    bjk3,
+    shk3,
+    gsk3,
+    gxk3,
+    jsk3
+  } from "@/obj/cal_lottery_data"
 
   export default {
     name: "lottery_result",
-    components: {
-      DatePicker
-    },
     async created() {
-      this.date="2018-05-09";
+      this.date = "2018-05-09";
       await this.initGameType();
       //加载数据;
       this.tempParam = {
-        date:this.date,
+        date: this.date,
         typeName: this.gameTypes[this.gameTypeIdx].name,
-        typeTitle:this.gameTypes[this.gameTypeIdx].title,
+        typeTitle: this.gameTypes[this.gameTypeIdx].title,
         gameNum: ""
       }
       this.loadData(1);
@@ -713,25 +2381,31 @@
         pages: [],
         date: new Date().format("yyyy-MM-dd"),
         page_size: 10,
-        show_types:[],
-        show_type:"",
+        show_types: [],
+        show_type: "",
         gameTypes: [],
         gameTypeIdx: -1,
         gameNum: "",
         is_loading_lottery_type: false,
         is_loading_result: true,
         results: [],
-        colors:{
+        colors: {
+          "red": "linear-gradient(#F05190,#E74231)!important",
+          "blue": "linear-gradient(#59e, #0E4FC3)!important",
+          "green": "linear-gradient(#5d5, #8BC34A)!important"
+        },
+        colors2: {
           "red": "#e53935",
           "blue": "#039be5",
           "green": "#7cb342"
         },
+        car_colors: ["", "#ffca28", "rgb(229, 115, 115)", "rgb(0, 191, 165)", "rgb(171, 71, 188)", "rgb(139, 195, 74)", "rgb(255, 138, 101)", "rgb(117, 117, 117)", "rgb(240, 98, 146)", "#ffee58", "rgb(92, 107, 192)"],
         tempParam: {
           endDate: "",
-          gameNum:"",
-          typeName:"",
-          typeTitle:"",
-          date:""
+          gameNum: "",
+          typeName: "",
+          typeTitle: "",
+          date: ""
         }
       }
     },
@@ -817,7 +2491,7 @@
         if (!res) return;
 
         //res.data.data.unshift({id: -1, title: "香港六合彩"});
-        let resArr = [{id:-1,title: "香港六合彩", name: "Xglhc"}];
+        let resArr = [{id: -1, title: "香港六合彩", name: "Xglhc"}];
         resArr = resArr.concat(res.data.data);
         let idx = resArr.findIndex(v => {
           return v.name == "Cqssc"//todo 根据路由参数 this.$route.params.game_name;
@@ -832,15 +2506,15 @@
           p: page,
           ps: this.page_size
         }
-        if(this.tempParam.typeName!="Xglhc"){
-          url=`/api/lottery-v1/${this.tempParam.typeName}/history/`;
-          data={
-            t:this.tempParam.date,
-            p:page,
-            ps:this.page_size,
+        if (this.tempParam.typeName != "Xglhc") {
+          url = `/api/lottery-v1/${this.tempParam.typeName}/history/`;
+          data = {
+            t: this.tempParam.date,
+            p: page,
+            ps: this.page_size,
           }
         }
-        if(!data.t) delete data.t;
+        if (!data.t) delete data.t;
         this.is_loading_result = true;
         let res = await this.$http.post(url, data);
         this.is_loading_result = false;
@@ -853,37 +2527,40 @@
         if (page == -1) return;
         this.loadData(page);
       },
-      search(){
+      search() {
         this.tempParam = {
-          date:this.date,
+          date: this.date,
           typeName: this.gameTypes[this.gameTypeIdx].name,
-          typeTitle:this.gameTypes[this.gameTypeIdx].title,
+          typeTitle: this.gameTypes[this.gameTypeIdx].title,
           gameNum: ""
         }
         this.loadData(1);
       },
-      getColors(txt){
-        let reds=["双","大","家禽","下","偶","龙"];
-        let blues=["单","小","野兽","上","奇","虎"];
-        if(reds.indexOf(txt)!=-1){
-          return this.colors["red"];
+      getColors(txt) {
+        if (!txt) return;
+        txt = txt + '';
+        let reds = ["双", "大", "家禽", "下", "偶", "龙", "前"];
+        let blues = ["单", "小", "野兽", "上", "奇", "虎", "后"];
+        if (reds.indexOf(txt) != -1) {
+          return this.colors2["red"];
         }
-        let res="";
-        txt.split("").forEach(v=>{
-          if(reds.indexOf(v)!=-1){
-            res = this.colors["red"];
+        let res = "";
+        txt.split("").forEach(v => {
+          if (reds.indexOf(v) != -1) {
+            res = this.colors2["red"];
           }
         });
-        if(res)return res;
-        if(blues.indexOf(txt)!=-1){
-          return this.colors["blue"];
+        if (res) return res;
+        if (blues.indexOf(txt) != -1) {
+          return this.colors2["blue"];
         }
-        txt.split("").forEach(v=>{
-          if(blues.indexOf(v)!=-1){
-            res= this.colors["blue"];
+        txt.split("").forEach(v => {
+          if (blues.indexOf(v) != -1) {
+            res = this.colors2["blue"];
           }
         });
-        if(res)return res;
+        if (res) return res;
+        else return "inherit";
       },
       setData(data) {
         if (this.tempParam.typeName == "Xglhc") {//香港六合彩
@@ -893,43 +2570,294 @@
               ...six_lottery(v.ball.split(","))
             }
           })
-        }else if(this.tempParam.typeName=="Cqssc"){//重庆时时彩
+        } else if (this.tempParam.typeName == "Cqssc") {//重庆时时彩
           data = data.map(v => {
             return {
               ...v,
               ...cqssc(v.data.split(","))
             }
           })
-        }else if(this.tempParam.typeName=="Tjssc"){//天津时时彩
+        } else if (this.tempParam.typeName == "Tjssc") {//天津时时彩
           data = data.map(v => {
             return {
               ...v,
               ...tjssc(v.data.split(","))
             }
           })
-        }else if(this.tempParam.typeName=="Xjssc"){//天津时时彩
+        } else if (this.tempParam.typeName == "Xjssc") {//新疆时时彩
           data = data.map(v => {
             return {
               ...v,
               ...xjssc(v.data.split(","))
             }
           })
+        } else if (this.tempParam.typeName == "Gdklsf") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...gdklsf(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Cqklsf") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...cqklsf(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Tjklsf") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...tjklsf(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Hnklsf") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...hnklsf(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Gd11x5") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...gd11x5(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Bjkl8") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...bjkl8(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Bjpk10") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...bjpk10(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Xyft") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...xyft(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Fc3d") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...fc3d(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Tcpl3") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...pl3(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Shssl") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...shssl(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Bj28") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...bj28(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Gxklsf") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...gxklsf(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Jlk3") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...jlk3(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Hbk3") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...hbk3(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Ahk3") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...ahk3(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Nmgk3") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...nmgk3(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Fjk3") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...fjk3(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Hubk3") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...hubk3(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Bjk3") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...bjk3(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Shk3") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...shk3(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Gsk3") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...gsk3(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Gxk3") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...gxk3(v.data.split(","))
+            }
+          })
+        } else if (this.tempParam.typeName == "Jsk3") {//
+          data = data.map(v => {
+            return {
+              ...v,
+              ...jsk3(v.data.split(","))
+            }
+          })
         }
+        /*hbk3
+        ahk3
+        nmgk3
+        fjk3
+        hubk3
+        bjk3
+        shk3
+        gsk3
+        gxk3
+        jsk3*/
+
         return data;
       },
-      setShowType(){
-        if(this.tempParam.typeName=="Xglhc"){
-          this.show_types=[{tit:"两面",value:"liangmian"},{tit:"龙虎斗",value:"longhudou"}];
-          this.show_type=this.show_types[0];
-        }else if(this.tempParam.typeName=="Cqssc"){
-          this.show_types=[{tit:"两面",value:"liangmian"},{tit:"龙虎斗",value:"longhudou"}];
-          this.show_type=this.show_types[0];
-        }else if(this.tempParam.typeName=="Tjssc"){
-          this.show_types=[{tit:"两面",value:"liangmian"},{tit:"龙虎斗",value:"longhudou"}];
-          this.show_type=this.show_types[0];
-        }else if(this.tempParam.typeName=="Xjssc"){
-          this.show_types=[{tit:"两面",value:"liangmian"},{tit:"龙虎斗",value:"longhudou"}];
-          this.show_type=this.show_types[0];
+      setShowType() {
+        if (this.tempParam.typeName == "Xglhc") {
+          this.show_types = [{tit: "两面", value: "liangmian"}, {tit: "龙虎斗", value: "longhudou"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Cqssc") {
+          this.show_types = [{tit: "两面", value: "liangmian"}, {tit: "龙虎斗", value: "longhudou"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Tjssc") {
+          this.show_types = [{tit: "两面", value: "liangmian"}, {tit: "龙虎斗", value: "longhudou"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Xjssc") {
+          this.show_types = [{tit: "两面", value: "liangmian"}, {tit: "龙虎斗", value: "longhudou"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Gdklsf") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Cqklsf") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Tjklsf") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Hnklsf") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Gd11x5") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Bjkl8") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Bjpk10") {
+          this.show_types = [{tit: "冠亚和两面", value: "paiming"}, {tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Xyft") {
+          this.show_types = [{tit: "冠亚和两面", value: "paiming"}, {tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Fc3d") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Tcpl3") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Shssl") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Bj28") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Gxklsf") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Jlk3") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Hbk3") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Ahk3") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Nmgk3") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Fjk3") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Hubk3") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Bjk3") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Shk3") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Gsk3") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Gxk3") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
+        } else if (this.tempParam.typeName == "Jsk3") {
+          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_type = this.show_types[0];
         }
       },
     }
@@ -937,8 +2865,10 @@
 </script>
 
 <style scoped lang="less">
+  @import "../style/style.css";
+
   .lottery_result {
-    min-height:100%;
+    min-height: 100%;
     box-sizing: border-box;
     textarea {
       line-height: 1.5em;
@@ -952,8 +2882,8 @@
       font-family: "Microsoft YaHei";
       box-sizing: border-box;
     }
-    .el-input{
-      .el-input__inner{
+    .el-input {
+      .el-input__inner {
         -webkit-appearance: none;
         background-color: #fff;
         background-image: none;
@@ -964,13 +2894,13 @@
         color: #606266;
         display: inline-block;
         font-size: inherit;
-        height:40px;
+        height: 40px;
         line-height: 40px;
-        outline:0;
-        padding:0 15px;
-        -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-        transition:border-color .2s cubic-bezier(.645,.045,.355,1);
-        width:100%;
+        outline: 0;
+        padding: 0 15px;
+        -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+        transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+        width: 100%;
         padding-left: 30px;
       }
     }
@@ -1050,7 +2980,7 @@
         border: 1px solid #ccc;
       }
       th {
-        background-color: #C7C7C7;
+        background-color: #f3f3f3;
         padding: 8px 0;
         font-weight: 200;
         border: 1px solid #d8d8d8;
@@ -1061,17 +2991,22 @@
         padding: 8px 0;
       }
     }
-    .xglhc td,.cqssc td{
-      >.ball{
+    .xglhc td, .cqssc td {
+      > .car {
         display: inline-block;
-        width:30px;
-        height:30px;
+        position: relative;
+        width: 50px;
+      }
+      > .ball {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
         line-height: 30px;
         text-align: center;
-        color:#fff;
-        border-radius:15px 15px;
+        color: #fff;
+        border-radius: 15px 15px;
       }
-      >.animal{
+      > .animal {
         display: inline-block;
       }
     }
@@ -1114,5 +3049,4 @@
       min-height: 500px;
     }
   }
-
 </style>
