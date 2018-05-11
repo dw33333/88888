@@ -41,6 +41,7 @@
             余额:{{money}}
           </div>
           <div style="width:540px;display:none;height:48px;" id="showId"></div>
+          <slot name="lottery_result"></slot>
           <router-link to='/UserCenter'>
             <div class="recharge items">
               充值
@@ -837,7 +838,7 @@
   }
 
   .bar-right {
-    float: left;
+    float: right;
     overflow: hidden;
     line-height: 44px;
   }
