@@ -75,7 +75,6 @@ export default {
         //跳转页面
         goGamePgae (id) {
             this.$http.post('/api/electronic/electronic/getGameUrl',{game_id:id}).then((res) => {
-                console.log(res)
                 let url = res.data.data.url;
                 window.open(url,'_blank',"modal=false,alwaysRaised=yes")
             });

@@ -59,7 +59,7 @@
     </div>
     <nav>
       <!-- 导航 -->
-      <div class="nav">
+      <div class="nav" id="nav">
         <router-link to="/">
           <img class="logo" src="../assets/logo.png" alt="">
         </router-link>
@@ -92,12 +92,12 @@
               <span>ANNOUNCEMENT</span>
             </router-link>
           </li>
-          <li>
+          <!-- <li>
             <a href="javascript:void(0)">
               <div>彩种信息</div>
               <span>GAMEINFORMATION</span>
             </a>
-          </li>
+          </li> -->
           <router-link to="/live" tag="li" style="position:relative;" @click="goVideo" @mousemove.native="showmenu" @mouseout.native="hidemenu">
             <a>
               <div>视讯直播</div>

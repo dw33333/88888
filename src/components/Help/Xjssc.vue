@@ -1,8 +1,8 @@
 <template>
   <div class="rule_from02" style="padding:30px;">
-				  <p> 重庆时时彩游戏是依照中国重庆福利彩票发行中心统一发行的『时时彩』彩票的开奖数据为依据所规划的线上彩票游戏。 <br>
+				  <p> 新疆时时彩由中国福利彩票发行管理中心组织，由新疆自治区福利彩票发行中心在所辖区域内承销。 <br>
 					<strong>开奖结果为五码 (万、仟、佰、拾、个)。假设结果为1 、2 、3 、4、5。</strong> </p>
-				  <strong>重庆时时彩开奖时间：</strong>
+				  <strong>新疆时时彩开奖时间：</strong>
 				  <table style="width: 94%;">
 					<tbody><tr>
 					  <th width="25%" valign="top" bgcolor="#AFAFE4" align="center" class="subtitle2"> 游戏项目 </th>
@@ -11,24 +11,14 @@
 					  <th width="25%" bgcolor="#AFAFE4" align="center" class="subtitle2"> 开奖频率 </th>
 					</tr>
 					<tr>
-					  <td valign="middle" align="center" bgcolor="#FFF7F0" class="point" rowspan="3"> 重庆时时彩 </td>
-					  <td bgcolor="#FFF7F0" class="point" align="center"> 10:00-22:00(北京时间) </td>
-					  <td bgcolor="#FFF7F0" class="point" align="center"> 024-096 </td>
+					  <td valign="middle" align="center" bgcolor="#FFF7F0" class="point"> 新疆时时彩 </td>
+					  <td bgcolor="#FFF7F0" class="point" align="center"> 10:00-02:00(北京时间) </td>
+					  <td bgcolor="#FFF7F0" class="point" align="center"> 001-096 </td>
 					  <td bgcolor="#FFF7F0" class="point" align="center"> 每10分钟 </td>
-					</tr>
-					<tr>
-					  <td bgcolor="#FFF7F0" class="point" align="center"> 22:05-24:00(北京时间) </td>
-					  <td bgcolor="#FFF7F0" class="point" align="center"> 097-120 </td>
-					  <td bgcolor="#FFF7F0" class="point" align="center"> 每5分钟 </td>
-					</tr>
-					<tr>
-					  <td bgcolor="#FFF7F0" class="point" align="center"> 00:05-01:55(北京时间) </td>
-					  <td bgcolor="#FFF7F0" class="point" align="center"> 001-023 </td>
-					  <td bgcolor="#FFF7F0" class="point" align="center"> 每5分钟 </td>
 					</tr>
 				  </tbody></table>
 				  <br>
-				  <p> 本公司重庆时时彩具体游戏规则如下︰ </p>
+				  <p> 本公司新疆时时彩具体游戏规则如下： </p>
 				  <br>
 				  <h2>选号玩法</h2>
 				  <dl>
@@ -206,7 +196,7 @@
 						</li>
 						<li>
 						  <p> 开奖结果万仟位、万佰位、万拾位、万个位、仟佰位、仟拾位、仟个位、佰拾位、拾个位或佰个位数字总和的个位数为1、3、5、7、9时为“单”，若为0、2、4、6、8时为“双”，当投注和数单双与开奖结果的和数单双相符时，即为中奖。 <br>
-							※举例：投注者购买佰拾和数单，当期开奖结果如为20290（佰2+拾9=11为单），则视为中奖。 </p>
+							※举例：投注者购买佰拾和数单，当期开奖结果如为20290（佰2+拾9+个0=11为单），则视为中奖。 </p>
 						  <table>
 							<tbody><tr>
 							  <th width="50%" valign="top" bgcolor="#AFAFE4" align="center" class="subtitle2"> 单 </th>

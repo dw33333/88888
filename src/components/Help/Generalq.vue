@@ -100,7 +100,6 @@
 
 <script>
 export default {
-    name:'Generalq',
     data () {
         return {
             

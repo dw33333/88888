@@ -69,7 +69,7 @@
         <h2></h2>
         <ul>
           <router-link to="/Deposit" tag="li">存款问题</router-link>
-          <router-link to="/Tjssc" tag="li">游戏帮助</router-link>
+          <router-link to="/Generalq" tag="li">游戏帮助</router-link>
           <router-link tag="li" to="/Teller"> 取款问题</router-link>
           <li> <a id="a" style="color: #808080;text-decoration: none;" :href="this.sitesInfos.SiteService" target="_blank">联系客服</a> </li>
         </ul>
