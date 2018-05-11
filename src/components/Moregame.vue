@@ -3,19 +3,19 @@
     <div class="more_game">
       <div class="hotgame">
         <div class="title">
-          
+
         </div>
         <!-- 官方玩法 -->
         <ul class="guantype" v-for="item in this.headerArry" :key="item.id">
           <li class="border-top ov padbottom" v-for="items in item.type" :key="items.id">
-            <router-link tag="div" class="item cursor" :to="{path:'/lottery/'+items.name}"><span>{{items.short_name}}</span></router-link>
+            <router-link tag="div" class="item cursor" :to="{path:'/lottery_ifm/'+items.name}"><span>{{items.short_name}}</span></router-link>
           </li>
         </ul>
       </div>
       <div class="hottype">
         <div class="title"></div>
         <ul>
-          <router-link tag="li" :to="{path:'/lottery/' +item.name}" class="cursor" v-for="item in lotteryHot" :key="item.id">
+          <router-link tag="li" :to="{path:'/lottery_ifm/' +item.name}" class="cursor" v-for="item in lotteryHot" :key="item.id">
             <div>{{item.short_name}}</div>
           </router-link>
         </ul>

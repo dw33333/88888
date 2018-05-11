@@ -22,7 +22,7 @@ export default {
     footervue
   },
   created(){
-    this.loadSiteInfo();
+    //this.loadSiteInfo();
   },
   computed:{
     ...mapState(["agent_id"]),
@@ -53,11 +53,6 @@ export default {
           }
         }
       });
-    },
-    async loadSiteInfo(){
-      let res = await this.$http.get('api/site/info');
-      if(!res)return;
-      this.SITE_INFO(res.data);
     }
   }
 }

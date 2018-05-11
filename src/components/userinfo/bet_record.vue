@@ -61,13 +61,13 @@
 <script>
   import {mapMutations} from "vuex"
   import alert from "@/components/base/alert"
-  import {DatePicker} from "element-ui"
+  /*import {DatePicker} from "element-ui"*/
 
   export default {
     name: "bet_record",
-    components: {
+    /*components: {
       DatePicker
-    },
+    },*/
     data() {
       return {
         pageSize: 10,

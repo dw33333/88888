@@ -3,10 +3,12 @@ import App from './App'
 import router from './router'
 import store from './store'
 import axios from 'axios'
-import $ from 'jquery'
+/*import $ from 'jquery'*/
 import 'babel-polyfill'  //ie11打开空白
 import alert from "@/components/base/alert"
 import "@/obj/util"
+import { DatePicker } from 'element-ui';
+Vue.component("DatePicker", DatePicker);
 Vue.config.productionTip = true
 axios.defaults.withCredentials = true
 Vue.prototype.$http = axios;
