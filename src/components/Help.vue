@@ -9,7 +9,7 @@
           <router-link to="/">返回首页</router-link>
         </li>
         <li class="server"><a :href="this.sitesInfos.SiteService" target="_blank">在线客服</a></li>
-        <li class="rules"><a href="#">规则说明</a></li>
+        <li class="rules"><a href="#" @click="isShowtop(5)">规则说明</a></li>
         <!--<li class="help"><a href="#">游戏帮助</a></li>-->
         <li class="layout"><a href="#" @click="loginout();">登出账号</a></li>
       </ul>
@@ -48,19 +48,19 @@
         <!-- 折叠菜单 -->
         <div class="sidebar">
           <div class="sidebar-menu">
-            <router-link tag="div" id="1" to="/Generalq" style="margin-top: 0;" class="item" @click.native="isShow(1)" :class="{active:1 == num}">
+            <router-link tag="div" to="/Generalq" style="margin-top: 0;" class="item" @click.native="isShow(1)" :class="{active:1 == num}">
               <span >常见问题</span>
             </router-link>
-            <router-link tag="div" id="2" to="/Deposit" class="item" @click.native="isShow(2)" :class="{active:2 == num}">
+            <router-link tag="div"  to="/Deposit" class="item" @click.native="isShow(2)" :class="{active:2 == num}">
              <span >存款帮助</span>
             </router-link>
-             <router-link tag="div" id="3" class="item" to="/Teller" @click.native="isShow(3)" :class="{active:3 == num}">
+             <router-link tag="div"  class="item" to="/Teller" @click.native="isShow(3)" :class="{active:3 == num}">
               <span>取款帮助</span>
             </router-link>
             <div class="item" @click="isShow(4)" >
               <a href="javascript:void(0);">玩法介绍</a>
             </div>
-            <ul class='list-item'
+            <ul class='list-item' id="ul_list" :class="{show_item:isActive}"
                 :style="{height:isDisplay==4?((34*28)+'px'):'0px',visibility:isDisplay==4?'visible':'hidden',overflow:'hidden'}">
                 <span v-for="item in this.headerArry" :key="item.id">
                     <li v-for="items in item.type" :key="items.id">
@@ -94,7 +94,8 @@
         unread_count: '',
         realname: '',
         bankCardNum: '',
-        bankName: ''
+        bankName: '',
+        isActive:false
         // headersArry:[]
       }
     },
@@ -105,18 +106,23 @@
       maskLayer
     },
     mounted() {
-      let url =window.location.href;
-      if(url.indexOf('Teller') !==-1){
-          $('#3').addClass('active').siblings().removeClass('active');
-      }else if(url.indexOf('Deposit') !==-1){
-          $('#2').addClass('active').siblings().removeClass('active');
-      }else if(url.indexOf('Generalq') !==-1){
-          $('#1').addClass('active').siblings().removeClass('active');
+      if(this.$route.name == 'Teller'){
+        this.isActive = false;
+        this.num = 3;
+      } 
+      if(this.$route.name == 'Deposit'){
+        this.num = 2;
+        this.isActive = false;
       }
-      if(url.indexOf('TellerDepositGeneralq') == -1){
-          console.log(2)
-          $('.list-item').addClass('show_item');
+      if(this.$route.name == 'Generalq'){
+        this.num = 1;
+        this.isActive = false;
       }
+      // if(this.$route.name == 'Cqssc'){
+      //   this.num = 0;
+      //   this.isDisplay = 4;
+      //   this.isActive = true;
+      // }
     },
     computed: {
       ...mapState(['agmoney', 'dsmoney', 'money', 'username', 'userRealName', 'userinfo','sitesInfos','headerArry'])
@@ -183,19 +189,28 @@
         else
           this.isDisplay = index;
         return;
+      },
+      isShowtop () {
+        this.isDisplay = 4;
       }
     }
   }
 
 </script>
 <style lang="less">
+.rule_from02{
+  padding: 30px;
+}
 .show_item{
     visibility: visible !important;
-    height: 864px !important;
+    height: 100% !important;
     overflow: auto !important;
 }
 .col_red{
     color: red;
+}
+.red{
+  background-color: #afafe4;
 }
 .help-con{
     padding: 30px;

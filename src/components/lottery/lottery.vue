@@ -35,11 +35,12 @@ export default {
     // }).catch((error) => {
     //   console.log(error)
     // })
-     $('.nav').hide();
-     $('#backhide').hide();
-     $('#backPage').show();
-     $('.presonInput').hide();
-     $('#showId').show();
+    document.getElementById('nav').style.display = "none";
+    document.getElementById('backhide').style.display = "none";
+    document.getElementById('backPage').style.display = "block";
+    document.getElementById('presonInput').style.display = "none";
+    document.getElementById('presonInput2').style.display = "none";
+    document.getElementById('showId').style.display = "block";
   },
   watch:{
     'fc_id':function(n){

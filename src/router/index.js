@@ -284,6 +284,131 @@ const Tjscc = (resolve) => {
     resolve(module)
   })
 }
+const Xjssc = (resolve) => {
+  import('@/components/Help/Xjssc').then((module) => {
+    resolve(module)
+  })
+}
+const Gdklsf = (resolve) => {
+  import('@/components/Help/Gdklsf').then((module) => {
+    resolve(module)
+  })
+}
+const Cqklsf = (resolve) => {
+  import('@/components/Help/Cqklsf').then((module) => {
+    resolve(module)
+  })
+}
+const Tjklsf = (resolve) => {
+  import('@/components/Help/Tjklsf').then((module) => {
+    resolve(module)
+  })
+}
+const Hnklsf = (resolve) => {
+  import('@/components/Help/Hnklsf').then((module) => {
+    resolve(module)
+  })
+}
+const Gd11x5 = (resolve) => {
+  import('@/components/Help/Gd11x5').then((module) => {
+    resolve(module)
+  })
+}
+const Bjkl8 = (resolve) => {
+  import('@/components/Help/Bjkl8').then((module) => {
+    resolve(module)
+  })
+}
+const Bjpk10 = (resolve) => {
+  import('@/components/Help/Bjpk10').then((module) => {
+    resolve(module)
+  })
+}
+const Xyft = (resolve) => {
+  import('@/components/Help/Xyft').then((module) => {
+    resolve(module)
+  })
+}
+const Tcpl3 = (resolve) => {
+  import("@/components/Help/Tcpl3").then((module) => {
+    resolve(module)
+  })
+}
+const Fc3d = (resolve) => {
+  import("@/components/Help/Fc3d").then((module) => {
+    resolve(module)
+  })
+}
+const Shssl = (resolve) => {
+  import("@/components/Help/Shssl").then((module) => {
+    resolve(module)
+  })
+}
+const Jsk3 = (resolve) => {
+  import("@/components/Help/Jsk3").then((module) => {
+    resolve(module)
+  })
+}
+const Gxk3 = (resolve) => {
+  import("@/components/Help/Gxk3").then((module) => {
+    resolve(module)
+  })
+}
+const Ahk3 = (resolve) => {
+  import("@/components/Help/Ahk3").then((module) => {
+    resolve(module)
+  })
+}
+const Hbk3 = (resolve) => {
+  import("@/components/Help/Hbk3").then((module) => {
+    resolve(module)
+  })
+}
+const Nmgk3 = (resolve) => {
+  import("@/components/Help/Nmgk3").then((module) => {
+    resolve(module)
+  })
+}
+const Fjk3 = (resolve) => {
+  import("@/components/Help/Fjk3").then((module) => {
+    resolve(module) 
+  })
+}
+const Hubk3 = (resolve) => {
+  import("@/components/Help/Hubk3").then((module) => {
+    resolve(module) 
+  })
+}
+const Bjk3 = (resolve) => {
+  import("@/components/Help/Bjk3").then((module) => {
+    resolve(module) 
+  })
+}
+const Jlk3 = (resolve) => {
+  import("@/components/Help/Jlk3").then((module) => {
+    resolve(module) 
+  })
+}
+const Shk3 = (resolve) => {
+  import("@/components/Help/Shk3").then((module) => {
+    resolve(module) 
+  })
+}
+const Gsk3 = (resolve) => {
+  import("@/components/Help/Gsk3").then((module) => {
+    resolve(module) 
+  })
+}
+const Bj28 = (resolve) => {
+  import("@/components/Help/Bj28").then((module) => {
+    resolve(module) 
+  })
+}
+const Gxklsf = (resolve) => {
+  import("@/components/Help/Gxklsf").then((module) => {
+    resolve(module) 
+  })
+}
 Vue.use(Router)
 Vue.use(VueAwesomeSwiper)
 
@@ -340,22 +465,152 @@ const route = new Router({
       children: [
         {
           path: '/Generalq',
+          name:'Generalq',
           component:Generalq
         },
         {
           path: '/Deposit',
+          name:'Deposit',
           component:Deposit
         },{
           path:'/Teller',
+          name:'Teller',
           component:Teller
         },
         {
           path:'/Cqssc',
+          name:'Cqssc',
           component:Cqssc
         },
         {
           path:'/Tjssc',
+          name:'Tjssc',
           component:Tjscc
+        },
+        {
+          path:'/Xjssc',
+          name:'Xjssc',
+          component:Xjssc
+        },
+        {
+          path:'/Gdklsf',
+          name:'Gdklsf',
+          component:Gdklsf
+        },
+        {
+          path:'/Cqklsf',
+          name:'Cqklsf',
+          component:Cqklsf
+        },
+        {
+          path:'/Tjklsf',
+          name:'Tjklsf',
+          component:Tjklsf
+        },
+        {
+          path:'/Hnklsf',
+          name:'Hnklsf',
+          component:Hnklsf
+        },
+        {
+          path:'/Gd11x5',
+          name:'Gd11x5',
+          component:Gd11x5
+        },
+        {
+          path:'/Bjkl8',
+          name:'Bjkl8',
+          component:Bjkl8
+        },
+        {
+          path:'/Bjpk10',
+          name:'Bjpk10',
+          component:Bjpk10
+        },
+        {
+          path:'/Xyft',
+          name:'Xyft',
+          component:Xyft
+        },
+        {
+          path:'/Tcpl3',
+          namel:'Tcpl3',
+          component:Tcpl3
+        },
+        {
+          path:'/Fc3d',
+          namel:'Fc3d',
+          component:Fc3d
+        },
+        {
+          path:'/Shssl',
+          namel:'Shssl',
+          component:Shssl
+        },
+        {
+          path:'/Jsk3',
+          namel:'Jsk3',
+          component:Jsk3
+        },
+        {
+          path:'/Gxk3',
+          name:'Gxk3',
+          component:Gxk3
+        },
+        {
+          path:'/Ahk3',
+          name:'Ahk3',
+          component:Ahk3
+        },
+        {
+          path:'/Hbk3',
+          name:'Hbk3',
+          component:Hbk3
+        },
+        {
+          path:'/Nmgk3',
+          name:'Nmgk3',
+          component:Nmgk3
+        },
+        {
+          path:'/Fjk3',
+          name:'Fjk3',
+          component:Fjk3
+        },
+        {
+          path:'/Hubk3',
+          name:'Hubk3',
+          component:Hubk3
+        },
+        {
+          path:'/Bjk3',
+          name:'Bjk3',
+          component:Bjk3
+        },
+        {
+          path:'/Jlk3',
+          name:'Jlk3',
+          component:Jlk3
+        },
+        {
+          path:'/Shk3',
+          name:'Shk3',
+          component:Shk3
+        },
+        {
+          path:'/Gsk3',
+          name:'Gsk3',
+          component:Gsk3
+        },
+        {
+          path:'/Bj28',
+          name:'Bj28',
+          component:Bj28
+        },
+        {
+          path:'/Gxklsf',
+          name:'Gxklsf',
+          component:Gxklsf
         }
       ]
     },
