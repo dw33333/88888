@@ -77,7 +77,7 @@ Vue.prototype.$http.interceptors.response.use(
         }
       });
     }
-    if (error.response) {
+    if (error.response&&error.response.status) {
       switch (error.response.status) {//根据状态码提示对应消息
         case 401:
           break;
@@ -91,11 +91,13 @@ Vue.prototype.$http.interceptors.response.use(
           wAlert("请求错误");
 
       }
+    }else{
+      //全局处理错误后返回成功一个undefined 免去每次使用 async await 都try catch
+      console.error(error.response);
+      store.commit("LOADING",false);//报错时关闭loading
+      wAlert("请求错误");
+      return Promise.resolve();
     }
-    //全局处理错误后返回成功一个undefined 免去每次使用 async await 都try catch
-    console.error(error.response);
-    store.commit("LOADING",false);//报错时关闭loading
-    return Promise.resolve();
   });
 /* eslint-disable no-new */
 
