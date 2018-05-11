@@ -340,21 +340,26 @@ const route = new Router({
       children: [
         {
           path: '/Generalq',
+          name: 'Generalq',
           component:Generalq
         },
         {
           path: '/Deposit',
+          name: 'Deposit',
           component:Deposit
         },{
           path:'/Teller',
+          name:"Teller",
           component:Teller
         },
         {
           path:'/Cqssc',
+          name:"Cqssc",
           component:Cqssc
         },
         {
           path:'/Tjssc',
+          name:"Tjssc",
           component:Tjscc
         }
       ]
@@ -367,14 +372,17 @@ const route = new Router({
       children: [
         {
           path: '/sportsgame',
+          name: 'sportsgame',
           component: sportsgame
         },
         {
           path: '/videogame',
+          name: 'videogame',
           component: videogame
         },
         {
           path: '/recharge',
+          name: 'recharge',
           component: recharge
         },
         {
@@ -384,26 +392,32 @@ const route = new Router({
         },
         {
           path: '/lotterygame',
+          name: 'lotterygame',
           component: lotterygame
         },
         {
           path: '/depositrecord',
+          name: 'depositrecord',
           component: depositrecord
         },
         {
           path: '/conversionchange',
+          name: 'conversionchange',
           component: conversionchange
         },
         {
           path: '/UserInfo',
+          name: 'UserInfo',
           component: UserInfo
         },
         {
           path: '/PasswordManagement',
+          name: 'PasswordManagement',
           component: PasswordManagement
         },
         {
           path: '/moneymanagemen',
+          name: 'moneymanagemen',
           component: moneymanagemen
         },
         // {
@@ -420,26 +434,32 @@ const route = new Router({
         // },
         {
           path: '/Notice',
+          name: 'Notice',
           component: Notice
         },
         {
           path: '/Messge',
+          name: 'Messge',
           component: Messge
         },
         {
           path: '/bet_record',
+          name: 'bet_record',
           component: bet_record
         },
         {
           path: '/charge_record',
+          name: 'charge_record',
           component: charge_record
         },
         {
           path: '/week_statistic',
+          name: 'week_statistic',
           component: week_statistic
         },
         {
           path: '/msg_list',
+          name:"msg_list",
           component: msg_list
         }
       ]
@@ -453,9 +473,9 @@ const route = new Router({
 });
 route.beforeEach((to, from, next) => {
   if (!store.state.easysecret && (["register", "Login", "Header"].indexOf(to.name) === -1)) {//除登录和注册页面其他页面未登录跳到登录页
-    route.push({name:"Login",params:{hback:true}});
+    route.push({name:"Login",params:{hback:to.name}});
   } else if (store.state.easysecret && (["register", "Login"].indexOf(to.name) !== -1)) {//登录的状态不能访问登录页和注册页
-    route.push("/");
+    route.go(-1);
   } else {
     next();
   }
