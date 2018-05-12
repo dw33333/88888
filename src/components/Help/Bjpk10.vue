@@ -1,87 +1,49 @@
 <template>
-  <table border="0" cellpadding="0" cellspacing="0" align="center">
-        <tbody>
-        <tr>
-            <td class="table_td2" style="padding:0 30px;"><table  border="0" cellspacing="0" cellpadding="0" align="center">
-              <tbody><tr>
-                <td class="title_td">&nbsp;&nbsp;&nbsp;&nbsp;北京PK拾游戏规则 </td>
-              </tr>
-              <tr>
-                <td>&nbsp;</td>
-              </tr>
-              <tr>
-                <td><ol class="no_style">
-                  <li>该游戏的投注时间、开奖时间和开奖号码与"北京PK拾"完全同步，北京时间（GMT+8）每天白天从上午09:02开到晚上23:57，每5分鐘开一次奖,每天开奖179期。 </li>
-                </ol></td>
-              </tr>
-              <tr>
-                <td>&nbsp;</td>
-              </tr>
-              <tr>
-                <td class="bold_black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、第一名 ~ 第十名</td>
-              </tr>
-              <tr>
-                <td>&nbsp;</td>
-              </tr>
-              <tr>
-                <td><ul>
-                  <li><span class="red">第一名~第八名：</span>
-                    <ul>
-                <li class="no_style">车号指定，每一个车号为一投注组合，开奖结果"投注车号"对应所投名次视为中奖，其余情形视为不中奖。</li>
-                    </ul>
-                  </li>
-                  <li><span class="red">两面：</span>
-<ul>
-                <li class="no_style">指单、双；大、小。</li>
-                <li class="no_style">单、双：号码为双数叫双，如8、10；号码为单数叫单，如9、5。</li>
-                <li class="no_style">大、小：开出之号码大于或等于6为大，小于或等于5为小。</li>
-                    </ul>
-                  </li>
-                  <li><span class="red">1~5龙虎：</span>
-<ul>
-                <li class="no_style">冠　军 龙/虎："第一名"车号大于"第十名"车号视为【龙】中奖、反之小于视为【虎】中奖，其余情形视为不中奖。</li>
-                <li class="no_style">亚　军 龙/虎："第二名"车号大于"第九名"车号视为【龙】中奖、反之小于视为【虎】中奖，其余情形视为不中奖。</li>
-                <li class="no_style">第三名 龙/虎："第三名"车号大于"第八名"车号视为【龙】中奖、反之小于视为【虎】中奖，其余情形视为不中奖。</li>
-                <li class="no_style">第四名 龙/虎："第四名"车号大于"第七名"车号视为【龙】中奖、反之小于视为【虎】中奖，其余情形视为不中奖。</li>
-                <li class="no_style">第五名 龙/虎："第五名"车号大于"第六名"车号视为【龙】中奖、反之小于视为【虎】中奖，其余情形视为不中奖。</li>
-                    </ul>
-                  </li>
-                </ul>
-                  
-                  </td>
-              </tr>
-              <tr>
-                <td class="bold_black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、冠亚军和</td>
-              </tr>
-              <tr>
-                <td>&nbsp;</td>
-              </tr>
-              <tr>
-                <td><ul>
-                  <li><span class="red">冠军车号＋亚军车号＝冠亚和值：</span>
-<ul class="no_style">
-                <li>可能出现的结果为3～19， 投中对应"冠亚和值"数字的视为中奖，其余视为不中奖。</li>
-                    </ul>
-                  </li>
-                  <li><span class="red">冠亚和大小：</span>
-<ul class="no_style">
-                <li>大于11时投注"大"的注单视为中奖，小于11时投注"小"的注单视为中奖，其余视为不中(如果开11打和)</li>
-                    </ul>
-                  </li>
-                  <li><span class="red">冠亚和单双：</span>
-<ul class="no_style">
-                <li>为单视为投注"单"的注单视为中奖，为双视为投注"双"的注单视为中奖，其余视为不中奖(如果开11打和)</li>
-                    </ul>
-                  </li>
-                </ul></td>
-              </tr>
-            </tbody></table></td>
-        </tr>
-        <tr>
-            <td class="table_td3">&nbsp;
-                </td>
-        </tr>
-    </tbody></table>
+  <div class="rule_from02"> <strong>北京赛车开奖时间：</strong>
+				  <table style="width: 94%;">
+					<tbody><tr>
+					  <th width="25%" valign="top" bgcolor="#AFAFE4" align="center" class="subtitle2"> 游戏项目 </th>
+					  <th width="25%" bgcolor="#AFAFE4" align="center" class="subtitle2"> 开奖时间 </th>
+					  <th width="25%" bgcolor="#AFAFE4" align="center" class="subtitle2"> 每日期数 </th>
+					  <th width="25%" bgcolor="#AFAFE4" align="center" class="subtitle2"> 开奖频率 </th>
+					</tr>
+					<tr>
+					  <td valign="middle" align="center" bgcolor="#FFF7F0" class="point"> 北京pk10 </td>
+					  <td bgcolor="#FFF7F0" class="point" align="center"> 09:07—23:57(北京时间) </td>
+					  <td bgcolor="#FFF7F0" class="point" align="center"> 001-179 </td>
+					  <td bgcolor="#FFF7F0" class="point" align="center"> 每5分钟 </td>
+					</tr>
+				  </tbody></table>
+				  <br>
+				  <p> 本公司北京赛车具体游戏规则如下︰ </p>
+				  <br>
+				  <h2>两面盘（冠军~第十名）</h2>
+				  <dd>
+					<ul>
+					  <li> 大小∶开出之号码大於或等於6为大，小於或等於5为小。 </li>
+					  <li> 单双∶开出之号码为双数叫双，如4、8；号码为单数叫单，如5、9。 </li>
+					  <li> 冠军 龙/虎∶"第一名"之车号大於"第十名"之车号视为「龙」中奖、反之小於视为「虎」中奖，其馀情况视为不中奖。 </li>
+					  <li> 亚军 龙/虎∶"第二名"之车号大於"第九名"之车号视为「龙」中奖、反之小於视为「虎」中奖，其馀情况视为不中奖。 </li>
+					  <li> 季军 龙/虎∶"第三名"之车号大於"第八名"之车号视为「龙」中奖、反之小於视为「虎」中奖，其馀情况视为不中奖。 </li>
+					  <li> 第四名 龙/虎∶"第四名"之车号大於"第七名"之车号视为「龙」中奖、反之小於视为「虎」中奖，其馀情况视为不中奖。 </li>
+					  <li> 第五名 龙/虎∶"第五名"之车号大於"第六名"之车号视为「龙」中奖、反之小於视为「虎」中奖，其馀情况视为不中奖。 </li>
+					</ul>
+				  </dd>
+				  <h2>两面盘（冠亚和）: "冠军车号 + 亚军车号 = 冠亚和"</h2>
+				  <dd>
+					<ul>
+					  <li> 冠亚和大小∶以冠军车号和亚军车号之和大小来判断胜负，"冠亚和"大於11为大，小於或等於11为小。假如投注组合符合中奖结果，视为中奖，其馀情形视为不中奖。 </li>
+					  <li> 冠亚和单双∶以冠军车号和亚军车号之和单双来判断胜负，"冠亚和"为双数叫双，为单数叫单。  假如投注组合符合中奖结果，视为中奖，其馀情形视为不中奖。 </li>
+					  <li> 冠亚和指定: 以指定冠军车号和亚军车号之和来判断胜负；冠亚车号总和可能出现结果为3~19，投中对应"冠亚和指定"数字视为中奖，其馀情形视为不中奖 </li>
+					</ul>
+				  </dd>
+				  <h2>冠军~第十名车号指定:</h2>
+				  <dd>
+					<ul>
+					  <li> 冠军~第十名车号指定: 每一个车号为一投注组合，开奖结果"投注车号"对应所投名次视为中奖，其馀情形视为不中奖。 </li>
+					</ul>
+				  </dd>
+				</div>
 </template>
 
 <script>
