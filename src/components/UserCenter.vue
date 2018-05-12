@@ -807,12 +807,12 @@
   }
 
   .sidebar-menu .list-item li a:hover {
-    color: #000;
+    color: #6f6d6d;
     background-color: #fff;
   }
 
   .sidebar-menu .list-item li .router-link-exact-active.router-link-active {
-    color: #000;
+    color: #6f6d6d;
     background-color: #fff;
   }
 
