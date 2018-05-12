@@ -53,7 +53,7 @@ Vue.prototype.$http.interceptors.response.use(
     }
   },
   error => {
-    let wAlert=(msg)=>{//todo 放到公共文件中
+    window.wAlert=(msg)=>{//todo 放到公共文件中
       store.commit("ROOTBOX",{
         open: true,
         compt: alert,
@@ -107,8 +107,7 @@ Vue.prototype.$http.interceptors.response.use(
 // axios.defaults.headers.common['token'] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJlYXN5LWNhc2luby1jb2RlIiwiY29kZSI6Ijg3NTgiLCJleHAiOjE1MjMxNzkwNjJ9.n18yr7jQxu1CZg9VfAHz6mwAgMNpw2c_g1B1f5PGd5M'
 //设置请求头
 // axios.defaults.headers.post["Content-type"] = "application/x-www-form-urlencoded"
-
-let vue =new Vue({
+window.cwvue=new Vue({
   el: '#app',
   router,
   store,

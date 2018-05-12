@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="top-wrap">
-      <div class="top-box">
+      <div class="top-box" :style="{width:fullwidth?'100%':'1170px'}">
         <div class="bar-left">
           <span id="backPage" v-show="backPage" @click="backPageclick" style="cursor:pointer;">返回首页</span>
           <span id="backhide">PLAY RESPONSIBLY</span>
@@ -58,7 +58,7 @@
         </div>
       </div>
     </div>
-    <nav>
+    <nav >
       <!-- 导航 -->
       <div class="nav" id="nav">
         <router-link to="/">
@@ -232,6 +232,7 @@
 
   export default {
     name: 'Header',
+    props:["fullwidth"],
     data() {
       return {
         backPage:false,
