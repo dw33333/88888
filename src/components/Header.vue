@@ -369,12 +369,13 @@
         })
       },
       // 封装提示信息函数
-      mytoast(msg) {
+      mytoast(msg,fn) {
         this.ifopen = true
 
         this.content = msg
         setTimeout(() => {
-          this.ifopen = false
+          this.ifopen = false;
+          fn();
           clearTimeout()
         }, 1500)
       },
@@ -403,7 +404,7 @@
           }
         });
       },
-      enterUserCenter() {
+     /* enterUserCenter() {
         if (!this.username) {
           this.mytoast('请先登录')
           setTimeout(() => {
@@ -413,9 +414,10 @@
         } else {
           this.$router.push('/UserCenter')
         }
-      },
+      },*/
       enterUserCenter() {
-        if (!this.codeToken) {
+        this.$router.push({name:"recharge"});
+       /* if (!this.codeToken) {
           this.mytoast('请先登录')
           setTimeout(() => {
             this.$router.push('/Login')
@@ -423,7 +425,7 @@
           }, 1500)
         } else {
           this.$router.push('/UserCenter')
-        }
+        }*/
       },
       async getuserinfo(virtual) {
         let res = await this.$http.get('/api/users/info');
@@ -478,7 +480,10 @@
               this.$http.defaults.headers.EasySecret = res.headers.easysecret;
               this.EASYSECRET(res.headers.easysecret);
               await this.getuserinfo();
-              this.mytoast(res.data.msg);
+              this.mytoast(res.data.msg,()=>{
+                this.$router.push({name:"Header"});
+              });
+
               // this.usermoney = res.data.data.user_money
 
               // sessionStorage.setItem('username', this.username)

@@ -1,7 +1,7 @@
 <template>
-  <div class='container'>
+  <div class='container withdrawal'>
     <div class="main-head">
-      <span>用户中心&gt;提现</span>
+      <span>用户中心 / 提现</span>
     </div>
     <div class="add-card" v-show="is_loading_car_info&&card" style="color:#B62929;min-height:500px;text-align: center;">
       加载中...
@@ -228,7 +228,10 @@
     },
     async mounted() {
       let res = await this.$http.get('/api/users/Bankcardcat');
-      if (!res) return;
+      if (!res) {
+        this.is_loading_car_info=false;
+        return;
+      };
       if (res.status == 200) {
         this.card =!res.data.code;
         if(this.card){
@@ -348,6 +351,9 @@
 
 </script>
 <style scoped lang="less">
+  .withdrawal{
+    font-size:14px;
+  }
   .tishi {
     text-align: left;
     margin-top: 10px;
@@ -366,7 +372,6 @@
   }
 
   .main-head span {
-    font-size: 16px;
     display: inline-block;
     height: 49px;
     border-bottom: 2px solid #b62929;

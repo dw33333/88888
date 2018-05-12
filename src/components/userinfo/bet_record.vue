@@ -1,6 +1,6 @@
 <template>
   <div class="bet_record">
-    <div class="header"><span class="mbx">用户中心>报表管理>下注记录</span></div>
+    <div class="header"><span class="mbx">用户中心 / 报表管理 / 下注记录</span></div>
     <div class="cont">
       <div class="search_box" style="float:left;">
         时间 ：
@@ -47,8 +47,8 @@
       </table>
       <div style="text-align: center;padding:10px;" v-show="records.length<1&&!is_loading_records">暂无数据</div>
 
-      <div class="pager" v-show="pages.length>1">
-        <div class="item" @click="pageClick(it.page)" v-for="it,idx in pages" :key="idx"
+      <div class="pager">
+        <div class="item"  v-show="pages.length>1" @click="pageClick(it.page)" v-for="it,idx in pages" :key="idx"
              :class="{cur:it.cur,sl:it.page==-1}">{{it.txt}}
         </div>
         <div style="display: inline-block;color:#B62929;" v-show="is_loading_records">加载中...</div>
@@ -230,6 +230,7 @@
 
 <style lang="less">
   .bet_record {
+    font-size:14px;
     .el-input {
       input {
         padding-left: 30px;
