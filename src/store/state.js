@@ -1,8 +1,8 @@
 // 用户名
 let username = '';
 try {
-  if (sessionStorage.getItem('username')) {
-    username = sessionStorage.getItem('username');
+  if (localStorage.getItem('username')) {
+    username = localStorage.getItem('username');
   }
 } catch (e) {
 }
@@ -10,9 +10,9 @@ try {
 // 用户余额
 let money = 0.00
 try {
-  if (sessionStorage.getItem('money')) {
-    // alert(sessionStorage.getItem('usermoney'))
-    money = sessionStorage.getItem('money')
+  if (localStorage.getItem('money')) {
+    // alert(localStorage.getItem('usermoney'))
+    money = localStorage.getItem('money')
   }
 } catch (e) {
 }
@@ -20,8 +20,8 @@ try {
 // AG余额
 let agmoney = 0.00
 try {
-  if (sessionStorage.getItem('agmoney')) {
-    agmoney = JSON.parse(sessionStorage.getItem('agmoney'))
+  if (localStorage.getItem('agmoney')) {
+    agmoney = JSON.parse(localStorage.getItem('agmoney'))
   }
 } catch (e) {
 }
@@ -29,8 +29,8 @@ try {
 // DS余额
 let dsmoney = 0.00
 try {
-  if (sessionStorage.getItem('dsmoney')) {
-    dsmoney = JSON.parse(sessionStorage.getItem('dsmoney'))
+  if (localStorage.getItem('dsmoney')) {
+    dsmoney = JSON.parse(localStorage.getItem('dsmoney'))
   }
 } catch (e) {
 }
@@ -38,8 +38,8 @@ try {
 // 代理ID
 let agentId = 0.00
 try {
-  if (sessionStorage.getItem('agentId')) {
-    agentId = JSON.parse(sessionStorage.getItem('agentId'))
+  if (localStorage.getItem('agentId')) {
+    agentId = JSON.parse(localStorage.getItem('agentId'))
   }
 } catch (e) {
 }
@@ -47,8 +47,8 @@ try {
 // BBIN余额
 let bbinmoney = 0.00
 try {
-  if (sessionStorage.getItem('bbinmoney')) {
-    bbinmoney = JSON.parse(sessionStorage.getItem('bbinmoney'))
+  if (localStorage.getItem('bbinmoney')) {
+    bbinmoney = JSON.parse(localStorage.getItem('bbinmoney'))
   }
 } catch (e) {
 }
@@ -56,8 +56,8 @@ try {
 // MG余额
 let mgmoney = 0.00
 try {
-  if (sessionStorage.getItem('mgmoney')) {
-    mgmoney = JSON.parse(sessionStorage.getItem('mgmoney'))
+  if (localStorage.getItem('mgmoney')) {
+    mgmoney = JSON.parse(localStorage.getItem('mgmoney'))
   }
 } catch (e) {
 }
@@ -65,8 +65,8 @@ try {
 // 用户用户token
 let codeToken = ''
 try {
-  if (sessionStorage.getItem('codeToken')) {
-    codeToken = sessionStorage.getItem('codeToken')
+  if (localStorage.getItem('codeToken')) {
+    codeToken = localStorage.getItem('codeToken')
   }
 } catch (e) {
 }
@@ -74,15 +74,15 @@ try {
 // 用户真实姓名
 let userRealName = ''
 try {
-  if (sessionStorage.getItem('userRealName')) {
-    userRealName = JSON.parse(sessionStorage.getItem('userRealName'))
+  if (localStorage.getItem('userRealName')) {
+    userRealName = JSON.parse(localStorage.getItem('userRealName'))
   }
 } catch (e) {
 }
 let easysecret = '';
 try {
-  if (sessionStorage.getItem('easysecret')) {
-    easysecret = sessionStorage.getItem('easysecret');
+  if (localStorage.getItem('easysecret')) {
+    easysecret = localStorage.getItem('easysecret');
   }
 } catch (e) {
 }
@@ -91,22 +91,22 @@ let rootbox = {
 }
 let sitesInfos = {};
 try {
-  if (sessionStorage.getItem('sitesInfos')) {
-    sitesInfos = JSON.parse(sessionStorage.getItem('sitesInfos'));
+  if (localStorage.getItem('sitesInfos')) {
+    sitesInfos = JSON.parse(localStorage.getItem('sitesInfos'));
   }
 } catch (e) {
 }
 let headerArry = {};
 try {
-  if (sessionStorage.getItem('headerArry')) {
-    headerArry = JSON.parse(sessionStorage.getItem('headerArry'));
+  if (localStorage.getItem('headerArry')) {
+    headerArry = JSON.parse(localStorage.getItem('headerArry'));
   }
 } catch (e) {
 }
 let userinfo = {};
 try {
-  if (sessionStorage.getItem('userinfo')) {
-    userinfo = JSON.parse(sessionStorage.getItem('userinfo'));
+  if (localStorage.getItem('userinfo')) {
+    userinfo = JSON.parse(localStorage.getItem('userinfo'));
   } else {
     userinfo = {};
   }
@@ -114,8 +114,8 @@ try {
 }
 let agent_id = -1;//代理id 值-1 是未被写入过 需要传代理id参数的接口判断
 try {
-  if (sessionStorage.getItem('agent_id')) {
-    agent_id = JSON.parse(sessionStorage.getItem('agent_id'));
+  if (localStorage.getItem('agent_id')) {
+    agent_id = JSON.parse(localStorage.getItem('agent_id'));
   } else {
     agent_id = -1;
   }

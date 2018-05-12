@@ -265,7 +265,7 @@
 
   .btns > .active {
     background-color: #b62929;
-    color: #fff;
+    color: #fff !important;
   }
 
   /*修改登录密码*/

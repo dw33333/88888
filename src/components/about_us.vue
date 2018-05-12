@@ -178,7 +178,7 @@
           return;
         }
         this.EASYSECRET("");
-        sessionStorage.clear();
+        localStorage.clear();
         this.$http.defaults.headers.EasySecret = undefined;
         this.$router.push("login");
       },

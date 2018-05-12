@@ -245,7 +245,7 @@
     text-align: left;
     .header {
       background-color: #fff;
-      padding-left: 10px;
+      padding-left: 20px;
       .mbx {
         line-height: 51px;
         display: inline-block;

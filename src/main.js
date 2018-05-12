@@ -32,7 +32,7 @@ Vue.prototype.$http.interceptors.response.use(
             confirm(){
               if(store.state.easysecret){ //没有登录或者token过期 清空之前状态跳到登录页
                 store.commit("EASYSECRET","");
-                sessionStorage.clear();
+                localStorage.clear();
               }
               Vue.prototype.$http.defaults.headers.EasySecret=undefined;
               router.push("Login");

@@ -254,7 +254,7 @@
         is_login:false
         // showforgotPassword:false
         // usermoney: '',
-        // isShowLogin: sessionStorage.getItem('isLogin')
+        // isShowLogin: localStorage.getItem('isLogin')
 
       }
     },
@@ -486,9 +486,9 @@
 
               // this.usermoney = res.data.data.user_money
 
-              // sessionStorage.setItem('username', this.username)
-              // sessionStorage.setItem('isShowLogin', this.username)
-              // sessionStorage.setItem('usermoney', res.data.data.user_money)
+              // localStorage.setItem('username', this.username)
+              // localStorage.setItem('isShowLogin', this.username)
+              // localStorage.setItem('usermoney', res.data.data.user_money)
 
               // this.$store.dispatch('UserLogin', this.username)
               // this.$store.dispatch('SET_userMoney', this.usermoney)
@@ -522,7 +522,7 @@
       //       this.userLoginOut()
 
       //       this.mytoast(res.data.msg)
-      //       sessionStorage.clear();
+      //       localStorage.clear();
       //       this.codeImgFn().stop
       //       setTimeout(() => {
       //         // alert(1)
@@ -558,9 +558,9 @@
           return;
         }
         this.EASYSECRET("");
-        sessionStorage.clear();
+        localStorage.clear();
         this.$http.defaults.headers.EasySecret = undefined;
-        this.$router.push("/login");
+        this.$router.push({name:"Header"});
       },
       ...mapMutations(['changeUserName', 'getUserRealName', 'changeUserMoney', 'getUserToken', 'userLoginOut', "EASYSECRET", "ROOTBOX", "USERINFO",'GETDATA']),
       // getUserMoney(){
