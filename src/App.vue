@@ -39,7 +39,7 @@
         let res = await this.$http.get('api/site/info');
         if(!res)return;
         this.SITE_INFO(res.data);
-        document.title=res.data.SiteName;
+        document.title=res.data.SiteName||"";
       }
     }
   }

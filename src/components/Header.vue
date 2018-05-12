@@ -500,8 +500,10 @@
             } else {
               this.alert("提示",res.data.msg);
             }
+            this.codeImgFn()
           }).catch((error) => {
             this.is_login=false;
+            this.codeImgFn()
             console.log(error)
           })
         }

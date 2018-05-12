@@ -109,7 +109,7 @@
       if(this.$route.name == 'Teller'){
         this.isActive = false;
         this.num = 3;
-      } 
+      }
       if(this.$route.name == 'Deposit'){
         this.num = 2;
         this.isActive = false;
@@ -723,8 +723,8 @@
     background-color: #ededed;
     overflow-y:auto;
     text-align: left;
-    color: #000;
-    font-size: 15px;
+    color: #6f6d6d;
+    font-size: 14px;
   }
 ol{
         padding: 0;
