@@ -93,7 +93,7 @@ Vue.prototype.$http.interceptors.response.use(
       }
     }else{
       //全局处理错误后返回成功一个undefined 免去每次使用 async await 都try catch
-      console.error(error.response);
+      console.error(error.response,"错误");
       store.commit("LOADING",false);//报错时关闭loading
       wAlert("请求错误");
       return Promise.resolve();
