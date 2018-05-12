@@ -1,6 +1,6 @@
 <template>
   <div class="week_statistic">
-    <div class="header"><span class="mbx">用户中心>报表管理>报表统计</span></div>
+    <div class="header"><span class="mbx">用户中心 / 报表管理 / 报表统计</span></div>
     <div class="cont">
       <table class="tb" cellpadding="0" cellspacing="0">
         <tr>
@@ -86,6 +86,7 @@
 
 <style lang="less">
   .week_statistic {
+    font-size:14px;
     .el-input {
       input {
         padding-left: 30px;
@@ -97,7 +98,7 @@
     text-align: left;
     .header {
       background-color: #fff;
-      padding-left: 10px;
+      padding-left: 20px;
       .mbx {
         line-height: 51px;
         display: inline-block;

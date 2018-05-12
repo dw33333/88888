@@ -1,7 +1,7 @@
 <template>
-  <div class='container'>
+  <div class='container recharge'>
     <div class="main-head">
-      <span>用户中心&gt;账户充值</span>
+      <span>用户中心 / 账户充值</span>
     </div>
     <div class="cont">
       <div class="tab_type clearfix" v-show="!is_loading_paytype&&!is_loading_banks" >
@@ -179,7 +179,10 @@
       this.is_loading_paytype=true;
       let res = await this.$http.get('/api/pay/mobilelist');
       this.is_loading_paytype=false;
-      if (!res) return;
+      if (!res) {
+        this.is_loading_banks=false;
+        return;
+      }
       if (res.data.code !== 0) {
         this.alert("提示", res.data.msg);
         return;
@@ -225,6 +228,9 @@
 
 </script>
 <style scoped lang="less">
+  .recharge{
+    font-size:14px;
+  }
   .main-head {
     background-color: #fff;
     border-bottom: 1px solid #d0d0d0;
@@ -235,7 +241,6 @@
   }
 
   .main-head span {
-    font-size: 16px;
     display: inline-block;
     height: 49px;
     border-bottom: 2px solid #b62929;
@@ -285,12 +290,10 @@
         &.cur {
           border-top: 3px solid #EA3146;
           background-color: #fff;
-          color: #000;
         }
         &:hover {
           border-top: 3px solid #EA3146;
           background-color: #fff;
-          color: #000;
         }
         &.bank {
           background-image: url(/static/rbank.png?2c434f8684);

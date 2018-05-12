@@ -17,7 +17,7 @@ import { mapState } from 'vuex'
 export default {
   data () {
     return {
-      // username: sessionStorage.getItem('username'),
+      // username: localStorage.getItem('username'),
       // user_money: '',
       showIndex: 0,
       titleindex:0,

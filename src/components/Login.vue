@@ -200,7 +200,7 @@
             this.mytoast("登录成功");
             setTimeout(() => {
               if(this.$route.params.hback){
-                this.$router.push(this.$route.params.hback);
+                this.$router.push({name:this.$route.params.hback,params:this.$route.params.params});
                 //this.$router.go(-1);
               }else{
                 this.$router.push({path: "/"});

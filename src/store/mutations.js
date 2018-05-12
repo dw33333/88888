@@ -2,35 +2,35 @@ const mutations = {
   changeUserName (state,data) {
       state.username = data
     try {
-      sessionStorage.setItem('username',data)
+      localStorage.setItem('username',data)
     } catch (e) {}
   },
 
   changeUserMoney (state,data) {
       state.money = data
     try {
-      sessionStorage.setItem('money',data)
+      localStorage.setItem('money',data)
     } catch (e) {}
   },
 
   changeAgMoney (state,data) {
       state.agmoney = data
     try {
-      sessionStorage.setItem('agmoney',data)
+      localStorage.setItem('agmoney',data)
     } catch (e) {}
   },
 
   changeDsMoney (state,data) {
       state.dsmoney = data
     try {
-      sessionStorage.setItem('dsmoney',data)
+      localStorage.setItem('dsmoney',data)
     } catch (e) {}
   },
 
   changeAgentId (state,data) {
       state.agentId = data
     try {
-      sessionStorage.setItem('agentId',data)
+      localStorage.setItem('agentId',data)
     } catch (e) {}
   },
 
@@ -38,7 +38,7 @@ const mutations = {
   // userIsLogin (state,data) {
   //     state.isLogin = data
   //   try {
-  //     sessionStorage.setItem('isLogin',data)
+  //     localStorage.setItem('isLogin',data)
   //   } catch (e) {}
   // },
 
@@ -46,7 +46,7 @@ const mutations = {
       state.codeToken = data
     try {
       // alert('23222'+data)
-      sessionStorage.setItem('codeToken',data)
+      localStorage.setItem('codeToken',data)
     } catch (e) {}
   },
 
@@ -54,16 +54,16 @@ const mutations = {
   getUserRealName (state,data) {
       state.userRealName = data
     try {
-      sessionStorage.setItem('userRealName',data)
+      localStorage.setItem('userRealName',data)
     } catch (e) {}
   },
   EASYSECRET (state,data) {
     state.easysecret = data;
     try {
       if(data)
-        sessionStorage.setItem('easysecret',data);
+        localStorage.setItem('easysecret',data);
       else
-        sessionStorage.setItem('easysecret',"");
+        localStorage.setItem('easysecret',"");
     } catch (e) {}
   },
   //BOOTBOX
@@ -79,27 +79,27 @@ const mutations = {
     state.sitesInfos = data;
     try {
       if(data)
-      sessionStorage.setItem('sitesInfos',JSON.stringify(data));
+      localStorage.setItem('sitesInfos',JSON.stringify(data));
       else
-      sessionStorage.setItem('sitesInfos',"");
+      localStorage.setItem('sitesInfos',"");
     } catch (e) {}
   },
   GETDATA(state,data){
     state.headerArry = data;
     try {
       if(data)
-      sessionStorage.setItem('headerArry',JSON.stringify(data));
+      localStorage.setItem('headerArry',JSON.stringify(data));
       else
-      sessionStorage.setItem('headerArry',"");
+      localStorage.setItem('headerArry',"");
     } catch (e) {}
   },
   USERINFO(state,data){
     state.userinfo = data;
     try {
       if(data)
-      sessionStorage.setItem('userinfo',JSON.stringify(data));
+      localStorage.setItem('userinfo',JSON.stringify(data));
       else
-      sessionStorage.setItem('userinfo',"");
+      localStorage.setItem('userinfo',"");
 
     } catch (e) {}
   },
@@ -107,9 +107,9 @@ const mutations = {
     state.agent_id = data;
     try {
       if(data)
-        sessionStorage.setItem('agent_id',data);
+        localStorage.setItem('agent_id',data);
       else
-        sessionStorage.setItem('agent_id',0);
+        localStorage.setItem('agent_id',0);
     } catch (e) {}
   },
   userLoginOut (state,data) {
@@ -121,13 +121,13 @@ const mutations = {
       state.codeToken=false
       state.userRealName = ''
     try {
-      sessionStorage.setItem('username','')
-      sessionStorage.setItem('usermoney',0.00)
-      sessionStorage.setItem('agmoney',0.00)
-      sessionStorage.setItem('dsmoney',0.00)
-      sessionStorage.setItem('agentId',0.00)
-      sessionStorage.setItem('codeToken',false)
-      sessionStorage.setItem('userRealName','')
+      localStorage.setItem('username','')
+      localStorage.setItem('usermoney',0.00)
+      localStorage.setItem('agmoney',0.00)
+      localStorage.setItem('dsmoney',0.00)
+      localStorage.setItem('agentId',0.00)
+      localStorage.setItem('codeToken',false)
+      localStorage.setItem('userRealName','')
     } catch (e) {}
   }
 }
