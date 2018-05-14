@@ -2344,6 +2344,8 @@
       </div>
       <div v-show="is_loading_result" style="text-align: center;padding-top:20px;color:rgb(229, 57, 53);">加载中...</div>
     </div>
+    </div>
+  </div>
   </div>
 </template>
 
