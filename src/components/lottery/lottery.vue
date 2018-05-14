@@ -7,7 +7,7 @@
         开奖结果
       </div>
     </home-header>
-    <iframe id="show-iframe" frameborder=0 name="showHere" scrolling=no width="1200"  height="700" :src="src"></iframe>
+    <iframe id="frameID" frameborder=0 name="showHere" scrolling=no :src="src"></iframe>
   </div>
 </template>
 <script>
@@ -33,12 +33,6 @@ export default {
     this.src = './lottery/index.html#/lottery/'+this.fc_id;
   },
   mounted () {
-    // >获取用户余额
-    // this.$http.get('/json/center/?r=Money').then((res) => {
-    //   this.user_money = res.data.data.user_money
-    // }).catch((error) => {
-    //   console.log(error)
-    // })
     document.getElementById('nav').style.display = "none";
     document.getElementById('backhide').style.display = "none";
     document.getElementById('backPage').style.display = "block";

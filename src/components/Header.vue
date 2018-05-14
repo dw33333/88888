@@ -19,8 +19,8 @@
             <input type="text" class="inputcode" v-model="code">
             <img :src="codeImg" @click='codeImgFn' class="code" alt="" title="点击更换">
           </div>
-          <div class="item login">
-            <a href="javascript:void(0);" @click='loginSubmit();'>{{is_login?"登录中...":"登录"}}</a>
+          <div class="item login" @click='loginSubmit();'>
+            <a href="javascript:void(0);">{{is_login?"登录中...":"登录"}}</a>
           </div>
           <div class="item regster">
             <router-link to="/register">免费开户</router-link>
