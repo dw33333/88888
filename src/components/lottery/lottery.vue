@@ -8,15 +8,9 @@
       </div>
     </home-header>
     <div class="main" id="loading">
-      <div class="loading">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-      </div>
+      <span style="color:rgb(182, 41, 41);">加载中</span>
 	  </div>
-    <iframe id="frameID" frameborder=0 name="showHere"  scrolling=no src="https://www.cnblogs.com/"></iframe>
+    <iframe id="frameID" frameborder=0 name="showHere"  scrolling=no :src="src"></iframe>
   </div>
 </template>
 <script>
@@ -98,7 +92,6 @@ export default {
 
 </script>
 <style lang="less">
-.lottery_ifm{
 .main{
   width: 100%;
   height: auto;
@@ -701,6 +694,4 @@ a {
   .result:hover{
     color:#b62929;
   }
-}
-
 </style>
