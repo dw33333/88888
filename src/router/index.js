@@ -418,6 +418,7 @@ Vue.use(Router)
 Vue.use(VueAwesomeSwiper)
 
 const route = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
