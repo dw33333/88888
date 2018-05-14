@@ -249,7 +249,7 @@
         margin-right:35px;
         > .item {
           display: inline-block;
-          line-height: 1.9em;
+          line-height: 30px;
           width: 80px;
           cursor: pointer;
           text-align: center;
