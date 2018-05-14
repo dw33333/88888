@@ -7,7 +7,16 @@
         开奖结果
       </div>
     </home-header>
-    <iframe id="frameID" frameborder=0 name="showHere" scrolling=no :src="src"></iframe>
+    <div class="main" id="loading">
+      <div class="loading">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+      </div>
+	  </div>
+    <iframe id="frameID" frameborder=0 name="showHere"  scrolling=no :src="src"></iframe>
   </div>
 </template>
 <script>
@@ -39,6 +48,16 @@ export default {
     document.getElementById('presonInput').style.display = "none";
     document.getElementById('presonInput2').style.display = "none";
     document.getElementById('showId').style.display = "block";
+    let loading = document.getElementById('loading');
+    let frameID = document.getElementById('frameID');
+    loading.style.display = 'block';
+    frameID.style.display = 'none';
+    frameID.onreadystatechange = function(){
+      if(this.readyState == 'complete'){
+        loading.style.display = 'none';
+        frameID.style.display = 'block';
+      }
+    }
   },
   watch:{
     'fc_id':function(n){
@@ -51,7 +70,6 @@ export default {
       this.typeIndex = index
     },
     leftBarfolding (index) {
-      console.log(index)
       this.showIndex = index
     },
     selectRange (index) {
@@ -80,6 +98,60 @@ export default {
 
 </script>
 <style scoped>
+.main{
+			width: 100%;
+			height: auto;
+			padding-top: 100px;
+    	}
+    	a{
+    		display: block;
+    		text-align: center;
+    		font-size: 20px;
+    		margin-top: 200px;
+    	}
+    	.loading{
+            width: 150px;
+            height: 15px;
+            margin: 0 auto;
+            margin-top:100px;
+            text-align: center;
+        }
+        .loading span{
+            display: inline-block;
+            width: 15px;
+            height: 100%;
+            margin-right: 5px;
+            background: #b62929;
+            -webkit-animation: load 1.04s ease infinite;
+        }
+        .loading span:last-child{
+            margin-right: 0px; 
+        }
+        @-webkit-keyframes load{
+            0%{
+                opacity: 1;
+                -webkit-transform: scale(1.2);
+            }
+            100%{
+                opacity: .2;
+                -webkit-transform: scale(.2);
+            }
+        }
+        .loading span:nth-child(1){
+            -webkit-animation-delay:0.13s;
+        }
+        .loading span:nth-child(2){
+            -webkit-animation-delay:0.26s;
+        }
+        .loading span:nth-child(3){
+            -webkit-animation-delay:0.39s;
+        }
+        .loading span:nth-child(4){
+            -webkit-animation-delay:0.52s;
+        }
+        .loading span:nth-child(5){
+            -webkit-animation-delay:0.65s;
+        }
 html,
 body {
   height: 100%;
@@ -97,7 +169,10 @@ select {
   padding: 0;
   list-style-type: none;
 }
-
+#frameID{
+  width: 100%;
+  height: 100%;
+}
 body {
   background: url("../../assets/bg1.jpg") center top no-repeat !important;
 }

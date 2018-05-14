@@ -1,5 +1,34 @@
 <template>
   <div class="lottery_result">
+    <div class="search_box">
+      <div class="item" style="padding-left:10px;">
+        {{tempParam.typeTitle}}
+      </div>
+      <div class="item">
+        游戏 :
+        <select name="" id="" v-model="gameTypeIdx">
+          <option value="-1" disabled selected style="display:none;">{{is_loading_lottery_type?"加载中...":"请选择游戏"}}
+          </option>
+          <option :value="idx" v-for="it,idx in gameTypes" :key="idx">{{it.title}}</option>
+        </select>
+      </div>
+      <div class="item">
+        日期 :
+        <date-picker
+          v-model="date"
+          type="date"
+          placeholder="日期"
+          value-format="yyyy-MM-dd"
+          align="right">
+        </date-picker>
+      </div>
+      <!--<div class="item">
+        期数 :
+        <input type="text" v-model="gameNum"/>
+      </div>-->
+      <div class="btn_search" @click="search">查询</div>
+      <div class="item">
+        <span v-for="(it,idx) in show_types" @click="(show_type=it)" :key="idx"
     <div class="header">
       <div class="left">
         <span class="backhome" @click="($router.push({name:'Header'}))">返回首页</span>
