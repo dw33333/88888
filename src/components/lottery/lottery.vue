@@ -1,5 +1,5 @@
 <template>
-  <div class="container lottery_ifm" id="container">
+  <div class="container1" id="container">
     <!-- 头部 -->
     <!-- 主体部分 -->
     <home-header >
@@ -8,15 +8,9 @@
       </div>
     </home-header>
     <div class="main" id="loading">
-      <div class="loading">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-      </div>
+      <span style="color:rgb(182, 41, 41);">加载中.....</span>
 	  </div>
-    <iframe id="frameID" frameborder=0 name="showHere"  scrolling=no src="https://www.cnblogs.com/"></iframe>
+    <iframe id="frameID" frameborder=0 name="showHere"  scrolling=no :src="src"></iframe>
   </div>
 </template>
 <script>
@@ -52,16 +46,22 @@ export default {
     let frameID = document.getElementById('frameID');
     loading.style.display = 'block';
     frameID.style.display = 'none';
-    frameID.onreadystatechange = function(){
-      if(this.readyState == 'complete'){
+    if (frameID.attachEvent){
+    frameID.attachEvent("onload", function(){
         loading.style.display = 'none';
         frameID.style.display = 'block';
-      }
+    });
+    } else {
+    frameID.onload = function(){
+        loading.style.display = 'none';
+        frameID.style.display = 'block';
+      };
     }
+
   },
   watch:{
     'fc_id':function(n){
-        this.src = './lottery/index.html#/lottery/'+n
+        this.src = '/lottery/index.html#/lottery/'+n
     }
   },
   methods: {
@@ -97,62 +97,12 @@ export default {
 }
 
 </script>
-<style lang="less">
-.lottery_ifm{
+<style  lang="less">
 .main{
   width: 100%;
   height: auto;
   padding-top: 100px;
   }
-  a{
-    display: block;
-    text-align: center;
-    font-size: 20px;
-    margin-top: 200px;
-  }
-  .loading{
-        width: 150px;
-        height: 15px;
-        margin: 0 auto;
-        margin-top:100px;
-        text-align: center;
-    }
-    .loading span{
-        display: inline-block;
-        width: 15px;
-        height: 100%;
-        margin-right: 5px;
-        background: #b62929;
-        -webkit-animation: load 1.04s ease infinite;
-    }
-    .loading span:last-child{
-        margin-right: 0px; 
-    }
-    @-webkit-keyframes load{
-        0%{
-            opacity: 1;
-            -webkit-transform: scale(1.2);
-        }
-        100%{
-            opacity: .2;
-            -webkit-transform: scale(.2);
-        }
-    }
-    .loading span:nth-child(1){
-        -webkit-animation-delay:0.13s;
-    }
-    .loading span:nth-child(2){
-        -webkit-animation-delay:0.26s;
-    }
-    .loading span:nth-child(3){
-        -webkit-animation-delay:0.39s;
-    }
-    .loading span:nth-child(4){
-        -webkit-animation-delay:0.52s;
-    }
-    .loading span:nth-child(5){
-        -webkit-animation-delay:0.65s;
-    }
 html,
 body {
   height: 100%;
@@ -178,7 +128,7 @@ body {
   background: url("../../assets/bg1.jpg") center top no-repeat !important;
 }
 
-.container {
+.container1 {
   width: 100%;
   height: 100%;
   margin: 0 auto;
@@ -701,6 +651,4 @@ a {
   .result:hover{
     color:#b62929;
   }
-}
-
 </style>
