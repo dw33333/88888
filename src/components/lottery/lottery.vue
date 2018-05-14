@@ -1,5 +1,5 @@
 <template>
-  <div class="container lottery_ifm" id="container">
+  <div class="container1" id="container">
     <!-- 头部 -->
     <!-- 主体部分 -->
     <home-header >
@@ -8,7 +8,7 @@
       </div>
     </home-header>
     <div class="main" id="loading">
-      <span style="color:rgb(182, 41, 41);">加载中</span>
+      <span style="color:rgb(182, 41, 41);">加载中.....</span>
 	  </div>
     <iframe id="frameID" frameborder=0 name="showHere"  scrolling=no :src="src"></iframe>
   </div>
@@ -46,16 +46,22 @@ export default {
     let frameID = document.getElementById('frameID');
     loading.style.display = 'block';
     frameID.style.display = 'none';
-    frameID.onreadystatechange = function(){
-      if(this.readyState == 'complete'){
+    if (frameID.attachEvent){
+    frameID.attachEvent("onload", function(){
         loading.style.display = 'none';
         frameID.style.display = 'block';
-      }
+    });
+    } else {
+    frameID.onload = function(){
+        loading.style.display = 'none';
+        frameID.style.display = 'block';
+      };
     }
+
   },
   watch:{
     'fc_id':function(n){
-        this.src = './lottery/index.html#/lottery/'+n
+        this.src = '/lottery/index.html#/lottery/'+n
     }
   },
   methods: {
@@ -91,17 +97,11 @@ export default {
 }
 
 </script>
-<style lang="less">
+<style  lang="less">
 .main{
   width: 100%;
   height: auto;
   padding-top: 100px;
-  }
-  a{
-    display: block;
-    text-align: center;
-    font-size: 20px;
-    margin-top: 200px;
   }
 html,
 body {
@@ -128,7 +128,7 @@ body {
   background: url("../../assets/bg1.jpg") center top no-repeat !important;
 }
 
-.container {
+.container1 {
   width: 100%;
   height: 100%;
   margin: 0 auto;
