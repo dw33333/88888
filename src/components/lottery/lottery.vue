@@ -1,5 +1,5 @@
 <template>
-  <div class="container" id="container">
+  <div class="container lottery_ifm" id="container">
     <!-- 头部 -->
     <!-- 主体部分 -->
     <home-header >
@@ -16,7 +16,7 @@
               <span></span>
       </div>
 	  </div>
-    <iframe id="frameID" frameborder=0 name="showHere"  scrolling=no :src="src"></iframe>
+    <iframe id="frameID" frameborder=0 name="showHere"  scrolling=no src="https://www.cnblogs.com/"></iframe>
   </div>
 </template>
 <script>
@@ -39,7 +39,7 @@ export default {
   },
   created(){
     this.fc_id = this.$route.params.id;
-    this.src = './lottery/index.html#/lottery/'+this.fc_id;
+    this.src = '/lottery/index.html#/lottery/'+this.fc_id;
   },
   mounted () {
     document.getElementById('nav').style.display = "none";
@@ -97,61 +97,62 @@ export default {
 }
 
 </script>
-<style scoped>
+<style lang="less">
+.lottery_ifm{
 .main{
-			width: 100%;
-			height: auto;
-			padding-top: 100px;
-    	}
-    	a{
-    		display: block;
-    		text-align: center;
-    		font-size: 20px;
-    		margin-top: 200px;
-    	}
-    	.loading{
-            width: 150px;
-            height: 15px;
-            margin: 0 auto;
-            margin-top:100px;
-            text-align: center;
+  width: 100%;
+  height: auto;
+  padding-top: 100px;
+  }
+  a{
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    margin-top: 200px;
+  }
+  .loading{
+        width: 150px;
+        height: 15px;
+        margin: 0 auto;
+        margin-top:100px;
+        text-align: center;
+    }
+    .loading span{
+        display: inline-block;
+        width: 15px;
+        height: 100%;
+        margin-right: 5px;
+        background: #b62929;
+        -webkit-animation: load 1.04s ease infinite;
+    }
+    .loading span:last-child{
+        margin-right: 0px; 
+    }
+    @-webkit-keyframes load{
+        0%{
+            opacity: 1;
+            -webkit-transform: scale(1.2);
         }
-        .loading span{
-            display: inline-block;
-            width: 15px;
-            height: 100%;
-            margin-right: 5px;
-            background: #b62929;
-            -webkit-animation: load 1.04s ease infinite;
+        100%{
+            opacity: .2;
+            -webkit-transform: scale(.2);
         }
-        .loading span:last-child{
-            margin-right: 0px; 
-        }
-        @-webkit-keyframes load{
-            0%{
-                opacity: 1;
-                -webkit-transform: scale(1.2);
-            }
-            100%{
-                opacity: .2;
-                -webkit-transform: scale(.2);
-            }
-        }
-        .loading span:nth-child(1){
-            -webkit-animation-delay:0.13s;
-        }
-        .loading span:nth-child(2){
-            -webkit-animation-delay:0.26s;
-        }
-        .loading span:nth-child(3){
-            -webkit-animation-delay:0.39s;
-        }
-        .loading span:nth-child(4){
-            -webkit-animation-delay:0.52s;
-        }
-        .loading span:nth-child(5){
-            -webkit-animation-delay:0.65s;
-        }
+    }
+    .loading span:nth-child(1){
+        -webkit-animation-delay:0.13s;
+    }
+    .loading span:nth-child(2){
+        -webkit-animation-delay:0.26s;
+    }
+    .loading span:nth-child(3){
+        -webkit-animation-delay:0.39s;
+    }
+    .loading span:nth-child(4){
+        -webkit-animation-delay:0.52s;
+    }
+    .loading span:nth-child(5){
+        -webkit-animation-delay:0.65s;
+    }
 html,
 body {
   height: 100%;
@@ -700,4 +701,6 @@ a {
   .result:hover{
     color:#b62929;
   }
+}
+
 </style>
