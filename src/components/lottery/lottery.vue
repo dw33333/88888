@@ -3,7 +3,7 @@
     <!-- 头部 -->
     <!-- 主体部分 -->
     <home-header >
-      <div slot="lottery_result" class="items" @click="($router.push({name:'lottery_result'}))">
+      <div slot="lottery_result" class="items result" style="cursor:pointer;" @click="($router.push({name:'lottery_result'}))">
         开奖结果
       </div>
     </home-header>
@@ -697,5 +697,7 @@ ul {
 a {
   text-decoration: none;
 }
-
+  .result:hover{
+    color:#b62929;
+  }
 </style>

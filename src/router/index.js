@@ -409,10 +409,16 @@ const Gxklsf = (resolve) => {
     resolve(module)
   })
 }
+const p404 = (resolve) => {
+  import("@/components/p404").then((module) => {
+    resolve(module)
+  })
+}
 Vue.use(Router)
 Vue.use(VueAwesomeSwiper)
 
 const route = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -718,6 +724,11 @@ const route = new Router({
       path: '/lottery_result',
       name: 'lottery_result',
       component: lottery_result
+    },
+    ,{
+      path: '*',
+      name: 'not_found',
+      component: p404
     },
   ]
 });

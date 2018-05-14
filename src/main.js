@@ -3,11 +3,46 @@ import App from './App'
 import router from './router'
 import store from './store'
 import axios from 'axios'
-/*import $ from 'jquery'*/
 import 'babel-polyfill'  //ie11打开空白
 import alert from "@/components/base/alert"
 import "@/obj/util"
 import { DatePicker } from 'element-ui';
+
+window.wAlert=(msg,fn)=>{//挂到全局中(同域iframe可调用)
+  store.commit("ROOTBOX",{
+    open: true,
+    compt: alert,
+    props: {
+      tit: "提示",
+      msg: msg,
+      msgstyle: {}
+    },
+    handles: {
+      confirm() {
+        store.commit("ROOTBOX",{
+          open: false
+        });
+        if (fn) fn(async ()=>{
+          let res = await Vue.prototype.$http.post('/api/user/logout');
+          if (!res) return;
+          if (res.data.code != 0) {
+            wAlert(res.data.msg);
+            return;
+          }
+          store.commit("EASYSECRET","");
+          localStorage.clear();
+          Vue.prototype.$http.defaults.headers.EasySecret = undefined;
+          router.push({name:"Header"});
+        });
+      },
+      close() {
+        store.commit("ROOTBOX",{
+          open: false
+        });
+      }
+    }
+  });
+}
 Vue.component("DatePicker", DatePicker);
 Vue.config.productionTip = true
 axios.defaults.withCredentials = true
@@ -53,30 +88,6 @@ Vue.prototype.$http.interceptors.response.use(
     }
   },
   error => {
-    let wAlert=(msg)=>{//todo 放到公共文件中
-      store.commit("ROOTBOX",{
-        open: true,
-        compt: alert,
-        props: {
-          tit: "提示",
-          msg: msg,
-          msgstyle: {}
-        },
-        handles: {
-          confirm() {
-            store.commit("ROOTBOX",{
-              open: false
-            })
-          },
-          close() {
-            if (fn) fn();
-            store.commit("ROOTBOX",{
-              open: false
-            });
-          }
-        }
-      });
-    }
     if (error.response&&error.response.status) {
       switch (error.response.status) {//根据状态码提示对应消息
         case 401:
@@ -107,8 +118,7 @@ Vue.prototype.$http.interceptors.response.use(
 // axios.defaults.headers.common['token'] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJlYXN5LWNhc2luby1jb2RlIiwiY29kZSI6Ijg3NTgiLCJleHAiOjE1MjMxNzkwNjJ9.n18yr7jQxu1CZg9VfAHz6mwAgMNpw2c_g1B1f5PGd5M'
 //设置请求头
 // axios.defaults.headers.post["Content-type"] = "application/x-www-form-urlencoded"
-
-let vue =new Vue({
+window.cwvue=new Vue({
   el: '#app',
   router,
   store,

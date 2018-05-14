@@ -232,7 +232,7 @@
   .bet_record {
     font-size:14px;
     .el-input {
-      input {
+      input[type=text],input[type=password] {
         padding-left: 30px;
         width: 220px;
         height: 35px;
