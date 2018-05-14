@@ -28,7 +28,7 @@
       </div>-->
       <div class="btn_search" @click="search">查询</div>
       <div class="item">
-        <span v-for="it in show_types" @click="(show_type=it)"
+        <span v-for="(it,idx) in show_types" @click="(show_type=it)" :key="idx" 
               :style="{color:show_type.value==it.value?'#e53935':'inherit'}"
               style="display: inline-block;padding:0 5px;cursor:pointer;">{{it.tit}}</span>
       </div>
