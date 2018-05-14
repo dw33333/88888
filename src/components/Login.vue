@@ -89,10 +89,10 @@
     },
     methods: {
       codeImgFn() {
-        this.$http.get('/api/site/captcha').then((res) => {
+        this.$http.get('/api/site/captcha/'+"?"+Math.random()).then((res) => {
           if (res.status === 200) {
-            this.codeImg = res.data.src
-            this.temcodeToken = res.data.codeToken
+            this.codeImg = res.data.src;
+            this.temcodeToken = res.data.codeToken;
             // this.mytoast(res.data.msg)
 
             this.getUserToken(this.temcodeToken)

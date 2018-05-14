@@ -137,7 +137,7 @@
         </li>
       </ul>
       <div class="item btns">
-        <button @click="addCard">{{is_add_card?"提交中...":"确定"}}</button>
+        <div class="btn" @click="addCard">{{is_add_card?"提交中...":"确定"}}</div>
       </div>
     </div>
     <div class="add-card" v-if="card" v-show="!is_loading_car_info">
@@ -173,7 +173,7 @@
         </li>
       </ul>
       <div class="item btns">
-        <button @click="tixian">{{is_tixian?"提交中...":"确定提交"}}</button>
+        <div class="btn" @click="tixian">{{is_tixian?"提交中...":"确定提交"}}</div>
       </div>
       <div class="tishi">
         <div>提款须知：</div>
@@ -504,9 +504,9 @@
 
   }
 
-  .add-card .item button {
+  .add-card .item .btn {
     background-color: #b62929;
-    padding: 8px 20px;
+    padding: 12px 20px;
     outline: none;
     border: none;
     border-radius: 5px;
@@ -517,10 +517,10 @@
 
   .add-card .item.btns {
     text-align: left;
-    padding-left: 180px;
+    padding-left: 135px;
   }
 
-  .add-card .item button:hover {
+  .add-card .item .btn:hover {
     background-color: #e34343;
   }
 

@@ -73,27 +73,27 @@
         <div class="sidebar">
           <div class="sidebar-menu">
             <div class="item" @click="isShow(1)">
-              <a href="javascript:void(0);">密码管理</a>
+              <a  href="javascript:void(0);">密码管理</a>
             </div>
             <ul class='list-item'
-                :style="{height:isDisplay==1?((34*1)+'px'):'0px',visibility:isDisplay==1?'visible':'hidden',overflow:'hidden'}">
+                :style="{height:isDisplay==1?((30*1)+'px'):'0px',visibility:isDisplay==1?'visible':'hidden',overflow:'hidden'}">
               <li>
-                <router-link to="/PasswordManagement">修改密码</router-link>
+                <router-link class="full" to="/PasswordManagement">修改密码</router-link>
               </li>
             </ul>
             <div class="item" @click="isShow(2)">
-              <a href="javascript:void(0);">报表管理</a>
+              <a  href="javascript:void(0);">报表管理</a>
             </div>
             <ul class="list-item"
-                :style="{height:isDisplay==2?((34*3)+'px'):'0px',visibility:isDisplay==2?'visible':'hidden',overflow:'hidden'}">
+                :style="{height:isDisplay==2?((30*3)+'px'):'0px',visibility:isDisplay==2?'visible':'hidden',overflow:'hidden'}">
               <li>
-                <router-link to="/charge_record">充提记录</router-link>
+                <router-link class="full" to="/charge_record">充提记录</router-link>
               </li>
               <li>
-                <router-link to="/bet_record">下注记录</router-link>
+                <router-link class="full" to="/bet_record">下注记录</router-link>
               </li>
               <li>
-                <router-link to="/week_statistic">报表统计</router-link>
+                <router-link class="full" to="/week_statistic">报表统计</router-link>
               </li>
             </ul>
            <!-- <div class="item" @click="isShow(3)">
@@ -109,12 +109,12 @@
               <a href="javascript:void(0);">信息中心</a>
             </div>
             <ul class='list-item'
-                :style="{height:isDisplay==4?((34*2)+'px'):'0px',visibility:isDisplay==4?'visible':'hidden',overflow:'hidden'}">
+                :style="{height:isDisplay==4?((30*2)+'px'):'0px',visibility:isDisplay==4?'visible':'hidden',overflow:'hidden'}">
               <li>
-                <router-link to="/msg_list">站内短信</router-link>
+                <router-link class="full" to="/msg_list">站内短信</router-link>
               </li>
              <li>
-                <router-link to="/Notice">网站公告</router-link>
+                <router-link class="full" to="/Notice">网站公告</router-link>
               </li>
             </ul>
           </div>
@@ -326,6 +326,12 @@
 </script>
 <style lang="less">
   .usercenter {
+    .full{
+      display:inline-block;
+      width:100%;
+      height:100%;
+      box-sizing:border-box;
+    }
     textarea {
       line-height: 1.5em;
       width: 300px;
@@ -766,7 +772,7 @@
     text-align: left;
     padding-left: 20px;
     cursor: pointer;
-    line-height: 40px;
+    line-height: 38px;
     /* height: 40px; */
     width: 172px;
     margin: 3px auto;
@@ -793,7 +799,6 @@
   .sidebar-menu .list-item li {
     cursor: pointer;
     text-align: left;
-    margin-top: 2px;
     width: 100%;
   }
 

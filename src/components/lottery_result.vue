@@ -137,7 +137,7 @@
             <td :style="{color:getColors(it.spe_sum_overorunder)}">{{it.spe_sum_overorunder}}</td>
             <td :style="{color:getColors(it.spe_tailnum_overorunder)}">{{it.spe_tailnum_overorunder}}</td>
             <td :style="{color:getColors(it.spe_jiaqingoryeshou)}">{{it.spe_jiaqingoryeshou}}</td>
-            <td :style="{color:colors[it.colorkey]}">{{it.color}}</td>
+            <td :style="{color:colors2[it.colorkey]}">{{it.color}}</td>
           </tr>
         </table>
         <table class="tb xglhc" v-show="show_type.value=='longhudou'" v-if="tempParam.typeName=='Xglhc'">
