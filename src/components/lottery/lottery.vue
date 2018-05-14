@@ -30,7 +30,7 @@ export default {
   },
   created(){
     this.fc_id = this.$route.params.id;
-    this.src = './lottery/index.html#/lottery/'+this.fc_id;
+    this.src = '/lottery/index.html#/lottery/'+this.fc_id;
   },
   mounted () {
     document.getElementById('nav').style.display = "none";
