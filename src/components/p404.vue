@@ -20,7 +20,7 @@
           clearInterval(trv);
           this.$router.push("/");
         }
-      },1000)
+      },1000);
     }
   }
 </script>
