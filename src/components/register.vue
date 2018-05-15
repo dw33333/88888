@@ -144,6 +144,36 @@
           </tr>
           <tr>
             <td class="right">
+              &nbsp;<span style="color:red;">*</span>&nbsp;密保问题：
+            </td>
+            <td>
+              <select name="" id="" class="inp" v-model="ask">
+                <option value="-1" style="display: none;" disabled selected >{{is_loading_ask?"加载中...":"请选择"}}</option>
+                <option :value="idx" v-for="it,idx in askList" :key="idx" >{{it}}</option>
+              </select>
+            </td>
+            <td>
+              <font color="#ce8b00">
+
+              </font>
+            </td>
+          </tr>
+          <tr>
+            <td class="right">
+              &nbsp;<span style="color:red;">*</span>&nbsp;密保答案：
+            </td>
+            <td>
+              <input class="inp" type="text" placeholder="请输入密保答案"
+                     v-model="answer"  maxlength="11">
+            </td>
+            <td>
+              <font color="#ce8b00">
+                *必填
+              </font>
+            </td>
+          </tr>
+          <tr>
+            <td class="right">
               &nbsp;
             </td>
             <td colspan="2">
@@ -245,6 +275,8 @@
   export default {
     data() {
       return {
+        ask:-1,
+        answer:"",
         isShowAgreement: false,
         ifopen: false,
         content: '',
@@ -260,33 +292,28 @@
         value: [],
         ifcheck: true,
         sex: 0,
-        is_reg:false
+        is_reg:false,
+        is_loading_ask:false,
+        askList:[]
       }
     },
+    created(){
+      this.loadAskData();
+    },
     methods: {
-      ...mapMutations(['changeUserName', 'changeUserMoney','ROOTBOX',"EASYSECRET","AGENT_ID"]),
+      ...mapMutations(['changeUserName', 'changeUserMoney','ROOTBOX',"EASYSECRET","AGENT_ID","USERINFO"]),
       selectSex(index) {
         this.sex = index
-        // alert(this.sex)
+      },
+      async loadAskData(){
+        this.is_loading_ask=true;
+        let res = await this.$http.get("/api/user/userAsk");
+        this.is_loading_ask=false;
+        if(!res)return;
+        this.askList=res.data;
       },
       check(q, auth) {//异步验证
-        return new Promise((resolve, reject) => {
-          this.$http.post('/api/user/check', {q: q, auth: auth}).then(res => {
-            if (res.status === 200 && res.data.code === 0) {
-              resolve(res);
-            } else {
-              reject(res);
-            }
-          }).catch(err => {
-            reject(err);
-          });
-        }).catch(err => {
-          if(err.data){
-            this.alert('提示',err.data.msg);
-          }else{
-            this.alert("提示","验证失败!");
-          }
-        });
+        return this.$http.post('/api/user/check', {q: q, auth: auth});
       },
       showAgreement() {
         this.isShowAgreement = true
@@ -294,7 +321,6 @@
       hideAgreement() {
         this.isShowAgreement = false
       },
-
       // 限制真实姓名输入框只能输入中文
       realTis() {
         this.realname = this.realname.replace(/[^\u4e00-\u9fa5]+$/, '')
@@ -338,6 +364,15 @@
       },
       // 提交注册
       async registerSubmit() {
+        /*let res = await this.check(this.username, "username");
+        console.log(res,2222222);
+        return;*/
+
+
+
+
+        if(this.is_loading_ask)return;
+
         if (!this.username) {
           this.alert('提示','请输入用户名！');
         } else if (this.username.length < 4) {
@@ -368,18 +403,43 @@
           this.alert('提示','请输入取款密码！')
         } else if (this.bankCode.length < 4) {
           this.alert('提示','取款密码最少4位数！')
+        } else if (!this.askList[this.ask]) {
+          this.alert('提示','请选择密保问题！')
+        } else if (!this.answer) {
+          this.alert('提示','请输入密保答案！')
         } else if (!this.ifcheck) {
           this.alert('提示','请勾选开户协议！')
         } else {
           this.is_reg=true;
+
           let res = await this.check(this.username, "username");
           if (!res) {this.is_reg=false;return;}
+          if (res.data.code!=0){
+            this.alert('提示',res.data.msg);
+            this.is_reg=false;
+            return;
+          }
           res = await  this.check(this.phonenum, "tel");
           if (!res)  {this.is_reg=false;return;}
+          if (res.data.code!=0){
+            this.alert('提示',res.data.msg);
+            this.is_reg=false;
+            return;
+          }
           res = await  this.check(this.realname, "realname");
           if (!res)  {this.is_reg=false;return;}
+          if (res.data.code!=0){
+            this.alert('提示',res.data.msg);
+            this.is_reg=false;
+            return;
+          }
           res = await  this.check(this.email, "email");
           if (!res)  {this.is_reg=false;return;}
+          if (res.data.code!=0){
+            this.alert('提示',res.data.msg);
+            this.is_reg=false;
+            return;
+          }
           let data = {
             username: this.username,
             password: this.password,
@@ -389,7 +449,9 @@
             MultiPwd: this.bankCode,
             qq: this.qq,
             sex: this.sex,
-            email: this.email
+            email: this.email,
+            ask:this.askList[this.ask],
+            answer:this.answer
           }
           if(this.agent_id==-1){//还没写入agent_id
             res = await this.$http({
@@ -406,7 +468,7 @@
             }
           }
           data.agent_id=this.agent_id;
-          this.$http.post('/api/user/regster', data).then(res => {
+          this.$http.post('/api/user/regster', data).then(async res => {
             this.$http.defaults.headers.EasySecret=res.headers.easysecret;
             this.EASYSECRET(res.headers.easysecret);
             this.mytoast(res.data.msg);
@@ -415,11 +477,13 @@
               this.changeUserName(this.username)
               this.changeUserMoney('0.00')
               // this.userIsLogin(true)
+              await this.getuserinfo();
               this.is_reg=false;
               setTimeout(() => {
                 this.$router.push('/')
               }, 1500)
             }else{
+              this.is_reg=false;
               this.alert("提示",res.data.msg);
             }
           })
@@ -428,6 +492,29 @@
               console.log(error)
             })
         }
+      },
+      async getuserinfo() {
+        let res = await this.$http.get('/api/users/info');
+        if (!res) return
+        if (res.data.code != 0) {
+          this.alert("提示", res.data.msg);
+          return;
+        }
+        this.USERINFO({
+          bankname: res.data.data.BandName,
+          cardnum: res.data.data.CardNumber,
+          logintime: res.data.data.LoginTime,
+          mobile: res.data.data.Mobile,
+          money: res.data.data.Money,
+          msgnum: res.data.data.MsgNumber,
+          name: res.data.data.Name,
+          username: res.data.data.UserName,
+          email: res.data.data.email,
+          qq: res.data.data.qq
+        });
+        this.getUserRealName(res.data.data.Name);
+        this.changeUserMoney(res.data.data.Money);
+        this.changeUserName(res.data.data.UserName);
       },
       // 点击本人同意
       sureAgreement() {
@@ -503,8 +590,8 @@
     text-decoration: none !important;
     outline: none !important;
   }
-
   .registration-c .inp {
+    box-sizing:content-box;
     color: #666;
     border: 1px solid #d6d6d6;
     padding-left: 5px;

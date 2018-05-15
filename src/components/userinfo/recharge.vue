@@ -129,10 +129,10 @@
             this.alert("提示", "转账金额不能低于100元");
             return;
           } else if (!this.curType.about) {
-            this.alert("提示", "请填写备注")
+            this.alert("提示", "请填写备注");
             return;
           } else if (!this.curType.type) {
-            this.alert("提示", "请选择转账类型")
+            this.alert("提示", "请选择转账类型");
             return;
           }
           this.is_submiting=true;

@@ -22,7 +22,7 @@ window.wAlert=(msg,fn)=>{//挂到全局中(同域iframe可调用)
         store.commit("ROOTBOX",{
           open: false
         });
-        if (fn) fn(async ()=>{
+        if (fn) fn(async ()=>{//第一个参数是退出登录的函数
           let res = await Vue.prototype.$http.post('/api/user/logout');
           if (!res) return;
           if (res.data.code != 0) {

@@ -2,6 +2,20 @@
   <div class="week_statistic">
     <div class="header"><span class="mbx">用户中心 / 报表管理 / 报表统计</span></div>
     <div class="cont">
+      <div class="clearfix">
+        <div class="tab_type clearfix">
+          <div class="item" v-for="it in types" @click="(types.forEach(v=>v.cur=false),it.cur=true,curType=it,typeClick())" :class="{cur:it.cur}">{{it.tit}}</div>
+        </div>
+        <div class="search_box" style="float:left;">
+          时间 ：
+          <select class="short" v-model="curDate" >
+            <option :value="it.value" v-for="it in dates">{{it.tit}}</option>
+          </select>
+          <!--&emsp;&emsp;&emsp;订单号
+          : <input class="short" type="text"/>-->
+          <div  class="btn_search" @click="search">查询</div>
+        </div>
+      </div>
       <table class="tb" cellpadding="0" cellspacing="0">
         <tr>
           <th>总笔数</th>
@@ -29,17 +43,38 @@
   import alert from "@/components/base/alert"
 
   export default {
-    name: "bet_record",
+    name: "week_statistic",
     components: {
     },
     data() {
       return {
         records: [],
-        is_loading:false
+        is_loading:false,
+        curDate:"cur",
+        curType:undefined,
+        types:[{
+          tit:"彩票",
+          value:1,
+          cur:true
+        },{
+          tit:"六合彩",
+          value:2,
+          cur:false
+        }],
+        dates:[{
+          tit:"本周",
+          value:"cur",
+          cur:true
+        },{
+          tit:"上周",
+          value:"before",
+          cur:false
+        }],
       }
 
     },
-    async mounted() {
+    created(){
+      this.curType=this.types[0];
       this.loadRecords();
     },
     methods: {
@@ -69,9 +104,24 @@
           }
         });
       },
+      typeClick(){
+        this.loadRecords();
+      },
+      search(){
+        this.loadRecords();
+      },
       async loadRecords() {
+        this.records=[];
+        let url='/api/users/weekStatistic';
+        let data={
+          op:this.curDate
+        };
+        if(data.op=="cur") delete data.op;
+        if(this.curType&&this.curType.value==2){
+          url="/api/users/lhcWeekStatistic";
+        }
         this.is_loading=true;
-        let res = await this.$http.get('/api/users/weekStatistic');
+        let res = await this.$http.post(url,data);
         this.is_loading=false;
         if (!res) return;
         if (res.data.code != 0) {
@@ -118,7 +168,7 @@
         margin-right: 35px;
         > .item {
           display: inline-block;
-          line-height: 1.9em;
+          line-height: 30px;
           width: 80px;
           cursor: pointer;
           text-align: center;
