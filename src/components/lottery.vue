@@ -1,8 +1,11 @@
 <template>
     <div class="xx_lottery">
-    <home-header >
+    <home-header  class="xx_lottery_hheader">
       <div slot="lottery_result" class="items result" style="cursor:pointer;" @click="($router.push({name:'lottery_result',params:{game_name:$route.params.id}}))">
         开奖结果
+      </div>
+      <div slot="game_introduce" class="items result" style="cursor:pointer;" @click="($router.push({name:$route.params.id}))">
+        玩法介绍
       </div>
     </home-header>
     <div class="lottery-r-box w ">
@@ -1169,4 +1172,7 @@
 <style scope lang="less">
   @import "../assets/css/lottery.less";
   @import "../assets/css/common.less";
+  .xx_lottery_hheader .result:hover{
+    color:#B62929;
+  }
 </style>

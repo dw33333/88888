@@ -159,6 +159,7 @@
               </div>
             </div>
            </div>
+          <div class="triangles_back"></div>
           </div>
         </transition>
       </div>
