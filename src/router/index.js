@@ -40,11 +40,7 @@ const Login = (resolve) => {
 // }
 
 // 彩票模块
-const lottery = (resolve) => {
-  import('@/components/lottery/lottery').then((module) => {
-    resolve(module)
-  })
-}
+
 
 // 用户中心>投注记录>购彩查询
 // const Buyrecord = (resolve) => {
@@ -464,11 +460,6 @@ const route = new Router({
       path: '/Activity',
       name: 'Activity',
       component: Activity
-    },
-    {
-      path: '/lottery_ifm/:id',
-      name: 'lottery',
-      component: lottery
     },
     {
       path: '/Help',
