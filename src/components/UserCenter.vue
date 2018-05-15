@@ -15,7 +15,7 @@
       </ul>
       <!-- 下拉游戏选择 -->
       <transition name="fade">
-        <div class="menu-child"  v-if="isShowMenu" id="lot_sec_menu">
+        <div class="menu-child" @mouseover="showAllgame" @mouseout="hideAllgame" v-if="isShowMenu" id="lot_sec_menu">
           <div class="gamelist clear">
 
             <div class="cut-line"></div>
