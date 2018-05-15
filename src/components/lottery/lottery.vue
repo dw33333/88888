@@ -3,7 +3,7 @@
     <!-- 头部 -->
     <!-- 主体部分 -->
     <home-header >
-      <div slot="lottery_result" class="items result" style="cursor:pointer;" @click="($router.push({name:'lottery_result',params:{game_name:fc_id}}))">
+      <div slot="lottery_result" class="items result" style="cursor:pointer;" @click="($router.push({name:'lottery_result',params:{game_name:$route.params.id}}))">
         开奖结果
       </div>
     </home-header>
