@@ -1220,3 +1220,8 @@ table th{
     color: #fff;
     margin-top: 55px;
 }
+.fl {float: left;}
+.fr {float: right;}
+.clearfix:before, .clearfix:after {content: "";  display: table;}
+.clearfix:after {clear: both;}
+.clearfix { *zoom: 1;}

@@ -270,5 +270,4 @@
 </script>
 <style scope>
     @import "../assets/css/lottery.css";
-    @import  '../assets/css/common.css';
 </style>

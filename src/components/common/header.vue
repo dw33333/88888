@@ -12,5 +12,4 @@
     }
 </script>
 <style scope>
- @import  '../assets/css/common.css';
 </style>

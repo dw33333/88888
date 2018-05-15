@@ -727,5 +727,9 @@
         background: -webkit-linear-gradient(#59e, #0E4FC3)!important;
         background: linear-gradient(#59e, #0E4FC3)!important;
     }
-     @import  '../assets/css/common.css';
+     .fl {float: left;}
+    .fr {float: right;}
+    .clearfix:before, .clearfix:after {content: "";  display: table;}
+    .clearfix:after {clear: both;}
+    .clearfix { *zoom: 1;}
 </style>
