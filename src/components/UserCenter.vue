@@ -138,7 +138,7 @@
         isDisplay: 0,
         content: '',
         ifopen: false,
-        isShowMenu: true,
+        isShowMenu: false,
         unread_count: '',
         /*lock10: false,
         lock20: false,
