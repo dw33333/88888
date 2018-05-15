@@ -66,10 +66,10 @@
         </router-link>
         <ul>
           <li class="buy-center" @mousemove="overShow" @mouseout="outHide">
-            <a href="javascript:;" to="/lottery">
+            <router-link href="javascript:;" to="/lottery_ifm/Tjssc">
               <div>购彩中心</div>
               <span>LOTTERY</span>
-            </a>
+            </router-link>
           </li>
           <li class="user-center">
             <a href='javascript:void(0);' @click='enterUserCenter();'>
