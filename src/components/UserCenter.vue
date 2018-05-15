@@ -15,7 +15,7 @@
       </ul>
       <!-- 下拉游戏选择 -->
       <transition name="fade">
-        <div class="menu-child" @mouseover="showAllgame" @mouseout="hideAllgame" v-if="isShowMenu" id="lot_sec_menu">
+        <div class="menu-child"  v-if="isShowMenu" id="lot_sec_menu">
           <div class="gamelist clear">
 
             <div class="cut-line"></div>
@@ -138,7 +138,7 @@
         isDisplay: 0,
         content: '',
         ifopen: false,
-        isShowMenu: false,
+        isShowMenu: true,
         unread_count: '',
         /*lock10: false,
         lock20: false,
@@ -589,7 +589,6 @@
 
   .official_play {
     border-bottom: none;
-    // width: 50%;
     font-size: 12px;
     float: left;
   }
@@ -638,7 +637,6 @@
   .credit_play {
     font-size: 0;
     float: left;
-    // width: 50%;
   }
 
   .menu-child h1.orange_style {
@@ -658,10 +656,7 @@
   }
 
   .menu-child li {
-    // float: left;
     line-height: 28px;
-    // width: 80px;
-    // height: 28px;
     margin: 5px 0;
     text-align: left;
     margin-right: 10px;
