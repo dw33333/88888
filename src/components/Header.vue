@@ -158,6 +158,8 @@
                 </div>
               </div>
             </div>
+           </div>
+          </div>
         </transition>
       </div>
       <!-- 平台公告 -->
