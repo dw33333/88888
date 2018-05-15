@@ -18,6 +18,7 @@ import 'element-ui/lib/theme-chalk/select.css';
 import 'element-ui/lib/theme-chalk/option.css';
 import 'element-ui/lib/theme-chalk/pagination.css';
 import './assets/css/iconfont.css';
+import route from "@/router";
 Vue.use(Dialog);
 Vue.use(Button);
 Vue.use(Form);
@@ -93,7 +94,7 @@ Vue.prototype.$http.interceptors.response.use(
                 localStorage.clear();
               }
               Vue.prototype.$http.defaults.headers.EasySecret=undefined;
-              router.push("Login");
+              router.push({name:"Login",params:{hback:Vue.prototype.$route.name,params:Vue.prototype.$route.params}});
               store.commit("ROOTBOX",{
                 open:false
               })
