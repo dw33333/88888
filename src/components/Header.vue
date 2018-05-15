@@ -41,6 +41,7 @@
             余额:{{money}}
           </div>
           <div style="width:540px;display:none;height:48px;" id="showId"></div>
+          <slot name="game_introduce"></slot>
           <slot name="lottery_result"></slot>
           <router-link to='/UserCenter'>
             <div class="recharge items">
@@ -60,100 +61,107 @@
     </div>
     <nav>
       <!-- 导航 -->
-      <div class="nav" id="nav">
-        <router-link to="/">
-          <img class="logo" src="../assets/logo.png" alt="">
-        </router-link>
-        <ul>
-          <li class="buy-center" @mousemove="overShow" @mouseout="outHide">
-            <router-link href="javascript:;" to="/lottery_ifm/Tjssc">
-              <div>购彩中心</div>
-              <span>LOTTERY</span>
+      <div style="width:1170px;margin:0 auto;position:relative;">
+        <div class="nav" id="nav">
+          <router-link to="/">
+            <img class="logo" src="../assets/logo.png" alt="">
+          </router-link>
+          <ul>
+            <li class="buy-center" @mousemove="overShow" @mouseout="outHide">
+              <router-link href="javascript:;" to="/lottery_ifm/Tjssc">
+                <div>购彩中心</div>
+                <span>LOTTERY</span>
+              </router-link>
+            </li>
+            <li class="user-center">
+              <a href='javascript:void(0);' @click='enterUserCenter();'>
+                <div>用户中心</div>
+                <span>USERCENTER</span>
+              </a>
+            </li>
+            <router-link to="/Activity" tag="li">
+              <a @click="enterActivity">
+                <div>优惠活动</div>
+                <span>ACTIVITY</span>
+              </a>
             </router-link>
-          </li>
-          <li class="user-center">
-            <a href='javascript:void(0);' @click='enterUserCenter();'>
-              <div>用户中心</div>
-              <span>USERCENTER</span>
-            </a>
-          </li>
-          <router-link to="/Activity" tag="li">
-            <a @click="enterActivity">
-              <div>优惠活动</div>
-              <span>ACTIVITY</span>
-            </a>
-          </router-link>
-          <li>
-            <a href="javascript:void(0)" v-if="!username" @click="showMessge">
-              <div>平台公告</div>
-              <span>ANNOUNCEMENT</span>
-            </a>
-            <router-link to="/Notice" v-else>
-              <div>平台公告</div>
-              <span>ANNOUNCEMENT</span>
+            <li>
+              <a href="javascript:void(0)" v-if="!username" @click="showMessge">
+                <div>平台公告</div>
+                <span>ANNOUNCEMENT</span>
+              </a>
+              <router-link to="/Notice" v-else>
+                <div>平台公告</div>
+                <span>ANNOUNCEMENT</span>
+              </router-link>
+            </li>
+            <!-- <li>
+              <a href="javascript:void(0)">
+                <div>彩种信息</div>
+                <span>GAMEINFORMATION</span>
+              </a>
+            </li> -->
+            <router-link to="/live" tag="li" style="position:relative;" @click="goVideo" @mousemove.native="showmenu"
+                         @mouseout.native="hidemenu">
+              <a>
+                <div>视讯直播</div>
+                <span>LIVEVIDEO</span>
+              </a>
+              <div class="hide" @mousemove.native="showmenu" @mouseout.native="hidemenu" v-show="menuVideo">
+                <a href="javascript:;" class="p10">DS</a>
+                <a href="javascript:;" class="p10">AG</a>
+                <a href="javascript:;" class="p10">BB</a>
+                <a href="javascript:;" class="p10">MG</a>
+              </div>
             </router-link>
-          </li>
-          <!-- <li>
-            <a href="javascript:void(0)">
-              <div>彩种信息</div>
-              <span>GAMEINFORMATION</span>
-            </a>
-          </li> -->
-          <router-link to="/live" tag="li" style="position:relative;" @click="goVideo" @mousemove.native="showmenu" @mouseout.native="hidemenu">
-            <a>
-              <div>视讯直播</div>
-              <span>LIVEVIDEO</span>
-            </a>
-            <div class="hide" @mousemove.native="showmenu" @mouseout.native="hidemenu" v-show="menuVideo">
-              <a href="javascript:;" class="p10">DS</a>
-              <a href="javascript:;" class="p10">AG</a>
-              <a href="javascript:;" class="p10">BB</a>
-              <a href="javascript:;" class="p10">MG</a>
-            </div>
-          </router-link>
-          <router-link to="/Games" tag="li" style="position:relative;" @mousemove.native="showmenu2" @mouseout.native="hidemenu2">
-            <a href="javascript:void(0)">
-              <div>电子游艺</div>
-              <span>ELECTRONICGAMES</span>
-            </a>
-            <div class="hide" @mousemove="showmenu2" @mouseout="hidemenu2" v-show="menugame"
-                 style="left:-11px;width:200px;">
-              <a href="javascript:;" class="p20">BB</a>
-              <a href="javascript:;" class="p20">AG</a>
-              <a @click="GoMg" class="p20">MG</a>
-            </div>
-          </router-link>
-          <router-link to="/mobile" tag="li">
-            <a href="javascript:void(0)">
-              <div>手机下注</div>
-              <span>MOBILE</span>
-            </a>
-          </router-link>
-        </ul>
-      </div>
-      <!-- 下拉菜单 -->
-      <div class="menu-child1" v-show="showMenu" @mousemove="overShow" @mouseout="outHide" id="lot_sec_menu">
-        <div class="gamelist-1 clear">
-          <div class="official_play_h">
-            <div class="gamelist_tit clear">
-              <h1 class="red_style">信用玩法</h1>
-              <div class="color">信</div>
-            </div>
-            <div class="high_wrap">
-              <div class="gamelist_l">
-                <ul v-for="item in headersArry" :key="item.id">
-                  <li v-for="items in item.type" :key="items.id">
-                    <!-- :href="'./lottery/index.html#/lottery/'+items.name" -->
-                    <router-link  class="game_26" :to="{path:'/lottery_ifm/'+items.name}">
-                      <img :src="`/static/img/${items.name}.png`" alt=""> <span class="hot"><font>{{items.short_name}}</font></span>
-                    </router-link>
-                  </li>
-                </ul>
+            <router-link to="/Games" tag="li" style="position:relative;" @mousemove.native="showmenu2"
+                         @mouseout.native="hidemenu2">
+              <a href="javascript:void(0)">
+                <div>电子游艺</div>
+                <span>ELECTRONICGAMES</span>
+              </a>
+              <div class="hide" @mousemove="showmenu2" @mouseout="hidemenu2" v-show="menugame"
+                   style="left:-11px;width:200px;">
+                <a href="javascript:;" class="p20">BB</a>
+                <a href="javascript:;" class="p20">AG</a>
+                <a @click="GoMg" class="p20">MG</a>
+              </div>
+            </router-link>
+            <router-link to="/mobile" tag="li">
+              <a href="javascript:void(0)">
+                <div>手机下注</div>
+                <span>MOBILE</span>
+              </a>
+            </router-link>
+          </ul>
+          <!-- 下拉菜单 -->
+        </div>
+        <transition name="fade">
+        <div class="menu-child1" v-show="showMenu" @mousemove="overShow" @mouseout="outHide" id="lot_sec_menu">
+          <div class="gamelist-1 clear">
+            <div class="official_play_h">
+              <div class="gamelist_tit clear">
+                <h1 class="red_style">信用玩法</h1>
+                <div class="color">信</div>
+              </div>
+              <div class="high_wrap">
+                <div class="gamelist_l">
+                  <ul v-for="item in headersArry" :key="item.id">
+                    <li v-for="items in item.type" :key="items.id">
+                      <!-- :href="'./lottery/index.html#/lottery/'+items.name" -->
+                      <router-link class="game_26" :to="{path:'/lottery_ifm/'+items.name}">
+                        <img :src="`/static/img/${items.name}.png`" alt=""> <span
+                        class="hot"><font>{{items.short_name}}</font></span>
+                      </router-link>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
+          <div class="triangles_back"></div>
         </div>
-        <div class="triangles_bacK"></div>
+        </transition>
       </div>
       <!-- 平台公告 -->
       <div class="ui-popup-backdrop" v-show="showMessgeBox" @click="closeMessge"></div>
@@ -176,7 +184,8 @@
                       </div>
                       <div class="notice_text">
                         <div class="notice_item"></div>
-                        <h1 style="color: #f4354a;text-align:left;">温馨提示：<span style="font-size:16px;padding:0;">{{sitesInfos.Msg}}</span></h1>
+                        <h1 style="color: #f4354a;text-align:left;">温馨提示：<span style="font-size:16px;padding:0;">{{sitesInfos.Msg}}</span>
+                        </h1>
                         <div class="fright"></div>
                       </div>
                     </div>
@@ -234,7 +243,7 @@
     name: 'Header',
     data() {
       return {
-        backPage:false,
+        backPage: false,
         nowTime: '',
         user_name: '',
         pass_word: '',
@@ -244,14 +253,14 @@
         temcodeToken: '',
         code: '',
         showMenu: false,
-        headersArry:[],
+        headersArry: [],
         showMessgeBox: false,
         menuVideo: false,
         menugame: false,
-        Msg:'',
-        siteInfo:'',
+        Msg: '',
+        siteInfo: '',
         menugame: false,
-        is_login:false
+        is_login: false
         // showforgotPassword:false
         // usermoney: '',
         // isShowLogin: sessionStorage.getItem('isLogin')
@@ -264,7 +273,7 @@
       this.checkUser();
     },
     computed: {
-      ...mapState(['money', 'username', 'codeToken', 'headerArry', 'easysecret','sitesInfos'])
+      ...mapState(['money', 'username', 'codeToken', 'headerArry', 'easysecret', 'sitesInfos'])
     },
     created() {
       this.getArry();
@@ -277,29 +286,29 @@
       })*/
     },
     methods: {
-      GoMg () {
+      GoMg() {
         this.$router.push('/Games')
       },
-      backPageclick () {
+      backPageclick() {
         this.$router.push('/')
       },
       async trial() {
-        if(this.is_login)return;
-        this.is_login=true;
+        if (this.is_login) return;
+        this.is_login = true;
         let res = await this.$http({
           method: "post",
           url: '/api/user/regsterVirtual',
           headers: {EasySecret: ""}
         });
-        this.is_login=false;
-        if(!res)return;
-        if(res.data.code!=0){
-          this.alert("提示",res.msg);
+        this.is_login = false;
+        if (!res) return;
+        if (res.data.code != 0) {
+          this.alert("提示", res.msg);
           return;
         }
         this.$http.defaults.headers.EasySecret = res.headers.easysecret;
         this.EASYSECRET(res.headers.easysecret);
-        await this.getuserinfo(res.data.virtual==1?1:undefined);
+        await this.getuserinfo(res.data.virtual == 1 ? 1 : undefined);
         this.mytoast("登录成功");
       },
       goVideo() {
@@ -342,7 +351,7 @@
         this.showMessgeBox = true;
         this.showMessgeBoxM = true;
       },
-      getArry () {
+      getArry() {
         this.$http.get('/api/lottery/basic/LotteryGroup').then((res) => {
           this.headersArry = res.data;
           this.GETDATA(this.headersArry);
@@ -432,7 +441,7 @@
           this.alert("提示", res.data.msg);
           return;
         }
-        let userinfo={
+        let userinfo = {
           bankname: res.data.data.BandName,
           cardnum: res.data.data.CardNumber,
           logintime: res.data.data.LoginTime,
@@ -444,7 +453,7 @@
           email: res.data.data.email,
           qq: res.data.data.qq
         }
-        if(virtual)userinfo.virtual=virtual;
+        if (virtual) userinfo.virtual = virtual;
         this.USERINFO(userinfo);
         this.getUserRealName(res.data.data.Name);
         this.changeUserMoney(res.data.data.Money);
@@ -452,7 +461,7 @@
       },
       // 登录提交
       loginSubmit() {
-        if(this.is_login)return;
+        if (this.is_login) return;
         let data = {
           // action: 'login',
           username: this.user_name,
@@ -466,14 +475,14 @@
         } else if (!this.pass_word) {
           this.mytoast('请输入密码')
         } else {
-          this.is_login=true;
+          this.is_login = true;
           this.$http({
             method: "post",
             url: '/api/user/login',
             data: data,
             headers: {EasySecret: ""}
           }).then(async (res) => {
-            this.is_login=false;
+            this.is_login = false;
             if (res.data.code === 0) {
               this.$http.defaults.headers.EasySecret = res.headers.easysecret;
               this.EASYSECRET(res.headers.easysecret);
@@ -493,10 +502,10 @@
               //this.changeUserMoney(res.data.data.money)
               // this.userIsLogin(true)
             } else {
-              this.alert("提示",res.data.msg);
+              this.alert("提示", res.data.msg);
             }
           }).catch((error) => {
-            this.is_login=false;
+            this.is_login = false;
             console.log(error)
           })
         }
@@ -555,7 +564,7 @@
         this.$http.defaults.headers.EasySecret = undefined;
         this.$router.push("/login");
       },
-      ...mapMutations(['changeUserName', 'getUserRealName', 'changeUserMoney', 'getUserToken', 'userLoginOut', "EASYSECRET", "ROOTBOX", "USERINFO",'GETDATA']),
+      ...mapMutations(['changeUserName', 'getUserRealName', 'changeUserMoney', 'getUserToken', 'userLoginOut', "EASYSECRET", "ROOTBOX", "USERINFO", 'GETDATA']),
       // getUserMoney(){
       //     // >获取用户余额
       //   this.$http.get('/json/center/?r=Money').then((res) => {
@@ -957,7 +966,7 @@
     float: left;
     cursor: pointer;
     background: url(../assets/base-ico2.png) no-repeat;
-    font-size:14px;
+    font-size: 14px;
   }
 
   .items {
@@ -971,12 +980,11 @@
   }
 
   .preson-balance {
-    padding-top:2px;
+    padding-top: 2px;
     /*padding: 0 20px;*/
     min-width: 165px;
     padding-left: 40px;
     text-align: left;
-
 
   }
 
@@ -987,7 +995,7 @@
 
   .personpwd {
     background-position: 0 -635px;
-    padding-top:2px;
+    padding-top: 2px;
   }
 
   .recharge {
@@ -1034,6 +1042,7 @@
     /* overflow: hidden; */
     font-size: 14px;
     color: #fff;
+    position: relative;
   }
 
   .nav .logo {
@@ -1086,15 +1095,15 @@
   /*下拉菜单*/
   .menu-child1 {
     position: absolute;
-    top: 90px;
-    width: 1050px;
+    top: 42px;
+    width: 1070px;
     margin: 0 5px;
     padding: 1px;
     z-index: 99999;
     border-radius: 0 0 8px 8px;
     zoom: 1;
     box-shadow: 0 1px 30px #A9A9A9;
-    left: 180px;
+    left: 90px;
     margin-top: 27px;
     padding-top: 5px;
     padding-bottom: 0;

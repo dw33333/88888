@@ -6,6 +6,10 @@
       <div slot="lottery_result" class="items result" style="cursor:pointer;" @click="($router.push({name:'lottery_result',params:{game_name:$route.params.id}}))">
         开奖结果
       </div>
+      <div slot="game_introduce" class="items result" style="cursor:pointer;" @click="($router.push({name:$route.params.id}))">
+        玩法介绍
+      </div>
+
     </home-header>
     <div class="main" id="loading">
       <span style="color:rgb(182, 41, 41);">加载中.....</span>
