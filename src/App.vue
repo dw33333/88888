@@ -205,4 +205,73 @@
   .slide-leave-active {
     //transform: translate3d( 64px,0, 0);
   }
+
+  .animated {
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+
+  .slideInUp {
+    -webkit-animation-name: slideInUp;
+    animation-name: slideInUp;
+  }
+  @-webkit-keyframes slideInUp {
+    from {
+      -webkit-transform: translate3d(0, 10%, 0);
+      transform: translate3d(0, 10%, 0);
+      visibility: visible;
+    }
+
+    to {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes slideInUp {
+    from {
+      -webkit-transform: translate3d(0, 10%, 0);
+      transform: translate3d(0, 10%, 0);
+      visibility: visible;
+    }
+
+    to {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .slideOutDown {
+    -webkit-animation-name: slideOutDown;
+    animation-name: slideOutDown;
+  }
+  @-webkit-keyframes slideOutDown {
+    from {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      visibility: hidden;
+      -webkit-transform: translate3d(0, 10%, 0);
+      transform: translate3d(0, 10%, 0);
+    }
+  }
+
+  @keyframes slideOutDown {
+    from {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+
+    to {
+      visibility: hidden;
+      -webkit-transform: translate3d(0, 100%, 0);
+      transform: translate3d(0, 10%, 0);
+    }
+  }
+
+
 </style>
