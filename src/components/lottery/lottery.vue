@@ -601,7 +601,6 @@ input[type="range"]::-moz-range-thumb {
 .credit_play {
   font-size: 0;
   float: left;
-  width: 50%;
 }
 
 .menu-child h1.orange_style {
@@ -621,10 +620,7 @@ ul {
 }
 
 .menu-child li {
-  float: left;
   line-height: 28px;
-  width: 80px;
-  height: 28px;
   margin: 5px 0;
   text-align: left;
   margin-right: 10px;
