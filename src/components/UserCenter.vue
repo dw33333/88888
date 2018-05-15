@@ -800,6 +800,7 @@
     cursor: pointer;
     text-align: left;
     width: 100%;
+    margin-top:0 !important;
   }
 
   .sidebar-menu .list-item li a {
