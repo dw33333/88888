@@ -511,8 +511,7 @@
           username: res.data.data.UserName,
           email: res.data.data.email,
           qq: res.data.data.qq
-        });
-        this.getUserRealName(res.data.data.Name);
+        });;
         this.changeUserMoney(res.data.data.Money);
         this.changeUserName(res.data.data.UserName);
       },
