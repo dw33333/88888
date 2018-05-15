@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="xx_lottery">
         <div class="note-box">
             <div class="query-toolbar clearfix">
                <div class="form-group left">
@@ -190,7 +190,8 @@
         }
     }
 </script>
-<style scope>
+<style scope lang="less">
+@import "../assets/css/common.less";
     .note-box{
         overflow-y: auto;
         padding-bottom: 50px;

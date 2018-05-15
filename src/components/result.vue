@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="xx_lottery">
 
         <div class="result-box clearfix">
             <div class="refresh-btn-area">
@@ -605,7 +605,8 @@
         }
     }
 </script>
-<style scope>
+<style scope lang="less">
+@import "../assets/css/common.less";
     .history{position: absolute;top: 90px;z-index: 99;
         width: 100%;
         height: 87%;
