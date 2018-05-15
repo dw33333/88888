@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div class="xx_lottery">
     <home-header >
       <div slot="lottery_result" class="items result" style="cursor:pointer;" @click="($router.push({name:'lottery_result',params:{game_name:$route.params.id}}))">
         开奖结果
       </div>
     </home-header>
-    <div class="lottery-r-box w">
+    <div class="lottery-r-box w ">
         <vue-result v-if="showResult" :child-id="fc_type" :child-data="this.menusData"></vue-result>
         <vue-note v-if="showNote" :child-id="currI"></vue-note>
         <div>
@@ -1166,8 +1166,7 @@
 
     }
 </script>
-<style scope>
-
-  @import "../assets/css/lottery.css";
-  @import  '../assets/css/common.css';
+<style scope lang="less">
+  @import "../assets/css/lottery.less";
+  @import "../assets/css/common.less";
 </style>
