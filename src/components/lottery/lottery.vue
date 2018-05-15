@@ -3,7 +3,7 @@
     <!-- 头部 -->
     <!-- 主体部分 -->
     <home-header >
-      <div slot="lottery_result" class="items result" style="cursor:pointer;" @click="($router.push({name:'lottery_result'}))">
+      <div slot="lottery_result" class="items result" style="cursor:pointer;" @click="($router.push({name:'lottery_result',params:{game_name:fc_id}}))">
         开奖结果
       </div>
     </home-header>
@@ -32,7 +32,7 @@ export default {
     }
   },
   created(){
-    if(!this.$route.params.nload){
+    if(!this.$route.params.nload){//从iframe彩票页改变路由(nload==true)不重新加载 刷新可重新加载
       this.fc_id = this.$route.params.id;
       this.src = '/lottery/index.html#/lottery/'+this.fc_id;
     }

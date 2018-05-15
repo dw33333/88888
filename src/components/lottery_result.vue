@@ -2384,7 +2384,6 @@
   export default {
     name: "lottery_result",
     async created() {
-      this.date = "2018-05-09";
       await this.initGameType();
       //加载数据;
       this.tempParam = {
@@ -2518,16 +2517,20 @@
         let resArr = [{id: -1, title: "香港六合彩", name: "Xglhc"}];
         resArr = resArr.concat(res.data.data);
         let idx = resArr.findIndex(v => {
-          return v.name == "Cqssc"//todo 根据路由参数 this.$route.params.game_name;
+          return v.name == this.$route.params.game_name;
         });
-        this.gameTypeIdx = idx;
+        if(idx==-1){
+          this.gameTypeIdx = 0;
+        }else{
+          this.gameTypeIdx = idx;
+        }
         this.gameTypes = resArr;
       },
       async loadData(page) {
         if (this.gameTypeIdx == -1) return;
-        let url = '/api/lhc/LhcInfo/kaiJiangHistory';
+        let url = '/api/lhc/Lhcinfo/kaiJiangHistory';
         let data = {
-          p: page,
+          page: page,
           ps: this.page_size
         }
         if (this.tempParam.typeName != "Xglhc") {

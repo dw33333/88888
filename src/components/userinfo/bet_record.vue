@@ -192,7 +192,7 @@
         }
         let method="POST";
         if(this.lotteryTypes[this.curLotteryType].id==-1){
-          url="/api/lhc/LhcInfo/betRecord/";
+          url="/api/lhc/Lhcinfo/betRecord/";
           data={
             page: page,
             ps: this.pageSize,
