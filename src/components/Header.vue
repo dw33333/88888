@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="top-wrap">
-      <div class="top-box" :style="{width:fullwidth?'100%':'1170px'}">
+      <div class="top-box">
         <div class="bar-left">
           <span id="backPage" v-show="backPage" @click="backPageclick" style="cursor:pointer;">返回首页</span>
           <span id="backhide">PLAY RESPONSIBLY</span>
@@ -58,7 +58,7 @@
         </div>
       </div>
     </div>
-    <nav >
+    <nav>
       <!-- 导航 -->
       <div class="nav" id="nav">
         <router-link to="/">
@@ -232,7 +232,6 @@
 
   export default {
     name: 'Header',
-    props:["fullwidth"],
     data() {
       return {
         backPage:false,
@@ -255,7 +254,7 @@
         is_login:false
         // showforgotPassword:false
         // usermoney: '',
-        // isShowLogin: localStorage.getItem('isLogin')
+        // isShowLogin: sessionStorage.getItem('isLogin')
 
       }
     },
@@ -356,10 +355,10 @@
         this.showMenu = false;
       },
       codeImgFn() {
-        this.$http.get('/api/site/captcha/'+"?"+Date.now()).then((res) => {
+        this.$http.get('/api/site/captcha').then((res) => {
           if (res.status === 200) {
-            this.codeImg = res.data.src;
-            this.temcodeToken = res.data.codeToken;
+            this.codeImg = res.data.src
+            this.temcodeToken = res.data.codeToken
             // this.mytoast(res.data.msg)
             // alert("11111"+this.temcodeToken)
             // this.getUserToken(this.temcodeToken)
@@ -370,13 +369,12 @@
         })
       },
       // 封装提示信息函数
-      mytoast(msg,fn) {
+      mytoast(msg) {
         this.ifopen = true
 
         this.content = msg
         setTimeout(() => {
-          this.ifopen = false;
-          fn();
+          this.ifopen = false
           clearTimeout()
         }, 1500)
       },
@@ -405,7 +403,7 @@
           }
         });
       },
-     /* enterUserCenter() {
+      enterUserCenter() {
         if (!this.username) {
           this.mytoast('请先登录')
           setTimeout(() => {
@@ -415,10 +413,9 @@
         } else {
           this.$router.push('/UserCenter')
         }
-      },*/
+      },
       enterUserCenter() {
-        this.$router.push({name:"recharge"});
-       /* if (!this.codeToken) {
+        if (!this.codeToken) {
           this.mytoast('请先登录')
           setTimeout(() => {
             this.$router.push('/Login')
@@ -426,7 +423,7 @@
           }, 1500)
         } else {
           this.$router.push('/UserCenter')
-        }*/
+        }
       },
       async getuserinfo(virtual) {
         let res = await this.$http.get('/api/users/info');
@@ -481,15 +478,12 @@
               this.$http.defaults.headers.EasySecret = res.headers.easysecret;
               this.EASYSECRET(res.headers.easysecret);
               await this.getuserinfo();
-              this.mytoast(res.data.msg,()=>{
-                this.$router.push({name:"Header"});
-              });
-
+              this.mytoast(res.data.msg);
               // this.usermoney = res.data.data.user_money
 
-              // localStorage.setItem('username', this.username)
-              // localStorage.setItem('isShowLogin', this.username)
-              // localStorage.setItem('usermoney', res.data.data.user_money)
+              // sessionStorage.setItem('username', this.username)
+              // sessionStorage.setItem('isShowLogin', this.username)
+              // sessionStorage.setItem('usermoney', res.data.data.user_money)
 
               // this.$store.dispatch('UserLogin', this.username)
               // this.$store.dispatch('SET_userMoney', this.usermoney)
@@ -501,10 +495,8 @@
             } else {
               this.alert("提示",res.data.msg);
             }
-            this.codeImgFn()
           }).catch((error) => {
             this.is_login=false;
-            this.codeImgFn()
             console.log(error)
           })
         }
@@ -523,7 +515,7 @@
       //       this.userLoginOut()
 
       //       this.mytoast(res.data.msg)
-      //       localStorage.clear();
+      //       sessionStorage.clear();
       //       this.codeImgFn().stop
       //       setTimeout(() => {
       //         // alert(1)
@@ -559,9 +551,9 @@
           return;
         }
         this.EASYSECRET("");
-        localStorage.clear();
+        sessionStorage.clear();
         this.$http.defaults.headers.EasySecret = undefined;
-        this.$router.push({name:"Header"});
+        this.$router.push("/login");
       },
       ...mapMutations(['changeUserName', 'getUserRealName', 'changeUserMoney', 'getUserToken', 'userLoginOut', "EASYSECRET", "ROOTBOX", "USERINFO",'GETDATA']),
       // getUserMoney(){
