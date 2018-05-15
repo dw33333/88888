@@ -313,21 +313,7 @@
         this.askList=res.data;
       },
       check(q, auth) {//异步验证
-        return new Promise((resolve, reject) => {
-          this.$http.post('/api/user/check', {q: q, auth: auth}).then(res => {
-            if (res.status === 200 && res.data.code === 0) {
-              resolve(res);
-            } else {
-              reject(res);
-            }
-          });
-        }).catch(err => {
-          if(err.data){
-            this.alert('提示',err.data.msg);
-          }else{
-            this.alert("提示","验证失败!");
-          }
-        });
+        return this.$http.post('/api/user/check', {q: q, auth: auth});
       },
       showAgreement() {
         this.isShowAgreement = true
@@ -378,6 +364,13 @@
       },
       // 提交注册
       async registerSubmit() {
+        /*let res = await this.check(this.username, "username");
+        console.log(res,2222222);
+        return;*/
+
+
+
+
         if(this.is_loading_ask)return;
 
         if (!this.username) {
@@ -418,14 +411,35 @@
           this.alert('提示','请勾选开户协议！')
         } else {
           this.is_reg=true;
+
           let res = await this.check(this.username, "username");
           if (!res) {this.is_reg=false;return;}
+          if (res.data.code!=0){
+            this.alert('提示',res.data.msg);
+            this.is_reg=false;
+            return;
+          }
           res = await  this.check(this.phonenum, "tel");
           if (!res)  {this.is_reg=false;return;}
+          if (res.data.code!=0){
+            this.alert('提示',res.data.msg);
+            this.is_reg=false;
+            return;
+          }
           res = await  this.check(this.realname, "realname");
           if (!res)  {this.is_reg=false;return;}
+          if (res.data.code!=0){
+            this.alert('提示',res.data.msg);
+            this.is_reg=false;
+            return;
+          }
           res = await  this.check(this.email, "email");
           if (!res)  {this.is_reg=false;return;}
+          if (res.data.code!=0){
+            this.alert('提示',res.data.msg);
+            this.is_reg=false;
+            return;
+          }
           let data = {
             username: this.username,
             password: this.password,
