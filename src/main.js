@@ -6,8 +6,31 @@ import axios from 'axios'
 import 'babel-polyfill'  //ie11打开空白
 import alert from "@/components/base/alert"
 import "@/obj/util"
-import { DatePicker } from 'element-ui';
-
+import Es6Promise from 'es6-promise'
+ Es6Promise.polyfill();
+import {Dialog,Button,Form,FormItem,DatePicker,Select,Option,Pagination} from 'element-ui';
+import 'element-ui/lib/theme-chalk/form-item.css';
+import 'element-ui/lib/theme-chalk/form.css';
+import 'element-ui/lib/theme-chalk/dialog.css';
+import 'element-ui/lib/theme-chalk/button.css';
+import 'element-ui/lib/theme-chalk/date-picker.css';
+import 'element-ui/lib/theme-chalk/select.css';
+import 'element-ui/lib/theme-chalk/option.css';
+import 'element-ui/lib/theme-chalk/pagination.css';
+import './assets/css/iconfont.css';
+Vue.use(Dialog);
+Vue.use(Button);
+Vue.use(Form);
+Vue.use(FormItem);
+Vue.use(DatePicker);
+Vue.use(Select);
+Vue.use(Option);
+Vue.use(Pagination);
+//公共样式
+// Vue.prototype.$layer = layer(Vue);
+Vue.config.productionTip = false;
+axios.defaults.withCredentials = true;
+Vue.prototype.$http = axios;
 window.wAlert=(msg,fn)=>{//挂到全局中(同域iframe可调用)
   store.commit("ROOTBOX",{
     open: true,

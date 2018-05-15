@@ -156,6 +156,95 @@
                     </li>
                   </ul>
                 </div>
+      <div class="nav" id="nav">
+        <router-link to="/">
+          <img class="logo" src="../assets/logo.png" alt="">
+        </router-link>
+        <ul>
+          <li class="buy-center" @mousemove="overShow" @mouseout="outHide">
+            <a href="javascript:;" to="/lottery">
+              <div>购彩中心</div>
+              <span>LOTTERY</span>
+            </a>
+          </li>
+          <li class="user-center">
+            <a href='javascript:void(0);' @click='enterUserCenter();'>
+              <div>用户中心</div>
+              <span>USERCENTER</span>
+            </a>
+          </li>
+          <router-link to="/Activity" tag="li">
+            <a @click="enterActivity">
+              <div>优惠活动</div>
+              <span>ACTIVITY</span>
+            </a>
+          </router-link>
+          <li>
+            <a href="javascript:void(0)" v-if="!username" @click="showMessge">
+              <div>平台公告</div>
+              <span>ANNOUNCEMENT</span>
+            </a>
+            <router-link to="/Notice" v-else>
+              <div>平台公告</div>
+              <span>ANNOUNCEMENT</span>
+            </router-link>
+          </li>
+          <!-- <li>
+            <a href="javascript:void(0)">
+              <div>彩种信息</div>
+              <span>GAMEINFORMATION</span>
+            </a>
+          </li> -->
+          <router-link to="/live" tag="li" style="position:relative;" @click="goVideo" @mousemove.native="showmenu" @mouseout.native="hidemenu">
+            <a>
+              <div>视讯直播</div>
+              <span>LIVEVIDEO</span>
+            </a>
+            <div class="hide" @mousemove.native="showmenu" @mouseout.native="hidemenu" v-show="menuVideo">
+              <a href="javascript:;" class="p10">DS</a>
+              <a href="javascript:;" class="p10">AG</a>
+              <a href="javascript:;" class="p10">BB</a>
+              <a href="javascript:;" class="p10">MG</a>
+            </div>
+          </router-link>
+          <router-link to="/Games" tag="li" style="position:relative;" @mousemove.native="showmenu2" @mouseout.native="hidemenu2">
+            <a href="javascript:void(0)">
+              <div>电子游艺</div>
+              <span>ELECTRONICGAMES</span>
+            </a>
+            <div class="hide" @mousemove="showmenu2" @mouseout="hidemenu2" v-show="menugame"
+                 style="left:-11px;width:200px;">
+              <a href="javascript:;" class="p20">BB</a>
+              <a href="javascript:;" class="p20">AG</a>
+              <a @click="GoMg" class="p20">MG</a>
+            </div>
+          </router-link>
+          <router-link to="/mobile" tag="li">
+            <a href="javascript:void(0)">
+              <div>手机下注</div>
+              <span>MOBILE</span>
+            </a>
+          </router-link>
+        </ul>
+      </div>
+      <!-- 下拉菜单 -->
+      <div class="menu-child1" v-show="showMenu" @mousemove="overShow" @mouseout="outHide" id="lot_sec_menu">
+        <div class="gamelist-1 clear">
+          <div class="official_play_h">
+            <div class="gamelist_tit clear">
+              <h1 class="red_style">信用玩法</h1>
+              <div class="color">信</div>
+            </div>
+            <div class="high_wrap">
+              <div class="gamelist_l">
+                <ul v-for="item in headersArry" :key="item.id">
+                  <li v-for="items in item.type" :key="items.id">
+                    <!-- :href="'./lottery/index.html#/lottery/'+items.name" -->
+                    <router-link  class="game_26" :to="{path:'/lottery/'+items.name}">
+                      <img :src="`/static/img/${items.name}.png`" alt=""> <span class="hot"><font>{{items.short_name}}</font></span>
+                    </router-link>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
