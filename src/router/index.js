@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import store from "@/store"
+import Lottery from '@/components/lottery'
 /*import alert from "@/components/base/alert"*/
 // 首页头部导航栏
 
@@ -428,6 +429,11 @@ const route = new Router({
       components: {
         default: home
       }
+    },
+    {
+      path: '/lottery/:id',
+      name: 'lottery',
+      component: Lottery
     },
     {
       path: '/register',
