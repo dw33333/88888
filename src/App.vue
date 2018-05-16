@@ -206,10 +206,12 @@
   }
 
   .animated {
-    -webkit-animation-duration: 0.5s;
-    animation-duration: 0.5s;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
+    animation-timing-function: ease;
+    -webkit-animation-timing-function: ease;
   }
 
   .slideInUp {
@@ -272,5 +274,33 @@
     }
   }
 
+  .zhankai {
+    -webkit-animation-name: zhankai;
+    animation-name: zhankai;
+  }
+  .shouqi {
+    -webkit-animation-name: shouqi;
+    animation-name: shouqi;
+  }
+  @-webkit-keyframes zhankai {
+    from {
+      height:0;
+      visibility: visible;
+    }
+
+    to {
+      height:435px;
+    }
+  }
+  @-webkit-keyframes shouqi {
+    from {
+      height:435px;
+    }
+
+    to {
+      visibility: hidden;
+      height:0;
+    }
+  }
 
 </style>

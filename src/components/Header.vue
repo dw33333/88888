@@ -136,8 +136,8 @@
           </ul>
           <!-- 下拉菜单   -->
         </div>
-        <transition name="fade">
-        <div class="menu-child1" v-show="showMenu" @mousemove="overShow" @mouseout="outHide" id="lot_sec_menu">
+        <transition enter-active-class="zhankai" leave-active-class="shouqi">
+        <div class="menu-child1 animated" v-show="showMenu" @mousemove="overShow" @mouseout="outHide" id="lot_sec_menu">
           <div class="gamelist-1 clear">
             <div class="official_play_h">
               <div class="gamelist_tit clear">
@@ -1094,18 +1094,20 @@
 
   /*下拉菜单*/
   .menu-child1 {
+    overflow: hidden;
     position: absolute;
-    top: 42px;
+    top: 32px;
     width: 1070px;
     margin: 0 5px;
     padding: 1px;
+    height:435px;
     z-index: 99999;
     border-radius: 0 0 8px 8px;
     zoom: 1;
-    box-shadow: 0 1px 30px #A9A9A9;
+    /*box-shadow: 0 5px 10px #A9A9A9;*/
     left: 90px;
     margin-top: 27px;
-    padding-top: 5px;
+    padding-top: 12px;
     padding-bottom: 0;
   }
 
@@ -1113,6 +1115,7 @@
     background: url('../assets/bg_0909.png') repeat;
     padding-bottom: 20px;
     border-radius: 5px;
+    height:100%;
   }
 
   .gamelist-1 {
@@ -1262,6 +1265,7 @@
     position: absolute;
     background: url('../assets/triangles_back.png') no-repeat;
     left: 246px;
-    top: -8px;
+    top: 0px;
+    z-index: 2;
   }
 </style>
