@@ -14,7 +14,7 @@
         </date-picker>&emsp;&emsp;彩种 ：
         <select name="" id="" class="short" v-model="curLotteryType">
           <option :value="-1" disabled selected style="display:none;">{{is_loading_lottery_type?"加载中...":"请选择彩种"}}</option>
-          <option :value="idx" v-for="it,idx in lotteryTypes">{{it.title}}</option>
+          <option :value="idx" v-for="it,idx in lotteryTypes" :key="idx">{{it.title}}</option>
         </select>
         <div class="btn_search" @click="search">查询</div>
         <!--<div style="display: inline-block;color:#B62929;" v-show="">加载中...</div>-->

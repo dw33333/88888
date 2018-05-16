@@ -4,12 +4,12 @@
     <div class="cont">
       <div class="clearfix">
         <div class="tab_type clearfix">
-          <div class="item" v-for="it in types" @click="(types.forEach(v=>v.cur=false),it.cur=true,curType=it,typeClick())" :class="{cur:it.cur}">{{it.tit}}</div>
+          <div class="item" :key="idx" v-for="it,idx in types" @click="(types.forEach(v=>v.cur=false),it.cur=true,curType=it,typeClick())" :class="{cur:it.cur}">{{it.tit}}</div>
         </div>
         <div class="search_box" style="float:left;">
           时间 ：
           <select class="short" v-model="curDate" >
-            <option :value="it.value" v-for="it in dates">{{it.tit}}</option>
+            <option :value="it.value" v-for="it,idx in dates" :key="idx">{{it.tit}}</option>
           </select>
           <!--&emsp;&emsp;&emsp;订单号
           : <input class="short" type="text"/>-->
