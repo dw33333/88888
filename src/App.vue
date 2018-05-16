@@ -36,7 +36,7 @@
         }
       },
       async loadSiteInfo(){
-        let res = await this.$http.get('api/site/info/');
+        let res = await this.$http.get('/api/site/info');
         if(!res)return;
         this.SITE_INFO(res.data);
         document.title=res.data.SiteName||"";
@@ -53,7 +53,6 @@
     background: url('./assets/bg1.jpg') 0 0 no-repeat;
     height: 100%;
   }
-
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

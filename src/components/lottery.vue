@@ -1,4 +1,5 @@
 <template>
+<div style="background:#e8e8e8;height:100%;">
     <div class="xx_lottery">
     <home-header  class="xx_lottery_hheader">
       <div slot="lottery_result" class="items result" style="cursor:pointer;" @click="($router.push({name:'lottery_result',params:{game_name:$route.params.id}}))">
@@ -487,6 +488,7 @@
             <vue-loading class="vue-loading-b"  type="spiningDubbles" color="#fac092" :size="{ width: '50px', height: '50px' }" v-if="isCloseNoGame==true" ></vue-loading>
         </div>
     </div>
+</div>
 </div>
 </template>
 <script>
