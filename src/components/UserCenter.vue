@@ -50,7 +50,7 @@
           账号: <span>{{username}}</span>
         </div>
         <div class="balance">
-          用户余额: <span>{{money}}</span>
+          余额: <span>{{money}}</span>
         </div>
         <!--<div class="balance" style="background-position:-96px -36px;">
           真实姓名: <span>{{userRealName}}</span>
@@ -343,17 +343,6 @@
       top: 3px;
       font-family: "Microsoft YaHei";
       box-sizing: border-box;
-    }
-    option::-ms-expand{ display: none; }
-    option{
-      -moz-appearance:none; /* Firefox */
-      -webkit-appearance:none; /* Safari 和 Chrome */
-      appearance:none;
-    }
-    /* --背景色字体颜色--*/
-    option:hover{
-      color:#fff;
-      background-color:#000;
     }
     select, input[type=text], input[type=password], input[type=number] {
       line-height: 30px;
