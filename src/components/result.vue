@@ -24,8 +24,8 @@
                                 <th>第一</th>
                                 <th>第二</th>
                                 <th>第三</th>
-                                <th>第四</th>
-                                <th>第五</th>
+                                <th v-if="isId!=206">第四</th>
+                                <th v-if="isId!=206">第五</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -48,8 +48,8 @@
                                 <th>第一</th>
                                 <th>第二</th>
                                 <th>第三</th>
-                                <th>第四</th>
-                                <th>第五</th>
+                                <th v-if="isId!=206">第四</th>
+                                <th v-if="isId!=206">第五</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -76,8 +76,8 @@
                                 <th>第一</th>
                                 <th>第二</th>
                                 <th>第三</th>
-                                <th>第四</th>
-                                <th>第五</th>
+                                <th v-if="isId!=206">第四</th>
+                                <th v-if="isId!=206">第五</th>
                             </tr>
                             </thead>
                             <tbody>
