@@ -726,16 +726,16 @@
     .pk10-h td.ball span{color: #fff; display: inline-block;width: 26px;height: 26px;line-height: 26px;}
     .pk10-h th,.k10-h th{color: #e61300}
     .pk10-h th:first-of-type,.k10-h th:first-of-type{color: #333;}
-    .ball1,.ball2,.ball3,.ball4,.ball5,.ball6,.ball7,.ball8,.ball9,.ball10{border-radius: 0!important;border: 1px solid #000}
-    .ball1{background: #ffff02;  color: #000!important;}
-    .ball2{background: #0088fe;}
-    .ball3{background: #000;}
-    .ball4{background: #ff7300;}
-    .ball5{background: #81fffe; color: #000!important;}
-    .ball6{background: #5300ff;}
-    .ball7{background: #e3e3e3; color: #000!important;}
-    .ball8{background: #f20000;}
-    .ball9{background: #710000;}
+    .ball01,.ball02,.ball03,.ball04,.ball05,.ball06,.ball07,.ball08,.ball09,.ball10{border-radius: 0!important;border: 1px solid #000}
+    .ball01{background: #ffff02;  color: #000!important;}
+    .ball02{background: #0088fe;}
+    .ball03{background: #000;}
+    .ball04{background: #ff7300;}
+    .ball05{background: #81fffe; color: #000!important;}
+    .ball06{background: #5300ff;}
+    .ball07{background: #e3e3e3; color: #000!important;}
+    .ball08{background: #f20000;}
+    .ball09{background: #710000;}
     .ball10{background: #229600;}
     .blueBg{background: #638ff4;}
     .orangeBg{background: #ff8949;}
