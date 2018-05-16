@@ -302,5 +302,24 @@
       height:0;
     }
   }
+  @keyframes zhankai {
+    from {
+      height:0;
+      visibility: visible;
+    }
 
+    to {
+      height:435px;
+    }
+  }
+  @keyframes shouqi {
+    from {
+      height:435px;
+    }
+
+    to {
+      visibility: hidden;
+      height:0;
+    }
+  }
 </style>
