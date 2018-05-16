@@ -89,7 +89,7 @@
     },
     methods: {
       codeImgFn() {
-        this.$http.get('/api/site/captcha/'+"?"+Math.random()).then((res) => {
+        this.$http.get('/api/site/captcha/').then((res) => {
           if (res.status === 200) {
             this.codeImg = res.data.src;
             this.temcodeToken = res.data.codeToken;
@@ -139,7 +139,7 @@
         });
       },
       async getuserinfo() {
-        let res = await this.$http.get('/api/users/info');
+        let res = await this.$http.get('/api/users/info/');
         if (!res) return
         if (res.data.code != 0) {
           this.alert("提示", res.data.msg);

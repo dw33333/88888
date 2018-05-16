@@ -165,13 +165,13 @@
       },
       //玩法列表
       getArry () {
-        this.$http.get('/api/lottery/basic/LotteryGroup').then((res) => {
+        this.$http.get('/api/lottery/basic/LotteryGroup/').then((res) => {
           this.headersArry = res.data;
         })
       },
       // 退出登录
       async loginout() {
-        let res = await this.$http.post('/api/user/logout');
+        let res = await this.$http.post('/api/user/logout/');
         if (!res) return;
         if (res.data.code != 0) {
           this.alert("提示", res.data.msg);

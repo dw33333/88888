@@ -68,7 +68,7 @@
           </router-link>
           <ul>
             <li class="buy-center" @mousemove="overShow" @mouseout="outHide">
-              <router-link href="javascript:;" to="/lottery_ifm/Tjssc">
+              <router-link href="javascript:;" to="/lottery/Tjssc">
                 <div>购彩中心</div>
                 <span>LOTTERY</span>
               </router-link>
@@ -352,7 +352,7 @@
         this.showMessgeBoxM = true;
       },
       getArry() {
-        this.$http.get('/api/lottery/basic/LotteryGroup').then((res) => {
+        this.$http.get('/api/lottery/basic/LotteryGroup/').then((res) => {
           this.headersArry = res.data;
           this.GETDATA(this.headersArry);
         })
@@ -364,7 +364,7 @@
         this.showMenu = false;
       },
       codeImgFn() {
-        this.$http.get('/api/site/captcha').then((res) => {
+        this.$http.get('/api/site/captcha/').then((res) => {
           if (res.status === 200) {
             this.codeImg = res.data.src
             this.temcodeToken = res.data.codeToken
@@ -435,7 +435,7 @@
         }
       },
       async getuserinfo(virtual) {
-        let res = await this.$http.get('/api/users/info');
+        let res = await this.$http.get('/api/users/info/');
         if (!res) return;
         if (res.data.code != 0) {
           this.alert("提示", res.data.msg);

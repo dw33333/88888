@@ -307,7 +307,7 @@
       },
       async loadAskData(){
         this.is_loading_ask=true;
-        let res = await this.$http.get("/api/user/userAsk");
+        let res = await this.$http.get("/api/user/userAsk/");
         this.is_loading_ask=false;
         if(!res)return;
         this.askList=res.data;
@@ -494,7 +494,7 @@
         }
       },
       async getuserinfo() {
-        let res = await this.$http.get('/api/users/info');
+        let res = await this.$http.get('/api/users/info/');
         if (!res) return
         if (res.data.code != 0) {
           this.alert("提示", res.data.msg);
