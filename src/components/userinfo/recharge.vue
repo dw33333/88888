@@ -16,7 +16,7 @@
           <div class="tit"><i>1</i>请选择入款银行账号：</div>
           <div class="det">
             <ul class="cards clearfix">
-              <li class="card" :class="{'cur':it.selected}" v-for="it,idx in curType.bankList" :key="idx"
+              <li class="card" :class="{'cur':it.selected}" v-for="it,idx in curType.bankList" :key="it.id"
                   @click="(curType.selectedBankId=it.id,curType.bankList.forEach(v=>v.selected=false),it.selected=true)">
                 <div>开户银行 : {{it.bank_name}}</div>
                 <div>开户网点 : {{it.bank_city}}</div>
@@ -29,7 +29,7 @@
         <div class="step">
           <div class="tit"><i>2</i>填写转账资料：</div>
           <div class="det">
-            <div class="ipt_item"><span>存入金额 : </span><input type="number" v-model="curType.money"
+            <div class="ipt_item"><span>存入金额 : </span><input type="text" v-model="curType.money"
                                                              placeholder="入款金额,单笔下限100"
             ></div>
             <div class="ipt_item"><span style="vertical-align: middle;">备&emsp;&emsp;注 : </span>
@@ -52,12 +52,12 @@
       <div v-show="!is_loading_paytype&&!is_loading_banks"  class="other_content" v-if="curType&&curType.id!=-1">
         <div class="title">请选择通道:</div>
         <div class="online_paytypes clearfix">
-          <div class="item" v-for="it,idx in curType.bankList" :key="idx" :class="{'cur':it.selected}"
+          <div class="item" v-for="it,idx in curType.bankList" :key="it.value" :class="{'cur':it.selected}"
                @click="(curType.selectedBankValue=it.value,curType.bankList.forEach(v=>{v.selected=false;}),it.selected=true)">
             {{it.name}}
           </div>
         </div>
-        <div class="ipt">充值金额: <input type="number" v-model="curType.money" style="width:150px;" placeholder="请输入充值金额"/>&emsp;&emsp;&emsp;<span
+        <div class="ipt">充值金额: <input type="text" v-model="curType.money" style="width:150px;" placeholder="请输入充值金额"/>&emsp;&emsp;&emsp;<span
           style="color:#ea3146;">*单笔最低存款金额{{curType.pay_lowest}}元,最高存款金额{{curType.pay_height}}元</span></div>
         <div class="btn_next" @click="submit">{{is_submiting?"提交中...":"提交"}}</div>
         <div class="tishi">
@@ -201,16 +201,33 @@
         v.selected = false;
       });
       let list = res.data.data;
-      list.forEach(v => {
-        v.selected = false;
-        v.selectedBankValue = "";
-        v.bankList.forEach(vv => {
-          vv.selected = false;
-        })
-      });
       list.unshift(bp);
+      list.forEach(v => {
+        v.money="";
+        if(v.id!==-1){
+          v.selected = false;
+          v.selectedBankValue = "";
+          v.bankList.forEach(vv => {
+            vv.selected = false;
+          });
+        }
+        var tValue = "";
+        Object.defineProperty(v, "money", {
+          get(){
+            return tValue;
+          },
+          set(value){
+            if(isNaN(value)){
+              tValue="";
+            }else{
+              tValue=value;
+            }
+          }
+        });
+      });
       this.typeList = list;
       this.curType = this.typeList[0];
+      console.log(this.curType.money);
     },
     computed: {
       currentTime() {
@@ -273,7 +290,6 @@
         margin-top:2px;
         float: left;
         margin-left: 3px;
-        width: 156px;
         border-left: 1px solid #ebebeb;
         border-top: 1px solid #ebebeb;
         border-right: 1px solid #ebebeb;
@@ -287,6 +303,7 @@
         color: #777777;
         cursor: pointer;
         padding-left: 53px;
+        padding-right:8px;
         &.cur {
           border-top: 3px solid #EA3146;
           background-color: #fff;
@@ -298,12 +315,12 @@
         &.bank {
           background-image: url(/static/rbank.png?2c434f8684);
           background-repeat: no-repeat;
-          background-position: 10px 0;
+          background-position: 8px 0;
         }
         &.other {
           background-image: url(/static/rbank.png?2c434f8684);
           background-repeat: no-repeat;
-          background-position: 10px -400px;
+          background-position: 8px -400px;
         }
       }
     }

@@ -2,7 +2,7 @@
 <div>
   <headervue></headervue>
   <div class="video_wrap" style="padding-top:30px;">
-    <div class="video_wrap_box1 clearfix">            
+    <div class="video_wrap_box1 clearfix">
       <div class="video_item view view-tenth ag">
         <a href="javascript:void(0);" @click=" aggame();"><img src="/static/public/live1/images/ag_slot.jpg"></a>
         <a class="mask" href="javascript:void(0);" @click=" aggame();"></a>
@@ -15,7 +15,7 @@
         <a href="javascript:void(0);" onclick=" bblive();"><img src="/static/public/live1/images/bbin.jpg"></a>
         <a class="mask" href="javascript:void(0);" onclick=" bblive();"></a>
       </div>
-      
+
       <div class="video_item view view-tenth gd">
         <a href="javascript:void(0);" onclick="javascript:alert('抱歉！该厅正在升级维护中！');"><img src="/static/public/live1/images/gd.jpg"></a>
         <a class="mask" href="javascript:void(0);" onclick="javascript:alert('抱歉！该厅正在升级维护中！');"></a>
@@ -54,7 +54,7 @@ export default {
   },
   data () {
     return {
-      
+
     }
   },
   computed: {
@@ -93,7 +93,6 @@ export default {
         }
       });
     },
-    ...mapMutations(['changeUserName','changeUserMoney','getUserToken','userLoginOut','ROOTBOX']),
   }
 }
 </script>

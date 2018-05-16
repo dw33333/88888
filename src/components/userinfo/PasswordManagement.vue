@@ -27,16 +27,16 @@
           提示：取款密码由4位数字组成，在线取款时需要输入取款密码才能进行取款
         </p>
         <p style="padding-left:28px;">请输入旧密码:
-          <input type="password" maxlength="6" onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="输入旧密码4-6位"
+          <input type="password" maxlength="6" onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="输入旧密码位"
                  v-model="oldPassWord">
         </p>
         <p style="padding-left:28px;">请输入新密码:
-          <input type="password" maxlength="6" onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="输入新密码4-6位"
+          <input type="password" maxlength="6" onkeyup="this.value=this.value.replace(/\D/g,'')" placeholder="输入新密码"
                  v-model="newPassWord">
         </p>
         <p>请再次输入新密码:
           <input type="password" maxlength="6" onkeyup="this.value=this.value.replace(/\D/g,'')"
-                 placeholder="再次输入新密码4-6位" v-model="againPassWord">
+                 placeholder="再次输入新密码" v-model="againPassWord">
         </p>
       </div>
       <div class="btn-group" v-if="tabIndex==1">
