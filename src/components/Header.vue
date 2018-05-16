@@ -413,17 +413,17 @@
         });
       },
       enterUserCenter() {
-        if (!this.username) {
-          this.mytoast('请先登录')
+        this.$router.push('/UserCenter');
+        /*if(!this.easysecret){
+          this.mytoast('请先登录');
           setTimeout(() => {
-            this.$router.push('/Login')
+            this.$router.push('/Login');
             // this.$router.go('/');
           }, 1500)
         } else {
-          this.$router.push('/UserCenter')
-        }
+        }*/
       },
-      enterUserCenter() {
+     /* enterUserCenter() {
         if (!this.codeToken) {
           this.mytoast('请先登录')
           setTimeout(() => {
@@ -433,7 +433,7 @@
         } else {
           this.$router.push('/UserCenter')
         }
-      },
+      },*/
       async getuserinfo(virtual) {
         let res = await this.$http.get('/api/users/info/');
         if (!res) return;
