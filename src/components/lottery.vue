@@ -6,7 +6,7 @@
         开奖结果
       </div>
       <div slot="game_introduce" class="items result" style="cursor:pointer;" @click="($router.push({name:$route.params.id}))">
-        玩法介绍{{$route.params.id}}
+        玩法介绍
       </div>
     </home-header>
     <div class="lottery-r-box w ">
