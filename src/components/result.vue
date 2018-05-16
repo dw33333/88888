@@ -56,7 +56,11 @@
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
                                 <td>{{v.data}}</td>
-                                <td><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor">({{v.data | filterSumDx(85)}})</i></td>
+                                <td v-if="isId==201"><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor(85)">({{v.data | filterSumDx(85)}})</i></td>
+                                <td v-if="isId==202"><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor(31)">({{v.data | filterSumDx(31)}})</i></td>
+                                <td v-if="isId==200"><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor(23)">({{v.data | filterSumDx(23)}})</i></td>
+                                <td v-if="isId==206"><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor(14)">({{v.data | filterSumDx(14)}})</i></td>
+                                <td v-if="isId==210"><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor(56)">({{v.data | filterSumDx(56)}})</i></td>
                                 <td v-for="vv in v.data.split(',')"><span :class="vv | filterColor(4)">{{vv | filterDx(4)}}</span></td>
                             </tr>
                             </tbody>
@@ -125,6 +129,7 @@
                             <thead>
                             <tr>
                                 <th>期数</th>
+                                <th>开奖号码</th>
                                 <th>冠</th>
                                 <th>亚</th>
                                 <th>季</th>
@@ -140,6 +145,7 @@
                             <tbody>
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
+                                <td>{{v.data}}</td>
                                 <td v-for="(vv,i) in v.data.split(',')" class="ball"><span :class="'ball'+vv">{{vv}}</span></td>
                             </tr>
                             </tbody>
@@ -150,6 +156,7 @@
                             <thead>
                             <tr>
                                 <th>期数</th>
+                                <th>开奖号码</th>
                                 <th>冠</th>
                                 <th>亚</th>
                                 <th>季</th>
@@ -165,6 +172,7 @@
                             <tbody>
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
+                                <td>{{v.data}}</td>
                                 <td v-for="(vv,i) in v.data.split(',')" class="ball"><span :class="vv | filterColor(5)">{{vv | filterDx(5)}}</span></td>
                             </tr>
                             </tbody>
@@ -175,6 +183,7 @@
                             <thead>
                             <tr>
                                 <th>期数</th>
+                                <th>开奖号码</th>
                                 <th>冠</th>
                                 <th>亚</th>
                                 <th>季</th>
@@ -190,6 +199,7 @@
                             <tbody>
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
+                                <td>{{v.data}}</td>
                                 <td v-for="(vv,i) in v.data.split(',')" class="ball"><span :class="vv | filterDsbg">{{vv | filterDs}}</span></td>
                             </tr>
                             </tbody>
@@ -211,6 +221,7 @@
                             <thead>
                             <tr>
                                 <th>期数</th>
+                                <th>开奖号码</th>
                                 <th>总</th>
                                 <th>一</th>
                                 <th>二</th>
@@ -225,6 +236,7 @@
                             <tbody>
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
+                                <td>{{v.data}}</td>
                                 <td><span>{{v.data | filterSum}}</span></td>
                                 <td v-for="(vv,i) in v.data.split(',')"><span>{{vv}}</span></td>
                             </tr>
@@ -252,7 +264,7 @@
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
                                 <td>{{v.data}}</td>
-                                <td><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor">({{v.data | filterSumDx(23)}})</i></td>
+                                <td><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor(23)">({{v.data | filterSumDx(23)}})</i></td>
                                 <td v-for="(vv,i) in v.data.split(',')"><span :class="vv | filterColor(10)">{{vv |filterDx(10)}}</span></td>
                             </tr>
                             </tbody>
@@ -263,6 +275,7 @@
                             <thead>
                             <tr>
                                 <th>期数</th>
+                                <th>开奖号码</th>
                                 <th>总</th>
                                 <th>一</th>
                                 <th>二</th>
@@ -277,6 +290,7 @@
                             <tbody>
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
+                                <td>{{v.data}}</td>
                                 <td><span>{{v.data | filterSum}}</span></td>
                                 <td v-for="(vv,i) in v.data.split(',')"><span :class="vv | filterDsbg">{{vv |filterDs}}</span></td>
                             </tr>
@@ -299,6 +313,7 @@
                             <thead>
                             <tr>
                                 <th>期数</th>
+                                <th>开奖号码</th>
                                 <th>总</th>
                                 <th>第一</th>
                                 <th>第二</th>
@@ -308,6 +323,7 @@
                             <tbody>
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
+                                <td>{{v.data}}</td>
                                 <td><span>{{v.data | filterSum}}</span></td>
                                 <td v-for="vv in v.data.split(',')"><span>{{vv}}</span></td>
                             </tr>
@@ -319,6 +335,7 @@
                             <thead>
                             <tr>
                                 <th>期数</th>
+                                <th>开奖号码</th>
                                 <th>总</th>
                                 <th>第一</th>
                                 <th>第二</th>
@@ -328,7 +345,8 @@
                             <tbody>
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
-                                <td><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor">({{v.data | filterSumDx(11)}})</i></td>
+                                <td>{{v.data}}</td>
+                                <td><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor(11)">({{v.data | filterSumDx(11)}})</i></td>
                                 <td v-for="vv in v.data.split(',')"><span :class="vv | filterColor(4)">{{vv | filterDx(4)}}</span></td>
                             </tr>
                             </tbody>
@@ -339,6 +357,7 @@
                             <thead>
                             <tr>
                                 <th>期数</th>
+                                <th>开奖号码</th>
                                 <th>总</th>
                                 <th>第一</th>
                                 <th>第二</th>
@@ -348,6 +367,7 @@
                             <tbody>
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
+                                <td>{{v.data}}</td>
                                 <td><span>{{v.data | filterSum}}</span></td>
                                 <td v-for="vv in v.data.split(',')"><span :class="vv | filterDsbg">{{vv | filterDs}}</span></td>
                             </tr>
@@ -385,6 +405,7 @@
                             <thead>
                             <tr>
                                 <th>期数</th>
+                                <th>开奖号码</th>
                                 <th>总</th>
                                 <th>总大小</th>
                                 <th>总单双</th>
@@ -393,6 +414,7 @@
                             <tbody>
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
+                                <td>{{v.data}}</td>
                                 <td><span>{{v.data | filterSum}}</span></td>
                                 <td><span>{{v.data | filterSum | filterDx}}</span></td>
                                 <td><span>{{v.data | filterSum | filterDs}}</span></td>
@@ -595,12 +617,14 @@
             filterSumDx(arr,num){
                 let sum = Init.getSum(arr);
                 if(sum >= num) return '大';
-                else if(sum==84) return '和';
+                else if(sum==84&&num==85) return '和';
+                else if(sum==55&&num==56) return '和';
+                else if(sum==30&&num==31) return '和';
                 else return '小';
             },
-            filterSumColor(arr){
+            filterSumColor(arr,num){
                 let sum = Init.getSum(arr);
-                if(sum > 20) return 'blue';
+                if(sum > num) return 'blue';
                 else return 'green';
             },
             filterDs(n){
@@ -669,7 +693,7 @@
     .six-h .num-box td span,
     .k10-h .num-box td span,
     .td-h .num-box td span,
-    .k10-h .tab-container>div td:nth-of-type(2) span,
+    .k10-h .tab-container>div td:nth-of-type(3) span,
     .ssc-h .dx-box td:nth-of-type(3) span,
     .ssc-h .ds-box td:nth-of-type(3) span,
     .td-h .dx-box td:nth-of-type(3) span,

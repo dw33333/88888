@@ -1,5 +1,5 @@
 <template>
-<div style="background:#e8e8e8;height:100%;">
+<div style="background:#e8e8e8;">
     <div class="xx_lottery">
     <home-header  class="xx_lottery_hheader">
       <div slot="lottery_result" class="items result" style="cursor:pointer;" @click="($router.push({name:'lottery_result',params:{game_name:$route.params.id}}))">
@@ -89,7 +89,7 @@
                     <div id="lotteryTime clearfix" class="lotteryTime">
                         <div id="betPeriod">
                             <!--<span>2018-03-17</span>-->
-                            <span class="daac36 awardNum t">{{inFo.number}}
+                            <span class="daac36 awardNum t">{{inFo.number==-1?'':inFo.numbe}}
                                 <span class="daac360 current-issue-tip">期</span>
                             </span>
                             <!--<span >{{closeT}}</span>-->
@@ -616,7 +616,9 @@
                 this.$http.get(api).then(response => {
                     if(response.data){
 //                        this.result =response.data;
+                        this.countDTime=''
                         this.inFo = response.data;
+                        if(this.inFo.number==-1&&!this.inFo.isopen) this.countDTime ='已封盘';
                         if(window.timer_5) clearInterval(window.timer_5);
                         this.timer_5();
                         if(window.timer1) clearInterval(window.timer1);
@@ -638,12 +640,11 @@
             timer(){
                 if(window.timer1) clearInterval(window.timer1);
                 window.timer1 = setInterval(()=>{
-                    this.countDTime ='';
                     if(this.fc_type == 'six'){
                         this.isCloseLoading=false;
                         this.closeT = '距离截止时间';
                         if(this.isCloseNoGame ==false){
-                            this.countDTime ='已关盘';
+                            this.countDTime ='已封盘';
                             this.isCloseLoading=true;
                         }
                         if(this.sixInfo.closeTime==0) {
@@ -659,16 +660,18 @@
                             if(!this.showResult &&!this.showNote)this.isCloseLoading=true;
                             this.closeT = '距离下期开盘时间';
                         }
-                        if(this.inFo.opentime==0) {
+                        if(this.inFo.opentime==0&&this.inFo.isopen) {
                             this.closeT = '距离截止时间';
                             this.isCloseLoading=false;
                             this.getOdds();
+                        }else{
+                            this.countDTime ='已封盘';
                         }
                         if(!this.inFo) return;
                         if(this.inFo.opentime<0) return;
 
                     }
-                    this.countDTime = this.fc_type =='six'?L.count(this.sixInfo.closeTime--,this):L.count(this.inFo.opentime--,this);
+                    this.countDTime = L.count(this.inFo.opentime--,this);
                 },1000);
             },
             //5s自动刷新一次时间赔率
@@ -676,7 +679,7 @@
                 if (window.timer_5) clearInterval(window.timer_5);
                 window.timer_5 = setInterval(() => {
 //                    this.changeOdds();
-                    this.getBall(2);
+                    if(this.inFo.isopen)this.getBall(2);
                     this.getUserInfo();
                 }, 60000);
             },
@@ -889,7 +892,7 @@
             getOdds(){
                 this.getBall();
                 if(this.$route.path.indexOf('lottery')<=-1) return;
-                this.countDTime = '';
+//                this.countDTime = '';
                 this.isLoading = true;
                 this.getOddsData()
             },
