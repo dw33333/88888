@@ -89,7 +89,7 @@
                     <div id="lotteryTime clearfix" class="lotteryTime">
                         <div id="betPeriod">
                             <!--<span>2018-03-17</span>-->
-                            <span class="daac36 awardNum t">{{inFo.number==-1?'':inFo.numbe}}
+                            <span class="daac36 awardNum t">{{inFo.number==-1?'':inFo.number}}
                                 <span class="daac360 current-issue-tip">期</span>
                             </span>
                             <!--<span >{{closeT}}</span>-->
@@ -660,7 +660,7 @@
                             if(!this.showResult &&!this.showNote)this.isCloseLoading=true;
                             this.closeT = '距离下期开盘时间';
                         }
-                        if(this.inFo.opentime==0&&this.inFo.isopen) {
+                        if(this.inFo.opentime==0&&this.inFo.number!=-1) {
                             this.closeT = '距离截止时间';
                             this.isCloseLoading=false;
                             this.getOdds();

@@ -716,7 +716,7 @@
 
     /*ssc*/
     .blue{color: rgb(36, 0, 252) !important;font-weight: bold}
-    .red{color: rgb(230, 19, 0) !important;font-weight: bold;background: none;}
+    .red{color: rgb(230, 19, 0) !important;font-weight: bold;background: none!important;}
     .green{color: rgb(0, 114, 36) !important;font-weight: bold}
     .zbg{    color: rgb(255, 0, 0)!important;font-weight: 700}
     .lbg{color: rgb(180, 72, 216)!important;font-weight: 700}
