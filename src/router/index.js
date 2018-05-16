@@ -3,7 +3,12 @@ import Router from 'vue-router'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import store from "@/store"
-import Lottery from '@/components/lottery'
+// import Lottery from '@/components/lottery'
+const Lottery = (resolve) => {
+    import('@/components/lottery').then((module) => {
+        resolve(module)
+    })
+}
 /*import alert from "@/components/base/alert"*/
 // 首页头部导航栏
 
