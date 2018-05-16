@@ -200,7 +200,7 @@
 </script>
 <style lang="less">
 table{
-  border-collapse: initial;
+  border-collapse: initial !important;
 }
 .rule_from02{
   padding: 30px;
