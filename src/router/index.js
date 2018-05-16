@@ -543,22 +543,22 @@ const route = new Router({
         },
         {
           path:'/Tcpl3',
-          namel:'Tcpl3',
+          name:'Tcpl3',
           component:Tcpl3
         },
         {
           path:'/Fc3d',
-          namel:'Fc3d',
+          name:'Fc3d',
           component:Fc3d
         },
         {
           path:'/Shssl',
-          namel:'Shssl',
+          name:'Shssl',
           component:Shssl
         },
         {
           path:'/Jsk3',
-          namel:'Jsk3',
+          name:'Jsk3',
           component:Jsk3
         },
         {

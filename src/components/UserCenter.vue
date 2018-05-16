@@ -581,11 +581,6 @@
     height: 100%;
     width: 100%;
   }
-
-  .triangles_back {
-    display: none;
-  }
-
   .official_play {
     border-bottom: none;
     font-size: 12px;
