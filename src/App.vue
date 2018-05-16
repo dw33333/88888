@@ -53,7 +53,6 @@
     background: url('./assets/bg1.jpg') 0 0 no-repeat;
     height: 100%;
   }
-
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

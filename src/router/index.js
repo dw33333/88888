@@ -734,7 +734,7 @@ route.beforeEach((to, from, next) => {
   if (!store.state.easysecret && (["register", "Login", "Header"].indexOf(to.name) === -1)) {//除登录和注册页面其他页面未登录跳到登录页
     route.push({name:"Login",params:{hback:to.name,params:to.params}});
   } else if (store.state.easysecret && (["register", "Login"].indexOf(to.name) !== -1)) {//登录的状态不能访问登录页和注册页
-    route.go(-1);
+    route.push({name:from.name});
   } else {
     next();
   }
