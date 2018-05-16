@@ -2506,7 +2506,7 @@
       },
       async initGameType() {
         this.is_loading_lottery_type = true;
-        let res = await this.$http.get('/api/lottery/basic/LotteryList');
+        let res = await this.$http.get('/api/lottery/basic/LotteryList/');
         this.is_loading_lottery_type = false;
         if (!res) {
           this.is_loading_result=false;

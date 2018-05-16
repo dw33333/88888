@@ -135,7 +135,7 @@
             },
             //获取彩种列表
             getMenus(){
-                this.$http.get('/api/lottery/basic/LotteryList').then(response=>{
+                this.$http.get('/api/lottery/basic/LotteryList/').then(response=>{
                 this.menus =response.data.data;
                 },response=>{
 

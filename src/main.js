@@ -3,11 +3,8 @@ import App from './App'
 import router from './router'
 import store from './store'
 import axios from 'axios'
-import 'babel-polyfill'  //ie11打开空白
 import alert from "@/components/base/alert"
 import "@/obj/util"
-import Es6Promise from 'es6-promise'
- Es6Promise.polyfill();
 import {Dialog,Button,Form,FormItem,DatePicker,Select,Option,Pagination} from 'element-ui';
 import 'element-ui/lib/theme-chalk/form-item.css';
 import 'element-ui/lib/theme-chalk/form.css';
@@ -18,6 +15,9 @@ import 'element-ui/lib/theme-chalk/select.css';
 import 'element-ui/lib/theme-chalk/option.css';
 import 'element-ui/lib/theme-chalk/pagination.css';
 import './assets/css/iconfont.css';
+import 'babel-polyfill'  //ie11打开空白
+/*import Es6Promise from 'es6-promise'
+Es6Promise.polyfill();*/
 import route from "@/router";
 Vue.use(Dialog);
 Vue.use(Button);
@@ -72,6 +72,17 @@ Vue.config.productionTip = true
 axios.defaults.withCredentials = true
 Vue.prototype.$http = axios;
 Vue.prototype.$http.defaults.headers.EasySecret=store.state.easysecret;
+Vue.prototype.$http.interceptors.request.use(request=>{
+  if(request.method=="get"){//添加时间戳
+    /*request.config.url=request.config.url.indexOf("?")!=-1?(request.config.url+"&t="+Date.now()):(request.config.url+"?t="+Date.now());
+      request.config.data={...request.config.data,"t":Date.now()} */
+    request.params={
+      t:Date.now(),
+      ...request.params
+    }
+  };
+  return request;
+});
 Vue.prototype.$http.interceptors.response.use(
   response => {
     if(response.status!=200){//不确定所有非200状态都进入error 所以价格判断
@@ -94,7 +105,7 @@ Vue.prototype.$http.interceptors.response.use(
                 localStorage.clear();
               }
               Vue.prototype.$http.defaults.headers.EasySecret=undefined;
-              router.push({name:"Login",params:{hback:Vue.prototype.$route.name,params:Vue.prototype.$route.params}});
+              router.push({name:"Login",params:{hback:router.currentRoute.name,params:router.currentRoute.params}});
               store.commit("ROOTBOX",{
                 open:false
               })

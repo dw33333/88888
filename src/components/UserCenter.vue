@@ -251,7 +251,7 @@
       },
       //玩法列表
       getArry () {
-        this.$http.get('/api/lottery/basic/LotteryGroup').then((res) => {
+        this.$http.get('/api/lottery/basic/LotteryGroup/').then((res) => {
           this.headersArry = res.data;
         })
       },
@@ -344,7 +344,17 @@
       font-family: "Microsoft YaHei";
       box-sizing: border-box;
     }
-
+    option::-ms-expand{ display: none; }
+    option{
+      -moz-appearance:none; /* Firefox */
+      -webkit-appearance:none; /* Safari 和 Chrome */
+      appearance:none;
+    }
+    /* --背景色字体颜色--*/
+    option:hover{
+      color:#fff;
+      background-color:#000;
+    }
     select, input[type=text], input[type=password], input[type=number] {
       line-height: 30px;
       height: 36px;

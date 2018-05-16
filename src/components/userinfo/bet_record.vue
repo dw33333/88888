@@ -168,7 +168,7 @@
       },
       async initLotteryType() {
         this.is_loading_lottery_type = true;
-        let res = await this.$http.get('/api/lottery/basic/LotteryList');
+        let res = await this.$http.get('/api/lottery/basic/LotteryList/');
         this.is_loading_lottery_type = false;
         if (!res) return;
         if (res.data.code != 0) {

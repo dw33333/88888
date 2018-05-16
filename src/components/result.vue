@@ -511,7 +511,7 @@
         methods:{
             getHistory(){
                 if(!this.$route.path.includes('lottery')) return;
-                this.$http.get("/api/lottery-v1/"+this.childId+"/history").then(response => {
+                this.$http.get("/api/lottery-v1/"+this.childId+"/history/").then(response => {
                     this.ballData = response.data.list;
                     console.log('23333',this.ballData);
                 }, response => {

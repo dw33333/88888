@@ -108,7 +108,7 @@ export default {
     //   })
     // },
     LotteryHot () {
-    this.$http.get('/api/lottery/basic/LotteryHot').then((res)=>{
+    this.$http.get('/api/lottery/basic/LotteryHot/').then((res)=>{
       this.lotteryHot = res.data;
       })
     },

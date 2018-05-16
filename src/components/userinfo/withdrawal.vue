@@ -227,7 +227,7 @@
       ...mapState(["userinfo"]),
     },
     async mounted() {
-      let res = await this.$http.get('/api/users/Bankcardcat');
+      let res = await this.$http.get('/api/users/Bankcardcat/');
       if (!res) {
         this.is_loading_car_info=false;
         return;
@@ -276,7 +276,7 @@
       },
       async loadCardInfo(){
         this.is_loading_car_info=true;
-        let res = await this.$http.get('/api/money/getUserBankInfo');
+        let res = await this.$http.get('/api/money/getUserBankInfo/');
         this.is_loading_car_info=false;
         if (!res) return;
         this.tixianInputs.min_money=res.data.min_money;

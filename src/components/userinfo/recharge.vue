@@ -177,7 +177,7 @@
     },
     async mounted() {
       this.is_loading_paytype=true;
-      let res = await this.$http.get('/api/pay/mobilelist');
+      let res = await this.$http.get('/api/pay/mobilelist/');
       this.is_loading_paytype=false;
       if (!res) {
         this.is_loading_banks=false;
@@ -189,7 +189,7 @@
       }
       let bp = {id: -1, name: "银行卡转账", selected: true, selectedBankId: -1, money: "", about: "", type: ""};
       this.is_loading_banks=true;
-      let inBankRes = await this.$http.get('/api/HuikuanList/showBank');
+      let inBankRes = await this.$http.get('/api/HuikuanList/showBank/');
       this.is_loading_banks=false;
       if (!inBankRes) return;
       if (inBankRes.data.code !== 0) {

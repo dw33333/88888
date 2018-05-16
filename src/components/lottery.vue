@@ -552,7 +552,7 @@
             },
             //获取玩法导航
             getMenus(){
-               this.$http.get("/api/lottery/basic/LotteryGroup").then(res=>{
+               this.$http.get("/api/lottery/basic/LotteryGroup/").then(res=>{
                    if (!res.data) return  window.top.wAlert('网络超时，请重新刷新');
                    this.menusData = res.data;
                    let arr = [];
@@ -1025,7 +1025,7 @@
                 this.getuser = false;
 //                this.$http.defaults.headers.EasySecret  = this.$cookieStore.getCookie('easysecret');
                 this.$http.defaults.headers.EasySecret = window.localStorage.getItem('easysecret');
-                this.$http.get("/api/users/info").then(response => {
+                this.$http.get("/api/users/info/").then(response => {
                     if (response.data.code == 0) {
                         this.userMoney = response.data.data.Money;
                         this.userName = response.data.data.UserName;
@@ -1052,7 +1052,7 @@
                 // 获取账户余额
             getUserMoney(){
                     this.getuser = false;
-                    this.$http.get("/api/users/balance").then(response => {
+                    this.$http.get("/api/users/balance/").then(response => {
                         if (response.data.code == 0) {
                             this.userMoney = response.data.data.money;
                             this.isLogin = true;
