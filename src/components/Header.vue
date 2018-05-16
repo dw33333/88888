@@ -86,7 +86,7 @@
               </a>
             </router-link>
             <li>
-              <a href="javascript:void(0)" v-if="!username" @click="showMessge">
+              <a href="javascript:void(0)" v-if="!easysecret" @click="showMessge">
                 <div>平台公告</div>
                 <span>ANNOUNCEMENT</span>
               </a>

@@ -118,11 +118,11 @@
         this.num = 1;
         this.isActive = false;
       }
-      // if(this.$route.name == 'Cqssc'){
-      //   this.num = 0;
-      //   this.isDisplay = 4;
-      //   this.isActive = true;
-      // }
+      if(this.$route.name !== 'Teller','Deposit','Generalq'){
+        this.num = 0;
+        this.isDisplay = 4;
+        // this.isActive = true;
+      }
     },
     computed: {
       ...mapState(['agmoney', 'dsmoney', 'money', 'username', 'userRealName', 'userinfo','sitesInfos','headerArry'])
@@ -199,6 +199,9 @@
 
 </script>
 <style lang="less">
+table{
+  border-collapse: initial;
+}
 .rule_from02{
   padding: 30px;
 }
