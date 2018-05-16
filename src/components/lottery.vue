@@ -926,6 +926,7 @@
                 this.CurrHxOdds = '';
             },
             changeCurrBall(v,name){
+                if(name=='官方玩法') return window.top.wAlert('官方玩法暂未开发，敬请期待！');
                 this.moreA=false;
                 this.currBall = v;
                 this.currN = name;
@@ -1166,6 +1167,7 @@
         },
         watch:{
             "currBall":function(n,o){
+//                if(this.currN=='官方玩法') return window.top.wAlert('官方玩法暂未开发，敬请期待！');
                 this.mainData = this.allData[n];
                 this.jiNav = Init.getjx[this.currT][this.currN];
                 this.currBall = n;
