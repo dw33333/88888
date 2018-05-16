@@ -743,5 +743,6 @@ route.beforeEach((to, from, next) => {
   } else {
     next();
   }
+  window.scrollTo(0, 0)
 })
 export default route;

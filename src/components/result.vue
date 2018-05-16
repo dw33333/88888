@@ -19,6 +19,7 @@
                             <thead>
                             <tr>
                                 <th>期数</th>
+                                <th>开奖号码</th>
                                 <th>总</th>
                                 <th>第一</th>
                                 <th>第二</th>
@@ -30,6 +31,7 @@
                             <tbody>
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
+                                <td>{{v.data}}</td>
                                 <td><span>{{v.data | filterSum}}</span></td>
                                 <td v-for="vv in v.data.split(',')"><span>{{vv}}</span></td>
                             </tr>
@@ -41,6 +43,7 @@
                             <thead>
                             <tr>
                                 <th>期数</th>
+                                <th>开奖号码</th>
                                 <th>总</th>
                                 <th>第一</th>
                                 <th>第二</th>
@@ -52,7 +55,8 @@
                             <tbody>
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
-                                <td><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor">({{v.data | filterSumDx}})</i></td>
+                                <td>{{v.data}}</td>
+                                <td><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor">({{v.data | filterSumDx(85)}})</i></td>
                                 <td v-for="vv in v.data.split(',')"><span :class="vv | filterColor(4)">{{vv | filterDx(4)}}</span></td>
                             </tr>
                             </tbody>
@@ -63,6 +67,7 @@
                             <thead>
                             <tr>
                                 <th>期数</th>
+                                <th>开奖号码</th>
                                 <th>总</th>
                                 <th>第一</th>
                                 <th>第二</th>
@@ -74,6 +79,7 @@
                             <tbody>
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
+                                <td>{{v.data}}</td>
                                 <td><span>{{v.data | filterSum}}</span></td>
                                 <td v-for="vv in v.data.split(',')"><span :class="vv | filterDsbg">{{vv | filterDs}}</span></td>
                             </tr>
@@ -85,6 +91,7 @@
                             <thead>
                             <tr>
                                 <th>期数</th>
+                                <th>开奖号码</th>
                                 <th>总</th>
                                 <th>第一</th>
                                 <th>第二</th>
@@ -96,6 +103,7 @@
                             <tbody>
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
+                                <td>{{v.data}}</td>
                                 <td><span>{{v.data | filterSum}}</span></td>
                                 <td v-for="vv in v.data.split(',')"><span :class="vv | filterDsbg">{{vv | filterZh}}</span></td>
                             </tr>
@@ -228,6 +236,7 @@
                             <thead>
                             <tr>
                                 <th>期数</th>
+                                <th>开奖号码</th>
                                 <th>总</th>
                                 <th>一</th>
                                 <th>二</th>
@@ -242,7 +251,8 @@
                             <tbody>
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
-                                <td><span>{{v.data | filterSum}}</span></td>
+                                <td>{{v.data}}</td>
+                                <td><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor">({{v.data | filterSumDx(23)}})</i></td>
                                 <td v-for="(vv,i) in v.data.split(',')"><span :class="vv | filterColor(10)">{{vv |filterDx(10)}}</span></td>
                             </tr>
                             </tbody>
@@ -318,7 +328,7 @@
                             <tbody>
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
-                                <td><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor">({{v.data | filterSumDx}})</i></td>
+                                <td><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor">({{v.data | filterSumDx(11)}})</i></td>
                                 <td v-for="vv in v.data.split(',')"><span :class="vv | filterColor(4)">{{vv | filterDx(4)}}</span></td>
                             </tr>
                             </tbody>
@@ -505,13 +515,18 @@
                 currP:1,
                 ballData:'',
                 load:null,
-                isId:''
+                isId:'',
+                fdata:{
+                    p:1,
+                    ps:10,
+                    t:''
+                }
             }
         },
         methods:{
             getHistory(){
                 if(!this.$route.path.includes('lottery')) return;
-                this.$http.get("/api/lottery-v1/"+this.childId+"/history/").then(response => {
+                this.$http.post("/api/lottery-v1/"+this.childId+"/history/",this.fdata).then(response => {
                     this.ballData = response.data.list;
                     console.log('23333',this.ballData);
                 }, response => {
@@ -566,8 +581,8 @@
                     if(n>s) return 'blue'
                     else return 'green'
                 }else if(s==5){ //pk10大小
-                    if(n>s) return 'blueBg'
-                    else return 'orangeBg'
+                    if(n>s) return 'blue'
+                    else return 'green'
                 }else if(s==10){ //k10大小
                     if(n>s) return 'red'
                     else return 'blue'
@@ -577,9 +592,10 @@
                 }
 
             },
-            filterSumDx(arr){
+            filterSumDx(arr,num){
                 let sum = Init.getSum(arr);
-                if(sum > 20) return '大';
+                if(sum >= num) return '大';
+                else if(sum==84) return '和';
                 else return '小';
             },
             filterSumColor(arr){
@@ -640,11 +656,11 @@
     .tab-title span{display: inline-block; background:#ddd;border-radius: 4px;
         box-shadow: 0 0 1px #6f6f6f;    border: 1px solid transparent; width:54px; height: 30px;line-height:30px;
         font-size: 14px;color: #72a5d0;cursor: pointer}
-    .tab-title span.active{background:#428bca;border-radius: 4px; box-shadow: 0 0 1px #153a6f;  color: #fff;}
+    .tab-title span.active{background:#428bca;border-radius: 4px; box-shadow: 0 0 1px #153a6f;  color: #fff!important;}
     .tab-title span.active:hover{background:#357ebd;}
     .tab-container table{width: 100%;text-align: center;font-size: .38rem;}
     .tab-container table thead th{padding:10px 0;background: #fff;font-size: 14px;border:none;border-bottom: 1px solid #e5e5e5;font-weight:700;color: #ff9b39; }
-    .tab-container table thead th:nth-child(1){color: #666;font-weight: 400}
+    .tab-container table thead th:nth-child(-n+2){color: #666;font-weight: 400}
     .tab-container table tbody{background: #fff;}
     .tab-container table tbody td{padding: 10px 5px;border: none;border-bottom: 1px solid #e5e5e5;font-size: 14px;color: #666;text-align: center;}
     .tab-container table tbody td.w20{padding:10px 20px;}
@@ -654,17 +670,17 @@
     .k10-h .num-box td span,
     .td-h .num-box td span,
     .k10-h .tab-container>div td:nth-of-type(2) span,
-    .ssc-h .dx-box td:nth-of-type(2) span,
-    .ssc-h .ds-box td:nth-of-type(2) span,
-    .td-h .dx-box td:nth-of-type(2) span,
-    .td-h .ds-box td:nth-of-type(2) span
+    .ssc-h .dx-box td:nth-of-type(3) span,
+    .ssc-h .ds-box td:nth-of-type(3) span,
+    .td-h .dx-box td:nth-of-type(3) span,
+    .td-h .ds-box td:nth-of-type(3) span
     {background: url("../assets/images/red-ball-sm.png") center no-repeat;background-size: contain;
         display: block; width:24px;height:24px;font-size: 12px; line-height:24px;color: #fff;display: inline-block}
 
-    .ssc-h .dx-box td:nth-of-type(2) span,
-    .ssc-h .ds-box td:nth-of-type(2) span,
-    .td-h .dx-box td:nth-of-type(2) span,
-    .td-h .ds-box td:nth-of-type(2) span
+    .ssc-h .dx-box td:nth-of-type(3) span,
+    .ssc-h .ds-box td:nth-of-type(3) span,
+    .td-h .dx-box td:nth-of-type(3) span,
+    .td-h .ds-box td:nth-of-type(3) span
     {display: inline-block}
 
     .ssc-h .ds-box td span,
@@ -676,7 +692,7 @@
 
     /*ssc*/
     .blue{color: rgb(36, 0, 252) !important;font-weight: bold}
-    .red{color: rgb(230, 19, 0) !important;font-weight: bold}
+    .red{color: rgb(230, 19, 0) !important;font-weight: bold;background: none;}
     .green{color: rgb(0, 114, 36) !important;font-weight: bold}
     .zbg{    color: rgb(255, 0, 0)!important;font-weight: 700}
     .lbg{color: rgb(180, 72, 216)!important;font-weight: 700}

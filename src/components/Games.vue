@@ -76,7 +76,7 @@ export default {
         goGamePgae (id) {
             this.$http.post('/api/electronic/electronic/getGameUrl',{game_id:id}).then((res) => {
                 let url = res.data.data.url;
-                window.open(url,'_blank',"modal=false,alwaysRaised=yes")
+                window.open(url,'_blank', "scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes")
             });
         },
         //搜索
@@ -113,6 +113,7 @@ export default {
         changeList (id){
             this.content = '';
             this.listId = id;
+            this.currentPage = 1;
             this.gamelistmore();
         },
         gamelistmore () {

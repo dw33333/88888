@@ -1,4 +1,5 @@
 <template>
+<div style="background:#e8e8e8;height:100%;">
     <div class="xx_lottery">
     <home-header  class="xx_lottery_hheader">
       <div slot="lottery_result" class="items result" style="cursor:pointer;" @click="($router.push({name:'lottery_result',params:{game_name:$route.params.id}}))">
@@ -488,6 +489,7 @@
         </div>
     </div>
 </div>
+</div>
 </template>
 <script>
     import Init from '../config/lottery_init.js';
@@ -926,6 +928,7 @@
                 this.CurrHxOdds = '';
             },
             changeCurrBall(v,name){
+                if(name=='官方玩法') return window.top.wAlert('官方玩法暂未开发，敬请期待！');
                 this.moreA=false;
                 this.currBall = v;
                 this.currN = name;
@@ -1166,6 +1169,7 @@
         },
         watch:{
             "currBall":function(n,o){
+//                if(this.currN=='官方玩法') return window.top.wAlert('官方玩法暂未开发，敬请期待！');
                 this.mainData = this.allData[n];
                 this.jiNav = Init.getjx[this.currT][this.currN];
                 this.currBall = n;
