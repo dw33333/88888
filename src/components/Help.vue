@@ -48,15 +48,15 @@
         <!-- 折叠菜单 -->
         <div class="sidebar">
           <div class="sidebar-menu">
-            <router-link tag="div" to="/Generalq" style="margin-top: 0;" class="item" @click.native="isShow(1)" :class="{active:1 == num}">
+            <div style="margin-top: 0;" class="item" @click="isShow(1)" :class="{help_active:1 == num}">
               <span >常见问题</span>
-            </router-link>
-            <router-link tag="div"  to="/Deposit" class="item" @click.native="isShow(2)" :class="{active:2 == num}">
+            </div>
+            <div  class="item" @click="isShow(2)" :class="{help_active:2 == num}">
              <span >存款帮助</span>
-            </router-link>
-             <router-link tag="div"  class="item" to="/Teller" @click.native="isShow(3)" :class="{active:3 == num}">
+            </div>
+             <div  class="item"  @click="isShow(3)" :class="{help_active:3 == num}">
               <span>取款帮助</span>
-            </router-link>
+            </div>
             <div class="item" @click="isShow(4)" >
               <a href="javascript:void(0);">玩法介绍</a>
             </div>
@@ -106,22 +106,20 @@
       maskLayer
     },
     mounted() {
+      
       if(this.$route.name == 'Teller'){
-        this.isActive = false;
         this.num = 3;
-      }
+      }else
       if(this.$route.name == 'Deposit'){
         this.num = 2;
         this.isActive = false;
-      }
+      }else
       if(this.$route.name == 'Generalq'){
         this.num = 1;
         this.isActive = false;
-      }
-      if(this.$route.name !== 'Teller','Deposit','Generalq'){
+      }else{
         this.num = 0;
         this.isDisplay = 4;
-        // this.isActive = true;
       }
     },
     computed: {
@@ -183,6 +181,15 @@
         this.isShowMenu = false
       },
       isShow(index) {
+        if(index == 1){
+          this.$router.push('/Generalq')
+        }
+        if(index == 2){
+          this.$router.push('/Deposit')
+        }
+        if(index == 3){
+          this.$router.push('/Teller')
+        }
         this.num = index;
         if (this.isDisplay == index)
           this.isDisplay = 0;
@@ -228,7 +235,7 @@
 .help-con{
     padding: 30px;
 }
-.active{
+.help_active{
     background-position: 0 -535px !important;
     color: #000 !important;
 }
