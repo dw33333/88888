@@ -1,5 +1,5 @@
 <template>
-  <div class='container usercenter'>
+  <div class='container hp_help'>
     <div class="header">
       <img class="logo" src="../assets/logo1.png" height="82" width="136" alt="">
       <ul class="nav">
@@ -199,12 +199,17 @@
 
 </script>
 <style lang="less">
-.subtitle2{
-  background-color: rgb(175, 175, 228) !important;
-}
-table{
-  border-collapse: initial !important;
-  width: auto !important;
+.hp_help{
+  .subtitle2{
+    background-color: rgb(175, 175, 228) !important;
+  }
+  table{
+    border-collapse: initial;
+    width: auto;
+  }
+  table td{
+    text-align: left;
+  }
 }
 .rule_from02{
   padding: 30px;
@@ -227,6 +232,7 @@ table{
     background-position: 0 -535px !important;
     color: #000 !important;
 }
+
 
   /*body {
     background-image: none;
