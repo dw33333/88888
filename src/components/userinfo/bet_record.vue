@@ -198,7 +198,7 @@
             ps: this.pageSize,
             d: this.curDate
           }
-          method="GET";
+          method="POST";
         }
         this.is_loading_records=true;
         let res = await this.$http({
