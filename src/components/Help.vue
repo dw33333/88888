@@ -198,14 +198,10 @@
   }
 
 </script>
-<<<<<<< HEAD
 <style lang="less">
 .subtitle2{
   background-color: rgb(175, 175, 228) !important;
 }
-=======
-<style lang="less" scoped>
->>>>>>> 79c2a760403beebbd60ea658ea772c3fe97258f3
 table{
   border-collapse: initial !important;
   width: auto !important;
