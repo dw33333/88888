@@ -52,7 +52,7 @@
                             </p>
                             <!--<p>开奖选项</p>-->
                         </div>
-                        <div class="result-no" v-if="currT==200"  v-for="(v,key) in result" >
+                        <div class="result-no" v-if="currT==200||currT==210"  v-for="(v,key) in result" >
                             <i class="redball"  v-for="vv in v" v-if="vv">{{vv}}</i>
                             <p  v-else>暂无开奖结果！</p>
                         </div >
@@ -576,13 +576,6 @@
                 this.resetD(this.fc_type);
                 this.reset();
             },
-            // 获取当期开奖结果
-            timer_30(){
-                if (window.timer_30) clearInterval(window.timer_30);
-                window.timer_30 = setInterval(() => {
-                    this.getBall(2);
-                }, 60000);
-            },
             //获取玩法导航
             getMenus(){
                 this.$http.get("/api/lottery/basic/LotteryGroup/").then(res=>{
@@ -606,12 +599,11 @@
                 if(e) this.more = e.text;
             },
             getBall(n){
+                if(this.$route.path.indexOf('lottery') <= -1) return;
                 if(n!=2){
                     this.isLoading2 = true;
                     this.result = '';
                 }
-//                this.showResult = false;
-//                this.showNote = false;
                 let api = "/api/lottery-v1/"+this.fc_type+"/opentime/";
                 this.$http.get(api).then(response => {
                     if(response.data){
@@ -620,8 +612,6 @@
                             this.countDTime='';
                             this.inFo = response.data;
                             if(this.inFo.number==-1&&!this.inFo.isopen) this.countDTime ='已封盘';
-                            if(window.timer_5) clearInterval(window.timer_5);
-                            this.timer_5();
                             if(window.timer1) clearInterval(window.timer1);
                             this.timer();
                         }
@@ -680,10 +670,8 @@
             timer_5(){
                 if (window.timer_5) clearInterval(window.timer_5);
                 window.timer_5 = setInterval(() => {
-//                    this.changeOdds();
-                    if(this.inFo.isopen)this.getBall(2);
-                    this.getUserInfo();
-                }, 60000);
+                    if(this.inFo.isopen) this.getBall(2);
+                },60000);
             },
             //取消注单
             removeList(e){
@@ -892,14 +880,13 @@
 
             },
             getOdds(){
-                this.getBall();
                 if(this.$route.path.indexOf('lottery')<=-1) return;
-//                this.countDTime = '';
                 this.isLoading = true;
                 this.getOddsData()
             },
             //获取赔率
             getOddsData(){
+                this.getBall();
                 this.mainData = [];
                 let agent = window.localStorage.getItem('agent_id');
                 let api = "/api/lottery-v1/"+this.fc_type+"/odds/";
@@ -913,7 +900,8 @@
                     this.mainData = this.allData[res.data.playd[0].playd_guoup_id];//当前数据
                     this.jiNav = Init.getjx[this.currT][this.currN];
                     this.isLoading = false;
-
+                    if(window.timer_5) clearInterval(window.timer_5)
+                    this.timer_5()
                 }, res => {
                     this.isLoading = false;
                     this.isLoading3 = false;
@@ -1232,8 +1220,4 @@
   .xx_lottery_hheader .result:hover{
     color:#B62929;
   }
-    body{
-     background: none;
-     height: auto;
-    }
 </style>
