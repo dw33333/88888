@@ -51,7 +51,7 @@
   html {
     height: 100%;
   }
-  body {
+  html body {
     background: url('./assets/bg1.jpg') 0 0 no-repeat;
     height: 100%;
   }

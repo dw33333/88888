@@ -309,8 +309,8 @@
         }
         this.$http.defaults.headers.EasySecret = res.headers.easysecret;
         this.EASYSECRET(res.headers.easysecret);
-        await this.getuserinfo(res.data.virtual == 1 ? 1 : undefined);
         this.mytoast("登录成功");
+        await this.getuserinfo(res.data.virtual == 1 ? 1 : undefined);
       },
       goVideo() {
         this.$router.push('/live1');
@@ -487,8 +487,8 @@
             if (res.data.code === 0) {
               this.$http.defaults.headers.EasySecret = res.headers.easysecret;
               this.EASYSECRET(res.headers.easysecret);
-              await this.getuserinfo();
               this.mytoast(res.data.msg);
+              await this.getuserinfo();
               // this.usermoney = res.data.data.user_money
 
               // sessionStorage.setItem('username', this.username)
