@@ -52,7 +52,7 @@
                             </p>
                             <!--<p>开奖选项</p>-->
                         </div>
-                        <div class="result-no" v-if="currT==200"  v-for="(v,key) in result" >
+                        <div class="result-no" v-if="currT==200||currT==210"  v-for="(v,key) in result" >
                             <i class="redball"  v-for="vv in v" v-if="vv">{{vv}}</i>
                             <p  v-else>暂无开奖结果！</p>
                         </div >
