@@ -199,8 +199,12 @@
 
 </script>
 <style lang="less">
+.subtitle2{
+  background-color: rgb(175, 175, 228) !important;
+}
 table{
   border-collapse: initial !important;
+  width: auto !important;
 }
 .rule_from02{
   padding: 30px;
