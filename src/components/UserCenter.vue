@@ -324,8 +324,8 @@
   }
 
 </script>
-<style lang="less">
-  .usercenter {
+<style lang="less" scoped>
+  /*.usercenter {
     .full{
       display:inline-block;
       width:100%;
@@ -456,7 +456,7 @@
         }
       }
     }
-  }
+  }*/
 
   /*body {
     background-image: none;

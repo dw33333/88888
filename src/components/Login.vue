@@ -269,6 +269,7 @@
     display: inline-block;
     padding-left: 45px;
     color: #fff;
+    margin:13px 0;
   }
 
   .code {

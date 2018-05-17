@@ -63,7 +63,9 @@
     min-width: 1170px;
     /*margin-top: 60px;*/
   }
-
+  *,
+  ::before,
+  ::after{ padding: 0;  margin: 0;}
   .clearfix {
     *zoom: 1;
   }
@@ -78,7 +80,9 @@
   .clearfix:after {
     clear: both;
   }
-
+  .clear_both{
+    clear:both;
+  }
   /*公共样式*/
   li {
     list-style-type: none;
@@ -320,6 +324,136 @@
     to {
       visibility: hidden;
       height:0;
+    }
+  }
+  .usercenter {
+    textarea {
+      line-height: 1.5em;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 3px 3px;
+      padding-left: 10px;
+      color: #999;
+      position: relative;
+      top: 3px;
+      font-family: "Microsoft YaHei";
+      box-sizing: border-box;
+    }
+
+    select, input[type=text], input[type=password], input[type=number] {
+      line-height: 30px;
+      height: 36px;
+      width: 300px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 3px 3px;
+      padding-left: 10px;
+      color: #999;
+      vertical-align: middle;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      outline: 0;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-text-fill-color: rgba(255, 255, 255, 1);;
+      -webkit-animation-name: autofill;
+      -webkit-animation-fill-mode: both;
+    }
+
+    @-webkit-keyframes autofill { //去除chrome浏览器自动填充表单的黄色背景
+      to {
+        color: rgba(255, 255, 255, 1);
+        background: transparent;
+      }
+    }
+
+    @-webkit-keyframes autofill2 { //去除chrome浏览器自动填充表单的黄色背景
+      to {
+        color: #aaa;
+        background: transparent;
+      }
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-text-fill-color: #aaa;
+      -webkit-animation-name: autofill2;
+      -webkit-animation-fill-mode: both;
+      color: #aaa !important;
+    }
+
+    .search_box {
+      padding: 10px 0px;
+      line-height: 35px;
+      .btn_search {
+        vertical-align: middle;
+        background-color: #b62929;
+        color: #fff;
+        display: inline-block;
+        line-height: 34px;
+        min-width: 60px;
+        text-align: center;
+        border-radius: 3px 3px;
+        cursor:pointer;
+      }
+    }
+    table.tb {
+      width:100%;
+      border-collapse: collapse;
+      border: 1px solid #ccc;
+      text-align: center;
+      tr {
+        border: 1px solid #ccc;
+      }
+      th{
+        background-color:#C7C7C7;
+        padding:8px 0;
+        font-weight: 200;
+      }
+      td{
+        background-color:#fff;
+        padding:8px 0;
+      }
+    }
+    .pager{
+      margin-top:20px;
+      margin-bottom:20px;
+      text-align: center;
+      >.item{
+        margin:0 2px;
+        display: inline-block;
+        padding:7px 10px;
+        cursor:pointer;
+        line-height: 1.2;
+        border:1px solid #ccc;
+        background-color:#fff;
+        &:hover{
+          color:#B62929;
+          border:1px solid #b62929;
+        }
+        &.cur{
+          color:#B62929;
+          border:1px solid #b62929;
+        }
+        &.sl{
+          &:hover{
+            border:none;
+            background:none;
+          }
+          border:none;
+          background:none;
+        }
+      }
+    }
+    .triangles_back {
+      display: none;
     }
   }
 </style>
