@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <transition name="fade">
-    <router-view></router-view>
+      <router-view></router-view>
     </transition>
     <transition name="ew-slide">
       <!--最外层动态组件-->
@@ -10,68 +10,70 @@
   </div>
 </template>
 <script>
-  import {mapState,mapMutations} from "vuex";
+  import {mapState, mapMutations} from "vuex";
   import 'element-ui/lib/theme-chalk/index.css';
+
   export default {
     name: 'App',
     computed: {
-      ...mapState(["rootbox","userinfo","easysecret"])
+      ...mapState(["rootbox", "userinfo", "easysecret"])
     },
-    created(){
+    created() {
       this.getAgentId();
       this.loadSiteInfo();
-      this.initGetBalanceTimer()
+      this.initGetBalanceTimer();
     },
-    methods:{
-      ...mapMutations(["AGENT_ID","SITE_INFO","USERINFO"]),
-      async getAgentId(){
+    methods: {
+      ...mapMutations(["AGENT_ID", "SITE_INFO", "USERINFO"]),
+      async getAgentId() {
         let res = await this.$http({
-          method:"post",
-          url:'/api/user/getAgentId/',
-          data:{domain:window.location.host},
-          headers:{EasySecret:""},
+          method: "post",
+          url: '/api/user/getAgentId/',
+          data: {domain: window.location.host},
+          headers: {EasySecret: ""},
         });
-        if(!res)return;
-        if (res.data.code==1) {
+        if (!res) return;
+        if (res.data.code == 1) {
           this.AGENT_ID(0);
-        }else if(res.data.code==0){
+        } else if (res.data.code == 0) {
           this.AGENT_ID(res.data.data);
         }
       },
-      async loadSiteInfo(){
+      async loadSiteInfo() {
         let res = await this.$http.get('/api/site/info/');
-        if(!res)return;
+        if (!res) return;
         this.SITE_INFO(res.data);
-        document.title=res.data.SiteName||"";
+        document.title = res.data.SiteName || "";
       },
-      initGetBalanceTimer(){
-        if(!this.easysecret){
-          clearInterval(timer);
-          return;//未登录
-        }
-        let timer=setInterval(async()=>{
-          let res = await this.$http.get('/api/users/balance/');
-          if(!res)return;
-          if(res.data.code!=0){
+      initGetBalanceTimer() {
+          setInterval(async() => {
+            if (!this.easysecret) {
+              return;//未登录
+            }
+            let res = await this.$http.get('/api/users/balance/');
+            if (!res) return;
+            if (res.data.code != 0) {
               window.wAlert(res.data.msg);
-            return;
-          }
-          this.userinfo.money=res.data.data.money;
-          this.USERINFO(this.userinfo);//userinfo 是引用类型  调用 mutation 是为了方便调试工具跟踪
-        },30000);
-      }
+              return;
+            }
+            this.userinfo.money = res.data.data.money;
+            this.USERINFO(this.userinfo);//userinfo 是引用类型  调用 mutation 是为了方便调试工具跟踪
+          }, 20000);
+        //})(this);
+      },
     }
   }
-
 </script>
 <style lang="less">
   html {
     height: 100%;
   }
+
   html body {
     background: url('./assets/bg1.jpg') 0 0 no-repeat;
     height: 100%;
   }
+
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -82,9 +84,14 @@
     min-width: 1170px;
     /*margin-top: 60px;*/
   }
+
   *,
   ::before,
-  ::after{ padding: 0;  margin: 0;}
+  ::after {
+    padding: 0;
+    margin: 0;
+  }
+
   .clearfix {
     *zoom: 1;
   }
@@ -99,9 +106,11 @@
   .clearfix:after {
     clear: both;
   }
-  .clear_both{
-    clear:both;
+
+  .clear_both {
+    clear: both;
   }
+
   /*公共样式*/
   li {
     list-style-type: none;
@@ -114,6 +123,7 @@
     padding: 0;
     margin: 0;
   }
+
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
@@ -137,12 +147,14 @@
       background: transparent;
     }
   }
+
   @keyframes autofill3 { //去除chrome浏览器自动填充表单的黄色背景
     to {
       color: rgba(255, 255, 255, 1);
       background: #fff;
     }
   }
+
   @-webkit-keyframes autofill { //去除chrome浏览器自动填充表单的黄色背景
     to {
       color: rgba(255, 255, 255, 1);
@@ -156,12 +168,14 @@
       background: transparent;
     }
   }
+
   @-webkit-keyframes autofill3 { //去除chrome浏览器自动填充表单的黄色背景
     to {
       color: rgba(255, 255, 255, 1);
       background: #fff;
     }
   }
+
   body {
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
@@ -189,13 +203,12 @@
   }
 
   .ew-slide-enter .alert {
-    margin-top:-64px;
+    margin-top: -64px;
   }
 
   .ew-slide-leave-active .alert {
-    margin-top:64px;
+    margin-top: 64px;
   }
-
 
   .fade-enter-active,
   .fade-leave-active {
@@ -203,21 +216,20 @@
     backface-visibility: hidden;
   }
 
-
   .fade-enter {
     opacity: 0;
   }
 
   .fade-leave-active {
-    opacity:0;
+    opacity: 0;
   }
+
   .slide-enter-active,
   .slide-leave-active {
     //transition: transform .25s ease-out;
     transition: height .25s ease-out;
     backface-visibility: hidden;
   }
-
 
   .slide-enter {
     //transform: translate3d(64px,0 , 0);
@@ -241,6 +253,7 @@
     -webkit-animation-name: slideInUp;
     animation-name: slideInUp;
   }
+
   @-webkit-keyframes slideInUp {
     from {
       -webkit-transform: translate3d(0, 10%, 0);
@@ -271,6 +284,7 @@
     -webkit-animation-name: slideOutDown;
     animation-name: slideOutDown;
   }
+
   @-webkit-keyframes slideOutDown {
     from {
       -webkit-transform: translate3d(0, 0, 0);
@@ -301,50 +315,56 @@
     -webkit-animation-name: zhankai;
     animation-name: zhankai;
   }
+
   .shouqi {
     -webkit-animation-name: shouqi;
     animation-name: shouqi;
   }
+
   @-webkit-keyframes zhankai {
     from {
-      height:0;
+      height: 0;
       visibility: visible;
     }
 
     to {
-      height:435px;
+      height: 435px;
     }
   }
+
   @-webkit-keyframes shouqi {
     from {
-      height:435px;
+      height: 435px;
     }
 
     to {
       visibility: hidden;
-      height:0;
+      height: 0;
     }
   }
+
   @keyframes zhankai {
     from {
-      height:0;
+      height: 0;
       visibility: visible;
     }
 
     to {
-      height:435px;
+      height: 435px;
     }
   }
+
   @keyframes shouqi {
     from {
-      height:435px;
+      height: 435px;
     }
 
     to {
       visibility: hidden;
-      height:0;
+      height: 0;
     }
   }
+
   .usercenter {
     textarea {
       line-height: 1.5em;
@@ -420,54 +440,54 @@
         min-width: 60px;
         text-align: center;
         border-radius: 3px 3px;
-        cursor:pointer;
+        cursor: pointer;
       }
     }
     table.tb {
-      width:100%;
+      width: 100%;
       border-collapse: collapse;
       border: 1px solid #ccc;
       text-align: center;
       tr {
         border: 1px solid #ccc;
       }
-      th{
-        background-color:#C7C7C7;
-        padding:8px 0;
+      th {
+        background-color: #C7C7C7;
+        padding: 8px 0;
         font-weight: 200;
       }
-      td{
-        background-color:#fff;
-        padding:8px 0;
+      td {
+        background-color: #fff;
+        padding: 8px 0;
       }
     }
-    .pager{
-      margin-top:20px;
-      margin-bottom:20px;
+    .pager {
+      margin-top: 20px;
+      margin-bottom: 20px;
       text-align: center;
-      >.item{
-        margin:0 2px;
+      > .item {
+        margin: 0 2px;
         display: inline-block;
-        padding:7px 10px;
-        cursor:pointer;
+        padding: 7px 10px;
+        cursor: pointer;
         line-height: 1.2;
-        border:1px solid #ccc;
-        background-color:#fff;
-        &:hover{
-          color:#B62929;
-          border:1px solid #b62929;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        &:hover {
+          color: #B62929;
+          border: 1px solid #b62929;
         }
-        &.cur{
-          color:#B62929;
-          border:1px solid #b62929;
+        &.cur {
+          color: #B62929;
+          border: 1px solid #b62929;
         }
-        &.sl{
-          &:hover{
-            border:none;
-            background:none;
+        &.sl {
+          &:hover {
+            border: none;
+            background: none;
           }
-          border:none;
-          background:none;
+          border: none;
+          background: none;
         }
       }
     }

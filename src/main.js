@@ -159,3 +159,4 @@ window.cwvue=new Vue({
   store,
   render: h => h(App)
 });
+window.str=store;

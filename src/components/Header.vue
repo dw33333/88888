@@ -491,6 +491,7 @@
               this.EASYSECRET(res.headers.easysecret);
               this.mytoast(res.data.msg);
               await this.getuserinfo();
+
               // this.usermoney = res.data.data.user_money
 
               // sessionStorage.setItem('username', this.username)
@@ -506,6 +507,7 @@
               // this.userIsLogin(true)
             } else {
               this.alert("提示", res.data.msg);
+              this.is_login=false;
             }
           }).catch((error) => {
             this.is_login = false;
