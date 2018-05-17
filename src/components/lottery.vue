@@ -1,7 +1,7 @@
 <template>
 <div style="background:#e8e8e8;height:100%;">
     <div class="xx_lottery">
-    <home-header  class="xx_lottery_hheader">
+    <home-header  class="xx_lottery_hheader" :inlottery="true">
       <div slot="lottery_result" class="items result" style="cursor:pointer;" @click="($router.push({name:'lottery_result',params:{game_name:$route.params.id}}))">
         开奖结果
       </div>
