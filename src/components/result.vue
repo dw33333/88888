@@ -115,6 +115,37 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="tab-content ds-box" v-if="currP==5">
+                        <table cellpadding="0" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>期数</th>
+                                <th>开奖号码</th>
+                                <th>总</th>
+                                <!--<th>百家乐</th>-->
+                                <th>三公</th>
+                                <th>龙虎</th>
+                                <th>牛牛</th>
+                                <th>梭哈</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="v in ballData">
+                                <td>{{v.issue}}</td>
+                                <td>{{v.data}}</td>
+                                <td><span>{{v.data | filterSum}}</span></td>
+                                <!--<td>11</td>-->
+                                <td><span :class="v.data.split(',') | filterSg | filterSgColor">{{v.data.split(',') | filterSg}}</span></td>
+                                <td><span :class="v.data.split(',') | filterLh | filterSgColor">{{v.data.split(',') | filterLh}}</span></td>
+                                <td><span :class="v.data.split(',') | filterniu | filterSgColor">{{v.data.split(',') | filterniu}}</span></td>
+                                <td ><span :class="v.data.split(',') | filterSh | filterSgColor">{{v.data.split(',') | filterSh}}</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="link-result">
+
                 </div>
             </div>
             <!--pk10-->
@@ -643,6 +674,37 @@
             },
             filterA:function (n) {
                 return Init.getA(n);
+            },
+            filterSg:function (arr) {
+               let z =  (arr[0]-0)+(arr[1]-0)+(arr[2]-0)+ "";
+               let x =  (arr[2]-0)+(arr[3]-0)+(arr[4]-0)+"";
+               z  = z.substr(z.length-1,1)-0;
+               x  = x.substr(x.length-1,1)-0;
+               if(z==0) z  = 10;
+               if(x==0) x  = 10;
+                if(z>x){
+                    return '庄';
+                }else if(z==x){
+                    return '和';
+                }else{
+                    return '闲';
+                }
+            },
+            filterLh:function (arr) {
+               if(arr[0]- 0>arr[4]- 0) return '龙';
+               else if(arr[0]- 0<arr[4]- 0) return '虎';
+               else return '和'
+            },
+            filterSh:function (Array) {
+                   return Init.getSh(Array)
+            },
+            filterSgColor:function (n) {
+                 if(n=='庄' || n=='龙' || n=='杂六') return 'blue';
+                 else if(n=='闲' ||n=='虎'||n.indexOf('无')<=-1 || n=='一对' ||n=='两对' || n=='三张' || n=='葫芦' || n=='豹子' || n=='四张') return 'red';
+                 else return 'green'
+            },
+            filterniu:function (arr) {
+              return Init.fiterniuniu(arr);
             }
         }
     }
@@ -714,7 +776,7 @@
     .pk10-h td.ball span,
     .k10-h td span,
     .td-h td span
-    {border-radius: 50%; display: inline-block !important; width: .6rem;line-height: .6rem; text-align: center;}
+    {border-radius: 50%; display: inline-block !important;line-height: .6rem; text-align: center;}
 
     /*ssc*/
     .blue{color: rgb(36, 0, 252) !important;font-weight: bold}

@@ -9,6 +9,64 @@ let Iint={
         }
         return sum;
     },
+
+//计算牛牛
+    fiterniuniu(numArr) {
+        let is_niu = 'false'
+        let niu_ji = ''
+        let niu_text = ''
+        if (((parseInt(numArr[0]) + parseInt(numArr[1]) + parseInt(numArr[2])) % 10) == 0) {
+            is_niu = 'true'
+            niu_ji = (parseInt(numArr[3]) + parseInt(numArr[4])) % 10;
+        }
+        else if (((parseInt(numArr[0]) + parseInt(numArr[1]) + parseInt(numArr[3])) % 10) == 0) {
+            is_niu = 'true'
+            niu_ji = (parseInt(numArr[2]) + parseInt(numArr[4])) % 10;
+        }
+        else if (((parseInt(numArr[0]) + parseInt(numArr[1]) + parseInt(numArr[4])) % 10) == 0) {
+            is_niu = 'true'
+            niu_ji = (parseInt(numArr[2]) + parseInt(numArr[3])) % 10;
+        }
+        else if (((parseInt(numArr[0]) + parseInt(numArr[2]) + parseInt(numArr[3])) % 10) == 0) {
+            is_niu = 'true'
+            niu_ji = (parseInt(numArr[1]) + parseInt(numArr[4])) % 10;
+        }
+        else if (((parseInt(numArr[0]) + parseInt(numArr[2]) + parseInt(numArr[4])) % 10) == 0) {
+            is_niu = 'true'
+            niu_ji = (parseInt(numArr[1]) + parseInt(numArr[3])) % 10;
+        }
+        else if (((parseInt(numArr[0]) + parseInt(numArr[3]) + parseInt(numArr[4])) % 10) == 0) {
+            is_niu = 'true'
+            niu_ji = (parseInt(numArr[1]) + parseInt(numArr[2])) % 10;
+        }
+        else if (((parseInt(numArr[1]) + parseInt(numArr[2]) + parseInt(numArr[3])) % 10) == 0) {
+            is_niu = 'true'
+            niu_ji = (parseInt(numArr[0]) + parseInt(numArr[4])) % 10;
+        }
+        else if (((parseInt(numArr[1]) + parseInt(numArr[2]) + parseInt(numArr[4])) % 10) == 0) {
+            is_niu = 'true'
+            niu_ji = (parseInt(numArr[0]) + parseInt(numArr[3])) % 10;
+        }
+        else if (((parseInt(numArr[1]) + parseInt(numArr[3]) + parseInt(numArr[4])) % 10) == 0) {
+            is_niu = 'true'
+            niu_ji = (parseInt(numArr[0]) + parseInt(numArr[2])) % 10;
+        }
+        else if (((parseInt(numArr[2]) + parseInt(numArr[3]) + parseInt(numArr[4])) % 10) == 0) {
+            is_niu = 'true'
+            niu_ji = (parseInt(numArr[0]) + parseInt(numArr[1])) % 10;
+        }
+        if (is_niu === 'true') {
+            if (niu_ji === 0) {
+                niu_text = '牛牛';
+            } else {
+                niu_text = `牛${niu_ji}`
+            }
+        }
+        else {
+            niu_text = '无牛'
+        }
+        return niu_text
+    },
     getjx: {
         '200': {
             '万位': {
@@ -187,6 +245,94 @@ let Iint={
             }
         }
     },
+     calc(arr){
+         let numberArray = arr;
+         let resultArray = this.calcGamePlayResult(numberArray);
+         // console.log(resultArray);
+         let value = '';
+         // console.log(resultArray);
+         if(resultArray[0] == 1){
+              value = "对子";
+           }else if(resultArray[0] == 2){
+               value = "豹子";
+           }else if(resultArray[1] == 1){
+               value = "半顺";
+           }else if(resultArray[1] == 2){
+               value = "顺子";
+           }else{
+               value = "杂六";
+           }
+         // console.log(value);
+         return value
+       },
+       calcGamePlayResult(array){
+           array = this.toNumArray(array);
+           array = this.sortAsc(array);
+           console.log(array);
+           //存储计算结果
+           let resultArray = new Array(2);
+           //计算豹子、对子
+           resultArray[0] = array[2] - array[1] == 0 ? 1 : 0;
+           resultArray[0] = array[1] - array[0] == 0 ? ++resultArray[0] : resultArray[0];
+
+           //计算顺子、半顺、杂六
+           resultArray[1] = array[2] - array[1] == 1 ? 1 : 0;
+           resultArray[1] = array[1] - array[0] == 1 ? ++resultArray[1] :  resultArray[1];
+
+           return resultArray;
+        },
+     sortAsc(array){
+            for(let i  = 0;i < array.length;i++){
+                 for(var x = i;x < array.length;x++){
+                   if(array[i] > array[x]){
+                          var temp = array[x];
+                          array[x] = array[i];
+                          array[i] = temp;
+                          }
+                  }
+             }
+         return array;
+      },
+      toNumArray(strArray){
+              let numArray = new Array(strArray.length);
+       for(var i = 0;i < strArray.length;i++){
+              numArray[i] = Number(strArray[i]);
+           }
+         return numArray;
+        },
+    getSh(Array){
+        let arr = [];
+        let value = '';
+        let result = Array;
+        result.sort();
+        for (let i = 0; i < result.length;) {
+            let count = 0;
+            for (let j = i; j < result.length; j++) {
+                if (result[i] === result[j]) {
+                    count++;
+                }
+            }
+            arr.push({
+                date: result[i],
+                count: count
+            });
+            i+=count;
+        }
+        console.log(arr);
+               for (let k = 0; k < arr.length; k++) {
+
+                   if(arr.length==5&&arr[1].date-arr[0].date==1&&arr[2].date-arr[1].date==1&&arr[3].date-arr[2].date==1&&arr[4].date-arr[3].date==1) return value = '顺子';
+                   else if(arr.length==5)  value = '杂六';
+                   else if(arr.length==4) value = '对子';
+                   else if(arr.length==3&&arr[k].count==3) return value = '三张';
+                   else if(arr.length==3) value = '两对';
+                   else if(arr.length==2 &&arr[k].count==4) return value = '四张';
+                   else if(arr.length==2) value = '葫芦';
+                   else if(arr.length==1) value = '豹子';
+               }
+        return value;
+
+    }
 }
 export default Iint;
 
