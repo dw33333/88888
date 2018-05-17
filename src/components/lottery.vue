@@ -1204,12 +1204,12 @@
             HomeHeader
         },
         mounted () {
-            document.getElementById('nav').style.display = "none";
+            /*document.getElementById('nav').style.display = "none";
             document.getElementById('backhide').style.display = "none";
             document.getElementById('backPage').style.display = "block";
             document.getElementById('presonInput').style.display = "none";
             document.getElementById('presonInput2').style.display = "none";
-            document.getElementById('showId').style.display = "block";
+            document.getElementById('showId').style.display = "block";*/
         },
 
     }
