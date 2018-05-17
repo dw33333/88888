@@ -3,13 +3,13 @@
     <div class="header">
       <img class="logo" src="../assets/logo1.png" height="82" width="136" alt="">
       <ul class="nav">
-        <li class='game' @mouseover="showAllgame" @mouseout="hideAllgame"><a href="javascript:;">游戏大厅</a>
+        <li class='game' @mouseover="showAllgame" @mouseout="hideAllgame"><a href="#">游戏大厅</a>
         </li>
         <li class="home">
           <router-link to="/">返回首页</router-link>
         </li>
-        <li class="server"><a :href="this.sitesInfos.SiteService" target="_blank">在线客服</a></li>
-        <li class="rules"><a href="#" @click="isShowtop(5)">规则说明</a></li>
+        <li class="server"><a href="javascript:void(0);" @click="serviceUrl">在线客服</a></li>
+        <li class="rules"><a href="javascript:void(0);" @click="($router.push({name:'Generalq'}))">规则说明</a></li>
         <!--<li class="help"><a href="#">游戏帮助</a></li>-->
         <li class="layout"><a href="#" @click="loginout();">登出账号</a></li>
       </ul>
@@ -26,12 +26,13 @@
               <div class="high_wrap">
                 <div class="gamelist_r">
                   <ul data-bind="foreach:credit">
-                    <li v-for="item in this.headerArry" :key="item.id">
+                    <li v-for="item in headersArry" :key="item.id">
                       <span v-for="items in item.type" :key="items.id">
                         <router-link  class="game_1" :to="{path:'/lottery/'+items.name}">
                           {{items.short_name}}
                         </router-link>
                       </span>
+
                     </li>
                   </ul>
                 </div>
@@ -45,28 +46,76 @@
     </div>
     <div class="main-body">
       <div class='select'>
+        <div class="account">
+          账号: <span>{{username}}</span>
+        </div>
+        <div class="balance">
+          余额: <span>{{money}}</span>
+        </div>
+        <!--<div class="balance" style="background-position:-96px -36px;">
+          真实姓名: <span>{{userRealName}}</span>
+        </div>
+        <div class="balance">
+          AG真人余额: <span>{{agmoney}}</span>
+        </div>
+        <div class="balance">
+          DS真人余额: <span>{{dsmoney}}</span>
+        </div>-->
+        <div class="money">
+          <router-link to='/recharge' class="recharge">
+            <span>充值</span>
+          </router-link>
+          <router-link to='/withdrawal' class="withdraw">
+            <span>提现</span>
+          </router-link>
+        </div>
         <!-- 折叠菜单 -->
         <div class="sidebar">
           <div class="sidebar-menu">
-            <router-link tag="div" to="/Generalq" style="margin-top: 0;" class="item" @click.native="isShow(1)" :class="{active:1 == num}">
-              <span >常见问题</span>
-            </router-link>
-            <router-link tag="div"  to="/Deposit" class="item" @click.native="isShow(2)" :class="{active:2 == num}">
-             <span >存款帮助</span>
-            </router-link>
-             <router-link tag="div"  class="item" to="/Teller" @click.native="isShow(3)" :class="{active:3 == num}">
-              <span>取款帮助</span>
-            </router-link>
-            <div class="item" @click="isShow(4)" >
-              <a href="javascript:void(0);">玩法介绍</a>
+            <div class="item" @click="isShow(1)">
+              <a  href="javascript:void(0);">密码管理</a>
             </div>
-            <ul class='list-item' id="ul_list" :class="{show_item:isActive}"
-                :style="{height:isDisplay==4?((34*28)+'px'):'0px',visibility:isDisplay==4?'visible':'hidden',overflow:'hidden'}">
-                <span v-for="item in this.headerArry" :key="item.id">
-                    <li v-for="items in item.type" :key="items.id">
-                        <router-link :to="items.name">{{items.short_name}}</router-link>
-                    </li>
-                </span>
+            <ul class='list-item'
+                :style="{height:isDisplay==1?((30*1)+'px'):'0px',visibility:isDisplay==1?'visible':'hidden',overflow:'hidden'}">
+              <li>
+                <router-link class="full" to="/PasswordManagement">修改密码</router-link>
+              </li>
+            </ul>
+            <div class="item" @click="isShow(2)">
+              <a  href="javascript:void(0);">报表管理</a>
+            </div>
+            <ul class="list-item"
+                :style="{height:isDisplay==2?((30*3)+'px'):'0px',visibility:isDisplay==2?'visible':'hidden',overflow:'hidden'}">
+              <li>
+                <router-link class="full" to="/charge_record">充提记录</router-link>
+              </li>
+              <li>
+                <router-link class="full" to="/bet_record">下注记录</router-link>
+              </li>
+              <li>
+                <router-link class="full" to="/week_statistic">报表统计</router-link>
+              </li>
+            </ul>
+           <!-- <div class="item" @click="isShow(3)">
+              <a href="javascript:void(0);">额度转换</a>
+            </div>
+            <ul class='list-item'
+                :style="{height:isDisplay==3?((34*1)+'px'):'0px',visibility:isDisplay==3?'visible':'hidden',overflow:'hidden'}">
+              <li>
+                <router-link to="/moneymanagemen">额度管理</router-link>
+              </li>
+            </ul>-->
+            <div class="item" @click="isShow(4)">
+              <a href="javascript:void(0);">信息中心</a>
+            </div>
+            <ul class='list-item'
+                :style="{height:isDisplay==4?((30*2)+'px'):'0px',visibility:isDisplay==4?'visible':'hidden',overflow:'hidden'}">
+              <li>
+                <router-link class="full" to="/msg_list">站内短信</router-link>
+              </li>
+             <li>
+                <router-link class="full" to="/Notice">网站公告</router-link>
+              </li>
             </ul>
           </div>
         </div>
@@ -87,45 +136,45 @@
     data() {
       return {
         isDisplay: 0,
-        num: '',
         content: '',
         ifopen: false,
         isShowMenu: false,
         unread_count: '',
+        /*lock10: false,
+        lock20: false,
+        lock30: false,
+        lock40: false,*/
         realname: '',
         bankCardNum: '',
         bankName: '',
-        isActive:false
-        // headersArry:[]
+        headersArry:[]
       }
     },
     created () {
-    //   this.getArry();
+      this.getArry();
+      let arr1=["PasswordManagement"];
+      let arr2=["charge_record","bet_record","week_statistic"];
+      let arr3=["msg_list","Notice"];
+      if(arr1.indexOf(this.$route.name)!==-1){
+        this.isDisplay=1;
+      }else if(arr2.indexOf(this.$route.name)!==-1){
+        this.isDisplay=2;
+      }else if(arr3.indexOf(this.$route.name)!==-1){
+        this.isDisplay=4;
+      }else{
+        this.isDisplay=0;
+      }
     },
     components: {
       maskLayer
     },
     mounted() {
-      if(this.$route.name == 'Teller'){
-        this.isActive = false;
-        this.num = 3;
-      }
-      if(this.$route.name == 'Deposit'){
-        this.num = 2;
-        this.isActive = false;
-      }
-      if(this.$route.name == 'Generalq'){
-        this.num = 1;
-        this.isActive = false;
-      }
-      if(this.$route.name !== 'Teller','Deposit','Generalq'){
-        this.num = 0;
-        this.isDisplay = 4;
-        // this.isActive = true;
-      }
+      // 获取个人信息
+      /*this.getuserinfo()*/
+
     },
     computed: {
-      ...mapState(['agmoney', 'dsmoney', 'money', 'username', 'userRealName', 'userinfo','sitesInfos','headerArry'])
+      ...mapState(['agmoney', 'dsmoney', 'money', 'username', 'userRealName', 'userinfo',"sitesInfos"])
     },
     methods: {
       alert(tit, msg, fn, msgStyle) {
@@ -153,6 +202,43 @@
           }
         });
       },
+      // 获取个人信息
+      /*getuserinfo () {
+        this.$http.get('/json/center/?r=UsrInfo').then((res) => {
+
+          this.getUserRealName(res.data.data.pay_name)
+
+        }).catch((error) => {
+          console.log(error)
+        })
+
+        // >获取AG真人余额
+        this.$http.get('/json/center/?r=AginMoney').then((res) => {
+
+           this.changeAgMoney(res.data.data.money)
+
+        }).catch((error) => {
+          console.log(error)
+        })
+
+        // >获取DS真人余额：
+        this.$http.get('/json/center/?r=DsMoney').then((res) => {
+
+          this.changeDsMoney(res.data.data.money)
+
+        }).catch((error) => {
+          console.log(error)
+        })
+
+        // >获取用户余额
+        this.$http.get('/json/center/?r=Money').then((res) => {
+
+          this.changeUserMoney(res.data.data.user_money)
+
+        }).catch((error) => {
+          console.log(error)
+        })
+      },*/
       ...mapMutations(['getUserRealName', 'changeUserMoney', 'changeUserName', 'userLoginOut', 'USERINFO', 'ROOTBOX','EASYSECRET']),
       // 封装提示信息函数
       mytoast(msg) {
@@ -162,6 +248,12 @@
           this.ifopen = false
           clearTimeout()
         }, 1500)
+      },
+      //玩法列表
+      getArry () {
+        this.$http.get('/api/lottery/basic/LotteryGroup/').then((res) => {
+          this.headersArry = res.data;
+        })
       },
       // 退出登录
       async loginout() {
@@ -183,54 +275,188 @@
         this.isShowMenu = false
       },
       isShow(index) {
-        this.num = index;
         if (this.isDisplay == index)
           this.isDisplay = 0;
         else
           this.isDisplay = index;
         return;
+        /*if (index === 1) {
+          this.lock10 = !this.lock10
+
+          if (this.lock10) {
+            this.isDisplay = 1
+          } else {
+            this.isDisplay = 0
+          }
+        }
+
+        if (index === 2) {
+          this.lock20 = !this.lock20
+          if (this.lock20) {
+            this.isDisplay = 2
+          } else {
+            this.isDisplay = 0
+          }
+        }
+
+        if (index === 3) {
+          this.lock30 = !this.lock30
+          if (this.lock30) {
+            this.isDisplay = 3
+          } else {
+            this.isDisplay = 0
+          }
+        }
+        if (index === 4) {
+          this.lock40 = !this.lock40
+          if (this.lock40) {
+            this.isDisplay = 4
+          } else {
+            this.isDisplay = 0
+          }
+        }*/
       },
-      isShowtop () {
-        this.isDisplay = 4;
-        this.num =0;
+      serviceUrl(){
+        if(!this.sitesInfos.SiteService)return;
+        window.open(this.sitesInfos.SiteService);
       }
     }
   }
 
 </script>
-<<<<<<< HEAD
-<style lang="less">
-.subtitle2{
-  background-color: rgb(175, 175, 228) !important;
-}
-=======
 <style lang="less" scoped>
->>>>>>> 79c2a760403beebbd60ea658ea772c3fe97258f3
-table{
-  border-collapse: initial !important;
-  width: auto !important;
-}
-.rule_from02{
-  padding: 30px;
-}
-.show_item{
-    visibility: visible !important;
-    height: 100% !important;
-    overflow: auto !important;
-}
-.col_red{
-    color: red;
-}
-.red{
-  background-color: #afafe4;
-}
-.help-con{
-    padding: 30px;
-}
-.active{
-    background-position: 0 -535px !important;
-    color: #000 !important;
-}
+  /*.usercenter {
+    .full{
+      display:inline-block;
+      width:100%;
+      height:100%;
+      box-sizing:border-box;
+    }
+    textarea {
+      line-height: 1.5em;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 3px 3px;
+      padding-left: 10px;
+      color: #999;
+      position: relative;
+      top: 3px;
+      font-family: "Microsoft YaHei";
+      box-sizing: border-box;
+    }
+    select, input[type=text], input[type=password], input[type=number] {
+      line-height: 30px;
+      height: 36px;
+      width: 300px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 3px 3px;
+      padding-left: 10px;
+      color: #999;
+      vertical-align: middle;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      outline: 0;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-text-fill-color: rgba(255, 255, 255, 1);;
+      -webkit-animation-name: autofill;
+      -webkit-animation-fill-mode: both;
+    }
+
+    @-webkit-keyframes autofill { //去除chrome浏览器自动填充表单的黄色背景
+      to {
+        color: rgba(255, 255, 255, 1);
+        background: transparent;
+      }
+    }
+
+    @-webkit-keyframes autofill2 { //去除chrome浏览器自动填充表单的黄色背景
+      to {
+        color: #aaa;
+        background: transparent;
+      }
+    }
+
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        -webkit-text-fill-color: #aaa;
+        -webkit-animation-name: autofill2;
+        -webkit-animation-fill-mode: both;
+        color: #aaa !important;
+      }
+
+    .search_box {
+      padding: 10px 0px;
+      line-height: 35px;
+      .btn_search {
+        vertical-align: middle;
+        background-color: #b62929;
+        color: #fff;
+        display: inline-block;
+        line-height: 34px;
+        min-width: 60px;
+        text-align: center;
+        border-radius: 3px 3px;
+        cursor:pointer;
+      }
+    }
+    table.tb {
+      width:100%;
+      border-collapse: collapse;
+      border: 1px solid #ccc;
+      text-align: center;
+      tr {
+        border: 1px solid #ccc;
+      }
+      th{
+        background-color:#C7C7C7;
+        padding:8px 0;
+        font-weight: 200;
+      }
+      td{
+        background-color:#fff;
+        padding:8px 0;
+      }
+    }
+    .pager{
+      margin-top:20px;
+      margin-bottom:20px;
+      text-align: center;
+      >.item{
+        margin:0 2px;
+        display: inline-block;
+        padding:7px 10px;
+        cursor:pointer;
+        line-height: 1.2;
+        border:1px solid #ccc;
+        background-color:#fff;
+        &:hover{
+          color:#B62929;
+          border:1px solid #b62929;
+        }
+        &.cur{
+          color:#B62929;
+          border:1px solid #b62929;
+        }
+        &.sl{
+          &:hover{
+            border:none;
+            background:none;
+          }
+          border:none;
+          background:none;
+        }
+      }
+    }
+  }*/
 
   /*body {
     background-image: none;
@@ -355,8 +581,6 @@ table{
     height: 100%;
     width: 100%;
   }
-
-
   .official_play {
     border-bottom: none;
     font-size: 12px;
@@ -529,15 +753,15 @@ table{
     background-position: -71px 10px;
   }
 
-//   .sidebar {
-//     margin-top: 20px;
-//   }
+  .sidebar {
+    margin-top: 20px;
+  }
 
   .sidebar-menu .item {
     text-align: left;
     padding-left: 20px;
     cursor: pointer;
-    line-height: 40px;
+    line-height: 38px;
     /* height: 40px; */
     width: 172px;
     margin: 3px auto;
@@ -564,8 +788,8 @@ table{
   .sidebar-menu .list-item li {
     cursor: pointer;
     text-align: left;
-    margin-top: 2px;
     width: 100%;
+    margin-top:0 !important;
   }
 
   .sidebar-menu .list-item li a {
@@ -578,12 +802,12 @@ table{
   }
 
   .sidebar-menu .list-item li a:hover {
-    color: #000;
+    color: #6f6d6d;
     background-color: #fff;
   }
 
   .sidebar-menu .list-item li .router-link-exact-active.router-link-active {
-    color: #000;
+    color: #6f6d6d;
     background-color: #fff;
   }
 
@@ -597,11 +821,6 @@ table{
     min-width: 500px;
     background-color: #ededed;
     overflow-y:auto;
-    text-align: left;
-    color: #6f6d6d;
-    font-size: 14px;
   }
-ol{
-        padding: 0;
-}
+
 </style>
