@@ -579,6 +579,7 @@
             //获取玩法导航
             getMenus(){
                 this.$http.get("/api/lottery/basic/LotteryGroup/").then(res=>{
+                    if(!res)return;
                     if (!res.data) return  window.top.wAlert('网络超时，请重新刷新');
                     this.menusData = res.data;
                     let arr = [];
@@ -606,6 +607,7 @@
                 }
                 let api = "/api/lottery-v1/"+this.fc_type+"/opentime/";
                 this.$http.get(api).then(response => {
+                  if(!response)return;
                     if(response.data){
 //                        this.result =response.data;
                         if(n!=2){
@@ -728,7 +730,8 @@
 //                this.getUserMoney();
 //                if (!this.$route.path.includes('lottery')) return;
                 if(this.fc_type=='six') return this.changeSixOdds();
-                this.$http.get("/api/lottery-v1/"+this.fc_type+"/odds/").then(res => {
+                this.$http.get("/api/lottery-v1/"+this.fc_type+"/odds/").then(res =>{
+                    if(!res)return;
                     if(!res.data.playd) return  window.top.wAlert('网络超时，请重新刷新');
                     if(res.data.playd.length==0) return  window.top.wAlert('请选择其他彩种下注！');
                     this.allData = L.data_demo_do(res.data.playd);
@@ -891,6 +894,7 @@
                 let agent = window.localStorage.getItem('agent_id');
                 let api = "/api/lottery-v1/"+this.fc_type+"/odds/";
                 this.$http.get(api+'?agent_id='+agent,{headers:{EasySecret:window.localStorage.getItem('easysecret')}}).then(res => {
+                    if(!res)return;
                     if(!res.data.playd) return  window.top.wAlert('网络超时，请重新刷新');
                     if(res.data.playd.length==0) {this.mainData=[]; return  window.top.wAlert('请选择其他彩种下注！')}
                     this.allData = L.data_demo_do(res.data.playd);
@@ -987,6 +991,7 @@
 //                this.isLoading =  true;
                 this.dataLoding =false;
                 this.$http.post(api,this.orderObj).then(response=> {
+                  if(!response)return;
                     this.dataLoding =true;
                     this.isLoadingS =false;
                     if(response.data.code ==0){
@@ -1037,6 +1042,7 @@
                     codeToken:"11",
                     source:2
                 }).then(res=>{
+
                     if(res.data.code == 0) {
                         window.sessionStorage.setItem('easysecret',res.headers.easysecret);
 //                        this.getUserInfo();
@@ -1060,6 +1066,7 @@
 //                this.$http.defaults.headers.EasySecret  = this.$cookieStore.getCookie('easysecret');
                 this.$http.defaults.headers.EasySecret = window.localStorage.getItem('easysecret');
                 this.$http.get("/api/users/info/").then(response => {
+                    if(!response)return;
                     if (response.data.code == 0) {
                         this.userMoney = response.data.data.Money;
                         this.userName = response.data.data.UserName;
@@ -1087,6 +1094,7 @@
             getUserMoney(){
                 this.getuser = false;
                 this.$http.get("/api/users/balance/").then(response => {
+                  if(!response)return;
                     if (response.data.code == 0) {
                         this.userMoney = response.data.data.money;
                         this.isLogin = true;
@@ -1211,7 +1219,6 @@
             document.getElementById('presonInput2').style.display = "none";
             document.getElementById('showId').style.display = "block";*/
         },
-
     }
 </script>
 <style scope lang="less">

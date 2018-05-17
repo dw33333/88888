@@ -70,7 +70,6 @@ window.wAlert=(msg,fn)=>{//挂到全局中(同域iframe可调用)
 Vue.component("DatePicker", DatePicker);
 Vue.config.productionTip = true
 axios.defaults.withCredentials = true
-Vue.prototype.$http = axios;
 Vue.prototype.$http.defaults.headers.EasySecret=store.state.easysecret;
 Vue.prototype.$http.interceptors.request.use(request=>{
   if(request.method=="get"){//添加时间戳
@@ -101,14 +100,14 @@ Vue.prototype.$http.interceptors.response.use(
           handles:{
             confirm(){
               Vue.prototype.$http.defaults.headers.EasySecret=undefined;
-              router.push({name:"Login",params:{hback:router.currentRoute.name,params:router.currentRoute.params}});
-              store.commit("ROOTBOX",{
-                open:false
-              });
               if(store.state.easysecret){ //没有登录或者token过期 清空之前状态跳到登录页
                 store.commit("EASYSECRET","");
                 localStorage.clear();
               }
+              router.push({name:"Login",params:{hback:router.currentRoute.name,params:router.currentRoute.params}});
+              store.commit("ROOTBOX",{
+                open:false
+              });
             },
             close(){
               store.commit("ROOTBOX",{
@@ -117,6 +116,7 @@ Vue.prototype.$http.interceptors.response.use(
             }
           }
         });
+        //return response;
       }else{
         return response;
       }

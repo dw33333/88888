@@ -201,6 +201,7 @@
             },
             getOdds(){
                 this.$http.get("/api/member/lottery/odds.php?gType="+this.fc_id).then(response => {
+                  if(!response)return;
                     if(this.currType == "klc") this.mainData = L.doKlcOdds(response.data.oddslist.ball,this)[this.currBall];
                     else this.mainData = L.doOdds(response.data.oddslist.ball,this)[this.currBall];
                     console.log(this.mainData);
@@ -228,6 +229,7 @@
             sendOrder(){
                 this.$http.post(this.config.host+'/member/lottery/order_lottery.php?gType='+this.fc_id, this.orderObj)
                     .then(response=> {
+                      if(!response)return;
                         console.log(response);
                     })
                     .catch(error=>{
@@ -241,6 +243,7 @@
                     password :"123456",
                     username:"rose222"
                 }).then(res=>{
+                  if(!res)return;
                     console.log(res);
                 }).catch(error=>{
 

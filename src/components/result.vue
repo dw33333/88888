@@ -550,6 +550,7 @@
             getHistory(){
                 if(!this.$route.path.includes('lottery')) return;
                 this.$http.post("/api/lottery-v1/"+this.childId+"/history/",this.fdata).then(response => {
+                  if(!response)return;
                     this.ballData = response.data.list;
                     console.log('23333',this.ballData);
                 }, response => {

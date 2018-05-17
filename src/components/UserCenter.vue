@@ -47,10 +47,10 @@
     <div class="main-body">
       <div class='select'>
         <div class="account">
-          账号: <span>{{username}}</span>
+          账号: <span>{{userinfo.username}}</span>
         </div>
         <div class="balance">
-          余额: <span>{{money}}</span>
+          余额: <span>{{userinfo.money}}</span>
         </div>
         <!--<div class="balance" style="background-position:-96px -36px;">
           真实姓名: <span>{{userRealName}}</span>
