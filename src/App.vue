@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+    <transition name="fade">
     <router-view></router-view>
+    </transition>
     <transition name="ew-slide">
       <!--最外层动态组件-->
       <component v-if="rootbox.open" :is="rootbox.compt" v-bind="rootbox.props" v-on="rootbox.handles"/>
