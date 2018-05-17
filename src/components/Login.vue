@@ -107,10 +107,10 @@
         this.ifopen = true
         // let instance = Toast(msg);
         this.content = msg
-        setTimeout(() => {
+       let timer= setTimeout(() => {
           // instance.close();
           this.ifopen = false
-          // clearTimeout();
+           clearTimeout(timer);
         }, 1500)
       },
       alert(tit, msg, fn, msgStyle) {
@@ -194,20 +194,19 @@
           if (res.data.code === 0) {
           this.$http.defaults.headers.EasySecret = res.headers.easysecret;
           this.EASYSECRET(res.headers.easysecret);
+            this.mytoast("登录成功");
             await this.getuserinfo();
             //this.changeUserName(this.user_name);
             //this.changeUserMoney(res.data.data.money);
-            this.mytoast("登录成功");
-            setTimeout(() => {
-              if(this.$route.params.hback){
-                this.$router.push({name:this.$route.params.hback,params:this.$route.params.params});
-                //this.$router.go(-1);
-              }else{
-                this.$router.push({path: "/"});
-              }
-            }, 1500);
+            if(this.$route.params.hback){
+              this.$router.push({name:this.$route.params.hback,params:this.$route.params.params});
+              //this.$router.go(-1);
+            }else{
+              this.$router.push({path: "/"});
+            }
             //this.codeImgFn()
           } else {
+            this.is_login=false;
             this.alert('提示', res.data.msg);
             this.codeImgFn()
           }

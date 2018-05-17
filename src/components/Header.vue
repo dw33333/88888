@@ -35,10 +35,10 @@
         <!-- 登录后显示账户名余额信息 -->
         <div class="bar-right" v-else>
           <div class="preson-info preson-balance presonInput" id="presonInput" v-show="!inlottery">
-            账号：{{username}}
+            账号：{{userinfo.username}}
           </div>
           <div class="preson-balance personpwd leftMoney presonInput" id="presonInput2" v-show="!inlottery">
-            余额:{{money}}
+            余额:{{userinfo.money}}
           </div>
           <div style="width:540px;display:none;height:48px;" id="showId"></div>
           <slot name="game_introduce"></slot>
@@ -274,7 +274,7 @@
       this.checkUser();
     },
     computed: {
-      ...mapState(['money', 'username', 'codeToken', 'headerArry', 'easysecret', 'sitesInfos'])
+      ...mapState(['money', 'username', 'codeToken', 'headerArry', 'easysecret', 'sitesInfos','userinfo',])
     },
     created() {
       this.getArry();
@@ -309,8 +309,8 @@
         }
         this.$http.defaults.headers.EasySecret = res.headers.easysecret;
         this.EASYSECRET(res.headers.easysecret);
-        await this.getuserinfo(res.data.virtual == 1 ? 1 : undefined);
         this.mytoast("登录成功");
+        await this.getuserinfo(res.data.virtual == 1 ? 1 : undefined);
       },
       goVideo() {
         this.$router.push('/live1');
@@ -366,6 +366,7 @@
       },
       codeImgFn() {
         this.$http.get('/api/site/captcha/').then((res) => {
+          if(!res){return;}
           if (res.status === 200) {
             this.codeImg = res.data.src
             this.temcodeToken = res.data.codeToken
@@ -483,12 +484,13 @@
             data: data,
             headers: {EasySecret: ""}
           }).then(async (res) => {
+            if(!res)return;
             this.is_login = false;
             if (res.data.code === 0) {
               this.$http.defaults.headers.EasySecret = res.headers.easysecret;
               this.EASYSECRET(res.headers.easysecret);
-              await this.getuserinfo();
               this.mytoast(res.data.msg);
+              await this.getuserinfo();
               // this.usermoney = res.data.data.user_money
 
               // sessionStorage.setItem('username', this.username)

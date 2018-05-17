@@ -35,10 +35,23 @@
             <div class="ipt_item"><span style="vertical-align: middle;">备&emsp;&emsp;注 : </span>
               <textarea name="" cols="30" rows="3" v-model="curType.about" placeholder="请备注账号/姓名、微信支付请留言备注"></textarea>
             </div>
-            <div class="ipt_item"><span>转账类型 : </span><select name="" id="" v-model="curType.type">
+            <div class="ipt_item"><span>转账类型 : </span><!--<select name="" id="" v-model="curType.type">
               <option value="" disabled selected style='display:none;'>请选择转账类型</option>
               <option :value="it" v-for="it,idx in huikuanMode" :key="idx">{{it}}</option>
-            </select></div>
+            </select>-->
+              <el-select v-model="curType.type" clearable placeholder="请选择">
+                <el-option
+                  v-for="item,idx in huikuanMode"
+                  :key="item"
+                  :label="item"
+                  :value="item">
+                </el-option>
+              </el-select>
+            </div>
+
+
+
+
             <div class="btn_next" @click="submit">{{is_submiting?"提交中...":"提交"}}</div>
           </div>
         </div>

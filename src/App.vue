@@ -15,18 +15,19 @@
   export default {
     name: 'App',
     computed: {
-      ...mapState(["rootbox"])
+      ...mapState(["rootbox","userinfo","easysecret"])
     },
     created(){
       this.getAgentId();
       this.loadSiteInfo();
+      this.initGetBalanceTimer()
     },
     methods:{
-      ...mapMutations(["AGENT_ID","SITE_INFO"]),
+      ...mapMutations(["AGENT_ID","SITE_INFO","USERINFO"]),
       async getAgentId(){
         let res = await this.$http({
           method:"post",
-          url:'/api/user/getAgentId',
+          url:'/api/user/getAgentId/',
           data:{domain:window.location.host},
           headers:{EasySecret:""},
         });
@@ -38,10 +39,26 @@
         }
       },
       async loadSiteInfo(){
-        let res = await this.$http.get('/api/site/info');
+        let res = await this.$http.get('/api/site/info/');
         if(!res)return;
         this.SITE_INFO(res.data);
         document.title=res.data.SiteName||"";
+      },
+      initGetBalanceTimer(){
+        if(!this.easysecret){
+          clearInterval(timer);
+          return;//未登录
+        }
+        let timer=setInterval(async()=>{
+          let res = await this.$http.get('/api/users/balance/');
+          if(!res)return;
+          if(res.data.code!=0){
+              window.wAlert(res.data.msg);
+            return;
+          }
+          this.userinfo.money=res.data.data.money;
+          this.USERINFO(this.userinfo);//userinfo 是引用类型  调用 mutation 是为了方便调试工具跟踪
+        },30000);
       }
     }
   }
@@ -51,7 +68,7 @@
   html {
     height: 100%;
   }
-  body {
+  html body {
     background: url('./assets/bg1.jpg') 0 0 no-repeat;
     height: 100%;
   }

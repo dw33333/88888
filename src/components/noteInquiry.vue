@@ -136,6 +136,7 @@
             //获取彩种列表
             getMenus(){
                 this.$http.get('/api/lottery/basic/LotteryList/').then(response=>{
+                  if(!response)return;
                 this.menus =response.data.data;
                 },response=>{
 
@@ -162,6 +163,7 @@
                     this.disabled =false;
                     let api=this.id==13? 'LotteryRecordLhcDetails':'betRecord';
                     this.$http.post('/api/users/'+api+'',obj).then(response=>{
+                      if(!response)return;
                         this.dataList =response.data['list'];
                         this.page = response.data.page*10;
                         if(this.dataList.length==0) this.dataNull=true;
