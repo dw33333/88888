@@ -12,6 +12,7 @@
                     <span :class="currP==2?'active':''" @click="currP=2">大小</span>
                     <span :class="currP==3?'active':''" @click="currP=3">单双</span>
                     <span :class="currP==4?'active':''" @click="currP=4" v-if="isId ==200">质合</span>
+                    <span :class="currP==5?'active':''" @click="currP=5" v-if="isId ==200">棋牌</span>
                 </div>
                 <div class="tab-container">
                     <div class="tab-content num-box" v-if="currP==1">
