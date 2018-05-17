@@ -358,9 +358,6 @@
     width: 100%;
   }
 
-  .triangles_back {
-    display: none;
-  }
 
   .official_play {
     border-bottom: none;

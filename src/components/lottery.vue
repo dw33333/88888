@@ -1,7 +1,7 @@
 <template>
 <div style="background:#e8e8e8;height:100%;">
     <div class="xx_lottery">
-    <home-header  class="xx_lottery_hheader">
+    <home-header  class="xx_lottery_hheader" :inlottery="true">
       <div slot="lottery_result" class="items result" style="cursor:pointer;" @click="($router.push({name:'lottery_result',params:{game_name:$route.params.id}}))">
         开奖结果
       </div>
@@ -616,13 +616,15 @@
                 this.$http.get(api).then(response => {
                     if(response.data){
 //                        this.result =response.data;
-                        this.countDTime=''
-                        this.inFo = response.data;
-                        if(this.inFo.number==-1&&!this.inFo.isopen) this.countDTime ='已封盘';
-                        if(window.timer_5) clearInterval(window.timer_5);
-                        this.timer_5();
-                        if(window.timer1) clearInterval(window.timer1);
-                        this.timer();
+                        if(n!=2){
+                            this.countDTime='';
+                            this.inFo = response.data;
+                            if(this.inFo.number==-1&&!this.inFo.isopen) this.countDTime ='已封盘';
+                            if(window.timer_5) clearInterval(window.timer_5);
+                            this.timer_5();
+                            if(window.timer1) clearInterval(window.timer1);
+                            this.timer();
+                        }
                         this.result = {};
                         for(let k in response.data.hmlist){
 //                            if(k=="") return ;
@@ -1230,4 +1232,8 @@
   .xx_lottery_hheader .result:hover{
     color:#B62929;
   }
+    body{
+     background: none;
+     height: auto;
+    }
 </style>

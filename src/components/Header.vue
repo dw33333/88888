@@ -3,9 +3,9 @@
     <div class="top-wrap">
       <div class="top-box">
         <div class="bar-left">
-          <span id="backPage" v-show="backPage" @click="backPageclick" style="cursor:pointer;">返回首页</span>
-          <span id="backhide">PLAY RESPONSIBLY</span>
-          <span style="padding-left:10px;">{{nowTime}}</span>
+          <span id="backPage" v-if="" v-show="inlottery" @click="backPageclick" style="cursor:pointer;">返回首页</span>
+          <span id="backhide" v-show="!inlottery">PLAY RESPONSIBLY</span>
+          <span v-show="!inlottery" style="padding-left:10px;">{{nowTime}}</span>
         </div>
         <!-- 登录界面 -->
         <div class="bar-right" v-if="!easysecret">
@@ -34,10 +34,10 @@
         </div>
         <!-- 登录后显示账户名余额信息 -->
         <div class="bar-right" v-else>
-          <div class="preson-info preson-balance presonInput" id="presonInput">
+          <div class="preson-info preson-balance presonInput" id="presonInput" v-show="!inlottery">
             账号：{{username}}
           </div>
-          <div class="preson-balance personpwd leftMoney presonInput" id="presonInput2">
+          <div class="preson-balance personpwd leftMoney presonInput" id="presonInput2" v-show="!inlottery">
             余额:{{money}}
           </div>
           <div style="width:540px;display:none;height:48px;" id="showId"></div>
@@ -62,7 +62,7 @@
     <nav>
       <!-- 导航 -->
       <div style="width:1170px;margin:0 auto;position:relative;">
-        <div class="nav" id="nav">
+        <div class="nav" id="nav"  v-show="!inlottery">
           <router-link to="/">
             <img class="logo" src="../assets/logo.png" alt="">
           </router-link>
@@ -241,6 +241,7 @@
 
   export default {
     name: 'Header',
+    props:["inlottery"],
     data() {
       return {
         backPage: false,
