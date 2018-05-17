@@ -562,8 +562,8 @@
         }
         this.EASYSECRET("");
         sessionStorage.clear();
-        this.$http.defaults.headers.EasySecret = undefined;
         this.$router.push("/login");
+        this.$http.defaults.headers.EasySecret = undefined;
       },
       ...mapMutations(['changeUserName', 'getUserRealName', 'changeUserMoney', 'getUserToken', 'userLoginOut', "EASYSECRET", "ROOTBOX", "USERINFO", 'GETDATA']),
       // getUserMoney(){
