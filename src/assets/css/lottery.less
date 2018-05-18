@@ -288,6 +288,7 @@
     }
     .result-no-info .result-no p i{
         border-radius: 50%;
+        color: #fff;
     }
     .result-no-info .result-no p:nth-child(2)>i{
         margin-top: 2px;
@@ -651,13 +652,14 @@
         height: 100%;
     }
     .lottery-nav .dropdown-menu{
+        margin-top: 42px;
         padding: 5px;
         font-size: 14px;
         background: #fff;
         border-radius: 4px;
-        /*margin-left: 8px;*/
         box-shadow: 0 6px 12px rgba(0,0,0,.175);
         position: absolute;
+        right: 20px;
         z-index: 99;
     }
     .lottery-nav .dropdown-menu li:hover{
@@ -974,6 +976,7 @@
         float: left;
         border-right:1px solid #ddd;
         border-bottom: 1px solid #ddd;
+        border-top: 1px solid #ddd;
         width: 25%;
     }
     .table-bet-top ul li.col-xs-5{
@@ -1061,13 +1064,16 @@
     #data-play>div{
         font-size: 14px;
         display: inline-block;
-        width: 96px;
+        width: 12.5%;
         height: 32px;
         line-height: 32px;
         float: left;
         color: #fff;
         background-color: #646464 ;
         cursor: pointer;
+    }
+    #data-play>div.col-16{
+        width: 16.666666666%;
     }
     #data-play>div:nth-last-of-type(-n+1){
         border-top-right-radius: 4px;

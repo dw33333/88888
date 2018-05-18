@@ -299,7 +299,7 @@
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
                                 <td>{{v.data}}</td>
-                                <td><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor(23)">({{v.data | filterSumDx(23)}})</i></td>
+                                <td><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor(85)">({{v.data | filterSumDx(85)}})</i></td>
                                 <td v-for="(vv,i) in v.data.split(',')"><span :class="vv | filterColor(10)">{{vv |filterDx(10)}}</span></td>
                             </tr>
                             </tbody>
@@ -477,9 +477,9 @@
                             <tbody>
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
-                                <td>{{v.data}}</td>
+                                <td><span v-for="(vv,i) in v.data.split(',')" :class="parseInt(vv)>40?'bgd':'bgx'">{{vv}}</span></td>
                                 <td><span>{{v.data | filterSum}}</span></td>
-                                <td><span>{{v.data | filterSum | filterDx}}</span></td>
+                                <td><span>{{v.data | filterSum | filterDx(810)}}</span></td>
                                 <td><span>{{v.data | filterSum | filterDs}}</span></td>
                             </tr>
                             </tbody>
@@ -491,7 +491,7 @@
                 </div>
             </div>
             <!--six-->
-            <div class="six-h history" v-if="czType==8">
+            <div class="six-h history" v-if="childId=='six'">
                 <div class="tab-title">
                     <span :class="currP==1?'active':''" @click="currP=1">号码</span>
                     <span :class="currP==2?'active':''" @click="currP=2">生肖</span>
@@ -515,8 +515,8 @@
                             </thead>
                             <tbody>
                             <tr v-for="v in ballData">
-                                <td class="w20">{{v.period}}</td>
-                                <td v-for="(vv,i) in v.result"><span :class="vv | filterBall ">{{vv}}</span></td>
+                                <td class="w20">{{v.qishu}}</td>
+                                <td v-for="(vv,i) in v.ball.split(',')"><span :class="vv | filterBall ">{{vv}}</span></td>
                             </tr>
                             </tbody>
                         </table>
@@ -537,8 +537,8 @@
                             </thead>
                             <tbody>
                             <tr v-for="v in ballData">
-                                <td class="w20">{{v.period}}</td>
-                                <td  v-for="(vv,i) in v.result"><span class="sixsx">{{vv | filterA}}</span></td>
+                                <td class="w20">{{v.qishu}}</td>
+                                <td  v-for="(vv,i) in v.ball.split(',')"><span class="sixsx">{{vv | filterA}}</span></td>
                             </tr>
                             </tbody>
                         </table>
@@ -559,8 +559,8 @@
                             </thead>
                             <tbody>
                             <tr v-for="v in ballData">
-                                <td class="w20">{{v.period}}</td>
-                                <td v-for="(vv,i) in v.result"><span :class="vv | filterColor(25)">{{vv | filterDx(25)}}</span></td>
+                                <td class="w20">{{v.qishu}}</td>
+                                <td v-for="(vv,i)  in v.ball.split(',')"><span :class="vv | filterColor(25)">{{vv | filterDx(25)}}</span></td>
                             </tr>
                             </tbody>
                         </table>
@@ -581,8 +581,8 @@
                             </thead>
                             <tbody>
                             <tr v-for="v in ballData">
-                                <td class="w20">{{v.period}}</td>
-                                <td v-for="(vv,i) in v.result"><span :class="vv | filterDsbg">{{vv | filterDs}}</span></td>
+                                <td class="w20">{{v.qishu}}</td>
+                                <td v-for="(vv,i)  in v.ball.split(',')"><span :class="vv | filterDsbg">{{vv | filterDs}}</span></td>
                             </tr>
                             </tbody>
                         </table>
@@ -617,7 +617,8 @@
         methods:{
             getHistory(){
                 if(!this.$route.path.includes('lottery')) return;
-                this.$http.post("/api/lottery-v1/"+this.childId+"/history/",this.fdata).then(response => {
+                let api = this.childId=='six'?'/api/lhc/LhcInfo/kaiJiangHistory':'/api/lottery-v1/'+this.childId+'/history';
+                this.$http.post(api).then(response => {
                   if(!response)return;
                     this.ballData = response.data.list;
 //                    console.log('23333',this.ballData);

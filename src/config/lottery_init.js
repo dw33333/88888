@@ -198,9 +198,11 @@ let Iint={
                 '总和': ['大', '小', '单', '双'],
             },
          },
-        "six":{
-            '特别号A': ['大', '小', '单', '双','红波', '蓝波', '绿波','兔','虎', '牛', '鼠', '猪','狗', '鸡', '猴', '羊','马', '蛇', '龙', '家禽','野兽'
+        "2":{
+            '特码A面':{
+                '': ['大', '小', '单', '双','红波', '蓝波', '绿波','兔','虎', '牛', '鼠', '猪','狗', '鸡', '猴', '羊','马', '蛇', '龙', '家禽','野兽'
                 ],
+            }
         },
         "207":{
           '大小骰宝':[]
@@ -246,7 +248,7 @@ let Iint={
             }
         }
     },
-    getSh(Array,num){
+    getSh(Array){
            let arr = [];
            let value = '';
            let result = Array;
@@ -264,9 +266,9 @@ let Iint={
             });
             i+=count;
            }
-        if(num==1){
             for (let k = 0; k < arr.length; k++) {
                 if(arr.length==5&&arr[1].date-arr[0].date==1&&arr[2].date-arr[1].date==1&&arr[3].date-arr[2].date==1&&arr[4].date-arr[3].date==1) return value = '顺子';
+                else if(arr.length==5&&arr[1].date-arr[0].date==2&&arr[2].date-arr[1].date==2&&arr[3].date-arr[2].date==2&&arr[4].date-arr[3].date==2)  return value = '无离';
                 else if(arr.length==5)  value = '杂六';
                 else if(arr.length==4) value = '对子';
                 else if(arr.length==3&&arr[k].count==3) return value = '三张';
@@ -276,28 +278,6 @@ let Iint={
                 else if(arr.length==1) value = '豹子';
             }
             return value;
-        }else{
-             let arrSum = [];
-             // let getArr = [];
-            for(let j=0;j<arr.length;j++){
-                arrSum.push(arr[j].date)
-            }
-            for (let k = 0; k < arr.length; k++) {
-                if(arr.length==3){
-                    value  = '长牌--'+ this.doCp(P.getRank(arrSum,2))
-                }else if(arr.length==2){
-                    value =  arr[0].count==2?arr[0].date+arr[0].date:arr[1].date+arr[1].date;
-                    value = '短牌--'+ value;
-                }else{
-                    value =  '豹子'
-                }
-            }
-            // console.log(value);
-            return value;
-
-        }
-          // console.log(value);
-
 
     },
     doCp(arr){
@@ -308,6 +288,200 @@ let Iint={
             arr2.push(arr[i].replace(',',''));
         };
         return arr2;
+    },
+    //色波
+    getSb(n){
+        let ballColor='';
+        switch (n-0){
+            case 1:
+            case 2:
+            case 7:
+            case 8:
+            case 12:
+            case 13:
+            case 18:
+            case 19:
+            case 23:
+            case 24:
+            case 29:
+            case 30:
+            case 34:
+            case 35:
+            case 40:
+            case 45:
+            case 46:
+                ballColor = "rColor";
+                break;
+            case 5:
+            case 6:
+            case 11:
+            case 16:
+            case 17:
+            case 21:
+            case 22:
+            case 27:
+            case 28:
+            case 32:
+            case 33:
+            case 38:
+            case 39:
+            case 43:
+            case 44:
+            case 49:
+                ballColor = "gColor";
+                break;
+            case 3:
+            case 4:
+            case 9:
+            case 10:
+            case 14:
+            case 15:
+            case 20:
+            case 25:
+            case 26:
+            case 31:
+            case 36:
+            case 37:
+            case 41:
+            case 42:
+            case 47:
+            case 48:
+                ballColor = "bColor";
+                break;
+            default :
+                break;
+        }
+        return ballColor;
+    },
+    getZmt: {
+        9: [
+            {
+                id:25,
+                name:"正码特一"
+            },
+            {
+                id:26,
+                name:"正码特二"
+            },
+            {
+                id:27,
+                name:"正码特三"
+            },
+            {
+                id:28,
+                name:"正码特四"
+            },
+            {
+                id:29,
+                name:"正码特五"
+            },
+            {
+                id:30,
+                name:"正码特六"
+            },
+        ],
+        10: [
+            {id:19,name:'正码一'} ,
+            {id:20,name:'正码二'} ,
+            {id:21,name:'正码三'} ,
+            {id:22,name:'正码四'} ,
+            {id:23,name:'正码五'} ,
+            {id:24,name:'正码六'} ,
+        ]
+    },
+    // 连肖连尾
+    getNav(){
+        return [
+            {id:35,name:'二连肖'},
+            {id:36,name:'三连肖'},
+            {id:37,name:'四连肖'},
+            {id:38,name:'五连肖'},
+            {id:39,name:'二碰尾'},
+            {id:40,name:'三碰尾'},
+            {id:41,name:'四碰尾'},
+            {id:42,name:'五碰尾'}
+        ]
+    },
+    getA(n){
+        let a = '';
+        switch(n-0){
+            case 1:
+            case 13:
+            case 25:
+            case 37:
+            case 49:
+                a = '狗';
+                break;
+            case 2:
+            case 14:
+            case 26:
+            case 38:
+                a = '鸡';
+                break;
+            case 3:
+            case 15:
+            case 27:
+            case 39:
+                a='猴';
+                break;
+            case 4:
+            case 16:
+            case 28:
+            case 40:
+                a='羊';
+                break;
+            case 5:
+            case 17:
+            case 29:
+            case 41:
+                a='马';
+                break;
+            case 6:
+            case 18:
+            case 30:
+            case 42:
+                a='蛇';
+                break;
+            case 7:
+            case 19:
+            case 31:
+            case 43:
+                a='龙';
+                break;
+            case 8:
+            case 20:
+            case 32:
+            case 44:
+                a='兔';
+                break;
+            case 9:
+            case 21:
+            case 33:
+            case 45:
+                a='虎';
+                break;
+            case 10:
+            case 22:
+            case 34:
+            case 46:
+                a='牛';
+                break;
+            case 11:
+            case 23:
+            case 35:
+            case 47:
+                a='鼠';
+                break;
+            case 12:
+            case 24:
+            case 36:
+            case 48:
+                a='猪';
+                break;
+            default :
+                break;
+        }
+        return a;
     },
 }
 export default Iint;

@@ -161,21 +161,36 @@
                     obj.d =Date;
                     obj.lot_id =this.id;
                     this.disabled =false;
-                    let api=this.id==13? 'LotteryRecordLhcDetails':'betRecord';
-                    this.$http.post('/api/users/'+api+'',obj).then(response=>{
-                      if(!response)return;
-                        this.dataList =response.data['list'];
-                        this.page = response.data.page*10;
-                        if(this.dataList.length==0) this.dataNull=true;
-                        else this.dataNull=false;
-                        this.isLoding =false;
+                    this.changeId = this.id;
+                    if(this.id==2){
+                        this.$http.get('/api/lhc/LhcInfo/betRecord/?ps='+10+'&page='+ obj.p).then(response=>{
+                            this.dataList =response.data['list'];
+                            this.page = response.data.page*10;
+                            if(this.dataList.length==0) this.dataNull=true;
+                            else this.dataNull=false;
+                            this.isLoding =false;
 //                        setTimeout(function () {
                             this.disabled =true
 //                        },4000)
-                    }, response => {
-                        this.isLoding =false;
-                        this.dataNull=true
-                    })
+                        }, response => {
+                            this.isLoding =false;
+                            this.dataNull=true
+                        })
+                    }else{
+                        this.$http.post('/api/users/betRecord',obj).then(response=>{
+                            this.dataList =response.data['list'];
+                            this.page = response.data.page*10;
+                            if(this.dataList.length==0) this.dataNull=true;
+                            else this.dataNull=false;
+                            this.isLoding =false;
+//                        setTimeout(function () {
+                            this.disabled =true
+//                        },4000)
+                        }, response => {
+                            this.isLoding =false;
+                            this.dataNull=true
+                        })
+                    }
                 }
             },
         },
