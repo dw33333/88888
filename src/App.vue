@@ -378,11 +378,13 @@
       font-family: "Microsoft YaHei";
       box-sizing: border-box;
     }
-
+    .el-input{width:300px;}
+    .el-input.el-input--small{
+      width:auto;
+    }
     select, input[type=text], input[type=password], input[type=number] {
       line-height: 30px;
       height: 36px;
-      width: 300px;
       box-sizing: border-box;
       border: 1px solid #ccc;
       border-radius: 3px 3px;
@@ -395,11 +397,20 @@
       outline: none;
       outline: 0;
     }
+    input::-webkit-input-placeholder,textarea::-webkit-input-placeholder{
+      color: #C0C4CC;
+    }
+    input:-moz-placeholder,textarea:-moz-placeholder {
+      color: #C0C4CC;
+    }
+    input:-ms-input-placeholder,textarea:-ms-input-placeholder {
+      color: #C0C4CC;
+    }
     input:-webkit-autofill,
     input:-webkit-autofill:hover,
     input:-webkit-autofill:focus,
     input:-webkit-autofill:active {
-      -webkit-text-fill-color: rgba(255, 255, 255, 1);;
+      -webkit-text-fill-color: rgba(255, 255, 255, 1);
       -webkit-animation-name: autofill;
       -webkit-animation-fill-mode: both;
     }

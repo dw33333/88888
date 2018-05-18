@@ -5,7 +5,7 @@ import store from './store'
 import axios from 'axios'
 import alert from "@/components/base/alert"
 import "@/obj/util"
-import {Dialog,Button,Form,FormItem,DatePicker,Select,Option,Pagination} from 'element-ui';
+import {Dialog,Button,Form,FormItem,DatePicker,Select,Option,Pagination,Input} from 'element-ui';
 import 'element-ui/lib/theme-chalk/form-item.css';
 import 'element-ui/lib/theme-chalk/form.css';
 import 'element-ui/lib/theme-chalk/dialog.css';
@@ -14,6 +14,7 @@ import 'element-ui/lib/theme-chalk/date-picker.css';
 import 'element-ui/lib/theme-chalk/select.css';
 import 'element-ui/lib/theme-chalk/option.css';
 import 'element-ui/lib/theme-chalk/pagination.css';
+import 'element-ui/lib/theme-chalk/input.css';
 import './assets/css/iconfont.css';
 import 'babel-polyfill'  //ie11打开空白
 /*import Es6Promise from 'es6-promise'
@@ -27,6 +28,7 @@ Vue.use(DatePicker);
 Vue.use(Select);
 Vue.use(Option);
 Vue.use(Pagination);
+Vue.use(Input);
 //公共样式
 // Vue.prototype.$layer = layer(Vue);
 Vue.config.productionTip = false;

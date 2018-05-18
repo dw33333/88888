@@ -33,13 +33,19 @@
                                                              placeholder="入款金额,单笔下限100"
             ></div>
             <div class="ipt_item"><span style="vertical-align: middle;">备&emsp;&emsp;注 : </span>
-              <textarea name="" cols="30" rows="3" v-model="curType.about" placeholder="请备注账号/姓名、微信支付请留言备注"></textarea>
+             <!-- <textarea name="" cols="30" rows="3" v-model="curType.about" placeholder="请备注账号/姓名、微信支付请留言备注"></textarea>-->
+             <span style="display: inline-block;"><el-input
+                type="textarea"
+                :rows="2"
+                placeholder="请备注账号/姓名、微信支付请留言备注"
+                v-model="curType.about">
+              </el-input></span>
             </div>
             <div class="ipt_item"><span>转账类型 : </span><!--<select name="" id="" v-model="curType.type">
               <option value="" disabled selected style='display:none;'>请选择转账类型</option>
               <option :value="it" v-for="it,idx in huikuanMode" :key="idx">{{it}}</option>
             </select>-->
-              <el-select v-model="curType.type" clearable placeholder="请选择">
+              <el-select v-model="curType.type" clearable placeholder="请选择转账类型">
                 <el-option
                   v-for="item,idx in huikuanMode"
                   :key="item"
@@ -89,8 +95,10 @@
   import maskLayer from '../base/mask-layer'
   import {mapState, mapMutations} from 'vuex'
   import alert from "@/components/base/alert"
+  /*import ElInput from "element-ui/packages/input"*/
 
   export default {
+    name:"recharge",
     data() {
       return {
         ifopen: false,
@@ -186,7 +194,8 @@
       }
     },
     components: {
-      maskLayer
+      maskLayer,
+/*      ElInput*/
     },
     async mounted() {
       this.is_loading_paytype=true;
@@ -259,6 +268,9 @@
 <style scoped lang="less">
   .recharge{
     font-size:14px;
+    select, input[type=text], input[type=password], input[type=number] {
+      width:300px;
+    }
   }
   .main-head {
     background-color: #fff;
@@ -525,15 +537,15 @@
     outline: none;
   }
 
-  textarea:focus {
+  /*textarea:focus {
     border-color: rgba(198, 33, 51, 0.8);
   }
 
   input:focus {
     border-color: rgba(198, 33, 51, 0.8);
-    /*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(198, 33, 51, 0.8);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(198, 33, 51, 0.8);*/
-  }
+    !*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(198, 33, 51, 0.8);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(198, 33, 51, 0.8);*!
+  }*/
 
   .pay-info button {
     border: none;
