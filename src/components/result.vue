@@ -144,8 +144,8 @@
                         </table>
                     </div>
                 </div>
-                <div class="link-result">
-
+                <div class="xx_link-result">
+                 <a href="javascript:;" @click="($router.push({name:'lottery_result',params:{game_name:childId}}))">查看更多</a>
                 </div>
             </div>
             <!--pk10-->
@@ -237,6 +237,9 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="xx_link-result">
+                    <a href="javascript:;" @click="($router.push({name:'lottery_result',params:{game_name:childId}}))">查看更多</a>
                 </div>
             </div>
 
@@ -330,6 +333,9 @@
                         </table>
                     </div>
                 </div>
+                <div class="xx_link-result">
+                    <a href="javascript:;" @click="($router.push({name:'lottery_result',params:{game_name:childId}}))">查看更多</a>
+                </div>
             </div>
 
             <!--3d  td-h-->
@@ -338,6 +344,8 @@
                     <span :class="currP==1?'active':''" @click="currP=1">号码</span>
                     <span :class="currP==2?'active':''" @click="currP=2">大小</span>
                     <span :class="currP==3?'active':''" @click="currP=3">单双</span>
+                    <span :class="currP==4?'active':''" @click="currP=4" v-if="isId==207">长牌/短牌/豹子</span>
+                    <!--<span :class="currP==5?'active':''" @click="currP=5" v-if="isId==207">短牌</span>-->
                 </div>
                 <div class="tab-container">
                     <div class="tab-content num-box" v-if="currP==1">
@@ -406,6 +414,29 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="tab-content ds-box" v-if="currP==4">
+                        <table cellpadding="0" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>期数</th>
+                                <th>开奖号码</th>
+                                <th>总</th>
+                                <th>结果</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="v in ballData">
+                                <td>{{v.issue}}</td>
+                                <td>{{v.data}}</td>
+                                <td><span>{{v.data | filterSum}}</span></td>
+                                <td><span :class="v.data.split(',') | filterCd | filterCdColor">{{v.data.split(',') | filterCd}}</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="xx_link-result">
+                    <a href="javascript:;" @click="($router.push({name:'lottery_result',params:{game_name:childId}}))">查看更多</a>
                 </div>
             </div>
 
@@ -454,6 +485,9 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="xx_link-result">
+                    <a href="javascript:;" @click="($router.push({name:'lottery_result',params:{game_name:childId}}))">查看更多</a>
                 </div>
             </div>
             <!--six-->
@@ -554,6 +588,9 @@
                         </table>
                     </div>
                 </div>
+                <div class="xx_link-result">
+                    <a href="javascript:;" @click="($router.push({name:'lottery_result',params:{game_name:childId}}))">查看更多</a>
+                </div>
             </div>
 
         </div>
@@ -583,7 +620,7 @@
                 this.$http.post("/api/lottery-v1/"+this.childId+"/history/",this.fdata).then(response => {
                   if(!response)return;
                     this.ballData = response.data.list;
-                    console.log('23333',this.ballData);
+//                    console.log('23333',this.ballData);
                 }, response => {
                 })
             },
@@ -696,12 +733,20 @@
                else return '和'
             },
             filterSh:function (Array) {
-                   return Init.getSh(Array)
+                return Init.getSh(Array,1)
+            },
+            filterCd:function (Array) {
+                return Init.getSh(Array,2)
             },
             filterSgColor:function (n) {
-                 if(n=='庄' || n=='龙' || n=='杂六') return 'blue';
-                 else if(n=='闲' ||n=='虎'||n.indexOf('无')<=-1 || n=='一对' ||n=='两对' || n=='三张' || n=='葫芦' || n=='豹子' || n=='四张') return 'red';
+                if(n=='庄' || n=='龙' || n=='杂六') return 'blue';
+                 else if(n=='闲' ||n=='虎'|| n.indexOf('无')<=-1 || n=='一对' ||n=='两对' || n=='三张' || n=='葫芦' || n=='豹子' || n=='四张') return 'red';
                  else return 'green'
+            },
+            filterCdColor:function (n) {
+                if(n.indexOf('长牌')>-1) return 'blue';
+                else if(n.indexOf('短牌')>-1) return 'red';
+                else  return 'green';
             },
             filterniu:function (arr) {
               return Init.fiterniuniu(arr);
@@ -742,7 +787,7 @@
     }
     .tab-title{border-bottom: 1px solid #e5e5e5;text-align: center;background: #fff;padding: 10px 0}
     .tab-title span{display: inline-block; background:#ddd;border-radius: 4px;
-        box-shadow: 0 0 1px #6f6f6f;    border: 1px solid transparent; width:54px; height: 30px;line-height:30px;
+        box-shadow: 0 0 1px #6f6f6f;    border: 1px solid transparent; padding: 0 10px; height: 30px;line-height:30px;
         font-size: 14px;color: #72a5d0;cursor: pointer}
     .tab-title span.active{background:#428bca;border-radius: 4px; box-shadow: 0 0 1px #153a6f;  color: #fff!important;}
     .tab-title span.active:hover{background:#357ebd;}
@@ -837,4 +882,18 @@
     .clearfix:before, .clearfix:after {content: "";  display: table;}
     .clearfix:after {clear: both;}
     .clearfix { *zoom: 1;}
+    /*查看更多*/
+    .xx_link-result{
+        margin-top: 20px;
+    }
+    .xx_link-result a{
+        color: #333;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 8px;
+   }
+  .xx_link-result a:hover{
+      border: 1px solid #ccc;
+       background: #eee;
+ }
 </style>

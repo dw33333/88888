@@ -15,7 +15,7 @@
                </div>
                 <div class="form-group left ">
                     <label for="">彩种：</label>
-                    <el-select v-model="id">
+                    <el-select v-model="id" class="xx_select">
                         <el-option v-for="v in menus" :value="v.id" :label="v.title"   :key="v.title">
                         </el-option>
                     </el-select>
@@ -208,7 +208,7 @@
         border-radius: 4px;
         box-shadow: 0 6px 12px rgba(0,0,0,.175);
     }
-    .el-select{width: 160px!important}
+    .xx_select{width: 160px!important}
     .query-toolbar{
         padding: 16px 10px;
         text-align: left;

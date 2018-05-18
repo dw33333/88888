@@ -1,4 +1,5 @@
-"use strict"
+"use strict";
+import P from './lottery_public.js';
 let Iint={
     //求和
     getSum(arr){
@@ -245,69 +246,14 @@ let Iint={
             }
         }
     },
-     calc(arr){
-         let numberArray = arr;
-         let resultArray = this.calcGamePlayResult(numberArray);
-         // console.log(resultArray);
-         let value = '';
-         // console.log(resultArray);
-         if(resultArray[0] == 1){
-              value = "对子";
-           }else if(resultArray[0] == 2){
-               value = "豹子";
-           }else if(resultArray[1] == 1){
-               value = "半顺";
-           }else if(resultArray[1] == 2){
-               value = "顺子";
-           }else{
-               value = "杂六";
-           }
-         // console.log(value);
-         return value
-       },
-       calcGamePlayResult(array){
-           array = this.toNumArray(array);
-           array = this.sortAsc(array);
-           console.log(array);
-           //存储计算结果
-           let resultArray = new Array(2);
-           //计算豹子、对子
-           resultArray[0] = array[2] - array[1] == 0 ? 1 : 0;
-           resultArray[0] = array[1] - array[0] == 0 ? ++resultArray[0] : resultArray[0];
-
-           //计算顺子、半顺、杂六
-           resultArray[1] = array[2] - array[1] == 1 ? 1 : 0;
-           resultArray[1] = array[1] - array[0] == 1 ? ++resultArray[1] :  resultArray[1];
-
-           return resultArray;
-        },
-     sortAsc(array){
-            for(let i  = 0;i < array.length;i++){
-                 for(var x = i;x < array.length;x++){
-                   if(array[i] > array[x]){
-                          var temp = array[x];
-                          array[x] = array[i];
-                          array[i] = temp;
-                          }
-                  }
-             }
-         return array;
-      },
-      toNumArray(strArray){
-              let numArray = new Array(strArray.length);
-       for(var i = 0;i < strArray.length;i++){
-              numArray[i] = Number(strArray[i]);
-           }
-         return numArray;
-        },
-    getSh(Array){
-        let arr = [];
-        let value = '';
-        let result = Array;
-        result.sort();
-        for (let i = 0; i < result.length;) {
+    getSh(Array,num){
+           let arr = [];
+           let value = '';
+           let result = Array;
+                result.sort();
+           for (let i = 0; i < result.length;) {
             let count = 0;
-            for (let j = i; j < result.length; j++) {
+           for (let j = i; j < result.length; j++) {
                 if (result[i] === result[j]) {
                     count++;
                 }
@@ -317,22 +263,52 @@ let Iint={
                 count: count
             });
             i+=count;
+           }
+        if(num==1){
+            for (let k = 0; k < arr.length; k++) {
+                if(arr.length==5&&arr[1].date-arr[0].date==1&&arr[2].date-arr[1].date==1&&arr[3].date-arr[2].date==1&&arr[4].date-arr[3].date==1) return value = '顺子';
+                else if(arr.length==5)  value = '杂六';
+                else if(arr.length==4) value = '对子';
+                else if(arr.length==3&&arr[k].count==3) return value = '三张';
+                else if(arr.length==3) value = '两对';
+                else if(arr.length==2 &&arr[k].count==4) return value = '四张';
+                else if(arr.length==2) value = '葫芦';
+                else if(arr.length==1) value = '豹子';
+            }
+            return value;
+        }else{
+             let arrSum = [];
+             // let getArr = [];
+            for(let j=0;j<arr.length;j++){
+                arrSum.push(arr[j].date)
+            }
+            for (let k = 0; k < arr.length; k++) {
+                if(arr.length==3){
+                    value  = '长牌--'+ this.doCp(P.getRank(arrSum,2))
+                }else if(arr.length==2){
+                    value =  arr[0].count==2?arr[0].date+arr[0].date:arr[1].date+arr[1].date;
+                    value = '短牌--'+ value;
+                }else{
+                    value =  '豹子'
+                }
+            }
+            // console.log(value);
+            return value;
+
         }
-        console.log(arr);
-               for (let k = 0; k < arr.length; k++) {
+          // console.log(value);
 
-                   if(arr.length==5&&arr[1].date-arr[0].date==1&&arr[2].date-arr[1].date==1&&arr[3].date-arr[2].date==1&&arr[4].date-arr[3].date==1) return value = '顺子';
-                   else if(arr.length==5)  value = '杂六';
-                   else if(arr.length==4) value = '对子';
-                   else if(arr.length==3&&arr[k].count==3) return value = '三张';
-                   else if(arr.length==3) value = '两对';
-                   else if(arr.length==2 &&arr[k].count==4) return value = '四张';
-                   else if(arr.length==2) value = '葫芦';
-                   else if(arr.length==1) value = '豹子';
-               }
-        return value;
 
-    }
+    },
+    doCp(arr){
+        // console.log(222);
+        let arr2=[];
+        // arr.join(',')
+        for(let i=0,len=arr.length;i<len;i++){
+            arr2.push(arr[i].replace(',',''));
+        };
+        return arr2;
+    },
 }
 export default Iint;
 

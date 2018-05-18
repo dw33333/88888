@@ -125,7 +125,7 @@
             </div>
         </div>
         <div class="lottery-box w clearfix">
-            <div class="bet-box">
+            <div class="bet-box" v-show="showResult==false">
                 <!--主要内容-->
                 <div class="bet-box-content">
                     <!--// 投注内容-->
