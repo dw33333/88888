@@ -228,7 +228,7 @@
         if (this.bet_type.val==2) {//香港六合彩
           url = "/api/lhc/Lhcinfo/betRecord/";
           data = {
-            page: page,
+            p: page,
             ps: this.pageSize,
             d: this.curDate
           }
