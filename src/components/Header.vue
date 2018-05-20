@@ -23,7 +23,7 @@
             <a href="javascript:void(0);">{{is_login?"登录中...":"登录"}}</a>
           </div>
           <div class="item regster">
-            <router-link to="/register">免费开户</router-link>
+            <router-link to="/register" style="background:none;">免费开户</router-link>
           </div>
           <div class="item regster">
             <span @click="trial" class="shiwan">试玩</span>
