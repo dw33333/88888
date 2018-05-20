@@ -33,7 +33,7 @@
                                     <span class="caret"></span>
                                 </a>
                             </li>
-                            <ul v-if="isMenu" class="dropdown-menu" @mouseover="isMenu=true" @mouseout="isMenu=false" >
+                            <ul v-show="isMenu" class="dropdown-menu" @mouseover="isMenu=true" @mouseout="isMenu=false" >
                                 <li  v-for="(v,index) in menus" @click="change(v.name,index);more=v.short_name" :class="fc_type==v.name?'active':''" v-if="index>9">
                                     <router-link :to="{name:'lottery',params:{id:v.name}}">
                                         {{v.short_name}}
@@ -196,10 +196,10 @@
                             <i :class="isZhong==2?'active':''" @click="selectZ(2,$event)">不中</i>
                             <span>{{CurrHxOdds}}</span>
                         </p>
-                        <div id="data-play" class="animail clearfix" v-if="currN=='合肖'">
+                        <div class="data-play animail clearfix" v-if="currN=='合肖'">
                             <div v-for="v in hxSelect" @click="selectAimail(v,$event)"><span>{{v}}</span></div>
                         </div>
-                        <div id="data-play" class="animail clearfix" v-if="currN=='正码1-6'||currN=='正码特'||currN=='连肖连尾'">
+                        <div class="data-play animail clearfix" v-if="currN=='正码1-6'||currN=='正码特'||currN=='连肖连尾'">
                             <div v-if="currN=='连肖连尾'"  v-for="(v,k) in ZmData":class="{'active':currTabId==k}" @click="changePlay(k)"><span>{{k}}</span></div>
                             <div v-if="currN!='连肖连尾'" v-for="(v,index) in ZmSelect":class="{'active':currTabNav==v.name,'col-16':currN!='连肖连尾'}" @click="changePlay(v.name,index,v.id)"><span>{{v.name}}</span></div>
                         </div>
@@ -296,12 +296,12 @@
                                 </li>
                             </ul>
                         </div>
-                        <div id="data-play" v-if="currN=='自选不中'" class="clearfix"  v-for="(v,index) in mainData">
+                        <div  v-if="currN=='自选不中'" class="data-play clearfix"  v-for="(v,index) in mainData">
                             <div v-for="(vv,index) in v" :class="currTabNav==vv.name?'active':''" @click="changePlay(vv.name,index,vv.id)"><span>{{vv.name}}</span></div>
                         </div>
 
-                        <div id="data-play" v-if="currN=='连码'" class="clearfix">
-                            <div v-for="(v,index) in mainData" :class="currTabId==v.id?'active':''" @click="changePlay(v.name,index,v.id)"><span>{{v.name | filterNavName(v.playd_type)}}</span></div>
+                        <div v-if="currN=='连码'" class="data-play clearfix">
+                            <div v-for="(v,index) in mainData" :class="currTabId==v.id?'active':''" @click="currTabId=v.id;changePlay(v.name,index,v.id);"><span>{{v.name | filterNavName(v.playd_type)}}</span></div>
                         </div>
 
                         <div v-if="isTab" class="table-bet-top  l clearfix " >
@@ -745,9 +745,11 @@
             },
             addMore(){
                 let e = document.querySelector('.dropdown-menu>li.active>a');
+//                console.log(e);
                 if(e) this.more = e.text;
             },
             getBall(n){
+                if(this.$route.path.indexOf('lottery') <= -1) return;
                 if(n!=2){
                     this.isLoading2 = true;
                     this.result = '';
@@ -841,7 +843,7 @@
                 window.timer_5 = setInterval(() => {
 //                    this.changeOdds();
                     this.getBall(2);
-                    this.getUserInfo();
+//                    this.getUserInfo();
                 }, 60000);
             },
             //取消注单
@@ -931,19 +933,19 @@
             },
             //提交注单
             submitTicket(){
-                if(this.isCloseLoading)   window.top.wAlert('封盘中！！');
+                if(this.isCloseLoading)  return window.top.wAlert('封盘中！！');
                 this.ifCofm =true;
                 if(this.currBall=='正码过关'||this.currN=='连肖连尾'||this.currN=='自选不中'||this.currN=='合肖'||this.currN=='连码') this.ifCofm =false;
                 let nod =  document.querySelectorAll('.warning .input_money');
                 let parent =  document.querySelectorAll('.warning');
                 let arr = [];
                 this.moneyBox = 0;
-                this.editMount = this.editMount-0;
+//                this.editMount = this.editMount-0;
                 for(let i =0;i<nod.length;i++){
                     // 判断最小，最大下注金额
                     let min = nod[i].dataset.min;
                     let max = nod[i].dataset.max;
-                    if(nod[i].value-0<min-0 || nod[i].value-0>max-0) return this.$layer.alert("下注金额在"+min+" - "+max+"之间");
+                    if(nod[i].value-0<min-0 || nod[i].value-0>max-0) return window.top.wAlert("下注金额在"+min+" - "+max+"之间");
                     let obj = {};
                     if(nod[i].value&&nod[i].value!=0 || this.currBall=='正肖' ||this.currBall=='特码生肖'|| this.currBall=='一肖'){
                         if(this.currN=='合肖') obj.money =this.editMount;
@@ -964,7 +966,7 @@
                         arr.push(obj);
                     }
                 }
-                if(arr.length&&this.editMount!=0&&parent.length ){
+                if(arr.length&&parent.length || parent.length&&this.editMount!=0){
                     if(this.fc_type == "six" && this.ifCofm){
                         this.arrTicket = arr;
                     }   else if(this.fc_type != "six") {
@@ -1132,20 +1134,21 @@
             changePlay(k,index,id){
                 this.reset();
                 if(this.currN=='自选不中'||this.currN=='连码'){
-                    this.tabData =[];
-                    for(let i=1;i<50;i++){
-                        this.tabData.push(i);
-                    }
+//                    this.tabData =[];
+//                    for(let i=1;i<50;i++){
+//                        this.tabData.push(i);
+//                    }
                     if(this.currN=='自选不中'){
                         this.sixTabNav = L.data_six_do(this.allData)[this.currBall][84];
                         this.currTabNav = this.sixTabNav[index].name;
                         this.currTabNavID = this.sixTabNav[index].id;
                         this.currOdds = this.sixTabNav[index].odds;
                     }else{
+//                        this.currTabId =  id;
                         this.currTabNav = this.sixTabNav[index].name;
                         this.currTabNavID = this.sixTabNav[index].id;
                         this.currOdds = this.sixTabNav[index].odds;
-                        this.currTabId =  id;
+
                     }
                 }else if(this.currN=='正码特'||this.currN=='正码1-6'){
                     this.currTabId = id;
@@ -1277,7 +1280,7 @@
                 this.currCz = n;
             },
             resetSix(){
-                P.removeAllactive(document.querySelectorAll("#data-play>div"));
+                P.removeAllactive(document.querySelectorAll(".data-play>div"));
                 this.orderObj = {};
                 this.CurrHxOdds = '';
             },
@@ -1295,6 +1298,7 @@
                 this.orderObj = {};
                 this.editMount = '';
                 this.arrName =[];
+                this.arrTicket =[];
                 let che = document.querySelectorAll('.check-send');
                 let nod = document.querySelectorAll('.input_money');
                 let col = document.querySelectorAll('.item-container .col-xs-3.active');
@@ -1464,6 +1468,7 @@
                         this.getuser = false;
                     }
                 }, response => {
+
                 })
             },
             // 获取账户余额
@@ -1550,7 +1555,7 @@
                 let n;
                 if(this.currN=="正码过关"){
                     if(len < 2) {
-                        this.$layer.alert('至少选择2组,若只要下一注,请前往正码1-6下注');
+                        window.top.wAlert('至少选择2组,若只要下一注,请前往正码1-6下注');
                         return false;
                     }else{
                         return true;

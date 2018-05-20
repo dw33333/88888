@@ -618,7 +618,7 @@
             getHistory(){
                 if(!this.$route.path.includes('lottery')) return;
                 let api = this.childId=='six'?'/api/lhc/LhcInfo/kaiJiangHistory':'/api/lottery-v1/'+this.childId+'/history';
-                this.$http.post(api).then(response => {
+                this.$http.post(api,this.fdata).then(response => {
                   if(!response)return;
                     this.ballData = response.data.list;
 //                    console.log('23333',this.ballData);

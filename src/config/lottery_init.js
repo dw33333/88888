@@ -248,7 +248,7 @@ let Iint={
             }
         }
     },
-    getSh(Array){
+    getSh(Array,num){
            let arr = [];
            let value = '';
            let result = Array;
@@ -266,18 +266,40 @@ let Iint={
             });
             i+=count;
            }
-            for (let k = 0; k < arr.length; k++) {
-                if(arr.length==5&&arr[1].date-arr[0].date==1&&arr[2].date-arr[1].date==1&&arr[3].date-arr[2].date==1&&arr[4].date-arr[3].date==1) return value = '顺子';
-                else if(arr.length==5&&arr[1].date-arr[0].date==2&&arr[2].date-arr[1].date==2&&arr[3].date-arr[2].date==2&&arr[4].date-arr[3].date==2)  return value = '无离';
-                else if(arr.length==5)  value = '杂六';
-                else if(arr.length==4) value = '对子';
-                else if(arr.length==3&&arr[k].count==3) return value = '三张';
-                else if(arr.length==3) value = '两对';
-                else if(arr.length==2 &&arr[k].count==4) return value = '四张';
-                else if(arr.length==2) value = '葫芦';
-                else if(arr.length==1) value = '豹子';
-            }
-            return value;
+           if(num==1){
+               for (let k = 0; k < arr.length; k++) {
+                   if(arr.length==5&&arr[1].date-arr[0].date==1&&arr[2].date-arr[1].date==1&&arr[3].date-arr[2].date==1&&arr[4].date-arr[3].date==1) return value = '顺子';
+                   else if(arr.length==5&&arr[1].date-arr[0].date==2&&arr[2].date-arr[1].date==2&&arr[3].date-arr[2].date==2&&arr[4].date-arr[3].date==2)  return value = '五离';
+                   else if(arr.length==5)  value = '杂六';
+                   else if(arr.length==4) value = '对子';
+                   else if(arr.length==3&&arr[k].count==3) return value = '三张';
+                   else if(arr.length==3) value = '两对';
+                   else if(arr.length==2 &&arr[k].count==4) return value = '四张';
+                   else if(arr.length==2) value = '葫芦';
+                   else if(arr.length==1) value = '豹子';
+               }
+               return value;
+           }else{
+               let arrSum = [];
+               // let getArr = [];
+               for(let j=0;j<arr.length;j++){
+                   arrSum.push(arr[j].date)
+               }
+               for (let k = 0; k < arr.length; k++) {
+                   if(arr.length==3){
+                       value  = '长牌--'+ this.doCp(P.getRank(arrSum,2))
+                   }else if(arr.length==2){
+                       value =  arr[0].count==2?arr[0].date+arr[0].date:arr[1].date+arr[1].date;
+                       value = '短牌--'+ value;
+                   }else{
+                       value =  '豹子'
+                   }
+               }
+               // console.log(value);
+               return value;
+
+           }
+
 
     },
     doCp(arr){
