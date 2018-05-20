@@ -805,6 +805,111 @@
             <td :style="{color:getColors(it.num8_overorunder)}">{{it.num8_overorunder}}</td>
           </tr>
         </table>
+        <table class="tb cqssc" v-show="show_type.value=='pos_and_zfb'" v-if="tempParam.typeName=='Gdklsf'">
+          <tr>
+            <th rowspan="2">期数</th>
+            <th rowspan="2">开奖时间</th>
+            <th colspan="8">球号</th>
+            <th colspan="2">第一球</th>
+            <th colspan="2">第二球</th>
+            <th colspan="2">第三球</th>
+            <th colspan="2">第四球</th>
+            <th colspan="2">第五球</th>
+            <th colspan="2">第六球</th>
+            <th colspan="2">第七球</th>
+            <th colspan="2">第八球</th>
+          </tr>
+          <tr>
+            <th>第一球</th>
+            <th>第二球</th>
+            <th>第三球</th>
+            <th>第四球</th>
+            <th>第五球</th>
+            <th>第六球</th>
+            <th>第七球</th>
+            <th>第八球</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+          </tr>
+          <tr v-for="it,idx in results">
+            <td>
+              {{it.issue}}
+            </td>
+            <td>
+              {{it.opentime}}
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num1}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num2}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num3}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num4}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num5}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num6}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num7}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num8}}
+              </div>
+            </td>
+            <td :style="{color:getColors(it.num1_zhongfabai)}">{{it.num1_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num1_position)}">{{it.num1_position}}</td>
+            <td :style="{color:getColors(it.num2_zhongfabai)}">{{it.num2_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num2_position)}">{{it.num2_position}}</td>
+            <td :style="{color:getColors(it.num3_zhongfabai)}">{{it.num3_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num3_position)}">{{it.num3_position}}</td>
+            <td :style="{color:getColors(it.num4_zhongfabai)}">{{it.num4_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num4_position)}">{{it.num4_position}}</td>
+            <td :style="{color:getColors(it.num5_zhongfabai)}">{{it.num5_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num5_position)}">{{it.num5_position}}</td>
+            <td :style="{color:getColors(it.num6_zhongfabai)}">{{it.num6_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num6_position)}">{{it.num6_position}}</td>
+            <td :style="{color:getColors(it.num7_zhongfabai)}">{{it.num7_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num7_position)}">{{it.num7_position}}</td>
+            <td :style="{color:getColors(it.num8_zhongfabai)}">{{it.num8_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num8_position)}">{{it.num8_position}}</td>
+          </tr>
+        </table>
         <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Cqklsf'">
           <tr>
             <th rowspan="2">期数</th>
@@ -2417,7 +2522,8 @@
         colors2: {
           "red": "#e53935",
           "blue": "#039be5",
-          "green": "#7cb342"
+          "green": "#7cb342",
+          "orange":"#ffa726"
         },
         car_colors: ["", "#ffca28", "rgb(229, 115, 115)", "rgb(0, 191, 165)", "rgb(171, 71, 188)", "rgb(139, 195, 74)", "rgb(255, 138, 101)", "rgb(117, 117, 117)", "rgb(240, 98, 146)", "#ffee58", "rgb(92, 107, 192)"],
         tempParam: {
@@ -2526,7 +2632,7 @@
         }
         this.gameTypes = resArr;
       },
-      async loadData(page) {
+      async loadData(page,ispage) {
         if (this.gameTypeIdx == -1) return;
         let url = '/api/lhc/Lhcinfo/kaiJiangHistory';
         let data = {
@@ -2548,12 +2654,14 @@
         this.is_loading_result = false;
         if (!res) return;
         this.results = this.setData(res.data.list);
-        this.setShowType();
+        if(!ispage){
+          this.setShowType();
+        }
         this.setPager(page, res.data.page);
       },
       pageClick(page) {
         if (page == -1) return;
-        this.loadData(page);
+        this.loadData(page,true);
       },
       async logout(){
         let res = await this.$http.post('/api/user/logout');
@@ -2579,8 +2687,10 @@
       getColors(txt) {
         if (!txt) return;
         txt = txt + '';
-        let reds = ["双", "大", "家禽", "下", "偶", "龙", "前"];
-        let blues = ["单", "小", "野兽", "上", "奇", "虎", "后"];
+        let reds = ["双", "大", "家禽", "下", "偶", "龙", "前","中","东"];
+        let blues = ["单", "小", "野兽", "上", "奇", "虎", "后","发","南"];
+        let orange = ["白","西"];
+        let green=["北"];
         if (reds.indexOf(txt) != -1) {
           return this.colors2["red"];
         }
@@ -2590,7 +2700,7 @@
             res = this.colors2["red"];
           }
         });
-        if (res) return res;
+        if (res) return res
         if (blues.indexOf(txt) != -1) {
           return this.colors2["blue"];
         }
@@ -2598,7 +2708,13 @@
           if (blues.indexOf(v) != -1) {
             res = this.colors2["blue"];
           }
-        });
+        })
+        if (orange.indexOf(txt) != -1) {
+          return this.colors2["orange"];
+        }
+        if (green.indexOf(txt) != -1) {
+          return this.colors2["green"];
+        }
         if (res) return res;
         else return "inherit";
       },
@@ -2827,16 +2943,16 @@
           this.show_types = [{tit: "两面", value: "liangmian"}, {tit: "龙虎斗", value: "longhudou"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Gdklsf") {
-          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_types = [{tit: "两面", value: "liangmian"},{tit:"中发白&方位",value:"pos_and_zfb"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Cqklsf") {
-          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_types = [{tit: "两面", value: "liangmian"},{tit:"中发白&方位",value:"pos_and_zfb"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Tjklsf") {
-          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_types = [{tit: "两面", value: "liangmian"},{tit:"中发白&方位",value:"pos_and_zfb"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Hnklsf") {
-          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_types = [{tit: "两面", value: "liangmian"},{tit:"中发白&方位",value:"pos_and_zfb"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Gd11x5") {
           this.show_types = [{tit: "两面", value: "liangmian"}];
