@@ -37,12 +37,12 @@
                 <router-link title="免费开户" class="btn btn_register" to="/register"></router-link>
               </li>
               <li class="login_others">
-                <a href="javascript:void(0)" id="forgetBtn" class="login_forgetpassword"
+                <!-- <a href="javascript:void(0)" id="forgetBtn" class="login_forgetpassword"
                    style="line-height:40px;color:#eaeaec;display:inline-block;">忘记密码?</a>
-                <span class="separate">|</span>
+                <span class="separate">|</span> -->
                 <!--<a href="javascript:;" class="authentication" style="display:inline-block;">域名验证</a>
                                 <span class="separate">|</span> -->
-                <a href="https://tb.53kf.com/code/client/10172705/1" target="_blank" class="online_service"
+                <a :href="this.sitesInfos.SiteService" target="_blank" class="online_service"
                    style="text-align:right;margin-top: 12px;color:#eaeaec;text-decoration:underline;font-size:14px;text-decoration:none;display:inline-block;">在线客服</a>
                 <span class="separate separate_hidden">|</span>
               </li>
@@ -224,7 +224,7 @@
       maskLayer
     },
     computed: {
-      ...mapState(['codeToken', 'easysecret'])
+      ...mapState(['codeToken', 'easysecret','sitesInfos'])
     }
   }
 
