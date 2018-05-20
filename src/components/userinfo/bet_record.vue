@@ -106,6 +106,19 @@
     created(){
       this.bet_type=this.bet_types[0];
       this.curDate=this.$route.params.date?this.$route.params.date:"";
+      console.log(this.$route.params.type);
+      if(this.$route.params.type){
+        this.bet_type=this.bet_types[this.bet_types.findIndex(v=>{
+          return
+        })];
+        this.bet_types.forEach(v=>{
+          v.cur=false;
+          if(this.$route.params.type==v.val){
+            this.bet_type=v;
+            v.cur=true;
+          };
+        })
+      }
     },
     async mounted() {
       await this.initLotteryType();

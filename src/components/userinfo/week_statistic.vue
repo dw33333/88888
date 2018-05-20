@@ -140,7 +140,7 @@
         this.records = res.data.data;
       },
       rowClick(item){
-        this.$router.push({name:"bet_record",params:{date:item.y+'-'+item.date}});
+        this.$router.push({name:"bet_record",params:{date:item.y+'-'+item.date,type:this.curType.value}});
       }
     }
   }
