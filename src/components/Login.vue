@@ -77,7 +77,7 @@
         content: '',
         codeImg: '',
         temcodeToken: '',
-        is_login:false,
+        is_login: false,
         code: ''
       }
     },
@@ -107,10 +107,10 @@
         this.ifopen = true
         // let instance = Toast(msg);
         this.content = msg
-       let timer= setTimeout(() => {
+        let timer = setTimeout(() => {
           // instance.close();
           this.ifopen = false
-           clearTimeout(timer);
+          clearTimeout(timer);
         }, 1500)
       },
       alert(tit, msg, fn, msgStyle) {
@@ -183,37 +183,38 @@
           codeToken: this.codeToken
         }
         //this.$http.defaults.headers.EasySecret = undefined;
-        this.is_login=true;
+        this.is_login = true;
         this.$http({
-          method:"post",
-          url:'api/user/login',
+          method: "post",
+          url: 'api/user/login',
           data: data,
-          headers:{EasySecret:""}
+          headers: {EasySecret: ""}
         }).then(async (res) => {
-          this.is_login=false;
+          this.is_login = false;
           if (res.data.code === 0) {
-          this.$http.defaults.headers.EasySecret = res.headers.easysecret;
-          this.EASYSECRET(res.headers.easysecret);
+            this.$http.defaults.headers.EasySecret = res.headers.easysecret;
+            this.EASYSECRET(res.headers.easysecret);
             this.mytoast("登录成功");
+            //this.initGetBalanceTimer();
             await this.getuserinfo();
             //this.changeUserName(this.user_name);
             //this.changeUserMoney(res.data.data.money);
-            if(this.$route.params.hback){
-              this.$router.push({name:this.$route.params.hback,params:this.$route.params.params});
+            if (this.$route.params.hback) {
+              this.$router.push({name: this.$route.params.hback, params: this.$route.params.params});
               //this.$router.go(-1);
-            }else{
+            } else {
               this.$router.push({path: "/"});
             }
             //this.codeImgFn()
           } else {
-            this.is_login=false;
+            this.is_login = false;
             this.alert('提示', res.data.msg);
             this.codeImgFn()
           }
         }).catch((error) => {
           this.codeImgFn()
           this.alert("提示", "登录失败");
-          this.is_login=false;
+          this.is_login = false;
           console.log('err:' + error)
         })
       },
@@ -224,7 +225,7 @@
       maskLayer
     },
     computed: {
-      ...mapState(['codeToken', 'easysecret','sitesInfos'])
+      ...mapState(['codeToken', 'easysecret','sitesInfos','userinfo'])
     }
   }
 
@@ -268,7 +269,7 @@
     display: inline-block;
     padding-left: 45px;
     color: #fff;
-    margin:13px 0;
+    margin: 13px 0;
   }
 
   .code {

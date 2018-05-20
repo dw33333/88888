@@ -35,10 +35,10 @@
         <!-- 登录后显示账户名余额信息 -->
         <div class="bar-right" v-else>
           <div class="preson-info preson-balance presonInput" id="presonInput" v-show="!inlottery">
-            账号：{{username}}
+            账号：{{userinfo.username}}
           </div>
           <div class="preson-balance personpwd leftMoney presonInput" id="presonInput2" v-show="!inlottery">
-            余额:{{money}}
+            余额:{{userinfo.money}}
           </div>
           <div style="width:540px;display:none;height:48px;" id="showId"></div>
           <slot name="game_introduce"></slot>
@@ -274,7 +274,7 @@
       this.checkUser();
     },
     computed: {
-      ...mapState(['money', 'username', 'codeToken', 'headerArry', 'easysecret', 'sitesInfos'])
+      ...mapState(['money', 'username', 'codeToken', 'headerArry', 'easysecret', 'sitesInfos','userinfo',])
     },
     created() {
       this.getArry();
@@ -366,6 +366,7 @@
       },
       codeImgFn() {
         this.$http.get('/api/site/captcha/').then((res) => {
+          if(!res){return;}
           if (res.status === 200) {
             this.codeImg = res.data.src
             this.temcodeToken = res.data.codeToken
@@ -483,12 +484,14 @@
             data: data,
             headers: {EasySecret: ""}
           }).then(async (res) => {
+            if(!res)return;
             this.is_login = false;
             if (res.data.code === 0) {
               this.$http.defaults.headers.EasySecret = res.headers.easysecret;
               this.EASYSECRET(res.headers.easysecret);
               this.mytoast(res.data.msg);
               await this.getuserinfo();
+
               // this.usermoney = res.data.data.user_money
 
               // sessionStorage.setItem('username', this.username)
@@ -504,6 +507,7 @@
               // this.userIsLogin(true)
             } else {
               this.alert("提示", res.data.msg);
+              this.is_login=false;
             }
           }).catch((error) => {
             this.is_login = false;
@@ -562,8 +566,8 @@
         }
         this.EASYSECRET("");
         sessionStorage.clear();
-        this.$router.push("/login");
         this.$http.defaults.headers.EasySecret = undefined;
+        this.$router.push("/login");
       },
       ...mapMutations(['changeUserName', 'getUserRealName', 'changeUserMoney', 'getUserToken', 'userLoginOut', "EASYSECRET", "ROOTBOX", "USERINFO", 'GETDATA']),
       // getUserMoney(){

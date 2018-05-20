@@ -5,7 +5,7 @@ import store from './store'
 import axios from 'axios'
 import alert from "@/components/base/alert"
 import "@/obj/util"
-import {Dialog,Button,Form,FormItem,DatePicker,Select,Option,Pagination} from 'element-ui';
+import {Dialog,Button,Form,FormItem,DatePicker,Select,Option,Pagination,Input} from 'element-ui';
 import 'element-ui/lib/theme-chalk/form-item.css';
 import 'element-ui/lib/theme-chalk/form.css';
 import 'element-ui/lib/theme-chalk/dialog.css';
@@ -14,6 +14,7 @@ import 'element-ui/lib/theme-chalk/date-picker.css';
 import 'element-ui/lib/theme-chalk/select.css';
 import 'element-ui/lib/theme-chalk/option.css';
 import 'element-ui/lib/theme-chalk/pagination.css';
+import 'element-ui/lib/theme-chalk/input.css';
 import './assets/css/iconfont.css';
 import 'babel-polyfill'  //ie11打开空白
 /*import Es6Promise from 'es6-promise'
@@ -27,6 +28,7 @@ Vue.use(DatePicker);
 Vue.use(Select);
 Vue.use(Option);
 Vue.use(Pagination);
+Vue.use(Input);
 //公共样式
 // Vue.prototype.$layer = layer(Vue);
 Vue.config.productionTip = false;
@@ -70,7 +72,6 @@ window.wAlert=(msg,fn)=>{//挂到全局中(同域iframe可调用)
 Vue.component("DatePicker", DatePicker);
 Vue.config.productionTip = true
 axios.defaults.withCredentials = true
-Vue.prototype.$http = axios;
 Vue.prototype.$http.defaults.headers.EasySecret=store.state.easysecret;
 Vue.prototype.$http.interceptors.request.use(request=>{
   if(request.method=="get"){//添加时间戳
@@ -101,14 +102,14 @@ Vue.prototype.$http.interceptors.response.use(
           handles:{
             confirm(){
               Vue.prototype.$http.defaults.headers.EasySecret=undefined;
-              router.push({name:"Login",params:{hback:router.currentRoute.name,params:router.currentRoute.params}});
-              store.commit("ROOTBOX",{
-                open:false
-              });
               if(store.state.easysecret){ //没有登录或者token过期 清空之前状态跳到登录页
                 store.commit("EASYSECRET","");
                 localStorage.clear();
               }
+              router.push({name:"Login",params:{hback:router.currentRoute.name,params:router.currentRoute.params}});
+              store.commit("ROOTBOX",{
+                open:false
+              });
             },
             close(){
               store.commit("ROOTBOX",{
@@ -117,6 +118,7 @@ Vue.prototype.$http.interceptors.response.use(
             }
           }
         });
+        //return response;
       }else{
         return response;
       }
@@ -159,3 +161,4 @@ window.cwvue=new Vue({
   store,
   render: h => h(App)
 });
+window.str=store;

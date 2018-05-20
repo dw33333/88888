@@ -28,6 +28,7 @@ let P ={
         return str.replace(/[^一二三四五六七八九十]/ig,"");
     },
     getRank:function(arr,num){
+        // console.log('2222',arr);
         var r=[];
         return function f(t,a,n){
             if(0==n)return r.push(t.join(","));

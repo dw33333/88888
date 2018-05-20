@@ -151,7 +151,7 @@ let L = {
     },
     getDx(domArr,num,rm){
         for(let i =0,len=domArr.length-1;i<=len;i++){
-            if(i<rm.number || rm==2) {
+            if(i<domArr.length || rm==2) {
                 let child = domArr[i].children[2].children[0];
                 this.ifR(domArr[i]);
                 this.clearV(child);
@@ -160,11 +160,11 @@ let L = {
                         if ((i < 10)) {
                             this.ifValue(rm,domArr[i],child)
                         }
-                       } else if(rm.number == 49){
+                    } else if(rm.number == 2){
                         if (i <24) {
                             this.ifValue(rm,domArr[i],child)
                         }
-                     } else if(rm.number == 203){
+                    } else if(rm.number == 203){
                         if (i <40) {
                             this.ifValue(rm,domArr[i],child)
                         }
@@ -173,7 +173,7 @@ let L = {
                             this.ifValue(rm,domArr[i],child)
                         }
                     }
-                    } else if (num == '大') {
+                } else if (num == '大') {
                     if(rm.number == 201 || rm.number == 210){
                         if (i > 9&&i<20) {
                             this.ifValue(rm,domArr[i],child)
@@ -186,20 +186,24 @@ let L = {
                         if (i >=40) {
                             this.ifValue(rm,domArr[i],child)
                         }
-                    }  else{
+                    }  else if(rm.number == 2){
+                        if (i > 24) {
+                            this.ifValue(rm,domArr[i],child)
+                        }
+                    } else{
                         if (i> 4) {
                             this.ifValue(rm,domArr[i],child)
                         }
                     }
-                   } else if (num == '单') {
+                } else if (num == '单') {
                     if ( (domArr[i].children[0].children[0].innerHTML-0 )% 2 != 0) {
                         this.ifValue(rm,domArr[i],child)
                     }
-                  }else if (num == '双') {
+                }else if (num == '双') {
                     if ( (domArr[i].children[0].children[0].innerHTML-0) % 2 == 0) {
                         this.ifValue(rm,domArr[i],child)
                     }
-                 }else if (num == '红波'||num == '蓝波'||num == '绿波') {
+                }else if (num == '红波'||num == '蓝波'||num == '绿波') {
                     let bgC;
                     if(num=='红波'){bgC = 'rColor';}
                     else if(num=='蓝波'){bgC = 'bColor';}
@@ -207,16 +211,16 @@ let L = {
                     if ( domArr[i].children[0].children[0].className.indexOf(''+bgC+'')>-1) {
                         this.ifValue(rm,domArr[i],child)
                     }
-                 }else if (num == '兔'||num == '虎'||num == '牛'||num == '鼠'||num == '猪'||num == '狗'||num == '鸡'||num == '猴'||num == '羊'||num == '马'||num == '蛇'||num == '龙') {
+                }else if (num == '兔'||num == '虎'||num == '牛'||num == '鼠'||num == '猪'||num == '狗'||num == '鸡'||num == '猴'||num == '羊'||num == '马'||num == '蛇'||num == '龙') {
                     let n = domArr[i].children[0].children[0].innerHTML - 0;
                     if(Init.getA(n) == num){
                         this.ifValue(rm,domArr[i],child)
                     }
-                 }else if (num == '家禽'||num == '野兽') {
+                }else if (num == '家禽'||num == '野兽') {
                     let n = domArr[i].children[0].children[0].innerHTML - 0;
                     if(num == '家禽'&&(Init.getA(n) == '牛'||Init.getA(n) == '马' ||Init.getA(n) == '羊'||Init.getA(n) == '鸡'||Init.getA(n) == '狗'||Init.getA(n) == '猪')){
                         this.ifValue(rm,domArr[i],child)
-                }else if(num == '野兽'&&(Init.getA(n) == '鼠'||Init.getA(n) == '虎' ||Init.getA(n) == '兔'||Init.getA(n) == '龙'||Init.getA(n) == '蛇'||Init.getA(n) == '猴')) {
+                    }else if(num == '野兽'&&(Init.getA(n) == '鼠'||Init.getA(n) == '虎' ||Init.getA(n) == '兔'||Init.getA(n) == '龙'||Init.getA(n) == '蛇'||Init.getA(n) == '猴')) {
                         this.ifValue(rm,domArr[i],child)
                     }
                 }
@@ -232,8 +236,9 @@ let L = {
         let play_list = {};
         for(let k in odds){
             let v = odds[k];
-            if(!play_list[v.playd_type]) play_list[v.playd_type] = [];
-            play_list[v.playd_type].push(v);
+            if(!play_list[v.playd_guoup_id]) play_list[v.playd_guoup_id] = {};
+            if(!play_list[v.playd_guoup_id][v.playd_type]) play_list[v.playd_guoup_id][v.playd_type] = [];
+            play_list[v.playd_guoup_id][v.playd_type].push(v);
         }
         return play_list;
     },
@@ -248,6 +253,20 @@ let L = {
             if(!play_list[v.playd_guoup_id]) play_list[v.playd_guoup_id] = {};
             if(!play_list[v.playd_guoup_id][v.playd_type_name]) play_list[v.playd_guoup_id][v.playd_type_name] = [];
             play_list[v.playd_guoup_id][v.playd_type_name].push(v);
+        }
+        return play_list;
+    },
+    // 正码特/正码1-6数据处理
+    data_six_zm_do:function (data,n) {
+        let odds = {};
+        if (data) {
+            odds = data;
+        } else return;
+        let play_list = {};
+        for(let k in odds){
+            let v = odds[k];
+            if(!play_list[v[n]]) play_list[v[n]] = [];
+            play_list[v[n]].push(v);
         }
         return play_list;
     },

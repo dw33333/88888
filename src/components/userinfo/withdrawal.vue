@@ -17,94 +17,93 @@
       <ul class="item">
         <li class='title'><span class="colorf00">*</span>取款银行 :</li>
         <li>
-          <select v-model="cardInputs.bankname" name="bank">
-            <option value="" selected disabled style="display: none;">请选择银行</option>
-            <option value="中国工商银行">中国工商银行</option>
-            <option value=国农业银行">中国农业银行</option>
-            <option value=国民生银行">中国民生银行</option>
-            <option value=国建设银行">中国建设银行</option>
-            <option value=国招商银行">中国招商银行</option>
-            <option value=国银行">中国银行</option>
-            <option value=国交通银行">中国交通银行</option>
-            <option value=国邮政银行">中国邮政银行</option>
-            <option value=国兴业银行">中国兴业银行</option>
-            <option value="华夏银行">华夏银行</option>
-            <option value="浦发银行">浦发银行</option>
-            <option value="广州银行">广州银行</option>
-            <option value="BEA东亚银行">BEA东亚银行</option>
-            <option value="广州农商银行">广州农商银行</option>
-            <option value="顺德农商银行">顺德农商银行</option>
-            <option value="北京银行">北京银行</option>
-            <option value="平安银行">平安银行</option>
-            <option value="杭州银行">杭州银行</option>
-            <option value="温州银行">温州银行</option>
-            <option value="上海农商银行">上海农商银行</option>
-            <option value="尧都信用社">尧都信用社</option>
-            <option value="中国光大银行">中国光大银行</option>
-            <option value="中信银行">中信银行</option>
-            <option value="渤海银行">渤海银行</option>
-            <option value="浙商银行">浙商银行</option>
-            <option value="晋商银行">晋商银行</option>
-            <option value="汉口银行">汉口银行</option>
-            <option value="浙江稠州商业银行">浙江稠州商业银行</option>
-            <option value="上海银行">上海银行</option>
-            <option value="广发银行">广发银行</option>
-            <option value="东莞银行">东莞银行</option>
-            <option value="宁波银行">宁波银行</option>
-            <option value="南京银行">南京银行</option>
-            <option value="北京农商银行">北京农商银行</option>
-            <option value="重庆银行">重庆银行</option>
-            <option value="广西壮族自治区农村信用社">广西壮族自治区农村信用社</option>
-            <option value="江苏银行">江苏银行</option>
-            <option value="吉林银行">吉林银行</option>
-            <option value="成都银行">成都银行</option>
-            <option value="农村信用社">农村信用社</option>
-            <option value="晋城银行">晋城银行</option>
-            <option value="邯郸银行">邯郸银行</option>
-            <option value="郑州银行">郑州银行</option>
-            <option value="九江银行">九江银行</option>
-            <option value="财付通">财付通</option>
-            <option value="盛京银行">盛京银行</option>
-            <option value="安徽农村信用合作社">安徽农村信用合作社</option>
-            <option value="甘肃银行">甘肃银行</option>
-            <option value="甘肃农村信用社">甘肃农村信用社</option>
-            <option value="东莞农村商业银行">东莞农村商业银行</option>
-            <option value="广东农村商业银行">广东农村商业银行</option>
-            <option value="Payoneer">Payoneer</option>
-            <option value="NETELLER">NETELLER</option>
-            <option value="Skrill">Skrill</option>
-            <option value="PayPal">PayPal</option>
-            <option value="其它银行">其它银行</option>
-            <option value="锦州银行">锦州银行</option>
-            <option value="齐鲁银行">齐鲁银行</option>
-            <option value="QQ钱包">QQ钱包</option>
-            <option value="贵阳银行">贵阳银行</option>
-            <option value="深圳农商银行">深圳农商银行</option>
-            <option value="贵州省农村信用社">贵州省农村信用社</option>
-            <option value="樱花银行">樱花银行</option>
-            <option value="京东钱包">京东钱包</option>
-            <option value="甘肃银行">甘肃银行</option>
-            <option value="兰州银行">兰州银行</option>
-            <option value="浙江农村信用社">浙江农村信用社</option>
-            <option value="霜夏银行">霜夏银行</option>
-            <option value="云南省农村信用社">云南省农村信用社</option>
-            <option value="云南省农村信用社">云南省农村信用社</option>
-            <option value="莱商银行">莱商银行</option>
-            <option value="南京銀行">南京銀行</option>
-            <option value="海南农村信用社">海南农村信用社</option>
-            <option value="三亚农村信用社">三亚农村信用社</option>
-            <option value="贵州农村信用社">贵州农村信用社</option>
-            <option value="福建农村信用社">福建农村信用社</option>
-            <option value="海南省农村信用社">海南省农村信用社</option>
-            <option value="永州市农村信用社">永州市农村信用社</option>
-            <option value="东莞农村商业银行">东莞农村商业银行</option>
-            <option value="江西信用社">江西信用社</option>
-            <option value="上海农村商业银行">上海农村商业银行</option>
-            <option value="北京农村商业银行">北京农村商业银行</option>
-            <option value="南洋商业银行">南洋商业银行</option>
-            <option value="河北银行">河北银行</option>
-            <option value="泰隆银行">泰隆银行</option>
-          </select>
+          <el-select v-model="cardInputs.bankname" name="bank" placeholder="请选择">
+            <el-option value="中国工商银行">中国工商银行</el-option>
+            <el-option value="国农业银行">中国农业银行</el-option>
+            <el-option value="国民生银行">中国民生银行</el-option>
+            <el-option value="国建设银行">中国建设银行</el-option>
+            <el-option value="国招商银行">中国招商银行</el-option>
+            <el-option value="国银行">中国银行</el-option>
+            <el-option value="国交通银行">中国交通银行</el-option>
+            <el-option value="国邮政银行">中国邮政银行</el-option>
+            <el-option value="国兴业银行">中国兴业银行</el-option>
+            <el-option value="华夏银行">华夏银行</el-option>
+            <el-option value="浦发银行">浦发银行</el-option>
+            <el-option value="广州银行">广州银行</el-option>
+            <el-option value="BEA东亚银行">BEA东亚银行</el-option>
+            <el-option value="广州农商银行">广州农商银行</el-option>
+            <el-option value="顺德农商银行">顺德农商银行</el-option>
+            <el-option value="北京银行">北京银行</el-option>
+            <el-option value="平安银行">平安银行</el-option>
+            <el-option value="杭州银行">杭州银行</el-option>
+            <el-option value="温州银行">温州银行</el-option>
+            <el-option value="上海农商银行">上海农商银行</el-option>
+            <el-option value="尧都信用社">尧都信用社</el-option>
+            <el-option value="中国光大银行">中国光大银行</el-option>
+            <el-option value="中信银行">中信银行</el-option>
+            <el-option value="渤海银行">渤海银行</el-option>
+            <el-option value="浙商银行">浙商银行</el-option>
+            <el-option value="晋商银行">晋商银行</el-option>
+            <el-option value="汉口银行">汉口银行</el-option>
+            <el-option value="浙江稠州商业银行">浙江稠州商业银行</el-option>
+            <el-option value="上海银行">上海银行</el-option>
+            <el-option value="广发银行">广发银行</el-option>
+            <el-option value="东莞银行">东莞银行</el-option>
+            <el-option value="宁波银行">宁波银行</el-option>
+            <el-option value="南京银行">南京银行</el-option>
+            <el-option value="北京农商银行">北京农商银行</el-option>
+            <el-option value="重庆银行">重庆银行</el-option>
+            <el-option value="广西壮族自治区农村信用社">广西壮族自治区农村信用社</el-option>
+            <el-option value="江苏银行">江苏银行</el-option>
+            <el-option value="吉林银行">吉林银行</el-option>
+            <el-option value="成都银行">成都银行</el-option>
+            <el-option value="农村信用社">农村信用社</el-option>
+            <el-option value="晋城银行">晋城银行</el-option>
+            <el-option value="邯郸银行">邯郸银行</el-option>
+            <el-option value="郑州银行">郑州银行</el-option>
+            <el-option value="九江银行">九江银行</el-option>
+            <el-option value="财付通">财付通</el-option>
+            <el-option value="盛京银行">盛京银行</el-option>
+            <el-option value="安徽农村信用合作社">安徽农村信用合作社</el-option>
+            <el-option value="甘肃银行">甘肃银行</el-option>
+            <el-option value="甘肃农村信用社">甘肃农村信用社</el-option>
+            <el-option value="东莞农村商业银行">东莞农村商业银行</el-option>
+            <el-option value="广东农村商业银行">广东农村商业银行</el-option>
+            <el-option value="Payoneer">Payoneer</el-option>
+            <el-option value="NETELLER">NETELLER</el-option>
+            <el-option value="Skrill">Skrill</el-option>
+            <el-option value="PayPal">PayPal</el-option>
+            <el-option value="其它银行">其它银行</el-option>
+            <el-option value="锦州银行">锦州银行</el-option>
+            <el-option value="齐鲁银行">齐鲁银行</el-option>
+            <el-option value="QQ钱包">QQ钱包</el-option>
+            <el-option value="贵阳银行">贵阳银行</el-option>
+            <el-option value="深圳农商银行">深圳农商银行</el-option>
+            <el-option value="贵州省农村信用社">贵州省农村信用社</el-option>
+            <el-option value="樱花银行">樱花银行</el-option>
+            <el-option value="京东钱包">京东钱包</el-option>
+            <el-option value="甘肃银行">甘肃银行</el-option>
+            <el-option value="兰州银行">兰州银行</el-option>
+            <el-option value="浙江农村信用社">浙江农村信用社</el-option>
+            <el-option value="霜夏银行">霜夏银行</el-option>
+            <el-option value="云南省农村信用社">云南省农村信用社</el-option>
+            <el-option value="云南省农村信用社">云南省农村信用社</el-option>
+            <el-option value="莱商银行">莱商银行</el-option>
+            <el-option value="南京銀行">南京銀行</el-option>
+            <el-option value="海南农村信用社">海南农村信用社</el-option>
+            <el-option value="三亚农村信用社">三亚农村信用社</el-option>
+            <el-option value="贵州农村信用社">贵州农村信用社</el-option>
+            <el-option value="福建农村信用社">福建农村信用社</el-option>
+            <el-option value="海南省农村信用社">海南省农村信用社</el-option>
+            <el-option value="永州市农村信用社">永州市农村信用社</el-option>
+            <el-option value="东莞农村商业银行">东莞农村商业银行</el-option>
+            <el-option value="江西信用社">江西信用社</el-option>
+            <el-option value="上海农村商业银行">上海农村商业银行</el-option>
+            <el-option value="北京农村商业银行">北京农村商业银行</el-option>
+            <el-option value="南洋商业银行">南洋商业银行</el-option>
+            <el-option value="河北银行">河北银行</el-option>
+            <el-option value="泰隆银行">泰隆银行</el-option>
+          </el-select>
         </li>
       </ul>
       <ul class="item">
@@ -122,18 +121,18 @@
       <ul class="item">
         <li class='title'><span class="colorf00">*</span>银行开户地区 :</li>
         <li>
-          <select v-model="cardInputs.prov" style="width:150px;margin-right:3px;" @change="(cardInputs.city=0,cardInputs.area=0)">
-            <option :value="idx" v-for="it,idx in city_area" :key="idx" :selected="idx==0" >{{it.name}}</option>
-          </select><select v-model="cardInputs.city" style="width:150px;margin-right:3px;" v-if="city_area[cardInputs.prov].city.length>0" @change="(cardInputs.area=0)">
-          <option :value="idx" v-for="it,idx in city_area[cardInputs.prov].city" :key="idx" :selected="idx==0">
+          <el-select size="small" class="sct_min" v-model="cardInputs.prov" style="width:150px;margin-right:3px;" @change="(cardInputs.city=0,cardInputs.area=0)">
+            <el-option :value="idx" :label="it.name" v-for="it,idx in city_area" :key="idx" :selected="idx==0" >{{it.name}}</el-option>
+          </el-select><el-select size="small" class="sct_min" v-model="cardInputs.city" style="width:150px;margin-right:3px;" v-if="city_area[cardInputs.prov].city.length>0" @change="(cardInputs.area=0)">
+          <el-option :value="idx" :label="it.name" v-for="it,idx in city_area[cardInputs.prov].city" :key="idx" :selected="idx==0">
             {{it.name}}
-          </option>
-        </select>
-          <select v-model="cardInputs.area" style="width:150px;margin-right:3px;" v-if="city_area[cardInputs.prov].city[cardInputs.city].area.length>0">
-            <option :value="idx" v-for="it,idx in city_area[cardInputs.prov].city[cardInputs.city].area" :key="idx"
+          </el-option>
+        </el-select>
+          <el-select size="small" class="sct_min" v-model="cardInputs.area" style="width:150px;margin-right:3px;" v-if="city_area[cardInputs.prov].city[cardInputs.city].area.length>0">
+            <el-option :value="idx" :label="it" v-for="it,idx in city_area[cardInputs.prov].city[cardInputs.city].area" :key="idx"
                     :selected="idx==0">{{it}}
-            </option>
-          </select>
+            </el-option>
+          </el-select>
         </li>
       </ul>
       <div class="item btns">
@@ -353,6 +352,9 @@
 <style scoped lang="less">
   .withdrawal{
     font-size:14px;
+    select, input[type=text], input[type=password], input[type=number] {
+      width:300px;
+    }
   }
   .tishi {
     text-align: left;
@@ -488,10 +490,10 @@
     outline: 0;
   }*/
 
-  .add-card .item input:focus {
+  /*.add-card .item input:focus {
     border-color: rgba(198, 33, 51, 0.8);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(198, 33, 51, 0.8);
-  }
+  }*/
 
   .add-card .item {
     overflow: hidden;
