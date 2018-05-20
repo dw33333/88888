@@ -76,9 +76,30 @@
                             <i class="redball kl" v-for="vv in v" v-if="vv" :class="'fruit_'+v"  >{{vv}}</i>
                             <p  v-else>暂无开奖结果！</p>
                         </div>
-                        <div class="result-no" v-if="currT==203 ||currT==209" v-for="(v,key) in result">
+                        <div class="result-no" v-if="currT==203 " v-for="(v,key) in result">
                             <i class="redball" v-for="vv in v" v-if="vv" >{{vv}}</i>
                             <p  v-else>暂无开奖结果！</p>
+                        </div>
+                        <div class="result-no" v-if="currT==209" v-for="(v,key) in result">
+                           <div v-if="v.length!=1">
+                              <span>
+                                  <i class="redball" v-for="(vv,index) in v" v-if="index==0" >{{vv}}</i>
+                                  <i class="block">+</i>
+                              </span>
+                               <span>
+                                  <i class="redball" v-for="(vv,index) in v" v-if="index==1" >{{vv}}</i>
+                                  <i class="block">+</i>
+                              </span>
+                               <span>
+                                  <i class="redball" v-for="(vv,index) in v" v-if="index==2" >{{vv}}</i>
+                                  <i class="block">=</i>
+                              </span>
+                               <i class="redball"  >{{v | filterSum}}</i>
+                           </div>
+                            <p  v-else>暂无开奖结果！</p>
+                            <!--<i class="redball" >{{1}}</i>-->
+                            <!--<i class="redball">{{2}}</i><-->
+                            <!--<i class="redball" >{{3}}</i>-->
                         </div>
                         <div class="result-no"   v-if="currT==205||currT==206||currT==207" v-for="(v,key) in result">
                             <i class="redball"v-for="vv in v" v-if="vv" >{{vv}}</i>
@@ -131,9 +152,12 @@
                 </ul>
                 <!--右侧额度转换/注单查询-->
                 <div class="note clearfix">
-                    <div class="result-more t" @click="linkMoney">
-                        <a href="javascript:;"> <i class="iconfont icon-weibiaoti8"></i>额度转换</a>
-                    </div>
+                    <!--<div class="result-more t" @click="linkMoney">-->
+                        <!--&lt;!&ndash;<a href="javascript:;">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<i class="iconfont icon-weibiaoti8"></i>&ndash;&gt;-->
+                            <!--&lt;!&ndash;额度转换&ndash;&gt;-->
+                        <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                    <!--</div>-->
                     <div class="result-more z" @click="showNote=!showNote">
                         <i class="iconfont icon-search"></i>
                         <a href="javascript:;"> 注单查询</a>
@@ -142,7 +166,7 @@
             </div>
         </div>
         <div class="lottery-box w clearfix">
-            <div class="bet-box">
+            <div class="bet-box" v-show="!showResult&&!showNote">
                 <!--主要内容-->
                 <div class="bet-box-content">
                     <!--// 投注内容-->
@@ -637,6 +661,7 @@
 </template>
 <script>
     import Init from '../config/lottery_init.js';
+    import R from '../config/lottery_rule';
     import P from '../config/lottery_public.js';
     import L from '../controller/lottery.js';
     import Or from '../controller/order.js';
@@ -1714,6 +1739,9 @@
                 return arr.join(',');
 
             },
+            filterSum:function (arr) {
+                return R.getSum(arr+"");
+            }
         },
         components:{
             vueLoading,
