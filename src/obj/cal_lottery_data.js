@@ -806,7 +806,6 @@ export const six_lottery = (nums) => {
   return res;
 }
 
-
 export const cqssc = (nums) => {
 
   if (nums.length != 5) return;
@@ -1232,7 +1231,13 @@ export const gdklsf = (nums) => {
     let num6 = parseInt(nums[5]);
     let num7 = parseInt(nums[6]);
     let num8 = parseInt(nums[7]);
-
+    let zhong=[1,2,3,4,5,6,7];
+    let fa=[8,9,10,11,12,13,14];
+    let bai=[15,16,17,18,19,20];
+    let dong=[1,5,9,13,17];
+    let nan=[2,6,10,14,18];
+    let xi=[3,7,11,15,19];
+    let bei=[4,8,12,16,20];
     //两面
     let res = {
       sum: 0,//总和
@@ -1240,20 +1245,36 @@ export const gdklsf = (nums) => {
       sum_overorunder: "",//总和大小
       num1_oddoreven: "",
       num1_overorunder: "",
+      num1_zhongfabai:"",
+      num1_position:"",
       num2_oddoreven: "",
       num2_overorunder: "",
+      num2_zhongfabai:"",
+      num2_position:"",
       num3_oddoreven: "",
       num3_overorunder: "",
+      num3_zhongfabai:"",
+      num3_position:"",
       num4_oddoreven: "",
       num4_overorunder: "",
+      num4_zhongfabai:"",
+      num4_position:"",
       num5_oddoreven: "",
       num5_overorunder: "",
+      num5_zhongfabai:"",
+      num5_position:"",
       num6_oddoreven: "",
       num6_overorunder: "",
+      num6_zhongfabai:"",
+      num6_position:"",
       num7_oddoreven: "",
       num7_overorunder: "",
+      num7_zhongfabai:"",
+      num7_position:"",
       num8_oddoreven: "",
       num8_overorunder: "",
+      num8_zhongfabai:"",
+      num8_position:"",
       num1: num1,
       num2: num2,
       num3: num3,
@@ -1266,6 +1287,12 @@ export const gdklsf = (nums) => {
     nums.forEach(v => {
       v = parseInt(v);
       res.sum += v;
+    });
+    //中发白 方位
+    nums.forEach((v,i)=>{
+      v=parseInt(v);
+      res["num"+(i+1)+"_zhongfabai"]=zhong.indexOf(v)!=-1?"中":fa.indexOf(v)!=-1?"发":bai.indexOf(v)!=-1?"白":"";
+      res["num"+(i+1)+"_position"]=dong.indexOf(v)!=-1?"东":nan.indexOf(v)!=-1?"南":xi.indexOf(v)!=-1?"西":bei.indexOf(v)!=-1?"北":"";
     });
     if (res.sum % 2 == 0) {//总和单双
       res.sum_oddoreven = "总双";
