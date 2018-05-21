@@ -26,6 +26,13 @@
               <div class="high_wrap">
                 <div class="gamelist_r">
                   <ul data-bind="foreach:credit">
+                    <li>
+                      <span>
+                        <router-link to="/lottery/six">
+                          香港六合彩
+                        </router-link>
+                      </span>
+                    </li>
                     <li v-for="item in this.headerArry" :key="item.id">
                       <span v-for="items in item.type" :key="items.id">
                         <router-link  class="game_1" :to="{path:'/lottery/'+items.name}">
@@ -62,6 +69,9 @@
             </div>
             <ul class='list-item' id="ul_list" :class="{show_item:isActive}"
                 :style="{height:isDisplay==4?((34*28)+'px'):'0px',visibility:isDisplay==4?'visible':'hidden',overflow:'hidden'}">
+                <span>
+                  <li><router-link to="/six">香港六合彩</router-link></li>
+                </span>
                 <span v-for="item in this.headerArry" :key="item.id">
                     <li v-for="items in item.type" :key="items.id">
                         <router-link :to="items.name">{{items.short_name}}</router-link>

@@ -6,6 +6,11 @@
 
         </div>
         <!-- 官方玩法 -->
+        <ul class="guantype">
+          <li class="border-top ov padbottom">
+            <router-link tag="div" class="item cursor" to="/lottery/six"><span>香港六合彩</span></router-link>
+          </li>
+        </ul>
         <ul class="guantype" v-for="item in this.headerArry" :key="item.id">
           <li class="border-top ov padbottom" v-for="items in item.type" :key="items.id">
             <router-link tag="div" class="item cursor" :to="{path:'/lottery/'+items.name}"><span>{{items.short_name}}</span></router-link>

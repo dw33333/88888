@@ -2,12 +2,14 @@
 <div style="background:#e8e8e8;min-height:100%;">
     <div class="xx_lottery">
     <home-header  class="xx_lottery_hheader" :inlottery="true">
+        
       <div slot="lottery_result" class="items result" style="cursor:pointer;" @click="($router.push({name:'lottery_result',params:{game_name:$route.params.id}}))">
         开奖结果
       </div>
-      <div slot="game_introduce" class="items result" style="cursor:pointer;" @click="($router.push({name:$route.params.id}))">
-        玩法介绍
-      </div>
+      <!-- ($router.push({name:$route.params.id})) -->
+            <div slot="game_introduce" class="items result" style="cursor:pointer;" @click="openRouter">
+                玩法介绍
+            </div>
     </home-header>
     <div class="lottery-r-box w ">
         <vue-result v-if="showResult" :child-id="fc_type" :child-data="this.menusData"></vue-result>
@@ -715,6 +717,11 @@
                 this.getOdds();
                 this.getUserInfo();
                 //获取玩法
+            },
+            openRouter () {
+                let id = this.$route.params.id;
+                let routeData = this.$router.resolve({name: id});
+                window.open(routeData.href,'_blank');
             },
             init(){
                 this.isCloseNoGame = true;

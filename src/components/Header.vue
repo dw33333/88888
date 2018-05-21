@@ -146,6 +146,14 @@
               </div>
               <div class="high_wrap">
                 <div class="gamelist_l">
+                  <ul>
+                    <li>
+                      <router-link to="/lottery/six">
+                        <img src="../../static/img/six.png" alt="">
+                        <span class="hot"><font>香港六合彩</font></span>
+                      </router-link>
+                    </li>
+                  </ul>
                   <ul v-for="item in headersArry" :key="item.id">
                     <li v-for="items in item.type" :key="items.id">
                       <!-- :href="'./lottery/index.html#/lottery/'+items.name" -->

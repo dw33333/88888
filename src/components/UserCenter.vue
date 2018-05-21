@@ -9,7 +9,7 @@
           <router-link to="/">返回首页</router-link>
         </li>
         <li class="server"><a href="javascript:void(0);" @click="serviceUrl">在线客服</a></li>
-        <li class="rules"><a href="javascript:void(0);" target="_blank" @click="($router.push({name:'Generalq'}))" >规则说明</a></li>
+        <li class="rules"><router-link to="/Generalq" target="_blank"  >规则说明</router-link></li>
         <!--<li class="help"><a href="#">游戏帮助</a></li>-->
         <li class="layout"><a href="#" @click="loginout();">登出账号</a></li>
       </ul>
@@ -26,6 +26,13 @@
               <div class="high_wrap">
                 <div class="gamelist_r">
                   <ul data-bind="foreach:credit">
+                    <li>
+                      <span>
+                        <router-link to="/lottery/six">
+                          香港六合彩
+                        </router-link>
+                      </span>
+                    </li>
                     <li v-for="item in headersArry" :key="item.id">
                       <span v-for="items in item.type" :key="items.id">
                         <router-link  class="game_1" :to="{path:'/lottery/'+items.name}">
