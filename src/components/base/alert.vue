@@ -1,7 +1,7 @@
 <template>
   <div class="mask">
     <div class="alert">
-      <div class="title clearfix"><span class="tishi">{{tit}}</span><span class="close" @click="($emit('close'))">×</span></div>
+      <div class="title clearfix"><span class="tishi">{{tit}}</span><span v-show="!hidden_close_button" class="close" @click="($emit('close'))">×</span></div>
       <div class="content clearfix">
         <div class="txt" v-html="msg" :style="msgstyle?msgstyle:{}"></div>
         <div v-show="confirm">
@@ -19,7 +19,7 @@
 <script>
   export default {
     name: "alert",
-    props: ["msg","tit","msgstyle","confirm"]
+    props: ["msg","tit","msgstyle","confirm","hidden_close_button"]
   }
 </script>
 

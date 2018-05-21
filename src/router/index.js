@@ -416,6 +416,11 @@ const p404 = (resolve) => {
     resolve(module)
   })
 }
+const six = (resolve) => {
+  import('@/components/Help/six').then((module) => {
+    resolve(module)
+  })
+}
 Vue.use(Router)
 Vue.use(VueAwesomeSwiper)
 
@@ -476,6 +481,11 @@ const route = new Router({
           path: '/Generalq',
           name:'Generalq',
           component:Generalq
+        },
+        {
+          path:'/six',
+          name:'six',
+          component:six
         },
         {
           path: '/Deposit',
