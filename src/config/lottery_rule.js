@@ -30,11 +30,11 @@ let R = {
         if(z==0) z  = 10;
         if(x==0) x  = 10;
         if(z>x){
-            return '庄';
+            return '左闲';
         }else if(z==x){
             return '和';
         }else{
-            return '闲';
+            return '右闲';
         }
     },
     //梭哈
