@@ -1,4 +1,4 @@
-export const gdklsf = (nums) => {//todo 复制所有的快乐十分
+export const gdklsf = (nums) => {
 
   if (nums.length != 8) return;
   let num1 = parseInt(nums[0]);

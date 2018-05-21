@@ -97,6 +97,7 @@ Vue.prototype.$http.interceptors.response.use(
           compt:alert,
           props:{
             tit:"提示",
+            hidden_close_button:true,
             msg:"您还未登录或登录过期!"
           },
           handles:{

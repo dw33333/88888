@@ -401,6 +401,61 @@
             <td :style="{color:getColors(it.n4vsn5)}">{{it.n4vsn5}}</td>
           </tr>
         </table>
+        <table class="tb cqssc" v-show="show_type.value=='qipai'" v-if="tempParam.typeName=='Cqssc'">
+          <tr>
+            <th rowspan="2">期数</th>
+            <th rowspan="2">开奖时间</th>
+            <th colspan="5">彩球号码</th>
+            <th rowspan="2">三公</th>
+            <th rowspan="2">牛牛</th>
+            <th rowspan="2">梭哈</th>
+            <th rowspan="2">百家乐</th>
+          </tr>
+          <tr>
+            <th>正码一</th>
+            <th>正码二</th>
+            <th>正码三</th>
+            <th>正码四</th>
+            <th>正码五</th>
+          </tr>
+          <tr v-for="it,idx in results">
+            <td>
+              {{it.issue}}
+            </td>
+            <td>
+              {{it.opentime}}
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num1}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num2}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num3}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num4}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num5}}
+              </div>
+            </td>
+            <td :style="{color:getColors(it.sangong)}">{{it.sangong}}</td>
+            <td :style="{color:getColors(it.niuniu)}">{{it.niuniu}}</td>
+            <td :style="{color:getColors(it.suoha)}">{{it.suoha}}</td>
+            <td :style="{color:getColors(it.baijiale)}">{{it.baijiale}}</td>
+          </tr>
+        </table>
         <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Tjssc'">
           <tr>
             <th rowspan="2">期数</th>
@@ -547,6 +602,61 @@
             <td :style="{color:getColors(it.n4vsn5)}">{{it.n4vsn5}}</td>
           </tr>
         </table>
+        <table class="tb cqssc" v-show="show_type.value=='qipai'" v-if="tempParam.typeName=='Tjssc'">
+          <tr>
+            <th rowspan="2">期数</th>
+            <th rowspan="2">开奖时间</th>
+            <th colspan="5">彩球号码</th>
+            <th rowspan="2">三公</th>
+            <th rowspan="2">牛牛</th>
+            <th rowspan="2">梭哈</th>
+            <th rowspan="2">百家乐</th>
+          </tr>
+          <tr>
+            <th>正码一</th>
+            <th>正码二</th>
+            <th>正码三</th>
+            <th>正码四</th>
+            <th>正码五</th>
+          </tr>
+          <tr v-for="it,idx in results">
+            <td>
+              {{it.issue}}
+            </td>
+            <td>
+              {{it.opentime}}
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num1}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num2}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num3}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num4}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num5}}
+              </div>
+            </td>
+            <td :style="{color:getColors(it.sangong)}">{{it.sangong}}</td>
+            <td :style="{color:getColors(it.niuniu)}">{{it.niuniu}}</td>
+            <td :style="{color:getColors(it.suoha)}">{{it.suoha}}</td>
+            <td :style="{color:getColors(it.baijiale)}">{{it.baijiale}}</td>
+          </tr>
+        </table>
         <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Xjssc'">
           <tr>
             <th rowspan="2">期数</th>
@@ -691,6 +801,61 @@
             <td :style="{color:getColors(it.n3vsn4)}">{{it.n3vsn4}}</td>
             <td :style="{color:getColors(it.n3vsn5)}">{{it.n3vsn5}}</td>
             <td :style="{color:getColors(it.n4vsn5)}">{{it.n4vsn5}}</td>
+          </tr>
+        </table>
+        <table class="tb cqssc" v-show="show_type.value=='qipai'" v-if="tempParam.typeName=='Xjssc'">
+          <tr>
+            <th rowspan="2">期数</th>
+            <th rowspan="2">开奖时间</th>
+            <th colspan="5">彩球号码</th>
+            <th rowspan="2">三公</th>
+            <th rowspan="2">牛牛</th>
+            <th rowspan="2">梭哈</th>
+            <th rowspan="2">百家乐</th>
+          </tr>
+          <tr>
+            <th>正码一</th>
+            <th>正码二</th>
+            <th>正码三</th>
+            <th>正码四</th>
+            <th>正码五</th>
+          </tr>
+          <tr v-for="it,idx in results">
+            <td>
+              {{it.issue}}
+            </td>
+            <td>
+              {{it.opentime}}
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num1}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num2}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num3}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num4}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num5}}
+              </div>
+            </td>
+            <td :style="{color:getColors(it.sangong)}">{{it.sangong}}</td>
+            <td :style="{color:getColors(it.niuniu)}">{{it.niuniu}}</td>
+            <td :style="{color:getColors(it.suoha)}">{{it.suoha}}</td>
+            <td :style="{color:getColors(it.baijiale)}">{{it.baijiale}}</td>
           </tr>
         </table>
         <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Gdklsf'">
@@ -1022,6 +1187,111 @@
             <td :style="{color:getColors(it.num8_overorunder)}">{{it.num8_overorunder}}</td>
           </tr>
         </table>
+        <table class="tb cqssc" v-show="show_type.value=='pos_and_zfb'" v-if="tempParam.typeName=='Cqklsf'">
+          <tr>
+            <th rowspan="2">期数</th>
+            <th rowspan="2">开奖时间</th>
+            <th colspan="8">球号</th>
+            <th colspan="2">第一球</th>
+            <th colspan="2">第二球</th>
+            <th colspan="2">第三球</th>
+            <th colspan="2">第四球</th>
+            <th colspan="2">第五球</th>
+            <th colspan="2">第六球</th>
+            <th colspan="2">第七球</th>
+            <th colspan="2">第八球</th>
+          </tr>
+          <tr>
+            <th>第一球</th>
+            <th>第二球</th>
+            <th>第三球</th>
+            <th>第四球</th>
+            <th>第五球</th>
+            <th>第六球</th>
+            <th>第七球</th>
+            <th>第八球</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+          </tr>
+          <tr v-for="it,idx in results">
+            <td>
+              {{it.issue}}
+            </td>
+            <td>
+              {{it.opentime}}
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num1}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num2}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num3}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num4}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num5}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num6}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num7}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num8}}
+              </div>
+            </td>
+            <td :style="{color:getColors(it.num1_zhongfabai)}">{{it.num1_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num1_position)}">{{it.num1_position}}</td>
+            <td :style="{color:getColors(it.num2_zhongfabai)}">{{it.num2_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num2_position)}">{{it.num2_position}}</td>
+            <td :style="{color:getColors(it.num3_zhongfabai)}">{{it.num3_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num3_position)}">{{it.num3_position}}</td>
+            <td :style="{color:getColors(it.num4_zhongfabai)}">{{it.num4_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num4_position)}">{{it.num4_position}}</td>
+            <td :style="{color:getColors(it.num5_zhongfabai)}">{{it.num5_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num5_position)}">{{it.num5_position}}</td>
+            <td :style="{color:getColors(it.num6_zhongfabai)}">{{it.num6_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num6_position)}">{{it.num6_position}}</td>
+            <td :style="{color:getColors(it.num7_zhongfabai)}">{{it.num7_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num7_position)}">{{it.num7_position}}</td>
+            <td :style="{color:getColors(it.num8_zhongfabai)}">{{it.num8_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num8_position)}">{{it.num8_position}}</td>
+          </tr>
+        </table>
         <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Tjklsf'">
           <tr>
             <th rowspan="2">期数</th>
@@ -1134,6 +1404,111 @@
             <td :style="{color:getColors(it.num8_overorunder)}">{{it.num8_overorunder}}</td>
           </tr>
         </table>
+        <table class="tb cqssc" v-show="show_type.value=='pos_and_zfb'" v-if="tempParam.typeName=='Tjklsf'">
+          <tr>
+            <th rowspan="2">期数</th>
+            <th rowspan="2">开奖时间</th>
+            <th colspan="8">球号</th>
+            <th colspan="2">第一球</th>
+            <th colspan="2">第二球</th>
+            <th colspan="2">第三球</th>
+            <th colspan="2">第四球</th>
+            <th colspan="2">第五球</th>
+            <th colspan="2">第六球</th>
+            <th colspan="2">第七球</th>
+            <th colspan="2">第八球</th>
+          </tr>
+          <tr>
+            <th>第一球</th>
+            <th>第二球</th>
+            <th>第三球</th>
+            <th>第四球</th>
+            <th>第五球</th>
+            <th>第六球</th>
+            <th>第七球</th>
+            <th>第八球</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+          </tr>
+          <tr v-for="it,idx in results">
+            <td>
+              {{it.issue}}
+            </td>
+            <td>
+              {{it.opentime}}
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num1}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num2}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num3}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num4}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num5}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num6}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num7}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num8}}
+              </div>
+            </td>
+            <td :style="{color:getColors(it.num1_zhongfabai)}">{{it.num1_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num1_position)}">{{it.num1_position}}</td>
+            <td :style="{color:getColors(it.num2_zhongfabai)}">{{it.num2_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num2_position)}">{{it.num2_position}}</td>
+            <td :style="{color:getColors(it.num3_zhongfabai)}">{{it.num3_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num3_position)}">{{it.num3_position}}</td>
+            <td :style="{color:getColors(it.num4_zhongfabai)}">{{it.num4_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num4_position)}">{{it.num4_position}}</td>
+            <td :style="{color:getColors(it.num5_zhongfabai)}">{{it.num5_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num5_position)}">{{it.num5_position}}</td>
+            <td :style="{color:getColors(it.num6_zhongfabai)}">{{it.num6_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num6_position)}">{{it.num6_position}}</td>
+            <td :style="{color:getColors(it.num7_zhongfabai)}">{{it.num7_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num7_position)}">{{it.num7_position}}</td>
+            <td :style="{color:getColors(it.num8_zhongfabai)}">{{it.num8_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num8_position)}">{{it.num8_position}}</td>
+          </tr>
+        </table>
         <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Hnklsf'">
           <tr>
             <th rowspan="2">期数</th>
@@ -1244,6 +1619,111 @@
             <td :style="{color:getColors(it.num7_overorunder)}">{{it.num7_overorunder}}</td>
             <td :style="{color:getColors(it.num8_oddoreven)}">{{it.num8_oddoreven}}</td>
             <td :style="{color:getColors(it.num8_overorunder)}">{{it.num8_overorunder}}</td>
+          </tr>
+        </table>
+        <table class="tb cqssc" v-show="show_type.value=='pos_and_zfb'" v-if="tempParam.typeName=='Hnklsf'">
+          <tr>
+            <th rowspan="2">期数</th>
+            <th rowspan="2">开奖时间</th>
+            <th colspan="8">球号</th>
+            <th colspan="2">第一球</th>
+            <th colspan="2">第二球</th>
+            <th colspan="2">第三球</th>
+            <th colspan="2">第四球</th>
+            <th colspan="2">第五球</th>
+            <th colspan="2">第六球</th>
+            <th colspan="2">第七球</th>
+            <th colspan="2">第八球</th>
+          </tr>
+          <tr>
+            <th>第一球</th>
+            <th>第二球</th>
+            <th>第三球</th>
+            <th>第四球</th>
+            <th>第五球</th>
+            <th>第六球</th>
+            <th>第七球</th>
+            <th>第八球</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+            <th>中发白</th>
+            <th>方位</th>
+          </tr>
+          <tr v-for="it,idx in results">
+            <td>
+              {{it.issue}}
+            </td>
+            <td>
+              {{it.opentime}}
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num1}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num2}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num3}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num4}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num5}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num6}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num7}}
+              </div>
+            </td>
+            <td>
+              <div class="ball" :style="{background:colors['red']}">
+                {{it.num8}}
+              </div>
+            </td>
+            <td :style="{color:getColors(it.num1_zhongfabai)}">{{it.num1_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num1_position)}">{{it.num1_position}}</td>
+            <td :style="{color:getColors(it.num2_zhongfabai)}">{{it.num2_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num2_position)}">{{it.num2_position}}</td>
+            <td :style="{color:getColors(it.num3_zhongfabai)}">{{it.num3_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num3_position)}">{{it.num3_position}}</td>
+            <td :style="{color:getColors(it.num4_zhongfabai)}">{{it.num4_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num4_position)}">{{it.num4_position}}</td>
+            <td :style="{color:getColors(it.num5_zhongfabai)}">{{it.num5_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num5_position)}">{{it.num5_position}}</td>
+            <td :style="{color:getColors(it.num6_zhongfabai)}">{{it.num6_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num6_position)}">{{it.num6_position}}</td>
+            <td :style="{color:getColors(it.num7_zhongfabai)}">{{it.num7_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num7_position)}">{{it.num7_position}}</td>
+            <td :style="{color:getColors(it.num8_zhongfabai)}">{{it.num8_zhongfabai}}</td>
+            <td :style="{color:getColors(it.num8_position)}">{{it.num8_position}}</td>
           </tr>
         </table>
         <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Gd11x5'">
@@ -2016,6 +2496,7 @@
             <th colspan="3">球号</th>
             <th rowspan="2">总和</th>
             <th rowspan="2">总和大小</th>
+            <th rowspan="2">长牌/短牌/豹子</th>
           </tr>
           <tr>
             <th>骰1</th>
@@ -2046,6 +2527,7 @@
             </td>
             <td>{{it.sum}}</td>
             <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+            <td :style="{color:getColors(it.longorshort)}">{{it.longorshort}}</td>
           </tr>
         </table>
         <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Hbk3'">
@@ -2055,6 +2537,7 @@
             <th colspan="3">球号</th>
             <th rowspan="2">总和</th>
             <th rowspan="2">总和大小</th>
+            <th rowspan="2">长牌/短牌/豹子</th>
           </tr>
           <tr>
             <th>骰1</th>
@@ -2085,6 +2568,7 @@
             </td>
             <td>{{it.sum}}</td>
             <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+            <td :style="{color:getColors(it.longorshort)}">{{it.longorshort}}</td>
           </tr>
         </table>
         <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Ahk3'">
@@ -2094,6 +2578,7 @@
             <th colspan="3">球号</th>
             <th rowspan="2">总和</th>
             <th rowspan="2">总和大小</th>
+            <th rowspan="2">长牌/短牌/豹子</th>
           </tr>
           <tr>
             <th>骰1</th>
@@ -2124,6 +2609,7 @@
             </td>
             <td>{{it.sum}}</td>
             <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+            <td :style="{color:getColors(it.longorshort)}">{{it.longorshort}}</td>
           </tr>
         </table>
         <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Nmgk3'">
@@ -2133,6 +2619,7 @@
             <th colspan="3">球号</th>
             <th rowspan="2">总和</th>
             <th rowspan="2">总和大小</th>
+            <th rowspan="2">长牌/短牌/豹子</th>
           </tr>
           <tr>
             <th>骰1</th>
@@ -2163,6 +2650,7 @@
             </td>
             <td>{{it.sum}}</td>
             <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+            <td :style="{color:getColors(it.longorshort)}">{{it.longorshort}}</td>
           </tr>
         </table>
         <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Fjk3'">
@@ -2172,6 +2660,7 @@
             <th colspan="3">球号</th>
             <th rowspan="2">总和</th>
             <th rowspan="2">总和大小</th>
+            <th rowspan="2">长牌/短牌/豹子</th>
           </tr>
           <tr>
             <th>骰1</th>
@@ -2202,6 +2691,7 @@
             </td>
             <td>{{it.sum}}</td>
             <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+            <td :style="{color:getColors(it.longorshort)}">{{it.longorshort}}</td>
           </tr>
         </table>
         <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Hubk3'">
@@ -2211,6 +2701,7 @@
             <th colspan="3">球号</th>
             <th rowspan="2">总和</th>
             <th rowspan="2">总和大小</th>
+            <th rowspan="2">长牌/短牌/豹子</th>
           </tr>
           <tr>
             <th>骰1</th>
@@ -2241,6 +2732,7 @@
             </td>
             <td>{{it.sum}}</td>
             <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+            <td :style="{color:getColors(it.longorshort)}">{{it.longorshort}}</td>
           </tr>
         </table>
         <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Bjk3'">
@@ -2250,6 +2742,7 @@
             <th colspan="3">球号</th>
             <th rowspan="2">总和</th>
             <th rowspan="2">总和大小</th>
+            <th rowspan="2">长牌/短牌/豹子</th>
           </tr>
           <tr>
             <th>骰1</th>
@@ -2280,6 +2773,7 @@
             </td>
             <td>{{it.sum}}</td>
             <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+            <td :style="{color:getColors(it.longorshort)}">{{it.longorshort}}</td>
           </tr>
         </table>
         <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Shk3'">
@@ -2289,6 +2783,7 @@
             <th colspan="3">球号</th>
             <th rowspan="2">总和</th>
             <th rowspan="2">总和大小</th>
+            <th rowspan="2">长牌/短牌/豹子</th>
           </tr>
           <tr>
             <th>骰1</th>
@@ -2319,6 +2814,7 @@
             </td>
             <td>{{it.sum}}</td>
             <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+            <td :style="{color:getColors(it.longorshort)}">{{it.longorshort}}</td>
           </tr>
         </table>
         <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Gsk3'">
@@ -2328,6 +2824,7 @@
             <th colspan="3">球号</th>
             <th rowspan="2">总和</th>
             <th rowspan="2">总和大小</th>
+            <th rowspan="2">长牌/短牌/豹子</th>
           </tr>
           <tr>
             <th>骰1</th>
@@ -2358,6 +2855,7 @@
             </td>
             <td>{{it.sum}}</td>
             <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+            <td :style="{color:getColors(it.longorshort)}">{{it.longorshort}}</td>
           </tr>
         </table>
         <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Gxk3'">
@@ -2367,6 +2865,7 @@
             <th colspan="3">球号</th>
             <th rowspan="2">总和</th>
             <th rowspan="2">总和大小</th>
+            <th rowspan="2">长牌/短牌/豹子</th>
           </tr>
           <tr>
             <th>骰1</th>
@@ -2397,6 +2896,7 @@
             </td>
             <td>{{it.sum}}</td>
             <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+            <td :style="{color:getColors(it.longorshort)}">{{it.longorshort}}</td>
           </tr>
         </table>
         <table class="tb cqssc" v-show="show_type.value=='liangmian'" v-if="tempParam.typeName=='Jsk3'">
@@ -2406,6 +2906,7 @@
             <th colspan="3">球号</th>
             <th rowspan="2">总和</th>
             <th rowspan="2">总和大小</th>
+            <th rowspan="2">长牌/短牌/豹子</th>
           </tr>
           <tr>
             <th>骰1</th>
@@ -2436,6 +2937,7 @@
             </td>
             <td>{{it.sum}}</td>
             <td :style="{color:getColors(it.sum_overorunder)}">{{it.sum_overorunder}}</td>
+            <td :style="{color:getColors(it.longorshort)}">{{it.longorshort}}</td>
           </tr>
         </table>
         <div v-show="results.length<1&&!is_loading_result" style="text-align: center;padding-top:20px;">暂无数据</div>
@@ -2687,9 +3189,9 @@
       getColors(txt) {
         if (!txt) return;
         txt = txt + '';
-        let reds = ["双", "大", "家禽", "下", "偶", "龙", "前","中","东"];
-        let blues = ["单", "小", "野兽", "上", "奇", "虎", "后","发","南"];
-        let orange = ["白","西"];
+        let reds = ["双", "大", "家禽", "下", "偶", "龙", "前","中","东","长","庄","顺子", "对子", "两对" ,"牛牛"];
+        let blues = ["单", "小", "野兽", "上", "奇", "虎", "后","发","南","短","闲","五离" ,"杂六" , "三张" ,"四张","牛"];
+        let orange = ["白","西","豹子"];
         let green=["北"];
         if (reds.indexOf(txt) != -1) {
           return this.colors2["red"];
@@ -2934,13 +3436,13 @@
           this.show_types = [{tit: "两面", value: "liangmian"}, {tit: "龙虎斗", value: "longhudou"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Cqssc") {
-          this.show_types = [{tit: "两面", value: "liangmian"}, {tit: "龙虎斗", value: "longhudou"}];
+          this.show_types = [{tit: "两面", value: "liangmian"}, {tit: "龙虎斗", value: "longhudou"}, {tit: "棋牌", value: "qipai"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Tjssc") {
-          this.show_types = [{tit: "两面", value: "liangmian"}, {tit: "龙虎斗", value: "longhudou"}];
+          this.show_types = [{tit: "两面", value: "liangmian"}, {tit: "龙虎斗", value: "longhudou"}, {tit: "棋牌", value: "qipai"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Xjssc") {
-          this.show_types = [{tit: "两面", value: "liangmian"}, {tit: "龙虎斗", value: "longhudou"}];
+          this.show_types = [{tit: "两面", value: "liangmian"}, {tit: "龙虎斗", value: "longhudou"}, {tit: "棋牌", value: "qipai"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Gdklsf") {
           this.show_types = [{tit: "两面", value: "liangmian"},{tit:"中发白&方位",value:"pos_and_zfb"}];
@@ -2982,37 +3484,37 @@
           this.show_types = [{tit: "两面", value: "liangmian"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Jlk3") {
-          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_types = [{tit: "两面&长牌/短牌/豹子", value: "liangmian"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Hbk3") {
-          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_types = [{tit: "两面&长牌/短牌/豹子", value: "liangmian"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Ahk3") {
-          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_types = [{tit: "两面&长牌/短牌/豹子", value: "liangmian"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Nmgk3") {
-          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_types = [{tit: "两面&长牌/短牌/豹子", value: "liangmian"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Fjk3") {
-          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_types = [{tit: "两面&长牌/短牌/豹子", value: "liangmian"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Hubk3") {
-          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_types = [{tit: "两面&长牌/短牌/豹子", value: "liangmian"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Bjk3") {
-          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_types = [{tit: "两面&长牌/短牌/豹子", value: "liangmian"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Shk3") {
-          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_types = [{tit: "两面&长牌/短牌/豹子", value: "liangmian"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Gsk3") {
-          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_types = [{tit: "两面&长牌/短牌/豹子", value: "liangmian"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Gxk3") {
-          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_types = [{tit: "两面&长牌/短牌/豹子", value: "liangmian"}];
           this.show_type = this.show_types[0];
         } else if (this.tempParam.typeName == "Jsk3") {
-          this.show_types = [{tit: "两面", value: "liangmian"}];
+          this.show_types = [{tit: "两面&长牌/短牌/豹子", value: "liangmian"}];
           this.show_type = this.show_types[0];
         }
       },
