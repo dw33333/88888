@@ -109,7 +109,7 @@ let R = {
                 z+=six;
             }else if(z==3&&four!=8){
                 z+=six;
-            }else if(z==4&&four!=0&&four!=1&&four!=8&&four!=8){
+            }else if(z==4&&four!=0&&four!=1&&four!=8&&four!=9){
                 z+=six;
             }else if(z==5&&four==4||four==5||four==6||four==7){
                 z+=six;
