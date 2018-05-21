@@ -122,7 +122,7 @@
                                 <th>期数</th>
                                 <th>开奖号码</th>
                                 <th>总</th>
-                                <!--<th>百家乐</th>-->
+                                <th>百家乐</th>
                                 <th>三公</th>
                                 <th>龙虎</th>
                                 <th>牛牛</th>
@@ -134,7 +134,7 @@
                                 <td>{{v.issue}}</td>
                                 <td>{{v.data}}</td>
                                 <td><span>{{v.data | filterSum}}</span></td>
-                                <!--<td><span :class="v.data.split(',') | filterSg | filterSgColor">{{v.data.split(',') | filterBjl}}</span></td>-->
+                                <td><span :class="v.data.split(',')| filterBjl | filterSgColor">{{v.data.split(',') | filterBjl}}</span></td>
                                 <td><span :class="v.data.split(',') | filterSg | filterSgColor">{{v.data.split(',') | filterSg}}</span></td>
                                 <td><span :class="v.data.split(',') | filterLh | filterSgColor">{{v.data.split(',') | filterLh}}</span></td>
                                 <td><span :class="v.data.split(',') | filterniu | filterSgColor">{{v.data.split(',') | filterniu}}</span></td>
@@ -721,15 +721,15 @@
                else if(arr[0]- 0<arr[4]- 0) return '虎';
                else return '和'
             },
-            filterSh:function (Array) {
-                return R.getSh(Array,1)
+            filterSh:function (arr) {
+                return R.getSh(arr)
             },
-            filterCd:function (Array) {
-                return R.getSh(Array,2)
+            filterCd:function (arr) {
+                return R.getKsCdp(arr)
             },
             filterSgColor:function (n) {
                 if(n=='庄' || n=='龙' || n=='杂六') return 'blue';
-                 else if(n=='闲' ||n=='虎'|| n.indexOf('无')<=-1 || n=='一对' ||n=='两对' || n=='三张' || n=='葫芦' || n=='豹子' || n=='四张') return 'red';
+                 else if(n=='闲' ||n=='虎'|| n.indexOf('无')<=-1&&n!='和' || n=='一对' ||n=='两对' || n=='三张' || n=='葫芦' || n=='豹子' || n=='四张') return 'red';
                  else return 'green'
             },
             filterCdColor:function (n) {

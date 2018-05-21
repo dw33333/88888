@@ -1548,7 +1548,7 @@
             },
             //机选/全选
             jixuan(n){
-                if(n==2) this.isQ =!this.isQ;
+                if(n==2){ this.isQ =!this.isQ; if(this.currN=='合肖') return window.top.wAlert(this.currN+'不可全选')}
                 let _this = this;
                 let chi = document.querySelectorAll('.input_money');
                 let arr = [];
@@ -1593,25 +1593,6 @@
                         return true;
                     }
                     this.orderObj.teamcount = len;
-//                }
-//                else if(this.currBall == 16){
-//                    n = P.num_zh(this.currTabNav.charAt(0));
-//                    if (this.currTabNav.charAt(0) == '特') n = 2;
-//                    if(l) {
-//                        if (len >= n + 3) {
-//                            this.$layer.alert('请选择' + n + '到' + (n + 3) + '个号码');
-//                            return false;
-//                        }else{
-//                            return true;
-//                        }
-//                    }else{
-//                        if (len < n || len > n + 3) {
-//                            this.$layer.alert('请选择' + n + '到' + (n + 3) + '个号码');
-//                            return false;
-//                        }else{
-//                            return true;
-//                        }
-//                    }
                 }else if( this.currN =='自选不中'||this.currN =='连肖连尾'||this.currN =='连码'){
                     if(this.currN=='连肖连尾') n = P.num_zh(P.getNumZh(this.currTabId));
                     else if(this.currN=='自选不中')  n = P.num_zh(P.getNumZh(this.currTabNav));
@@ -1631,7 +1612,16 @@
                             return true;
                         }
                     }
-                }else{
+                }else if(this.currN=='合肖'){
+                    let len = document.querySelectorAll(".table-bet-top .select>li.warning").length;
+                    if (this.isZhong == 1) {
+                        if (len < 2) {
+                            return window.top.wAlert("最少只能选择2个");
+                        } else {
+                            return true;
+                        }
+                    }
+                } else{
                     return true;
                 }
             }
