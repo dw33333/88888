@@ -134,7 +134,7 @@
                                 <td>{{v.issue}}</td>
                                 <td>{{v.data}}</td>
                                 <td><span>{{v.data | filterSum}}</span></td>
-                                <!--<td>11</td>-->
+                                <!--<td><span :class="v.data.split(',') | filterSg | filterSgColor">{{v.data.split(',') | filterBjl}}</span></td>-->
                                 <td><span :class="v.data.split(',') | filterSg | filterSgColor">{{v.data.split(',') | filterSg}}</span></td>
                                 <td><span :class="v.data.split(',') | filterLh | filterSgColor">{{v.data.split(',') | filterLh}}</span></td>
                                 <td><span :class="v.data.split(',') | filterniu | filterSgColor">{{v.data.split(',') | filterniu}}</span></td>
@@ -386,7 +386,8 @@
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
                                 <td>{{v.data}}</td>
-                                <td><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor(11)">({{v.data | filterSumDx(11)}})</i></td>
+                                <td v-if="isId==207"><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor(11)">({{v.data | filterSumDx(11)}})</i></td>
+                                <td v-if="isId!=207"><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor(14)">({{v.data | filterSumDx(14)}})</i></td>
                                 <td v-for="vv in v.data.split(',')"><span :class="vv | filterColor(4)">{{vv | filterDx(4)}}</span></td>
                             </tr>
                             </tbody>
@@ -599,6 +600,7 @@
 </template>
 <script>
     import Init from '../config/lottery_init.js';
+    import R from '../config/lottery_rule';
     export default{
         data(){
             return {
@@ -657,7 +659,7 @@
         },
         filters:{
             filterSum(arr){
-                return Init.getSum(arr);
+                return R.getSum(arr);
             },
             filterDx(n,s){
                 if(n>s) return '大'
@@ -686,16 +688,11 @@
 
             },
             filterSumDx(arr,num){
-                let sum = Init.getSum(arr);
-                if(sum >= num) return '大';
-                else if(sum==84&&num==85) return '和';
-                else if(sum==55&&num==56) return '和';
-                else if(sum==30&&num==31) return '和';
-                else return '小';
+               return R.SumDx(arr,num)
             },
             filterSumColor(arr,num){
-                let sum = Init.getSum(arr);
-                if(sum > num) return 'blue';
+                let sum = R.getSum(arr);
+                if(sum >= num) return 'blue';
                 else return 'green';
             },
             filterDs(n){
@@ -714,19 +711,10 @@
                 return Init.getA(n);
             },
             filterSg:function (arr) {
-               let z =  (arr[0]-0)+(arr[1]-0)+(arr[2]-0)+ "";
-               let x =  (arr[2]-0)+(arr[3]-0)+(arr[4]-0)+"";
-               z  = z.substr(z.length-1,1)-0;
-               x  = x.substr(x.length-1,1)-0;
-               if(z==0) z  = 10;
-               if(x==0) x  = 10;
-                if(z>x){
-                    return '庄';
-                }else if(z==x){
-                    return '和';
-                }else{
-                    return '闲';
-                }
+             return R.ResultSg(arr);
+            },
+            filterBjl:function (arr) {
+             return R.ResultBjl(arr);
             },
             filterLh:function (arr) {
                if(arr[0]- 0>arr[4]- 0) return '龙';
@@ -734,10 +722,10 @@
                else return '和'
             },
             filterSh:function (Array) {
-                return Init.getSh(Array,1)
+                return R.getSh(Array,1)
             },
             filterCd:function (Array) {
-                return Init.getSh(Array,2)
+                return R.getSh(Array,2)
             },
             filterSgColor:function (n) {
                 if(n=='庄' || n=='龙' || n=='杂六') return 'blue';
@@ -750,7 +738,7 @@
                 else  return 'green';
             },
             filterniu:function (arr) {
-              return Init.fiterniuniu(arr);
+              return R.fiterniuniu(arr);
             }
         }
     }

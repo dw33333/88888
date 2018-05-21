@@ -168,7 +168,7 @@
           if (res.status === 200) {
             if (res.data.code === 0) {
               this.alert("提示", "提交成功！", () => {
-                this.$router.push("bet_record");
+                this.$router.push("charge_record");
               });
             } else {
               this.alert("提示", res.data.msg);

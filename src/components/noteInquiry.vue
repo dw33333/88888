@@ -50,7 +50,7 @@
                         <tr v-for="v in dataList">
                             <td>{{v.order_id}}</td>
                             <td>{{v.bet_issue}}</td>
-                            <td>{{v.title}}</td>
+                            <td>{{changeId==2?'香港六合彩':v.title}}</td>
                             <td>{{v.type_name}} - {{v.name}}</td>
                             <td>{{v.bet_amt}}</td>
                             <td>{{v.back_amt}}</td>
@@ -89,6 +89,7 @@
                 dataNull:false,
                 page:null,
                 changeP:1,
+                changeId:'',
                 pickerOptions0:{
                     disabledDate(time) {
                         let curDate = (new Date()).getTime();
@@ -97,14 +98,12 @@
                         return time.getTime() > Date.now() || time.getTime() < threeMonths;;
                     }
                 },
+                form:{id:2,name:"six",title:"香港六合彩"}
             }
         },
         created(){
             this.date =this.getDay();
             this.changeD= this.date[6];
-//            this.menus = Init.getName;
-            this.id = this.childId;
-            this.getNoteSearch();
             this.getMenus();
         },
         props:{
@@ -137,7 +136,10 @@
             getMenus(){
                 this.$http.get('/api/lottery/basic/LotteryList/').then(response=>{
                   if(!response)return;
-                this.menus =response.data.data;
+                  this.menus =response.data.data;
+                  this.menus.push(this.form);
+                  this.id = this.childId;
+                    this.getNoteSearch();
                 },response=>{
 
                 })
@@ -162,8 +164,23 @@
                     obj.lot_id =this.id;
                     this.disabled =false;
                     this.changeId = this.id;
-                    if(this.id==2){
-                        this.$http.get('/api/lhc/LhcInfo/betRecord/?ps='+10+'&page='+ obj.p).then(response=>{
+//                    if(this.id==2){
+//                        this.$http.post('/api/lhc/LhcInfo/betRecord/?ps='+10+'&page='+ obj.p).then(response=>{
+//                            this.dataList =response.data['list'];
+//                            this.page = response.data.page*10;
+//                            if(this.dataList.length==0) this.dataNull=true;
+//                            else this.dataNull=false;
+//                            this.isLoding =false;
+////                        setTimeout(function () {
+//                            this.disabled =true
+////                        },4000)
+//                        }, response => {
+//                            this.isLoding =false;
+//                            this.dataNull=true
+//                        })
+//                    }else{
+                       let api = this.id==2?'/api/lhc/LhcInfo/betRecord/':'/api/users/betRecord/';
+                        this.$http.post(api,obj).then(response=>{
                             this.dataList =response.data['list'];
                             this.page = response.data.page*10;
                             if(this.dataList.length==0) this.dataNull=true;
@@ -176,21 +193,6 @@
                             this.isLoding =false;
                             this.dataNull=true
                         })
-                    }else{
-                        this.$http.post('/api/users/betRecord',obj).then(response=>{
-                            this.dataList =response.data['list'];
-                            this.page = response.data.page*10;
-                            if(this.dataList.length==0) this.dataNull=true;
-                            else this.dataNull=false;
-                            this.isLoding =false;
-//                        setTimeout(function () {
-                            this.disabled =true
-//                        },4000)
-                        }, response => {
-                            this.isLoding =false;
-                            this.dataNull=true
-                        })
-                    }
                 }
             },
         },
@@ -214,7 +216,7 @@
         padding-bottom: 50px;
         position: absolute;top: 50px;z-index: 99;
         width: 100%;
-        height: 100%;
+        height: 93%;
         font-size: 14px;
         background-color: #fff;
         background-clip: padding-box;

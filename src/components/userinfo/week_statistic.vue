@@ -8,9 +8,18 @@
         </div>
         <div class="search_box" style="float:left;">
           时间 ：
-          <select class="short" v-model="curDate" >
+          <!--<select class="short" v-model="curDate" >
             <option :value="it.value" v-for="it in dates">{{it.tit}}</option>
-          </select>
+          </select>-->
+          <el-select v-model="curDate" clearable size="small">
+            <el-option
+              v-for="it in dates"
+              :value="it.value"
+              :label="it.tit"
+              :key="it.value"
+            >
+            </el-option>
+          </el-select>
           <!--&emsp;&emsp;&emsp;订单号
           : <input class="short" type="text"/>-->
           <div  class="btn_search" @click="search">查询</div>
@@ -24,7 +33,7 @@
           <th>有效下注</th>
           <th>结果</th>
         </tr>
-        <tr v-for="it,idx in records" :key="idx">
+        <tr class="tbody_tr" v-for="it,idx in records" :key="idx" @click="rowClick(it)">
           <td>{{it.all_bet}}</td>
           <td>{{it.amt_bet}}</td>
           <td>{{it.date}}</td>
@@ -129,6 +138,9 @@
           return;
         }
         this.records = res.data.data;
+      },
+      rowClick(item){
+        this.$router.push({name:"bet_record",params:{date:item.y+'-'+item.date,type:this.curType.value}});
       }
     }
   }
@@ -139,10 +151,16 @@
     font-size:14px;
     .el-input {
       input {
-        padding-left: 30px;
+        /*padding-left: 30px;*/
         width: 220px;
-        height: 40px;
+        height: 35px;
         line-height: 40px;
+      }
+    }
+    .tb{
+      cursor:pointer;
+      .tbody_tr:hover{
+        background-color:#e8e5e5;
       }
     }
     text-align: left;

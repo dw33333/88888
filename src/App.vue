@@ -21,6 +21,7 @@
     created() {
       this.getAgentId();
       this.loadSiteInfo();
+      this.getBalance();
       this.initGetBalanceTimer();
     },
     methods: {
@@ -46,21 +47,24 @@
         document.title = res.data.SiteName || "";
       },
       initGetBalanceTimer() {
-          setInterval(async() => {
-            if (!this.easysecret) {
-              return;//未登录
-            }
-            let res = await this.$http.get('/api/users/balance/');
-            if (!res) return;
-            if (res.data.code != 0) {
-              window.wAlert(res.data.msg);
-              return;
-            }
-            this.userinfo.money = res.data.data.money;
-            this.USERINFO(this.userinfo);//userinfo 是引用类型  调用 mutation 是为了方便调试工具跟踪
+          setInterval(() => {
+            this.getBalance();
           }, 20000);
         //})(this);
       },
+      async getBalance(){
+        if (!this.easysecret) {
+          return;//未登录
+        }
+        let res = await this.$http.get('/api/users/balance/');
+        if (!res) return;
+        if (res.data.code != 0) {
+          window.wAlert(res.data.msg);
+          return;
+        }
+        this.userinfo.money = res.data.data.money;
+        this.USERINFO(this.userinfo);//userinfo 是引用类型  调用 mutation 是为了方便调试工具跟踪
+      }
     }
   }
 </script>
@@ -461,6 +465,7 @@
       text-align: center;
       tr {
         border: 1px solid #ccc;
+        background-color: #fff;
       }
       th {
         background-color: #C7C7C7;
@@ -468,7 +473,6 @@
         font-weight: 200;
       }
       td {
-        background-color: #fff;
         padding: 8px 0;
       }
     }
