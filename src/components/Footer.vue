@@ -17,12 +17,12 @@
           <h1><em>使用帮助</em><span>Guide</span></h1>
           <div class="new-con">
             <ul>
-              <router-link tag="li" to="/Generalq">关于我们</router-link>
+              <li><router-link  to="/Generalq" style="color:#fff;" target="_blank">关于我们</router-link></li>
               <li><a :href="this.sitesInfos.SiteService" target="_blank" style="color:#fff;">联络我们</a></li>
-              <router-link tag="li" to="/Generalq">合作伙伴</router-link>
-              <router-link tag="li" to="/Deposit">存款帮助</router-link>
-              <router-link tag="li" to="/Teller">取款帮助</router-link>
-              <router-link tag="li" to="/Generalq">常见问题</router-link>
+              <li><router-link  to="/Generalq" style="color:#fff;" target="_blank">合作伙伴</router-link></li>
+              <li><router-link to="/Deposit" style="color:#fff;" target="_blank">存款帮助</router-link></li>
+              <li><router-link  to="/Teller" style="color:#fff;" target="_blank">取款帮助</router-link></li>
+              <li><router-link to="/Generalq" style="color:#fff;" target="_blank"> 常见问题</router-link></li>
             </ul>
           </div>
         </div>

@@ -1,6 +1,6 @@
 <template>
   <div class='container hp_help'>
-    <div class="header">
+    <!-- <div class="header">
       <img class="logo" src="../assets/logo1.png" height="82" width="136" alt="">
       <ul class="nav">
         <li class='game' @mouseover="showAllgame" @mouseout="hideAllgame"><a href="javascript:;">游戏大厅</a>
@@ -10,10 +10,8 @@
         </li>
         <li class="server"><a :href="this.sitesInfos.SiteService" target="_blank">在线客服</a></li>
         <li class="rules"><a href="#" @click="isShowtop(5)">规则说明</a></li>
-        <!--<li class="help"><a href="#">游戏帮助</a></li>-->
         <li class="layout"><a href="#" @click="loginout();">登出账号</a></li>
       </ul>
-      <!-- 下拉游戏选择 -->
       <transition name="fade">
         <div class="menu-child" @mouseover="showAllgame" @mouseout="hideAllgame" v-if="isShowMenu" id="lot_sec_menu">
           <div class="gamelist clear">
@@ -48,8 +46,7 @@
           <div class="triangles_back"></div>
         </div>
       </transition>
-      <!-- 下拉游戏选择 -->
-    </div>
+    </div> -->
     <div class="main-body">
       <div class='select'>
         <!-- 折叠菜单 -->
@@ -217,6 +214,7 @@
 </script>
 <style lang="less">
 .hp_help{
+  height: 100%;
   .subtitle2{
     background-color: rgb(175, 175, 228) !important;
   }
