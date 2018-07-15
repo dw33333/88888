@@ -161,23 +161,70 @@ let Iint={
             },
         }
     },
-    getTitle(obj,id){
-        for(let k in obj){
-            let v = obj[k].type;
-            for(let i=0,len=v.length;i<len;i++){
-                if(v[i].name == id){
-                    return obj[k].id;
-                }
-            }
+    getTitle(id){
+        let type;
+        switch(id-0){
+            case 11901:
+            case 11801:
+            case 11701:
+            case 11601:
+            case 11501:
+            case 11401:
+            case 11301:
+            case 11201:
+            case 11101:
+            case 10702:
+            case 10701:
+                type = 207;
+                break;
+            case 11001:
+            case 10103:
+            case 10102:
+            case 10101:
+                type  =  201;    
+                break; 
+            case 10901:
+                type  =  209;    
+                break; 
+            case 10601:
+            case 10502:
+            case 10501:
+                type  =  206;    
+                break; 
+            case 10401:
+                type  =  204;    
+                break; 
+            case 10301:
+                type  =  203;    
+                break; 
+            case 10201:
+                type  =  202;    
+                break; 
+            case 10104:
+                type  =  210;    
+                break; 
+            case 10003:
+            case 10002:
+            case 10001:
+                type  =  200;    
+                break; 
+
         }
+        return type; 
+         
     },
     getId(obj,id){
-        for(let k in obj){
-            let v = obj[k].type;
-            for(let i=0,len=v.length;i<len;i++){
-                if(v[i].name == id){
-                    return v[i].lot_id;
-                }
+        // for(let k in obj){
+        //     let v = obj[k].type;
+        //     for(let i=0,len=v.length;i<len;i++){
+        //         if(v[i].name == id){
+        //             return v[i].lot_id;
+        //         }
+        //     }
+        // }
+        for(let i=0,len=obj.length;i<len;i++){
+            if(obj[i].name == id){
+                return obj[i].id;
             }
         }
     },

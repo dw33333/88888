@@ -139,9 +139,10 @@ const state = {
   codeToken,// token
   userRealName,
   headerArry,
-
-
   bbinmoney: bbinmoney, // BBIN余额
   mgmoney: mgmoney, // MG余额
+  showDlleft:true,
+  showDlright:true,
+  showBottom:true
 }
 export default state

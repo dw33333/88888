@@ -1,6 +1,7 @@
 <template>
     <div>
     <headervue></headervue>
+    <ssheader></ssheader>
     <div class="site_main_game2">
         <div class="casino_box">
             <div class="games_search_menu">
@@ -47,11 +48,15 @@
 <script>
 import headervue from '@/components/Header'
 import footervue from '@/components/Footer'
+import ssheader from '@/components/ssheader'
+import {mapState, mapMutations} from 'vuex'
+import alert from "@/components/base/alert"
 export default {
     name:'Games',
     components: {
         headervue,
-        footervue
+        footervue,
+        ssheader
     },
     data () {
         return {
@@ -71,14 +76,47 @@ export default {
         this.gamelistmore();
         this.gameCategory();
     },
+    computed: {
+      ...mapState(['easysecret'])
+    },
     methods: {
+        alert(tit, msg, fn, msgStyle) {
+        let _this = this;
+        this.ROOTBOX({
+          open: true,
+          compt: alert,
+          props: {
+            tit: tit,
+            msg: msg,
+            msgstyle: msgStyle
+          },
+          handles: {
+            confirm() {
+              _this.ROOTBOX({
+                open: false
+              })
+            },
+            close() {
+              if (fn) fn();
+              _this.ROOTBOX({
+                open: false
+              });
+            }
+          }
+        });
+      },
         //跳转页面
         goGamePgae (id) {
+            if(!this.easysecret){
+                this.alert('提示','请先登录！');
+                return;
+            }
             this.$http.post('/api/electronic/electronic/getGameUrl',{game_id:id}).then((res) => {
                 let url = res.data.data.url;
-                window.open(url,'_blank', "scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes")
+                window.open(url,'_blank', 'scrollbars=yes,resizable=1,modal=false,alwaysRaised=yes');
             });
         },
+        ...mapMutations(["EASYSECRET", "ROOTBOX"]),
         //搜索
         serchContent () {
             this.gamelistmore();
@@ -253,12 +291,12 @@ export default {
     padding: 3px;
     position: relative;
     width: 950px;
-    z-index: 200;
+    z-index: 20;
     margin: 0px auto;
     margin-bottom: 10px;
 }
 .site_main_game2{
-    background-image: url('../../static/img/casino_bg.jpg');
+    background: url('../../static/img/nybg1.jpg');
     background-repeat: repeat-x;
     padding-top: 40px;
     background-size: 100%;

@@ -1,6 +1,7 @@
 <template>
   <div>
     <headervue></headervue>
+    <!-- <Phbox></Phbox> -->
     <banner></banner>
     <moregame></moregame>
     <footervue></footervue>
@@ -11,6 +12,7 @@ import headervue from '@/components/Header'
 import banner from '@/components/Banner'
 import moregame from '@/components/MoreGame'
 import footervue from '@/components/Footer'
+// import Phbox from '@/components/Phbox'
 import {mapState,mapMutations} from "vuex"
 import alert from "@/components/base/alert"
 export default {
@@ -20,6 +22,7 @@ export default {
     banner,
     moregame,
     footervue
+    // Phbox
   },
   created(){
     //this.loadSiteInfo();

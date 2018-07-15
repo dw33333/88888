@@ -4,14 +4,14 @@ a{text-decoration: none;}
 .clr{clear: both;}
 
 
-.video_wrap{width: 932px;margin: 0 auto;height:800px;}
+.video_wrap{width: 1070px;margin: 0 auto;height:692px;}
 
 .video_list ul{height: 50px;margin: 5px 0;padding: 0;}
 .video_list li{float: left;width: 116px;height: 50px;line-height: 50px;background: rgba(0,0,0,0.5);}
 .video_list li.dark{background: rgba(0,0,0,0.8);}
 .video_list li a{width: 100%;height: 50px;display: inline-block;text-align: center;color: #F1DD7D;}
 .video_list li a:hover{background:#d79a08 url(/static/public/live1/images/video_a_h.gif) center;}
-.video_wrap_box1 .view{float: left;margin: 0 3px 3px 0;}
+.video_wrap_box1 .view{float: left;margin:0 35px 19px 0;;}
 
 .ag_slot .mask {
    background: url(/static/public/live1/images/ag_h.jpg);

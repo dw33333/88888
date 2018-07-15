@@ -63,7 +63,6 @@ export default {
     // 获取站内信
     getMsg (item, index) {
       this.$http.get('/json/center/?r=Msg').then((res) => {
-        console.log(res.data.data)
         this.msgArr = res.data.data
         this.msgArr.forEach((item, index) => {
           if (item.islook === '0') {

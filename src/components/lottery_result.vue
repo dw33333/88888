@@ -3175,7 +3175,7 @@
         this.EASYSECRET("");
         localStorage.clear();
         this.$http.defaults.headers.EasySecret = undefined;
-        this.$router.push("login");
+        this.$router.push("/");
       },
       search() {
         this.tempParam = {

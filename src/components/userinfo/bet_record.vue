@@ -106,7 +106,6 @@
     created(){
       this.bet_type=this.bet_types[0];
       this.curDate=this.$route.params.date?this.$route.params.date:"";
-      console.log(this.$route.params.type);
       if(this.$route.params.type){
         this.bet_type=this.bet_types[this.bet_types.findIndex(v=>{
           return

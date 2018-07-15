@@ -136,7 +136,6 @@
             this.is_changing = true;
             this.$http.post('/api/users/changepwd', data).then((res) => {
               this.is_changing = false;
-              console.log(res)
               this.alert('提示', res.data.msg)
               setTimeout(() => {
                 // instance.close()

@@ -107,7 +107,8 @@
         curType: null,
         is_loading_paytype:true,
         is_loading_banks:true,
-        is_submiting:false
+        is_submiting:false,
+        openurl:''
       }
     },
 
@@ -190,6 +191,16 @@
             this.alert("提示", `支付金额不能高于${this.curType.pay_height}元`);
             return;
           }
+          this.is_submiting=true;
+          // let res = await this.$http.get("http://cctv.zuidir.top/pay/submit/16"+'?PayAmount ='+this.curType.money+'&pay_bank='+this.curType.selectedBankValue+'&token='+this.easysecret, {
+            // id: this.curType.selectedBankId,
+            // order_value: this.curType.money,
+            // about: this.curType.type + this.curType.about,
+            // source: 1
+          // });
+          window.open(this.openurl+'?PayAmount=' +this.curType.money+'&pay_bank=' +this.curType.selectedBankValue+'&token=' +this.easysecret)
+          this.is_submiting=false;
+          if (!res) return
         }
       }
     },
@@ -200,6 +211,9 @@
     async mounted() {
       this.is_loading_paytype=true;
       let res = await this.$http.get('/api/pay/mobilelist/');
+      let url = res.data.data[res.data.data.length-1];
+      this.openurl = url.form;
+      console.log(this.openurl)
       this.is_loading_paytype=false;
       if (!res) {
         this.is_loading_banks=false;
@@ -249,7 +263,6 @@
       });
       this.typeList = list;
       this.curType = this.typeList[0];
-      console.log(this.curType.money);
     },
     computed: {
       currentTime() {
@@ -260,7 +273,7 @@
         let m = new Date().getMinutes() < 10 ? 0 + new Date().getMinutes() : new Date().getMinutes()
         return `${Y}年${M}月${D}日${H}时${m}分`
       },
-      ...mapState(['usermoney', 'agmoney', 'dsmoney'])
+      ...mapState(['usermoney', 'agmoney', 'dsmoney','easysecret'])
     }
   }
 

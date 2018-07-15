@@ -29,38 +29,6 @@ const register = (resolve) => {
     resolve(module)
   })
 }
-
-// 首页登录
-const Login = (resolve) => {
-  import('@/components/Login').then((module) => {
-    resolve(module)
-  })
-}
-
-// 首页footer部分
-// const Footer = (resolve) => {
-//   import('@/components/Footer').then((module) => {
-//     resolve(module)
-//   })
-// }
-
-// 彩票模块
-
-
-// 用户中心>投注记录>购彩查询
-// const Buyrecord = (resolve) => {
-//   import('@/components/userinfo/buyrecord').then((module) => {
-//     resolve(module)
-//   })
-// }
-
-// 用户中心>投注记录>追号查询
-// const track = (resolve) => {
-//   import('@/components/userinfo/track').then((module) => {
-//     resolve(module)
-//   })
-// }
-
 // 用户中心>报表管理>充值记录
 const sportsgame = (resolve) => {
   import('@/components/userinfo/sportsgame').then((module) => {
@@ -145,58 +113,6 @@ const msg_list = (resolve) => {
     resolve(module)
   })
 }
-//帮助
-
-
-// 用户中心>账户管理>银行卡管理
-// const CardsList = (resolve) => {
-//   import('@/components/userinfo/CardsList').then((module) => {
-//     resolve(module)
-//   })
-// }
-
-// 用户中心>账户管理>用户资料
-// const UserData = (resolve) => {
-//   import('@/components/userinfo/UserData').then((module) => {
-//     resolve(module)
-//   })
-// }
-
-// 用户中心>账户管理>彩种信息
-// const GameInfoType = (resolve) => {
-//   import('@/components/userinfo/GameInfoType').then((module) => {
-//     resolve(module)
-//   })
-// }
-
-// 用户中心>账户管理>彩种限额
-// const GameLimits = (resolve) => {
-//   import('@/components/userinfo/GameLimits').then((module) => {
-//     resolve(module)
-//   })
-// }
-
-// 用户中心>代理管理>团队总览
-// const teamRecordView = (resolve) => {
-//   import('@/components/userinfo/teamRecordView').then((module) => {
-//     resolve(module)
-//   })
-// }
-
-// 用户中心>代理管理>用户列表
-// const UserList = (resolve) => {
-//   import('@/components/userinfo/UserList').then((module) => {
-//     resolve(module)
-//   })
-// }
-
-// 用户中心>代理管理>注册管理
-// const RegisterManage = (resolve) => {
-//   import('@/components/userinfo/RegisterManage').then((module) => {
-//     resolve(module)
-//   })
-// }
-
 // 用户中心>额度管理>转入
 const moneymanagemen = (resolve) => {
   import('@/components/userinfo/moneymanagemen').then((module) => {
@@ -220,12 +136,6 @@ const Notice = (resolve) => {
 //优惠中心
 const Activity = (resolve) => {
   import('@/components/Activity').then((module) => {
-    resolve(module)
-  })
-}
-//手机下注
-const mobile = (resolve) => {
-  import('@/components/mobile').then((module) => {
     resolve(module)
   })
 }
@@ -421,6 +331,29 @@ const six = (resolve) => {
     resolve(module)
   })
 }
+const ssheader = (resolve) => {
+  import('@/components/ssheader').then((module) => {
+    resolve(module)
+  })
+}
+//代理
+const daili = (resolve) => {
+  import('@/components/daili').then((module) => {
+    resolve(module)
+  })
+}
+//防劫持
+const fjc = (resolve) => {
+  import('@/components/fjc').then((module) => {
+    resolve(module)
+  })
+}
+//额度转换
+const transRecord = (resolve) => {
+  import('@/components/userinfo/transRecord').then((module) => {
+    resolve(module)
+  })
+}
 Vue.use(Router)
 Vue.use(VueAwesomeSwiper)
 
@@ -442,6 +375,21 @@ const route = new Router({
       component: Lottery
     },
     {
+      path: '/ssheader',
+      name: 'ssheader',
+      component:ssheader
+    },
+    {
+      path: '/fjc',
+      name: 'fjc',
+      component:fjc
+    },
+    {
+      path: '/daili',
+      name: 'daili',
+      component: daili
+    },
+    {
       path: '/register',
       name: 'register',
       component: register
@@ -452,19 +400,9 @@ const route = new Router({
       component: Games
     },
     {
-      path: '/Login',
-      name: 'Login',
-      component: Login
-    },
-    {
       path: '/live',
       name: 'live1',
       component: live
-    },
-    {
-      path: '/mobile',
-      name: 'mobile',
-      component: mobile
     },
     {
       path: '/Activity',
@@ -689,18 +627,11 @@ const route = new Router({
           name: 'moneymanagemen',
           component: moneymanagemen
         },
-        // {
-        //   path:'/UserData',
-        //   component:UserData
-        // },
-        // {
-        //   path:'/GameInfoType',
-        //   component:GameInfoType
-        // },
-        //  {
-        //   path:'/GameLimits',
-        //   component:GameLimits
-        // },
+        {
+          path:'/transRecord',
+          name:'transRecord',
+          component:transRecord
+        },
         {
           path: '/Notice',
           name: 'Notice',
@@ -746,13 +677,25 @@ const route = new Router({
   ]
 });
 route.beforeEach((to, from, next) => {
-  if (!store.state.easysecret && (["register", "Login", "Header","mobile","Activity"].indexOf(to.name) === -1)) {//除登录和注册页面其他页面未登录跳到登录页
-    route.push({name:"Login",params:{hback:to.name,params:to.params}});
-  } else if (store.state.easysecret && (["register", "Login"].indexOf(to.name) !== -1)) {//登录的状态不能访问登录页和注册页
-    route.push({name:from.name});
-  } else {
-    next();
-  }
+  let virtualUserDisRoterNames=["recharge","withdrawal","charge_record","PasswordManagement"];
+    if(store.state.userinfo&&store.state.userinfo.virtual===1&&virtualUserDisRoterNames.indexOf(to.name)>-1){
+      window.wAlert("试玩用户无法进行此操作!");
+    }else{
+      next();
+    }
+    
   window.scrollTo(0, 0)
+})
+route.afterEach((to) => {
+  let disDL = ['UserCenter','Help','lottery_result','lottery'];
+    if(disDL.indexOf(to.matched&&to.matched.length>0?to.matched[0].name:to.name)===-1){
+      store.commit("SHOWDLLEFT",true);
+      store.commit("SHOWDLRIGHT",true);
+      store.commit("SHOWBOTTOM",true);
+    }else{
+      store.commit("SHOWDLLEFT",false);
+      store.commit("SHOWDLRIGHT",false);
+      store.commit("SHOWBOTTOM",false);
+  }
 })
 export default route;

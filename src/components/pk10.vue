@@ -204,7 +204,6 @@
                   if(!response)return;
                     if(this.currType == "klc") this.mainData = L.doKlcOdds(response.data.oddslist.ball,this)[this.currBall];
                     else this.mainData = L.doOdds(response.data.oddslist.ball,this)[this.currBall];
-                    console.log(this.mainData);
                 }, response => {
                     // error callback
                 })
@@ -224,7 +223,6 @@
             back(){ this.$router.go(-1);},
             selectBall(id){
                 this.orderObj[id] = 10;
-                console.log(this.orderObj);
             },
             sendOrder(){
                 this.$http.post(this.config.host+'/member/lottery/order_lottery.php?gType='+this.fc_id, this.orderObj)
@@ -253,7 +251,6 @@
         watch:{
             "currBall":function(n,o){
                 this.mainData = this.allData[n];
-                console.log(this.mainData);
             },
             "fc_id":function(n,o){
                 this.resetD(n);

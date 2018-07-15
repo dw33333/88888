@@ -13,6 +13,7 @@
                     <span :class="currP==3?'active':''" @click="currP=3">单双</span>
                     <span :class="currP==4?'active':''" @click="currP=4" v-if="isId ==200">质合</span>
                     <span :class="currP==5?'active':''" @click="currP=5" v-if="isId ==200">棋牌</span>
+                    <span :class="currP==6?'active':''" @click="currP=6" v-if="isId ==202||isId==210">龙虎/三连</span>
                 </div>
                 <div class="tab-container">
                     <div class="tab-content num-box" v-if="currP==1">
@@ -62,7 +63,8 @@
                                 <td v-if="isId==200"><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor(23)">({{v.data | filterSumDx(23)}})</i></td>
                                 <td v-if="isId==206"><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor(14)">({{v.data | filterSumDx(14)}})</i></td>
                                 <td v-if="isId==210"><span>{{v.data | filterSum}}</span><i :class="v.data | filterSumColor(56)">({{v.data | filterSumDx(56)}})</i></td>
-                                <td v-for="vv in v.data.split(',')"><span :class="vv | filterColor(4)">{{vv | filterDx(4)}}</span></td>
+                                <td v-for="vv in v.data.split(',')" v-if="isId!=202"><span :class="vv | filterColor(4)">{{vv | filterDx(4)}}</span></td>
+                                <td v-for="vv in v.data.split(',')" v-if="isId==202"><span :class="vv | filterColor(5)">{{vv | filterDx(5)}}</span></td>
                             </tr>
                             </tbody>
                         </table>
@@ -86,7 +88,8 @@
                                 <td>{{v.issue}}</td>
                                 <td>{{v.data}}</td>
                                 <td><span>{{v.data | filterSum}}</span></td>
-                                <td v-for="vv in v.data.split(',')"><span :class="vv | filterDsbg">{{vv | filterDs}}</span></td>
+                                <td v-for="vv in v.data.split(',')" v-if="isId!=202"><span :class="vv | filterDs | filterDsbg" >{{vv | filterDs}}</span></td>
+                                <td v-for="vv in v.data.split(',')" v-if="isId==202"><span :class="vv | filterDs(11) | filterDsbg" >{{vv | filterDs(11)}}</span></td>
                             </tr>
                             </tbody>
                         </table>
@@ -110,7 +113,7 @@
                                 <td>{{v.issue}}</td>
                                 <td>{{v.data}}</td>
                                 <td><span>{{v.data | filterSum}}</span></td>
-                                <td v-for="vv in v.data.split(',')"><span :class="vv | filterDsbg">{{vv | filterZh}}</span></td>
+                                <td v-for="vv in v.data.split(',')"><span :class="vv |  filterZh | filterDsbg">{{vv | filterZh}}</span></td>
                             </tr>
                             </tbody>
                         </table>
@@ -124,7 +127,7 @@
                                 <th>总</th>
                                 <th>百家乐</th>
                                 <th>三公</th>
-                                <th>龙虎</th>
+                                <th>龙虎和</th>
                                 <th>牛牛</th>
                                 <th>梭哈</th>
                             </tr>
@@ -139,6 +142,32 @@
                                 <td><span :class="v.data.split(',') | filterLh | filterSgColor">{{v.data.split(',') | filterLh}}</span></td>
                                 <td><span :class="v.data.split(',') | filterniu | filterSgColor">{{v.data.split(',') | filterniu}}</span></td>
                                 <td ><span :class="v.data.split(',') | filterSh | filterSgColor">{{v.data.split(',') | filterSh}}</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-content ds-box" v-if="currP==6">
+                        <table cellpadding="0" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>期数</th>
+                                <th>开奖号码</th>
+                                <th>总</th>
+                                <th>龙虎和</th>
+                                <th>前三</th>
+                                <th>中三</th>
+                                <th>后三</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="v in ballData">
+                                <td>{{v.issue}}</td>
+                                <td>{{v.data}}</td>
+                                <td><span>{{v.data | filterSum}}</span></td>
+                                <td><span :class="v.data.split(',') | filterLh | filterSgColor">{{v.data.split(',') | filterLh}}</span></td>
+                                <td><span :class="v.data.split(',') | filterBs(1) | filterSgColor">{{v.data.split(',') | filterBs(1)}}</span></td>
+                                <td><span :class="v.data.split(',') | filterBs(2) | filterSgColor">{{v.data.split(',')| filterBs(2)}}</span></td>
+                                <td ><span :class="v.data.split(',') | filterBs(3) | filterSgColor">{{v.data.split(',')| filterBs(3)}}</span></td>
                             </tr>
                             </tbody>
                         </table>
@@ -232,7 +261,7 @@
                             <tr v-for="v in ballData">
                                 <td>{{v.issue}}</td>
                                 <td>{{v.data}}</td>
-                                <td v-for="(vv,i) in v.data.split(',')" class="ball"><span :class="vv | filterDsbg">{{vv | filterDs}}</span></td>
+                                <td v-for="(vv,i) in v.data.split(',')" class="ball"><span :class="vv | filterDs| filterDsbg">{{vv | filterDs}}</span></td>
                             </tr>
                             </tbody>
                         </table>
@@ -249,6 +278,9 @@
                     <span :class="currP==1?'active':''" @click="currP=1">号码</span>
                     <span :class="currP==2?'active':''" @click="currP=2">大小</span>
                     <span :class="currP==3?'active':''" @click="currP=3">单双</span>
+                    <span :class="currP==4?'active':''" @click="currP=4">中发白</span>
+                    <span :class="currP==5?'active':''" @click="currP=5">方位</span>
+                    <span :class="currP==6?'active':''" @click="currP=6">总</span>
                 </div>
                 <div class="tab-container">
                     <div class="tab-content num-box" v-if="currP==1">
@@ -327,7 +359,83 @@
                                 <td>{{v.issue}}</td>
                                 <td>{{v.data}}</td>
                                 <td><span>{{v.data | filterSum}}</span></td>
-                                <td v-for="(vv,i) in v.data.split(',')"><span :class="vv | filterDsbg">{{vv |filterDs}}</span></td>
+                                <td v-for="(vv,i) in v.data.split(',')"><span :class="vv | filterDs| filterDsbg">{{vv |filterDs}}</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-content ds-box" v-if="currP==4">
+                        <table cellpadding="0" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>期数</th>
+                                <th>开奖号码</th>
+                                <th>总</th>
+                                <th>一</th>
+                                <th>二</th>
+                                <th>三</th>
+                                <th>四</th>
+                                <th>五</th>
+                                <th v-if="this.childId!='Gxklsf'">六</th>
+                                <th v-if="this.childId!='Gxklsf'">七</th>
+                                <th v-if="this.childId!='Gxklsf'">八</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="v in ballData">
+                                <td>{{v.issue}}</td>
+                                <td>{{v.data}}</td>
+                                <td><span>{{v.data | filterSum}}</span></td>
+                                <td v-for="(vv,i) in v.data.split(',')"><span :class="vv | filterZfb | filterDsbg">{{vv |filterZfb}}</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-content ds-box" v-if="currP==5">
+                        <table cellpadding="0" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>期数</th>
+                                <th>开奖号码</th>
+                                <th>总</th>
+                                <th>一</th>
+                                <th>二</th>
+                                <th>三</th>
+                                <th>四</th>
+                                <th>五</th>
+                                <th v-if="this.childId!='Gxklsf'">六</th>
+                                <th v-if="this.childId!='Gxklsf'">七</th>
+                                <th v-if="this.childId!='Gxklsf'">八</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="v in ballData">
+                                <td>{{v.issue}}</td>
+                                <td>{{v.data}}</td>
+                                <td><span>{{v.data | filterSum}}</span></td>
+                                <td v-for="(vv,i) in v.data.split(',')"><span :class="vv | filterDnxb | filterDsbg">{{vv |filterDnxb}}</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-content ds-box" v-if="currP==6">
+                        <table cellpadding="0" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>期数</th>
+                                <th>开奖号码</th>
+                                <th>总</th>
+                                <th>尾大小</th>
+                                <th>龙虎</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="v in ballData">
+                                <td>{{v.issue}}</td>
+                                <td>{{v.data}}</td>
+                                <td><span>{{v.data | filterSum}}</span></td>
+                                <td><span :class="v.data | filterSum | filterWdx |filterSgColor">{{v.data | filterSum | filterWdx}}</span></td>
+                                <td><span :class="v.data.split(',') | filterLh | filterSgColor">{{v.data.split(',') | filterLh}}</span></td>
                             </tr>
                             </tbody>
                         </table>
@@ -345,7 +453,7 @@
                     <span :class="currP==2?'active':''" @click="currP=2">大小</span>
                     <span :class="currP==3?'active':''" @click="currP=3">单双</span>
                     <span :class="currP==4?'active':''" @click="currP=4" v-if="isId==207">长牌/短牌/豹子</span>
-                    <!--<span :class="currP==5?'active':''" @click="currP=5" v-if="isId==207">短牌</span>-->
+                    <span :class="currP==5?'active':''" @click="currP=5" v-if="isId ==205">龙虎/三连</span>
                 </div>
                 <div class="tab-container">
                     <div class="tab-content num-box" v-if="currP==1">
@@ -410,7 +518,7 @@
                                 <td>{{v.issue}}</td>
                                 <td>{{v.data}}</td>
                                 <td><span>{{v.data | filterSum}}</span></td>
-                                <td v-for="vv in v.data.split(',')"><span :class="vv | filterDsbg">{{vv | filterDs}}</span></td>
+                                <td v-for="vv in v.data.split(',')"><span :class="vv |filterDs| filterDsbg">{{vv | filterDs}}</span></td>
                             </tr>
                             </tbody>
                         </table>
@@ -435,6 +543,29 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="tab-content ds-box" v-if="currP==5">
+                        <table cellpadding="0" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>期数</th>
+                                <th>开奖号码</th>
+                                <th>总</th>
+                                <th>龙虎和</th>
+                                <th>三连</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="v in ballData">
+                                <td>{{v.issue}}</td>
+                                <td>{{v.data}}</td>
+                                <td><span>{{v.data | filterSum}}</span></td>
+                                <td><span :class="v.data.split(',') | filterLh(3) | filterSgColor">{{v.data.split(',') | filterLh(3)}}</span></td>
+                                <td><span :class="v.data.split(',') | filterBs(1) | filterSgColor">{{v.data.split(',') | filterBs(1)}}</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
                 <div class="xx_link-result">
                     <a href="javascript:;" @click="($router.push({name:'lottery_result',params:{game_name:childId}}))">查看更多</a>
@@ -473,6 +604,10 @@
                                 <th>总</th>
                                 <th>总大小</th>
                                 <th>总单双</th>
+                                <th>大小单双</th>
+                                <th>前后</th>
+                                <th>单双</th>
+                                <th>五行</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -482,6 +617,10 @@
                                 <td><span>{{v.data | filterSum}}</span></td>
                                 <td><span>{{v.data | filterSum | filterDx(810)}}</span></td>
                                 <td><span>{{v.data | filterSum | filterDs}}</span></td>
+                                <td><span>{{v.data | filterKlcDsDx}}</span></td>
+                                <td><span>{{v.data  | filgerQhh}}</span></td>
+                                <td><span>{{v.data  | filgerDsh}}</span></td>
+                                <td><span>{{v.data  | filterWh}}</span></td>
                             </tr>
                             </tbody>
                         </table>
@@ -583,7 +722,7 @@
                             <tbody>
                             <tr v-for="v in ballData">
                                 <td class="w20">{{v.qishu}}</td>
-                                <td v-for="(vv,i)  in v.ball.split(',')"><span :class="vv | filterDsbg">{{vv | filterDs}}</span></td>
+                                <td v-for="(vv,i)  in v.ball.split(',')"><span :class="vv |filterDs | filterDsbg">{{vv | filterDs}}</span></td>
                             </tr>
                             </tbody>
                         </table>
@@ -628,7 +767,7 @@
                 })
             },
             getczType(){
-                this.isId =  Init.getTitle(this.childData, this.childId);
+                this.isId =  Init.getTitle(this.childCid);
                 let i = this.isId;
                 if(i == 200||i == 206||i == 208){
                     this.czType = 1;
@@ -655,6 +794,7 @@
         },
         props: {
             childId: String,
+            childCid: null,
             childData: null,
         },
         filters:{
@@ -662,7 +802,8 @@
                 return R.getSum(arr);
             },
             filterDx(n,s){
-                if(n>s) return '大'
+                if(n==11&&s==5) return '和';
+                else if(n>s) return '大';
                 else return '小'
             },
             filterBall(n){
@@ -676,14 +817,15 @@
                     if(n>s) return 'blue'
                     else return 'green'
                 }else if(s==5){ //pk10大小
-                    if(n>s) return 'blue'
-                    else return 'green'
+                    if(n==11) return 'green';
+                    else if(n>s) return 'blue';
+                    else return 'red'
                 }else if(s==10){ //k10大小
-                    if(n>s) return 'red'
+                    if(n>s) return 'red';
                     else return 'blue'
                 } else if(s==25){ //k10大小
-                    if(n>s) return 'blue'
-                    else return 'green'
+                    if(n>s) return 'blue';
+                    else return 'red';
                 }
 
             },
@@ -695,8 +837,9 @@
                 if(sum >= num) return 'blue';
                 else return 'green';
             },
-            filterDs(n){
-                if(n%2==0) return '双'
+            filterDs(n,num){
+                if(n%2==0) return '双';
+                else if(n==11&&num==11 || n==21) return'和';
                 else return '单'
             },
             filterZh(n){
@@ -704,7 +847,8 @@
                 else return '质'
             },
             filterDsbg(n){
-                if(n%2==0) return 'zbg'
+                if(n=='双' || n=='合' || n=='中' || n=='东') return 'zbg';
+                else if(n=='和'|| n=='发' || n=='北') return 'green'
                 else return 'lbg'
             },
             filterA:function (n) {
@@ -716,9 +860,13 @@
             filterBjl:function (arr) {
              return R.ResultBjl(arr);
             },
-            filterLh:function (arr) {
-               if(arr[0]- 0>arr[4]- 0) return '龙';
-               else if(arr[0]- 0<arr[4]- 0) return '虎';
+            filterLh:function (arr,num) {
+                let one = 0;
+                let last = arr.length-1;
+                // 龙虎和，三个开奖号码
+               if(num==3){one=0;last=2};
+               if(arr[one]- 0>arr[last]- 0) return '龙';
+               else if(arr[one]- 0<arr[last]- 0) return '虎';
                else return '和'
             },
             filterSh:function (arr) {
@@ -728,8 +876,8 @@
                 return R.getKsCdp(arr)
             },
             filterSgColor:function (n) {
-                if(n=='庄' || n=='龙' || n=='杂六') return 'blue';
-                 else if(n=='闲' ||n=='虎'|| n.indexOf('无')<=-1&&n!='和' || n=='一对' ||n=='两对' || n=='三张' || n=='葫芦' || n=='豹子' || n=='四张') return 'red';
+                if(n=='庄' || n=='龙' || n=='杂六'||  n=='尾大') return 'blue';
+                 else if(n=='闲' ||n=='虎'|| n=='尾小' || n.indexOf('无')<=-1&&n!='和'&&n!='顺子' || n=='一对' ||n=='两对' || n=='三张'|| n=='半顺' || n=='葫芦' || n=='豹子' || n=='四张') return 'red';
                  else return 'green'
             },
             filterCdColor:function (n) {
@@ -739,6 +887,35 @@
             },
             filterniu:function (arr) {
               return R.fiterniuniu(arr);
+            },
+            //十一选五 / 3D
+            filterBs:function (arr,num) {
+              return R.ResultBs(arr,num)
+            },
+            // 快乐十分，中发白
+            filterZfb:function (n) {
+                return R.ResultZfb(n);
+            },
+            // 快乐十分，尾大小
+            filterWdx:function (n) {
+                return R.filterWdx(n)
+            },
+            //快乐十分，东南西北
+            filterDnxb:function (n) {
+                return R.ResultDnxb(n)
+            },
+            // 北京28 ， 前后和，五行，单双和
+            filgerQhh:function (n) {
+                return R.filgerQhh(n);
+            },
+            filgerDsh:function (n) {
+                return R.filgerDsh(n);
+            },
+            filterWh:function (n) {
+                return R.filterWh(n);
+            },
+            filterKlcDsDx:function (n) {
+                return R.filterKlcDsDx(n);
             }
         }
     }
@@ -839,7 +1016,7 @@
     .orangeBg{background: #ff8949;}
 
     /*k1c 快乐8*/
-    .klc-h td span{display: inline-block; width: 25px; height: 26px; line-height: 25px; text-align: center; font-weight: bold;}
+    .klc-h td span{display: inline-block; width: 28px; height: 25px; line-height: 25px; text-align: center; font-weight: bold;}
     .klc-h td span.bgd{background-image: url(../assets/images/ball-sm.png);  background-repeat: no-repeat;  background-position: 0 -31px;color: #333}
     .klc-h td span.bgx{background-image: url(../assets/images/ball-sm.png);  background-repeat: no-repeat;  background-position: 0 -92px;}
     @media screen and (max-width: 400px){.w20{width: 27% !important}}
@@ -851,29 +1028,29 @@
     .ballbg{
         border-radius: 50%!important;
     }
-    .rColor{
+    .six-h .rColor{
         background: -webkit-gradient(linear, left top, left bottom, from(#F05190), to(#E74231))!important;
         background: -webkit-linear-gradient(#F05190,#E74231)!important;
         background: linear-gradient(#F05190,#E74231)!important;
     }
-     .gColor{
+     .six-h .gColor{
         background: -webkit-gradient(linear, left top, left bottom, from(#5d5), to(#8BC34A))!important;
         background: -webkit-linear-gradient(#5d5, #8BC34A)!important;
         background: linear-gradient(#5d5, #8BC34A)!important;
     }
-    .bColor{
+    .six-h .bColor{
         background: -webkit-gradient(linear, left top, left bottom, from(#59e), to(#0E4FC3))!important;
         background: -webkit-linear-gradient(#59e, #0E4FC3)!important;
         background: linear-gradient(#59e, #0E4FC3)!important;
     }
-     .fl {float: left;}
+    .fl {float: left;}
     .fr {float: right;}
     .clearfix:before, .clearfix:after {content: "";  display: table;}
     .clearfix:after {clear: both;}
     .clearfix { *zoom: 1;}
     /*查看更多*/
     .xx_link-result{
-        margin-top: 20px;
+        margin-top: 15px;
     }
     .xx_link-result a{
         color: #333;

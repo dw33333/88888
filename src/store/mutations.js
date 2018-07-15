@@ -70,6 +70,15 @@ const mutations = {
   ROOTBOX(state,data){
     state.rootbox=data;
   },
+  SHOWDLLEFT(state,data){
+    state.showDlleft = data;
+  },
+  SHOWDLRIGHT(state,data){
+    state.showDlright = data;
+  },
+  SHOWBOTTOM(state,data){
+    state.showBottom = data;
+  },
   //LOADING
   LOADING(state,data){
     state.loading=data;

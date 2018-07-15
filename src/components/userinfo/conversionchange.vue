@@ -45,7 +45,6 @@ export default {
   mounted () {
     // 额度转换
     this.$http.get('/json/center/?r=ChangeHistory/').then((res) => {
-      console.log(res.data)
       if (res.data.code === 0) {
         this.quotaWeekDatas = res.data.data.InfoList || []
         this.inliveMoney = res.data.data.in_normal_total

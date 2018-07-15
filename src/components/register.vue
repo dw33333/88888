@@ -1,9 +1,33 @@
 <template>
-  <div>
+  <div style="background-color: #2c1d16;">
     <headervue></headervue>
+    <ssheader></ssheader>
     <div class="pages-con">
+      <div style="height: 844px;margin: 0 auto;width: 1050px;">
+      <table border="0" cellspacing="0" cellpadding="0" style="float:left;margin-right: 35px;width:auto;">
+                  <tbody><tr>
+                <td><img src="../../static/img/1.png"></td>
+              </tr>
+                  <tr>
+                <td> <router-link to="/live"><img src="../../static/img/2.png"></router-link></td>
+              </tr>
+                  <tr>
+                <td> <router-link to="/moregame"><img src="../../static/img/3.png"></router-link> </td>
+              </tr>
+                  <tr>
+                <td> <router-link to="/lottery/Cqssc"><img src="../../static/img/4.png"></router-link> </td>
+              </tr>
+                  <tr>
+                <td> <router-link to="/Activity"><img src="../../static/img/5.png"></router-link> </td>
+              </tr>
+                  <tr>
+                <td> <router-link to="/register"><img src="../../static/img/6.png"></router-link> </td>
+              </tr>
+                  <tr>
+                <td><img src="../../static/img/7.png"></td>
+              </tr>
+                </tbody></table>
       <div class="registration-c" id="REG-FORM">
-        <h1>注册本公司账户</h1>
         <div class="line1"></div>
         <!-- <form method="post" autocomplete="off" data-bind="submit:submit"> -->
         <table border="0" cellspacing="5" cellpadding="5" class="regTab">
@@ -14,7 +38,7 @@
             </td>
             <td>
               如果您已拥有本公司账户，
-              <router-link to="/Login">点击此处登录</router-link>
+              <router-link to="/">点击此处登录</router-link>
             </td>
           </tr>
           <tr>
@@ -261,6 +285,7 @@
           </table>
         </div>
       </div>-->
+      </div>
     </div>
     <maskLayer :ifopen="ifopen" :content='content'></maskLayer>
     <footervue></footervue>
@@ -269,6 +294,7 @@
 <script>
   import headervue from '@/components/Header'
   import footervue from '@/components/Footer'
+  import ssheader from '@/components/ssheader'
   import maskLayer from '@/components/base/mask-layer'
   import {mapState, mapMutations} from 'vuex'
   import alert from "@/components/base/alert"
@@ -532,7 +558,8 @@
       ...mapState(['agent_id']),
       headervue,
       footervue,
-      maskLayer
+      maskLayer,
+      ssheader
     }
   }
 
@@ -542,13 +569,16 @@
   .female {
     margin-right: 20px;
   }
-
+a img {
+    border: 0;
+}
   .registration-c {
-    width: 830px;
+    width: 770px;
     min-height: 228px;
-    margin: 60px auto 146px;
+    /* margin: 60px auto 146px; */
     padding-bottom: 50px;
     background: url("../assets/bg_07.png") repeat;
+    float: left;
   }
 
   .registration-c h1 {

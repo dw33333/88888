@@ -5,7 +5,7 @@
     </div>
     <!-- 日期列表 -->
     <div class="table-list">
-      <div class="wallet">我的钱包：<span class="red">¥{{usermoney}}</span></div>
+      <div class="wallet">我的钱包：<span class="red">¥{{money}}</span></div>
     </div>
     <div class="btns paddbottom10">
       <div :class="{recharge:true,active:inOrOut==1}" @click="turnInOrOut(1);">转入</div>
@@ -14,11 +14,19 @@
     <div class="btns platform">
       <div :class="{recharge:true,ag:true,active:platform==1}" @click="platformSelect(1);">
         AG平台
-        <br> ¥{{agmoney}}
+        <br> <a href="javascript:;" @click="readMoney(1)">查询余额</a>
       </div>
       <div :class="{withdraw:true,ds:true,active:platform==2}" @click="platformSelect(2);">
         DS平台
-        <br> ¥{{dsmoney}}
+        <br> <a href="javascript:;" @click="readMoney(2)">查询余额</a>
+      </div>
+      <div :class="{withdraw:true,ds:true,active:platform==3}" @click="platformSelect(3);">
+        BBIN平台
+        <br> <a href="javascript:;" @click="readMoney(3)">查询余额</a>
+      </div>
+      <div :class="{withdraw:true,ds:true,active:platform==4}" @click="platformSelect(4);" style=" border-top-right-radius: 10px;border-bottom-right-radius: 10px;">
+        MG平台
+        <br> <a href="javascript:;" @click="readMoney(4)">查询余额</a>
       </div>
     </div>
     <div class="table-list">
@@ -48,6 +56,7 @@
 
 import maskLayer from '../base/mask-layer'
 import { mapState,mapMutations } from 'vuex'
+import alert from "@/components/base/alert"
 export default {
   data () {
     return {
@@ -58,57 +67,69 @@ export default {
       lock: true,
       inputMoney: '',
       ifopen: false,
-      money: '',
+      // money: '',
       realname: '',
       bankCardNum: '',
       bankName: '',
       content: ''
     }
   },
-  mounted () {
-    // this.getuserinfo()
-  },
   methods: {
-    // 获取个人信息
-    getuserinfo () {
-      // this.$http.get('/json/center/?r=UsrInfo').then((res) => {
-      //   this.realname = res.data.data.pay_name
-      //   this.bankCardNum = res.data.data.pay_num
-      //   this.bankName = res.data.data.pay_bank
-      // }).catch((error) => {
-      //   console.log(error)
-      // })
-
-      // >获取AG真人余额
-      // this.$http.get('/json/center/?r=AginMoney').then((res) => {
-      //   // this.agmoney = res.data.data.money;
-
-      //   this.$store.dispatch('SET_agMoney', res.data.data.money)
-
-      // }).catch((error) => {
-      //   console.log(error)
-      // })
-
-      // >获取DS真人余额：
-      // this.$http.get('/json/center/?r=DsMoney').then((res) => {
-      //   // this.dsmoney = res.data.data.money
-
-      //   this.$store.dispatch('SET_dsMoney', res.data.data.money)
-      // }).catch((error) => {
-      //   console.log(error)
-      // })
-
-      // >获取用户余额
-      // this.$http.get('/json/center/?r=Money').then((res) => {
-      //   // this.usermoney = res.data.data.user_money;
-
-      //   this.$store.dispatch('SET_userMoney', res.data.data.money)
-
-      // }).catch((error) => {
-      //   console.log(error)
-      // })
+    ...mapMutations(['ROOTBOX']),
+    alert(tit, msg, fn, msgStyle) {
+        let _this = this;
+        this.ROOTBOX({
+          open: true,
+          compt: alert,
+          props: {
+            tit: tit,
+            msg: msg,
+            msgstyle: msgStyle,
+          },
+          handles: {
+            confirm() {
+              _this.ROOTBOX({
+                open: false
+              })
+            },
+            close() {
+              if (fn) fn();
+              _this.ROOTBOX({
+                open: false
+              });
+            }
+          }
+        });
+      },
+    readMoney (index) {
+      let type;
+      if(index == 1){
+        type = 'AG'
+      };
+      if(index == 2){
+        type = 'DS'
+      }
+      if(index == 3){
+        type = 'BBIN'
+      }
+      if(index == 4){
+        type = 'MG'
+      }
+      this.mytoast('请稍等,正在为您查询！')
+      this.$http.post('/api/live/index/leftMoney/',{type:type}).then((res) =>{
+        if(res.data.code == 0){
+          this.alert('提示',type +'余额为'+res.data.money);
+          setTimeout(() => {
+            this.ifopen = false
+          }, 100)
+        }else{
+          this.alert('提示',res.data.msg);
+          setTimeout(() => {
+            this.ifopen = false
+          }, 100)
+        }
+      })
     },
-
     turnInOrOut (select) {
       this.inOrOut = select
       this.inputMoney = ''
@@ -121,7 +142,6 @@ export default {
       this.all = ''
       this.platform = plat
     },
-
     selectType (index) {
       if (index === 10) {
         if (this.lock) {
@@ -157,7 +177,6 @@ export default {
         this.all = ''
         this.inputMoney = index
       }
-      console.log(this.inputMoney)
       // 重置按钮
       if (index === 0) {
         this.inputMoney = ''
@@ -171,51 +190,49 @@ export default {
     },
     // 提交
     submitQuota () {
-      console.log(this.inputMoney)
       if (!this.inputMoney) {
         this.mytoast('请先输入转账金额')
         setTimeout(() => {
           this.ifopen = false
-        }, 1500)
+        }, 1000)
         return
       } else if (this.inOrOut === 1) {
         // 转入
         // 转入到AG平台
         this.mytoast('正在操作中')
-
-        if (this.platform === 1) {
           let data = {}
-          data['change_money'] = this.inputMoney
-          data['change_type'] = 'd'
-          data['change_live'] = 1
-          this.$http.post('/json/center/?r=AginTransfer', data).then((res) => {
-
-            console.log(res.data.data)
+        if (this.platform === 1) {
+          data['money'] = this.inputMoney
+          data['type'] = 'AG'
+          data['trans'] = 'i'
+        }
+        if(this.platform === 2){
+          data['money'] = this.inputMoney
+          data['type'] = 'DS'
+          data['trans'] = 'i'
+        }
+        if(this.platform === 3){
+          data['money'] = this.inputMoney
+          data['type'] = 'BBIN'
+          data['trans'] = 'i'
+        }
+        if(this.platform === 4){
+          data['money'] = this.inputMoney
+          data['type'] = 'MG'
+          data['trans'] = 'i'
+        }
+          this.$http.post('/api/live/index/moneyTrans/', data).then((res) => {
             if (res.data.code === 0) {
-              this.mytoast(res.data.msg)
+              this.alert('提示',res.data.msg)
               setTimeout(() => {
                 this.ifopen = false
                 // clearTimeout()
-              }, 1500)
-
-              this.changeAgMoney(res.data.data.liveMoney)
-              this.changeUserMoney(res.data.data.money)
-
+              }, 300)
+              let nowmoney = this.money - this.inputMoney +'.00'
+              this.$store.commit('changeUserMoney',nowmoney)
               this.inputMoney = ''
               this.all = ''
-              // this.fastIndex = 0
-            } else if (res.data.code === 2) {
-              // MessageBox.confirm('请先登录', '温馨提示').then(() => {
-              //   this.$router.push({
-              //     path: '/login',
-              //     query: { redirect: this.$route.path } // 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由
-              //   })
-              //   this.$store.dispatch('UserLogout')
-              // }, () => {
-              //   this.$store.dispatch('UserLogout')
-              //   return false
-              // })
-            } else {
+            }  else {
               this.mytoast(res.data.msg)
               setTimeout(() => {
                 this.ifopen = false
@@ -225,149 +242,61 @@ export default {
           }).catch((error) => {
             console.log(error)
           })
-        }
-        // 转入到DS平台
-        if (this.platform === 2) {
-          let data = {}
-          data['change_money'] = this.inputMoney
-          data['change_type'] = 'd'
-          data['change_live'] = 4
-          this.$http.post('/json/center/?r=DsTransfer', data).then((res) => {
-              this.mytoast(res.data.msg)
-            if (res.data.code === 0) {
-              setTimeout(() => {
-                this.ifopen = false
-                clearTimeout()
-              }, 1500)
-
-              this.changeDsMoney(res.data.data.liveMoney)
-              this.changeUserMoney(res.data.data.money)
-              this.inputMoney = ''
-              this.all = ''
-            } else if (res.data.code === 2) {
-              // MessageBox.confirm('请先登录', '温馨提示').then(() => {
-              //   this.$router.push({
-              //     path: '/login',
-              //     query: { redirect: this.$route.path } // 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由
-              //   })
-              //   this.$store.dispatch('UserLogout')
-              // }, () => {
-              //   this.$store.dispatch('UserLogout')
-              //   return false
-              // })
-            } else {
-              this.mytoast(res.data.msg)
-              setTimeout(() => {
-                this.ifopen = false
-                clearTimeout()
-              }, 1000)
-            }
-          }).catch((error) => {
-            console.log(error)
-          })
-        }
       } else if (this.inOrOut === 2) {
         this.mytoast('正在操作中')
         // 转出
         // 转出到AG平台
+        let dataout = {}
         if (this.platform === 1) {
-          let data = {}
-          data['change_money'] = this.inputMoney
-          data['change_type'] = 'w'
-          data['change_live'] = 1
-
-          this.$http.post('/json/center/?r=AginTransfer', data).then((res) => {
-
-              this.mytoast(res.data.msg)
-            if (res.data.code === 0) {
-              console.log('res.data.code-----' + res.data.code)
-              setTimeout(() => {
-                this.ifopen = false
-                clearTimeout()
-              }, 1500)
-              // this.getuserinfo()
-
-
-              this.changeAgMoney(res.data.data.liveMoney)
-              this.changeUserMoney(res.data.data.money)
-
-              this.inputMoney = ''
-              this.all = ''
-            } else if (res.data.code === 2) {
-              // MessageBox.confirm('请先登录', '温馨提示').then(() => {
-              //   this.$router.push({
-              //     path: '/login',
-              //     query: { redirect: this.$route.path } // 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由
-              //   })
-              //   this.$store.dispatch('UserLogout')
-              // }, () => {
-              //   this.$store.dispatch('UserLogout')
-              //   return false
-              // })
-            } else {
-              this.mytoast(res.data.msg)
-              setTimeout(() => {
-                this.ifopen = false
-                clearTimeout()
-              }, 1500)
-
-              this.inputMoney = ''
-              this.all = ''
-            }
-          }).catch((error) => {
-            console.log(error)
-          })
+          dataout['money'] = this.inputMoney
+          dataout['type'] = 'AG'
+          dataout['trans'] = 'w'
         }
-        // 转出到DS平台
-        if (this.platform === 2) {
-          let data = {}
-          data['change_money'] = this.inputMoney
-          data['change_type'] = 'w'
-          data['change_live'] = 4
-          this.$http.post('/json/center/?r=DsTransfer', data).then((res) => {
+        if(this.platform === 2){
+          dataout['money'] = this.inputMoney
+          dataout['type'] = 'DS'
+          dataout['trans'] = 'w'
+        }
+        if(this.platform === 3){
+          dataout['money'] = this.inputMoney
+          dataout['type'] = 'BBIN'
+          dataout['trans'] = 'w'
+        }
+        if(this.platform === 4){
+          dataout['money'] = this.inputMoney
+          dataout['type'] = 'MG'
+          dataout['trans'] = 'w'
+        }
+          this.$http.post('/api/live/index/moneyTrans/', dataout).then((res) => {
             if (res.data.code === 0) {
-              this.mytoast(res.data.msg)
+              this.alert('提示',res.data.msg)
               setTimeout(() => {
                 this.ifopen = false
-                clearTimeout()
-              }, 1500)
-              // this.getuserinfo()
-
-              this.changeDsMoney(res.data.data.liveMoney)
-              this.changeUserMoney(res.data.data.money)
-
-
+              }, 300)
+              let nowmoney = (parseInt(this.money) + parseInt(this.inputMoney))+'.00' 
+              this.$store.commit('changeUserMoney',nowmoney)
               this.inputMoney = ''
               this.all = ''
-            } else if (res.data.code === 2) {
-              // MessageBox.confirm('请先登录', '温馨提示').then(() => {
-              //   this.$router.push({
-              //     path: '/login',
-              //     query: { redirect: this.$route.path } // 将刚刚要去的路由path（却无权限）作为参数，方便登录成功后直接跳转到该路由
-              //   })
-              //   this.$store.dispatch('UserLogout')
-              // }, () => {
-              //   this.$store.dispatch('UserLogout')
-              //   return false
-              // })
-            } else {
+            }  else {
               this.mytoast(res.data.msg)
               setTimeout(() => {
                 this.ifopen = false
                 clearTimeout()
               }, 1000)
+
+              this.inputMoney = ''
+              this.all = ''
             }
           }).catch((error) => {
             console.log(error)
           })
-        }
       }
     },
     ...mapMutations(['changeAgMoney','changeDsMoney','changeUserMoney','userLoginOut']),
 
   },
   computed: {
-    ...mapState(['agmoney','dsmoney','usermoney'])
+    ...mapState(['agmoney','dsmoney','money'])
   },
   components: {
     maskLayer
@@ -409,7 +338,11 @@ export default {
   padding-top: 20px;
   border-top: 1px solid #cdcdcd;
 }
-
+.platform a{
+  color: #26a2ff;
+  text-decoration: none;
+  font-size: 13px;
+}
 .btns {
   margin: 8px;
   overflow: hidden;
@@ -428,6 +361,7 @@ export default {
   height: 50px;
   line-height: 50px;
   float: left;
+  color: #6f6d6d;
 }
 
 .paddbottom10 {
@@ -450,8 +384,6 @@ export default {
 
 .btns .withdraw {
   border-left: none;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
 }
 
 .btns>.active {

@@ -1,40 +1,13 @@
 <template>
 <div>
   <headervue></headervue>
-  <div class="video_wrap" style="padding-top:30px;">
-    <div class="video_wrap_box1 clearfix">
-      <div class="video_item view view-tenth ag">
-        <a href="javascript:void(0);" @click=" aggame();"><img src="/static/public/live1/images/ag_slot.jpg"></a>
-        <a class="mask" href="javascript:void(0);" @click=" aggame();"></a>
-      </div>
-      <div class="video_item view view-tenth ds">
-        <a href="javascript:void(0);" onclick="dsgame();"><img src="/static/public/live1/images/ds.jpg"></a>
-        <a class="mask" href="javascript:void(0);" onclick="dsgame();"></a>
-      </div>
-      <div class="video_item view view-tenth bbin">
-        <a href="javascript:void(0);" onclick=" bblive();"><img src="/static/public/live1/images/bbin.jpg"></a>
-        <a class="mask" href="javascript:void(0);" onclick=" bblive();"></a>
-      </div>
-
-      <div class="video_item view view-tenth gd">
-        <a href="javascript:void(0);" onclick="javascript:alert('抱歉！该厅正在升级维护中！');"><img src="/static/public/live1/images/gd.jpg"></a>
-        <a class="mask" href="javascript:void(0);" onclick="javascript:alert('抱歉！该厅正在升级维护中！');"></a>
-      </div>
-      <div class="video_item view view-tenth ct">
-        <a href="javascript:alert('抱歉！该厅正在升级维护中！');"><img src="/static/public/live1/images/ct.jpg"></a>
-        <a class="mask" href="javascript:alert('抱歉！该厅正在升级维护中！');"></a>
-      </div>
-      <div class="video_item view view-tenth kk">
-        <a href="javascript:alert('抱歉！该厅正在升级维护中！');"><img src="/static/public/live1/images/kk.jpg"></a>
-        <a class="mask" href="javascript:alert('抱歉！该厅正在升级维护中！');"></a>
-      </div>
-      <div class="video_item view view-tenth mg">
-        <a href="javascript:void(0);" onclick="mggame();"><img src="/static/public/live1/images/mg.jpg"></a>
-        <a class="mask" href="javascript:void(0);" onclick="mggame();"></a>
-      </div>
-      <div class="video_item view view-tenth ag_slot">
-        <a href="javascript:aggame();"><img src="/static/public/live1/images/ag.jpg"></a>
-        <a class="mask" href="javascript:aggame();"></a>
+  <div class="liveBack">
+    <div class="video_wrap" style="padding-top:80px;">
+      <div class="video_wrap_box1 clearfix">
+        <div class="video_item view view-tenth" v-for="it in sitesInfos.LiveList" :class="it.toLowerCase()" :key="it" >
+          <a   @click="toGame(it)"><img :src="`/static/public/live1/images/${it.toLowerCase()}.jpg`"></a>
+          <a class="mask"  @click="toGame(it)"></a>
+        </div>
       </div>
     </div>
   </div>
@@ -54,50 +27,50 @@ export default {
   },
   data () {
     return {
-
+      url:''
     }
   },
   computed: {
-    ...mapState(['money','username','codeToken'])
+    ...mapState(['money','username','codeToken','sitesInfos'])
   },
   methods: {
-    aggame () {
-      if(!this.username){
-        this.alert('提示','请先登录！');
-      }else{
-      }
-    },
-  //提示函数
-    alert(tit,msg,fn,msgStyle){
-      let _this=this;
+    ...mapMutations(["ROOTBOX"]),
+    async toGame(type){
       this.ROOTBOX({
-        open:true,
-        compt:alert,
-        props:{
-          tit:tit,
-          msg:msg,
-          msgstyle:msgStyle
-        },
-        handles:{
-          confirm(){
-            _this.ROOTBOX({
-              open:false
-            })
-          },
-          close(){
-            if(fn)fn();
-            _this.ROOTBOX({
-              open:false
-            });
-          }
+        open: true,
+        compt: alert,
+        props: {
+          nobuttons: true,
+          tit: "",
+          msg: "加载中..."
         }
       });
+      // let newWindow = window.open();
+      let res = await this.$http.post("/api/live/index/index/",{type:type});
+      if(!res) return;
+      if(res.data.code!==0){
+        window.wAlert(res.data.msg);
+        return;
+      }
+      this.ROOTBOX({
+        open:false
+      });
+      this.url = res.data.data;
+      // window.open(this.url);
+      // newWindow.location.href = url;
+      this.openGameUrl();
     },
+    openGameUrl() {
+      window.open(this.url,'_blank')
+    }
   }
 }
 </script>
 
 <style scoped>
   @import '../../../static/public/live1/css/video_css';
+  .liveBack{
+    background: url('../../../static/img/nybg1.jpg') repeat;
+  }
   a {display:inline-block}
 </style>

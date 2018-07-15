@@ -107,7 +107,7 @@ Vue.prototype.$http.interceptors.response.use(
                 store.commit("EASYSECRET","");
                 localStorage.clear();
               }
-              router.push({name:"Login",params:{hback:router.currentRoute.name,params:router.currentRoute.params}});
+              router.push({name:"Header"});
               store.commit("ROOTBOX",{
                 open:false
               });
@@ -148,6 +148,26 @@ Vue.prototype.$http.interceptors.response.use(
       return Promise.resolve();
     }
   });
+window.toggleColor=function(id, arr, s) {
+    var self = this;
+    self._i = 0;
+    self._timer = null;
+    //let el=document.getElementById(id);
+    //console.log(el);
+    self.run = function() {
+        if(arr[self._i]) {
+          if(document.getElementById(id)){
+            document.getElementById(id).style.color=arr[self._i];
+          }
+        }
+        self._i == 0 ? self._i++ : self._i = 0;
+        self._timer = setTimeout(function() {
+            self.run(id, arr, s);
+        }, s);
+    }
+    self.run();
+}
+
 /* eslint-disable no-new */
 
 // Vue.prototype.$http = axios

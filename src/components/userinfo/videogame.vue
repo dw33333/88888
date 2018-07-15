@@ -105,7 +105,6 @@ export default {
       this.tabIndex = 2
       this.dayTime = date
       this.$http.get('/json/center/?r=LiveRecordDetails&date=' + date).then((res) => {
-        console.log(res.data.data.InfoList)
         if (res.data.code === 0) {
           this.liveDayDatas = res.data.data.InfoList
         }

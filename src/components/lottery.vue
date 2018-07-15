@@ -1,46 +1,59 @@
 <template>
 <div style="background:#e8e8e8;min-height:100%;">
     <div class="xx_lottery">
-    <home-header  class="xx_lottery_hheader" :inlottery="true">
-        
-      <div slot="lottery_result" class="items result" style="cursor:pointer;" @click="($router.push({name:'lottery_result',params:{game_name:$route.params.id}}))">
-        开奖结果
-      </div>
-      <!-- ($router.push({name:$route.params.id})) -->
-            <div slot="game_introduce" class="items result" style="cursor:pointer;" @click="openRouter">
-                玩法介绍
-            </div>
-    </home-header>
+    <div  class="top-wrap">
+        <div  class="top-box">
+            <div  class="bar-left">
+                <span id="backPage" style="cursor: pointer;" @click="backPageclick">返回首页</span> 
+                <span id="backhide" style="display: none;">PLAY RESPONSIBLY</span>
+                 </div> 
+                 <div class="bar-right"> 
+                      <div id="showId" style="width: 540px; display: none; height: 48px;"></div> 
+                      <div slot="game_introduce" class="items result" style="cursor:pointer;" @click="openRouter"> 玩法介绍</div>
+                 <div slot="lottery_result" class="items result" style="cursor:pointer;" @click="($router.push({name:'lottery_result',params:{game_name:$route.params.id}}))">开奖结果</div>
+                <router-link to='/UserCenter'>
+                <div class="recharge_lottery items">
+                    充值
+                </div>
+                </router-link> 
+                <router-link to='/withdrawal'>
+                    <div class="withdraw items">
+                    提款
+                    </div>
+                </router-link>
+          <div class="login-out items" @click="loginout()">
+          退出</div></div></div></div>
     <div class="lottery-r-box w ">
-        <vue-result v-if="showResult" :child-id="fc_type" :child-data="this.menusData"></vue-result>
+        <vue-result v-if="showResult" :child-id="fc_type" :child-cid="currI"  :child-data="this.menusData"></vue-result>
         <vue-note v-if="showNote" :child-id="currI"></vue-note>
         <div>
             <div class="lottery-header w">
                 <div class="lottery-header-top w">
                     <div class="lottery-nav">
                         <ul class="clearfix">
-                            <li @click="change('six',2);" :class="fc_type=='six'?'active':''">
-                                <a href="javascript:;">
-                                    香港六合彩
-                                </a>
-                            </li>
-                            <li  v-for="(v,index) in menus" @click="change(v.name,index)" :class="fc_type==v.name?'active':''" v-if="index<=9">
+                            
+                            <li  v-for="(v,index) in menus" @click="change(v.name,index)" :class="fc_type==v.name?'active':''" v-if="index<11">
                                 <router-link :to="{name:'lottery',params:{id:v.name}}">
-                                    {{v.short_name}}
+                                    {{v.title}}
                                 </router-link>
                             </li>
-                            <li @mouseover="isMenu=true" @mouseout="isMenu=false"   v-for="(v,index) in menus"  v-if="index==9" :class="more!='更多玩法'?'active':''">
+                            <li @mouseover="isMenu=true" @mouseout="isMenu=false"   v-for="(v,index) in menus"  v-if="index==11" :class="more!='更多玩法'?'active':''">
                                 <a href="javascript:;" class="moreNav ">
                                     {{more}}
                                     <span class="caret"></span>
                                 </a>
                             </li>
                             <ul v-show="isMenu" class="dropdown-menu" @mouseover="isMenu=true" @mouseout="isMenu=false" >
-                                <li  v-for="(v,index) in menus" @click="change(v.name,index);more=v.short_name" :class="fc_type==v.name?'active':''" v-if="index>9">
+                                <li  v-for="(v,index) in menus" @click="change(v.name,index);more=v.title" :class="fc_type==v.name?'active':''" v-if="index>=11">
                                     <router-link :to="{name:'lottery',params:{id:v.name}}">
-                                        {{v.short_name}}
+                                        {{v.title}}
                                     </router-link>
                                 </li>
+                                <li @click="change('six',66,'香港六合彩');" :class="fc_type=='six'?'active':''">
+                                <a href="javascript:;">
+                                    香港六合彩
+                                </a>
+                            </li>
                             </ul>
                         </ul>
                     </div>
@@ -60,8 +73,10 @@
                             <!--<p>开奖选项</p>-->
                         </div>
                         <div class="result-no" v-if="currT==200"  v-for="(v,key) in result" >
-                            <i class="redball"  v-for="vv in v" v-if="vv">{{vv}}</i>
-                            <p  v-else>暂无开奖结果！</p>
+                            <i class="redball"  v-for="vv in v" v-if="v.length>1">{{vv}}</i>
+                            <i class="redball img"  v-for="vv in index" v-if="v.length==1">
+                              {{vv}}
+                            </i>
                         </div >
                         <div class="result-no lh " v-if="currT==2&&this.resultLh!=''" v-cloak >
                             <p >
@@ -71,45 +86,65 @@
                             </p>
                         </div>
                         <div class="result-no"  v-if="currT==204" v-for="(v,key) in result">
-                            <i class="redball" v-for="vv in v" v-if="vv">{{vv}}</i>
-                            <p  v-else>暂无开奖结果！</p>
+                            <i class="redball"  v-for="vv in v" v-if="v.length>1">{{vv}}</i>
+                            <i class="redball img"  v-for="vv in index" v-if="v.length==1">
+                                {{vv}}
+                            </i>
                         </div>
                         <div class="result-no" v-if="currT==201"v-for="(v,key) in result">
-                            <i class="redball kl" v-for="vv in v" v-if="vv" :class="'fruit_'+v"  >{{vv}}</i>
-                            <p  v-else>暂无开奖结果！</p>
+                            <i class="redball kl" v-for="vv in v" v-if="v.length>1" :class="'fruit_'+v"  >{{vv}}</i>
+                            <i class="redball img"  v-for="vv in index" v-if="v.length==1">
+                                {{vv}}
+                            </i>
                         </div>
                         <div class="result-no" v-if="currT==203 " v-for="(v,key) in result">
-                            <i class="redball" v-for="vv in v" v-if="vv" >{{vv}}</i>
-                            <p  v-else>暂无开奖结果！</p>
+                            <i class="redball"  v-for="vv in v" v-if="v.length>1">{{vv}}</i>
+                            <i class="redball img"  v-for="vv in index" v-if="v.length==1">
+                                {{vv}}
+                            </i>
                         </div>
                         <div class="result-no" v-if="currT==209" v-for="(v,key) in result">
-                           <div v-if="v.length!=1">
+                           <div v-if="v.length>1">
                               <span>
-                                  <i class="redball" v-for="(vv,index) in v" v-if="index==0" >{{vv}}</i>
+                                  <i class="redball bj" v-for="(vv,index) in v" v-if="index==0" >{{vv}}</i>
                                   <i class="block">+</i>
                               </span>
                                <span>
-                                  <i class="redball" v-for="(vv,index) in v" v-if="index==1" >{{vv}}</i>
+                                  <i class="redball bj" v-for="(vv,index) in v" v-if="index==1" >{{vv}}</i>
                                   <i class="block">+</i>
                               </span>
                                <span>
-                                  <i class="redball" v-for="(vv,index) in v" v-if="index==2" >{{vv}}</i>
+                                  <i class="redball bj" v-for="(vv,index) in v" v-if="index==2" >{{vv}}</i>
                                   <i class="block">=</i>
                               </span>
-                               <i class="redball"  >{{v | filterSum}}</i>
+                             <p>
+                                 <i :class="v | filterSum | filterHll" class="redball">{{v | filterSum}}</i>
+                             </p>
                            </div>
-                            <p  v-else>暂无开奖结果！</p>
+                            <i class="redball img"  v-for="vv in index" v-if="v.length==1">
+                                {{vv}}
+                            </i>
                             <!--<i class="redball" >{{1}}</i>-->
                             <!--<i class="redball">{{2}}</i><-->
                             <!--<i class="redball" >{{3}}</i>-->
                         </div>
+                        <div class="result-no"  v-if="currT==210" v-for="(v,key) in result">
+                            <i class="redball"  v-for="vv in v" v-if="v.length>1">{{vv}}</i>
+                            <i class="redball img"  v-for="vv in index" v-if="v.length==1">
+                                {{vv}}
+                            </i>
+                        </div>
                         <div class="result-no"   v-if="currT==205||currT==206||currT==207" v-for="(v,key) in result">
-                            <i class="redball"v-for="vv in v" v-if="vv" >{{vv}}</i>
-                            <p  v-else>暂无开奖结果！</p>
+                            <i class="redball"  v-for="vv in v" v-if="v.length>1">{{vv}}</i>
+                            <i class="redball img"  v-for="vv in index" v-if="v.length==1">
+                                {{vv}}
+                            </i>
                         </div>
                         <div class="result-no" v-if="currT==202"  v-for="(v,key) in result">
-                            <i class="redball" v-for="vv in v" v-if="vv"  >{{vv}}</i>
-                            <p  v-else>暂无开奖结果！</p>
+                            <i class="redball"  v-for="vv in v" v-if="v.length>1">{{vv}}</i>
+                            <i class="redball img"  v-for="vv in index" v-if="v.length==1">
+                                {{vv}}
+                            </i>
                         </div>
                         <div class="result-more right">
                             <a href="javascript:;" @click="showResult=!showResult;isCloseLoading=false">前十期开奖结果</a>
@@ -210,7 +245,7 @@
                                 <li v-for="(vv,i) in v" :data-id="vv.play_id" @click="isAct($event);" :class="{'cl-os-3':v.length==3,'cl-os-5':v.length==2}">
                                     <span :class="v.length==10||v.length==28?'active':''"><i >{{vv.name}}</i></span>
                                     <span class="ff9b39" >{{vv.odds}}</span>
-                                    <span>   <input type="number"class="input_money" :data-min="vv.min_charge" :data-max="vv.max_charge" :data-id="vv.play_id" :data-title="vv.playd_type_name" :data-playd_info="vv.playd_info" :data-name="vv.name" :data-odds="vv.odds" v-on:input="parentAct($event)"></span>
+                                    <span><input type="tel" class="input_money" :data-min="vv.min_charge" :data-max="vv.max_charge" :data-id="vv.play_id" :data-title="vv.playd_type_name" :data-playd_info="vv.playd_info" :data-name="vv.name" :data-odds="vv.odds" v-on:input="parentAct($event)"></span>
                                 </li>
                             </ul>
                         </div>
@@ -298,7 +333,7 @@
                                     <span class="ff9b39" v-if="vv.odds" :class="currBall==6?'cl-os-5':''">{{vv.odds}}</span>
                                     <!--<span class="ff9b39" v-if="v.num" :class="v.num?'active':''">{{v.num}}</span>-->
                                     <span>
-                                        <input  type="number" name="" v-on:input="parentAct($event)" class="input_money" :data-min="vv.min_charge" :data-max="vv.max_charge"  :data-id="vv.id" :data-guoup="vv.playd_guoup_id" :data-playd_info="vv.playd_info" :data-name="vv.name" :data-odds="vv.odds" onkeyup="value=value.replace(/[^\d]/g,'') " maxlength="5"></span>
+                                        <input  type="tel" name="" v-on:input="parentAct($event)" class="input_money" :data-min="vv.min_charge" :data-max="vv.max_charge"  :data-id="vv.id" :data-guoup="vv.playd_guoup_id" :data-playd_info="vv.playd_info" :data-name="vv.name" :data-odds="vv.odds" onkeyup="value=value.replace(/[^\d]/g,'') " maxlength="5"></span>
                                 </li>
                             </ul>
                             <ul class="clearfix select"  v-if="currBall==6">
@@ -307,7 +342,7 @@
                                     <span class="ff9b39 cl-os-5">{{v.zodiacdata}}</span>
                                     <!--<span class="ff9b39" v-if="v.num" :class="v.num?'active':''">{{v.num}}</span>-->
                                     <span v-show="currBall!=6">
-                                        <input  type="number" class="input_money" ></span>
+                                        <input  type="tel" class="input_money" ></span>
                                 </li>
                             </ul>
                             <ul class="clearfix select"   v-if="currN=='正码特'||currN=='正码1-6'||currN=='连肖连尾'">
@@ -317,7 +352,7 @@
                                     <span class="ff9b39" v-if="currN=='连肖连尾'">{{v.playd_info | filterHm(sxName,currTabId)}}</span>
                                     <!--<span><i></i></span>-->
                                     <span v-show="currN!='连肖连尾'">
-                                        <input  type="number" name="" v-on:input="parentAct($event)" class="input_money" :data-min="v.min_charge" :data-max="v.max_charge"  :data-id="v.id" :data-guoup="currBall" :data-playd_info="v.playd_info" :data-name="v.name" :data-odds="v.odds" onkeyup="value=value.replace(/[^\d]/g,'') " maxlength="5"></span>
+                                        <input  type="tel" name="" v-on:input="parentAct($event)" class="input_money" :data-min="v.min_charge" :data-max="v.max_charge"  :data-id="v.id" :data-guoup="currBall" :data-playd_info="v.playd_info" :data-name="v.name" :data-odds="v.odds" onkeyup="value=value.replace(/[^\d]/g,'') " maxlength="5"></span>
 
                                 </li>
                             </ul>
@@ -362,7 +397,7 @@
                                     <span class="cl-os-5"><i :class="v | filterBall(currBall)">{{v}}</i></span>
                                     <span class="ff9b39 cl-os-5" :class="isTab&&currBall != '正码特'?'active':''">{{currOdds}}</span>
                                     <span v-show="currBall == 99">
-                                        <input type="text" name="" class="input_money" ></span>
+                                        <input type="tel" name="" class="input_money" ></span>
                                 </li>
                             </ul>
                         </div>
@@ -406,14 +441,14 @@
                                 <li v-for="(vv,i) in v" :data-id="vv.play_id" v-if="i<=16 && vv.odds!=null" @click="isAct($event);">
                                     <span :class="v.length==10?'active'+i:''" ><i :class="v.length==10?'active':''">{{vv.name}}</i></span>
                                     <span class="ff9b39" >{{vv.odds}}</span>
-                                    <span> <input type="number" name="" class="input_money" v-on:input="parentAct($event)" :data-id="vv.play_id" :data-title="vv.playd_type_name" :data-playd_info="vv.playd_info" :data-name="vv.name"  :data-odds="vv.odds" onkeyup="value=value.replace(/[^\d]/g,'') " maxlength="5"></span>
+                                    <span> <input type="tel" name="" class="input_money" v-on:input="parentAct($event)" :data-id="vv.play_id" :data-title="vv.playd_type_name" :data-playd_info="vv.playd_info" :data-name="vv.name"  :data-odds="vv.odds" onkeyup="value=value.replace(/[^\d]/g,'') " maxlength="5"></span>
                                 </li>
                             </ul>
                             <ul class="clearfix select">
                                 <li v-for="(vv,i) in v" :data-id="vv.play_id" v-if="i>16" @click="isAct($event);">
                                     <span ><i>{{vv.name}}</i></span>
                                     <span class="ff9b39" >{{vv.odds}}</span>
-                                    <span> <input type="text" name="" class="input_money" :data-id="vv.play_id" :data-title="vv.playd_type_name" :data-playd_info="vv.playd_info"  :data-name="vv.name" :data-odds="vv.odds" onkeyup="value=value.replace(/[^\d]/g,'') " maxlength="5"></span>
+                                    <span> <input type="tel" name="" class="input_money" :data-id="vv.play_id" :data-title="vv.playd_type_name" :data-playd_info="vv.playd_info"  :data-name="vv.name" :data-odds="vv.odds" onkeyup="value=value.replace(/[^\d]/g,'') " maxlength="5"></span>
                                 </li>
                             </ul>
                         </div>
@@ -427,7 +462,7 @@
                                 <li v-for="(vv,i) in v" :data-id="vv.play_id" v-if=" vv.odds!=null" @click="isAct($event);" :class="{'col-xs-5':v.length==2,'col-xs-3':v.length==3}">
                                     <span :class="v.length==20||v.length==21?'active':''" ><i>{{vv.name}}</i></span>
                                     <span class="ff9b39" >{{vv.odds}}</span>
-                                    <span> <input type="number" name="" class="input_money" v-on:input="parentAct($event)":data-id="vv.play_id" :data-title="vv.playd_type_name" :data-playd_info="vv.playd_info"  :data-name="vv.name" :data-odds="vv.odds" onkeyup="value=value.replace(/[^\d]/g,'') " maxlength="5"></span>
+                                    <span> <input type="tel" name="" class="input_money" v-on:input="parentAct($event)":data-id="vv.play_id" :data-title="vv.playd_type_name" :data-playd_info="vv.playd_info"  :data-name="vv.name" :data-odds="vv.odds" onkeyup="value=value.replace(/[^\d]/g,'') " maxlength="5"></span>
                                 </li>
                             </ul>
                         </div>
@@ -438,9 +473,46 @@
                             <p>{{v[0].playd_type_name}}</p>
                             <ul class="select">
                                 <li v-for="(vv,i) in v" :data-id="vv.play_id" @click="isAct($event);" :class="{'cl-os-3':v.length==3,'cl-os-10':v.length==1}">
-                                    <span :class="currN=='正码'?'active':''"><i >{{vv.name}}</i></span>
+                                    <span :class="vv.name| filterHll" v-if="v[0].playd_type_name=='特码定位'" class="active"><i >{{vv.name}}</i></span>
+                                    <span v-else><i >{{vv.name}}</i></span>
                                     <span class="ff9b39" >{{vv.odds}}</span>
-                                    <span><input type="number" name="" class="input_money" v-on:input="parentAct($event)" :data-id="vv.play_id" :data-title="vv.playd_type_name" :data-playd_info="vv.playd_info" :data-name="vv.name" :data-odds="vv.odds" onkeyup="value=value.replace(/[^\d]/g,'') " maxlength="5"></span>
+                                    <div v-if="vv.name=='特码包三'" class="left special-three">
+                                        <select name="" v-model="oneNum" >
+                                            <option :value="oneNum" selected>{{oneNum}}</option>
+                                            <option :value="v" v-for="v in oneNums">{{v}}</option>
+                                        </select>
+                                        <select name=""  v-model="twoNum">
+                                            <option :value="twoNum" selected>{{twoNum}}</option>
+                                            <option :value="v" v-for="v in twoNums">{{v}}</option>
+                                        </select>
+                                        <select name="" v-model="threeNum">
+                                            <option :value="threeNum" selected>{{threeNum}}</option>
+                                            <option :value="v" v-for="v in threeNums">{{v}}</option>
+                                        </select>
+                                        <!--<div>-->
+                                            <!--<span>-->
+                                                <!--{{threeData[0]}}-->
+                                                <!--<i></i>-->
+                                            <!--</span>-->
+                                            <!--<ol>-->
+                                                <!--<li  v-for="v in threeData" >-->
+                                                    <!--{{v}}-->
+                                                <!--</li>-->
+                                            <!--</ol>-->
+                                        <!--</div>-->
+
+                                        <!--<span>-->
+                                            <!--{{threeData[1]}}-->
+                                            <!--<i></i>-->
+                                        <!--</span>-->
+                                        <!--<span>-->
+                                            <!--{{threeData[2]}}-->
+                                            <!--<i></i>-->
+                                        <!--</span>-->
+                                    </div>
+                                    <span>
+                                        <input type="tel" name="" class="input_money" v-on:input="parentAct($event)" :data-id="vv.play_id" :data-title="vv.playd_type_name" :data-playd_info="vv.playd_info" :data-name="vv.name" :data-odds="vv.odds" onkeyup="value=value.replace(/[^\d]/g,'') " maxlength="5">
+                                    </span>
                                 </li>
                             </ul>
                         </div>
@@ -483,7 +555,7 @@
                                 <li v-for="(vv,i) in v" :data-id="vv.play_id" @click="isAct($event);">
                                     <span :class="vv.name<=9&&currT!=207?'active':''"><i>{{vv.name}}</i></span>
                                     <span class="ff9b39" >{{vv.odds}}</span>
-                                    <span><input type="number" name="" class="input_money" v-on:input="parentAct($event)" :data-id="vv.play_id" :data-title="vv.playd_type_name" :data-playd_info="vv.playd_info" :data-name="vv.name" :data-odds="vv.odds" onkeyup="value=value.replace(/[^\d]/g,'') " maxlength="5"></span>
+                                    <span><input type="tel" name="" class="input_money" v-on:input="parentAct($event)" :data-id="vv.play_id" :data-title="vv.playd_type_name" :data-playd_info="vv.playd_info" :data-name="vv.name" :data-odds="vv.odds" onkeyup="value=value.replace(/[^\d]/g,'') " maxlength="5"></span>
                                 </li>
                             </ul>
                         </div>
@@ -496,7 +568,7 @@
                                 <li v-for="(vv,i) in v" :data-id="vv.play_id" @click="isAct($event);" :class="{'col-xs-5':v.length==2,'col-xs-3':v.length==3}">
                                     <span :class="v.length==11?'active':''"><i >{{vv.name}}</i></span>
                                     <span class="ff9b39" >{{vv.odds}}</span>
-                                    <span><input type="number" name="" class="input_money" v-on:input="parentAct($event)" :data-id="vv.play_id" :data-title="vv.playd_type_name":data-playd_info="vv.playd_info" :data-name="vv.name" :data-odds="vv.odds" onkeyup="value=value.replace(/[^\d]/g,'') " maxlength="5"></span>
+                                    <span><input type="tel" name="" class="input_money" v-on:input="parentAct($event)" :data-id="vv.play_id" :data-title="vv.playd_type_name":data-playd_info="vv.playd_info" :data-name="vv.name" :data-odds="vv.odds" onkeyup="value=value.replace(/[^\d]/g,'') " maxlength="5"></span>
                                 </li>
                             </ul>
                         </div>
@@ -540,7 +612,7 @@
                                 快捷金额：
                             </label>
                             <div class="bet-add  left input-group">
-                                <input type="number" class="form-control" oninput="if(value.length>6)value=value.slice(0,6)" v-model="editMount">
+                                <input type="tel"  class="form-control" v-on:input="parentAct($event,true)" v-model="editMount">
                                 <ul class="flex-flow-row ">
                                     <li class="cm1" @click="getotleMoney(10)"><span>10</span></li>
                                     <li class="cm2" @click="getotleMoney(50)"><span>50</span></li>
@@ -589,7 +661,7 @@
                       <span class="input-group-addon ">
                           金额
                       </span>
-                        <input type="number" class="form-control" oninput="if(value.length>6)value=value.slice(0,6)"  v-model="editMount">
+                        <input type="number" class="form-control" v-on:input="parentAct($event,true)" v-model="editMount">
                     </div>
                     <button type="button" class="btn btn-danger fl bet-add " @click="reset">清空 </button>
                     <ul class="flex-flow-row left">
@@ -622,7 +694,7 @@
                         <tr v-for="(v,i) in arrTicket" >
                             <td v-if="isTab&&currN=='自选不中'||currN=='连肖连尾'||currN=='连码'">{{currTabNav}} {{v.content}}</td>
                             <!--{{topNav[currBall-1]}}.group_name-->
-                            <td v-if="currBall!=6 && (currN=='正码特' || !isTab)"><i v-if="fc_type!='six'">{{v.title}}</i><i v-if="topNav[currBall-1]">{{topNav[currBall-1].group_name}}</i> &nbsp;{{v.content_name}}</td>
+                            <td v-if="currBall!=6 && (currN=='正码特' || !isTab)"><i v-if="fc_type!='six'">{{v.title}}</i><i v-if="topNav[currBall-1]">{{topNav[currBall-1].group_name}}</i> &nbsp;{{v.content_name=='特码包三'?oneNum+'-'+twoNum+'-'+threeNum:v.content_name}}</td>
                             <td v-if="currBall==6"> {{isZhong==1?'中':'不中'}} {{orderObj.playd_info}}</td>
                             <td v-if="currN!='连肖连尾'">{{currBall==6?CurrHxOdds:v.odds}}</td>
                             <td v-show="ifCofm==true"><input type="number" oninput="if(value.length>6)value=value.slice(0,6)"  v-model="v.money"  v-on:input="inputB()" class="inputB b" ></td>
@@ -670,7 +742,8 @@
     import vueLoading from 'vue-loading-template';
     import vueResult from './result.vue';
     import vueNote from './noteInquiry.vue';
-    import HomeHeader from './Header'
+    import HomeHeader from './Header';
+    import {mapState, mapMutations} from 'vuex'
     export default{
         data(){
             return {
@@ -729,12 +802,49 @@
                 ZmData:'',
                 currI:'',
                 currN:'',//当前玩法名字
+                oneNum:0,
+                twoNum:1,
+                threeNum:2,
+                oneNums:[3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27],
+                twoNums:[3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27],
+                threeNums:[3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27],
+                index:[1,2,3,4,5],// 循环遍历五张图片
             }
         },
         created(){
             this._loading();
         },
         methods: {
+            getTwo(arr,n){
+                for(let i= 0,len=arr.length;i<len;i++){
+                    if(n==3){
+                        if(arr[i]==this.threeNum) arr.splice(i,1);
+                    }else if(n==1){
+                        if(arr[i]==this.oneNum) arr.splice(i,1);
+                    }
+                }
+                return arr;
+            },
+            getOne(arr,n){
+                for(let i= 0,len=arr.length;i<len;i++){
+                    if(n==2){
+                        if(arr[i]==this.twoNum) arr.splice(i,1);
+                    }else if(n==3){
+                        if(arr[i]==this.threeNum) arr.splice(i,1);
+                    }
+                }
+                return arr;
+            },
+            getThree(arr,n){
+                for(let i= 0,len=arr.length;i<len;i++){
+                    if(n==2){
+                        if(arr[i]==this.twoNum) arr.splice(i,1);
+                    }else if(n==1){
+                        if(arr[i]==this.oneNum) arr.splice(i,1);
+                    }
+                }
+                return arr;
+            },
             _loading(){
 //                this.login();
                 this.getMenus();
@@ -748,6 +858,22 @@
                 let routeData = this.$router.resolve({name: id});
                 window.open(routeData.href,'_blank');
             },
+            ...mapMutations([ "EASYSECRET" ]),
+            backPageclick () {
+                this.$router.push('/')
+            },
+            async loginout() {
+                let res = await this.$http.post('/api/user/logout');
+                if (!res) return;
+                if (res.data.code != 0) {
+                this.alert("提示", res.data.msg);
+                return;
+                }
+                this.EASYSECRET("");
+                sessionStorage.clear();
+                this.$http.defaults.headers.EasySecret = undefined;
+                this.$router.push("/");
+            },
             init(){
                 this.isCloseNoGame = true;
                 this.countDTime = '';
@@ -757,19 +883,15 @@
             },
             //获取玩法导航
             getMenus(){
-                this.$http.get("/api/lottery/basic/LotteryGroup/").then(res=>{
+                this.$http.get("/api/lottery/basic/LotteryList/").then(res=>{
                     if(!res)return;
                     if (!res.data) return  window.top.wAlert('网络超时，请重新刷新');
-                    this.menusData = res.data;
-                    let arr = [];
-                    for(let i =0;i<res.data.length;i++){
-                        arr = arr.concat(res.data[i].type);
-//                        this.typeName.push(res.data[i].name);
-                    }
-                    this.menus  =arr;
+                    this.menusData = res.data.data;
+                    this.menus  =this.menusData;
                     if(this.fc_type=='six') {this.currT=2;this.currI=2; return}
-                    this.currT = Init.getTitle(this.menusData, this.fc_type);
+                    // this.currT = Init.getTitle(this.menusData, this.fc_type);
                     this.currI = Init.getId(this.menusData, this.fc_type);
+                    this.currT = Init.getTitle(this.currI)
 
                 },res => {
                     return  window.top.wAlert('网络超时，请重新刷新');
@@ -821,6 +943,7 @@
                             let v = response.data.hmlist[k].slice(1,response.data.hmlist[k].length-1);
                             this.result[k] = v.split(',');
                         }
+//                        console.log(result);
                     }
                     this.isLoading2 = false;
                 }, response => {
@@ -876,7 +999,7 @@
 //                    this.changeOdds();
                     this.getBall(2);
 //                    this.getUserInfo();
-                }, 60000);
+                }, 10000);
             },
             //取消注单
             removeList(e){
@@ -950,18 +1073,29 @@
                 })
             },
             // input输入后，li选中
-            parentAct(e){
-//                replace(/^[0]+[0-9]*$/gi,"")'
-//                let value = e.currentTarget.value-0;
-//                console.log(value.length);
-//                value = vaule.replace(/^[0]+[0-9]*$/gi,"");
-//                if(value.length>6) value=value.slice(0,6);
-                let prn = e.currentTarget.parentNode.parentNode;
-                prn.classList.remove('warning')
-                if(e.currentTarget.value!=0 && e.currentTarget.value!='') {
-                    prn.classList.add('warning')
+            parentAct(e,bool){
+                let value = e.currentTarget.value;
+                if(value=='0'){
+                    e.currentTarget.value = '';
+                    this.editMount=''
+                    return;
+                }else if(value.length>6){
+                    e.currentTarget.value = value.substr(0,6);
+                    this.editMount= this.editMount.substr(0,6);
+                   return;
+                }else {
+                    e.currentTarget.value = value.replace(/[^\d]/g,'');
+                    this.editMount = value.replace(/[^\d]/g,'');
+                    if(!bool){
+                        let prn = e.currentTarget.parentNode.parentNode;
+                        prn.classList.remove('warning');
+                        if(value!=0 && value!='') {
+                            prn.classList.add('warning')
+                        }
+                    }else{
+                        this.editMount = e.currentTarget.value;
+                    }
                 }
-
             },
             //提交注单
             submitTicket(){
@@ -1023,7 +1157,7 @@
             isAct(e,name,odds,vv,i){
                 let enev = e.currentTarget;
                 enev.classList.toggle('warning')
-                let nodeList = enev.children[2].children[0];
+                let nodeList = enev.querySelector('.input_money');
                 let  len = document.querySelectorAll(".table-bet-top .select>li.warning").length;
                 if(enev.className.indexOf('warning')<= -1){
                     nodeList.value = '';
@@ -1260,7 +1394,7 @@
                 this.$http.get(api+'?agent_id='+agent).then(res => {
                     if(this.fc_type!='six'){
                         if(!res.data.playd) return  window.top.wAlert('网络超时，请重新刷新');
-                        if(res.data.playd.length==0) {this.mainData=[]; return  window.top.wAlert('请选择其他彩种下注！');}
+                        if(res.data.playd.length==0) {this.mainData=[];this.topNav=''; return  window.top.wAlert('请选择其他彩种下注！');}
                         this.allData = L.data_demo_do(res.data.playd);
                         this.topNav = res.data.group;//玩法类型
                         this.currBall = res.data.group[0].id;//当前玩法id
@@ -1268,7 +1402,7 @@
                         this.mainData = this.allData[res.data.playd[0].playd_guoup_id];//当前数据
                     }else{
                         if(!res.data.list.playd) return alert('网络超时，请重新刷新');
-                        if(res.data.list.playd.length==0) {this.mainData=[]; return  window.top.wAlert('请选择其他彩种下注！');}
+                        if(res.data.list.playd.length==0) {this.mainData=[];this.topNav=''; return  window.top.wAlert('请选择其他彩种下注！');}
                         this.allData = res.data.list.playd;
                         this.topNav = res.data.list.group;//玩法类型ok
                         this.currBall = res.data.list.group[0].id;//当前玩法id ok
@@ -1391,7 +1525,12 @@
                         if(che[i].checked){
                             money.push(parseInt(che[i].dataset.money));
                             pid.push(che[i].dataset.id);
-                            Info.push(che[i].dataset.playd_info);
+                            if(che[i].dataset.playd_info=='tmbs'){
+                                Info.push((this.oneNum+","+this.twoNum+","+this.threeNum));
+                            }else{
+                                Info.push(che[i].dataset.playd_info);
+                            }
+
                         }
                     }
                     this.orderObj.lot_id = this.currI;
@@ -1438,12 +1577,13 @@
                 this.showResult =false;
                 this.showNote =false;
                 this.fc_type = k;
-                if(i<=10) {this.more='更多玩法'}
+                if(i<=12) {this.more='更多玩法'}
                 else this.more = name;
                 this.$router.push('/lottery/'+k+'');
                 if(window.top.cwvue) window.top.cwvue.$router.push({path:'/lottery/'+k+'',params:{nload:true}});
-                this.currT = Init.getTitle(this.menusData , this.fc_type);
+                // this.currT = Init.getTitle(this.menusData , this.fc_type);
                 this.currI = Init.getId(this.menusData, this.fc_type);
+                this.currT = Init.getTitle(this.currI)
                 if(this.fc_type=='six') {this.currT=2;this.currI=2}
                 this.init();
             },
@@ -1535,7 +1675,7 @@
 //                if(Init.getPlayType(this.fc_id) == 'ssc'&&this.currBall=='整合'||Init.getPlayType(this.fc_id) == '11x5'&&this.currBall=='整合' ||Init.getPlayType(this.fc_id) == '3d'&&this.currBall=='整合' || Init.getPlayType(this.fc_id) == 'sfc'&&this.currBall=='整合'){index++;};
 
                 this.number = this.currT;
-                console.log(this.number);
+                // console.log(this.number);
                 P.removeAllactive(P.getSiblings(e.currentTarget));
                 let box = document.querySelectorAll('.table-bet-top');
                 if(e.currentTarget.className.indexOf('active')>-1){
@@ -1685,7 +1825,34 @@
             "countDTime":function () {
 
             },
-            '$route':'getOdds'
+            '$route':'getOdds',
+            "oneNum":function(n){
+                let arr=[];
+                for(let i=0;i<28;i++){
+                    if(i!=n) arr.push(i);
+                }
+                this.threeNums=this.getThree(arr,2);
+                this.twoNums=this.getTwo(arr,3);
+            },
+            "twoNum":function(n){
+                let arr=[];
+                for(let i=0;i<28;i++){
+                    if(i!=n) arr.push(i);
+                }
+                this.threeNums=this.getThree(arr,1);
+                this.oneNums=this.getOne(arr,3);
+            },
+            "threeNum":function(n){
+                // console.log(n);
+                let arr=[];
+                for(let i=0;i<28;i++){
+                    if(i!=n) arr.push(i);
+                }
+                this.twoNums=this.getTwo(arr,1);
+                this.oneNums=this.getOne(arr,2);
+                console.log(this.threeNums);
+                console.log(this.twoNums);
+            }
         },
         computed:{
 
@@ -1738,6 +1905,45 @@
             },
             filterSum:function (arr) {
                 return R.getSum(arr+"");
+            },
+            filterHll:function (a) {
+                let r='';
+                switch (a-0){
+                    case 3:
+                    case 6:
+                    case 9:
+                    case 12:
+                    case 15:
+                    case 18:
+                    case 21:
+                    case 24:
+                        r='rColor';
+                        break;
+                    case 1:
+                    case 4:
+                    case 7:
+                    case 10:
+                    case 16:
+                    case 19:
+                    case 22:
+                    case 25:
+                        r='gColor';
+                        break;
+                    case 2:
+                    case 5:
+                    case 8:
+                    case 11:
+                    case 17:
+                    case 20:
+                    case 23:
+                    case 26:
+                        r='bColor';
+                        break;
+                    default :
+                        r='bj';
+                        break;
+                }
+                return r;
             }
         },
         components:{
@@ -1756,4 +1962,81 @@
   .xx_lottery_hheader .result:hover{
     color:#B62929;
   }
+  .top-wrap {
+    height: 48px;
+    overflow: hidden;
+    color: #fff;
+    background-color: rgba(0,0,0,.73);
+}
+.top-box {
+    width: 1170px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.top-box .bar-left {
+    float: left;
+    background: url(../../static/img/base-ico2.png) 0 -176px no-repeat;
+}
+.top-box .bar-left span {
+    display: inline-block;
+    padding-left: 48px;
+    font-size: 14px;
+    font-style: normal;
+    line-height: 48px;
+    background-position: 0 -180px;
+}
+.bar-right {
+    float: right;
+    overflow: hidden;
+    line-height: 44px;
+}
+.bar-right div {
+    font-size: 14px;
+    float: left;
+}
+.recharge_lottery, .withdraw {
+    padding-left: 45px;
+    color: #fff;
+    background-position: -108px -677px;
+    cursor: pointer;
+    background: url(../../static/img/base-ico2.png) no-repeat;
+}
+.withdraw {
+    background-position: 0 -678px;
+    padding-left: 45px;
+    color: #fff;
+    cursor: pointer;
+    background: url(../../static/img/base-ico2.png) no-repeat;
+}
+.login-out {
+    padding-left: 45px;
+    background-position: -201px -677px;
+    cursor: pointer;
+    background: url(../../static/img/base-ico2.png) no-repeat
+}
+.items{
+    margin: 0 10px;
+}
+.recharge_lottery {
+    background-position: -108px -677px;
+}
+.withdraw {
+    background-position: 0 -678px;
+}
+.login-out {
+    padding-left: 45px;
+    background-position: -201px -677px;
+}
+.withdraw:hover {
+    color: #b62929;
+    background-position: 0 -750px;
+}
+.recharge_lottery:hover {
+    color: #b62929;
+    background-position: -108px -750px;
+}
+.login-out:hover {
+    color: #b62929;
+    background-position: -201px -750px;
+}
 </style>

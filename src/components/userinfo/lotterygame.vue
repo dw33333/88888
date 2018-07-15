@@ -176,7 +176,6 @@ export default {
         this.$http.get('/json/center/?r=LotteryRecordDetails&gtype=' + gtype + '&gamedate=' + date).then((res) => {
           if (res.data.code === 0) {
             this.lotteryTypeDatas = res.data.data.recordList
-            console.log(this.lotteryTypeDatas)
           }
         }).catch((error) => {
           console.log(error)

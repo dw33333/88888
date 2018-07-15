@@ -1,4 +1,8 @@
 .xx_lottery{
+    .cpssc .redball.bj{
+        background: #aaaaaa;
+    }
+    .result-no p{    display: inline-block;}
     .w50 {
         width: 50px;
         margin-top: 16px;
@@ -6,7 +10,11 @@
     .block{
         color: #666!important;
     }
-
+    .cpssc .redball.img{
+        background: url("../../assets/images/ball-run.gif")-3px -1px;
+        background-size: 130%;
+        text-indent:-9999px;
+    }
     .w150 {
         width: 150px;
         /*margin-top: 10px;*/
@@ -105,6 +113,7 @@
     }
     .lottery-nav ul.clearfix>li.active>a{
         background: #b62929;
+        width: 110px;;
     }
     .lottery-nav .dropdown-menu li.active>a{
         background: #b62929;
@@ -120,7 +129,8 @@
         display: inline-block;
         height: 100%;
         text-align: center;
-        padding: 12px 10px;
+        padding: 12px 0;
+        width: 98px;
         color: #fff;
         font-size: 14px;
     }
@@ -663,16 +673,17 @@
         border-radius: 4px;
         box-shadow: 0 6px 12px rgba(0,0,0,.175);
         position: absolute;
-        right: 20px;
+        right: 10px;
         z-index: 99;
     }
     .lottery-nav .dropdown-menu li:hover{
         background: #ddd;
     }
     .lottery-nav .dropdown-menu li a{
-        text-align: left;
+        text-align: center;
         display: block;
-        padding: 3px 20px 3px 10px;
+        width: 98px;
+        padding: 3px 5px;
         color: #333;
     }
     .lottery-nav .dropdown-menu li{

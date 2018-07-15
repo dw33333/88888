@@ -1,29 +1,23 @@
 <template>
-  <div>
+  <div class="activity_bg">
       <headervue></headervue>
-      <div class="activity_bg">
-          <div class="activity-container">
-              <div class="activity-site">
-                  <div class="activitybar">
-                      <ul class="activity-nav">
-                          <li>一般优惠规则与条款</li>
-                      </ul>
-                  </div>
-              <div class="activity-content">
-                  <div class="activity-list" @click="show_list">
-                      <div class="activity-box">
-                      </div>
-                      <div class="activity-footer">
-                          <div style="width:150px;float:left;margin-top:7px;">
-                          <span>一般优惠规则与条款</span>
-                          </div>
-                          <a class="activity-show-btn"></a>
-                      </div>
-                        <div style="padding-top:20px;" v-show="showRulePic">
-                            <img src="../../static/img/25c.jpg" alt="">
-                        </div>
-                  </div>
+      <ssheader></ssheader>
+      <div class="MemberExclusive_area">
+          <br>
+          <div class="MemberExclusive">
+              <div id="memExclusive_1" @click="show_list">
+                  <a href="javascript:;"></a>
               </div>
+              <div class="eventtext" v-show="hideGG">
+                  <img src="../../static/img/161214114805.jpg" alt="">
+              </div>
+          </div>
+          <div class="MemberExclusive">
+              <div id="memExclusive_2"  @click="show_list2">
+                  <a href="javascript:;"></a>
+              </div>
+              <div class="eventtext" v-show="hideGG2">
+                  <img src="../../static/img/161202174939.jpg" alt="">
               </div>
           </div>
       </div>
@@ -32,16 +26,19 @@
 </template>
 <script>
 import headervue from '@/components/Header'
+import ssheader from '@/components/ssheader'
 import footervue from '@/components/Footer'
 export default {
   name:'Activity',
   components: {
       headervue,
-      footervue
+      footervue,
+      ssheader
   },
   data () {
       return {
-          showRulePic:false
+          hideGG:false,
+          hideGG2:false
       }
   },
   created () {
@@ -49,65 +46,66 @@ export default {
   },
   methods: {
       show_list () {
-          this.showRulePic = !this.showRulePic;
+          this.hideGG = !this.hideGG;
+          this.hideGG2 =false;
+      },
+      show_list2 () {
+          this.hideGG = false;
+          this.hideGG2 = !this.hideGG2;
       }
    }
 }
 </script>
 <style>
+.eventtext {
+    margin: 0px auto;
+    line-height: 23px;
+    text-align: left;
+}
 .activity_bg{
-    background: url(/static/img/bg1.a4a4897.jpg) 0 0 repeat-y;
+    background-image: url('../../static/img/nybg1.jpg');
+    background-repeat: repeat-x;
+    background-color: #2c1d16;
+    background-position: 0px 0px;
 }
-.activity-footer a{
-    background: url('../../static/img/activity-btn.png') no-repeat right top;
-    display: inline-block;
-    width: 163px;
-    height: 36px;
-    margin-left: 380px;
-}
-.activity-footer{
-    color: #ffffff;
-}
-.activity-box{
-    background: url('../../static/img/25.jpg') no-repeat;
-    height: 380px;
-}
-.activity-content {
-    margin-left: 200px;
-}
-.activity-list {
-    border: 1px solid #071217;
-    background: #071217;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    padding: 20px 40px;
-    min-height: 455px;
-}
-.activity-container {
-    padding-top: 10px;
-    width: 1010px;
+.MemberExclusive_area{
+    width: 980px;
     margin: 0 auto;
+    height: auto;
 }
-.activity-site {
-    position: relative;
+.MemberExclusive {
+    margin-bottom: 10px;
+}
+#memExclusive_1 {
+    width: 980px;
+    height: 150px;
+    margin: 0 auto;
+    margin-top: 5px;
     overflow: hidden;
 }
-.activitybar {
-    width: 182px;
-    float: left;
-    padding: 19px 0;
+#memExclusive_1 a {
+    display: block;
+    width: 980px;
+    height: 150px;
+    margin: 0 auto;
     overflow: hidden;
-    position: relative;
-    height: 45px;
-    background: #b62929;
+    background: url('../../static/img/161214114812.png') no-repeat left top;
 }
-.activity-nav li {
-    background: #000;
-    border-bottom: 1px solid #282626;
-    border-top: 1px solid #b62929;
-    line-height: 45px;
-    font-size: 14px;
-    text-align: center;
-    color: #ffffff;
+#memExclusive_2 {
+    width: 980px;
+    height: 150px;
+    margin: 0 auto;
+    margin-top: 5px;
+    overflow: hidden;
+    padding-bottom: 30px;
 }
+#memExclusive_2 a {
+    display: block;
+    width: 980px;
+    height: 150px;
+    margin: 0 auto;
+    overflow: hidden;
+    background: url('../../static/img/161214114930.png') no-repeat left top;
+}
+
 </style>

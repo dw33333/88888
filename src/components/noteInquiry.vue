@@ -137,7 +137,7 @@
                 this.$http.get('/api/lottery/basic/LotteryList/').then(response=>{
                   if(!response)return;
                   this.menus =response.data.data;
-                  this.menus.push(this.form);
+                  this.menus.unshift(this.form);
                   this.id = this.childId;
                     this.getNoteSearch();
                 },response=>{

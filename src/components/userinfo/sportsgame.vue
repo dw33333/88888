@@ -137,7 +137,6 @@ export default {
     // 获取体育注单记录
     getSportRecord () {
       this.$http.get('/json/center/?r=SportRecord').then((res) => {
-        console.log(res.data.data)
         if (res.status === 200 && res.data.code === 0) {
           this.sportRecordList = res.data.data.recordList
           this.TotalBetMoney = res.data.data.TotalBetMoney
@@ -151,7 +150,6 @@ export default {
     // 打开体育日报表
     selectOneDaySport (date) {
       this.$http.get('/json/center/?r=SportRecordOneday&date=' + date).then((res) => {
-        console.log(res.data.data)
         if (res.data.code === 0) {
           // this.dayifopen = !this.dayifopen
           this.tabIndex = 2
@@ -184,7 +182,6 @@ export default {
       } else {
         console.log('feichuanguan')
         this.$http.get('/json/center/?r=SportRecordDetails' + '&date=' + date + '&gtype=' + type).then((res) => {
-          console.log(res.data.data)
           if (res.data.code === 0) {
             this.sportTypeDatas = res.data.data
           }
